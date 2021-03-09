@@ -104,7 +104,7 @@ const createTokenProvider = () => {
 
   /* serve per salvare il token in locale o svuotare tutto se è pieno e mandare la notifica dell'avvenuto */
 
-  const seToken = (token: typeof _token) => {
+  const setToken = (token: typeof _token) => {
     if (token) {
       localStorage.setItem('REACT_TOKEN_AUTH', JSON.stringify(token));
     } else {
@@ -125,6 +125,56 @@ const createTokenProvider = () => {
 };
 /*       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA        */
 
+export const createAuthProvider = () => {
+
+  const tokenProvider = createTokenProvider();
+
+  const login: typeof tokenProvider.setToken = (newTokens) => {
+    tokenProvider.setToken(newTokens);
+  }
+
+  const logout = () => {
+    tokenProvider.setToken(null);
+  }
+
+  const authFetch = async (input: RequestInfo, init?: RequestInit): Promise<Response> => {
+    const token = await tokenProvider.getToken();
+
+    init = init || {};
+
+    init.headers = {
+      ...init.headers,
+      Authorization: 'Bearer ${token}',
+    };
+
+    return fetch(input, init);
+  };
+
+  const useAuth = () => {
+    const [isLogged, setIsLogged] = useState(tokenProvider.isLoggedIn());
+
+    useEffect(() => {
+        const listener = (newIsLogged: boolean) => {
+            setIsLogged(newIsLogged);
+        };
+
+        tokenProvider.subscribe(listener);
+        return () => {
+            tokenProvider.unsubscribe(listener);
+        };
+    }, []);
+
+    return [isLogged] as [typeof isLogged];
+};
+
+  return {
+    useAuth,
+    authFetch,
+    login,
+    logout,
+  }
+}
+/* AAAAAAAAAAAAAAAAAAAAAAAAA */
 const LoginForm = () => {
   const classes = useStyles();
   const [username, setUsername] = useState('');
