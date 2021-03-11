@@ -66,7 +66,9 @@ class AccountsForm extends Component {
   render() {
     return (
       <div>
-        <TableContainer component={Paper}>
+        <p> paragrafo di prova </p>
+
+        {/*<TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead className="headerCard">
               <TableRow>
@@ -76,6 +78,8 @@ class AccountsForm extends Component {
             <TableBody>{this.rows}</TableBody>
           </Table>
         </TableContainer>
+        */}
+        
       </div>
     )
   }
