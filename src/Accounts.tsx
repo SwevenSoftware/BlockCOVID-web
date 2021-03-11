@@ -73,7 +73,6 @@ class AccountsForm extends Component {
                     <Table aria-label="simple table">
                         <TableHead className="headerCard">
                             <TableRow>
-                                <TableCell align="left">Reservation ID</TableCell>
                                 <TableCell align="center">Username</TableCell>
                                 <TableCell align="center">Surname - Name</TableCell>
                                 <TableCell align="center">Password</TableCell>
