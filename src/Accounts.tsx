@@ -74,7 +74,6 @@ class AccountsForm extends Component {
             <TableHead className="headerCard">
               <TableRow>
                 <TableCell align="center">Username</TableCell>
-                <TableCell align="center">Surname - Name</TableCell>
                 <TableCell align="center">Password</TableCell>
               </TableRow>
             </TableHead>
