@@ -19,8 +19,6 @@ import { Rowing } from '@material-ui/icons'
 interface Account {
   id: number,
   user: string,
-  surname_name: string,
-  password: string,
 }
 
 class AccountsForm extends Component {
@@ -79,7 +77,7 @@ class AccountsForm extends Component {
           </Table>
         </TableContainer>
         */}
-        
+
       </div>
     )
   }
