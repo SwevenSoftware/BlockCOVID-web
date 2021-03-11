@@ -1,19 +1,19 @@
-import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react';
+import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react'
 import ReactDOM from 'react-dom'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
 
 import './styles.css'
 import GeneralLayout from './GeneralLayout'
 import Report from './Report'
 import Token from './Token'
-import { Rowing } from '@material-ui/icons';
+import { Rowing } from '@material-ui/icons'
 
 interface Account {
   id: number,
@@ -24,7 +24,7 @@ interface Account {
 
 class AccountsForm extends Component {
 
-  rows: Array<JSX.Element>;
+  rows: Array<JSX.Element>
 
   constructor(props) {
     super(props)
@@ -46,7 +46,7 @@ class AccountsForm extends Component {
   }
 
   private retrieveAccounts() {
-    const config = { headers: { "Authorization": Token.get() } };
+    const config = { headers: { "Authorization": Token.get() } }
     axios.post("/api", {}, config).then((res) => {
       for (var id in res.data) {
         const data = res.data[id]
@@ -55,8 +55,8 @@ class AccountsForm extends Component {
           user: data.user,
           surname_name: data.surname_name,
           password: data.password
-        };
-        this.addTableRow(newAccount);
+        }
+        this.addTableRow(newAccount)
       }
       this.forceUpdate()
     })
@@ -83,7 +83,7 @@ class AccountsForm extends Component {
         </TableContainer>
       </div>
     )
-  };
+  }
 }
 
 const Accounts = () => {
@@ -97,7 +97,7 @@ const Accounts = () => {
         <AccountsForm />
       </div>
     )
-  );
+  )
 }
 
-export default Accounts;
+export default Accounts
