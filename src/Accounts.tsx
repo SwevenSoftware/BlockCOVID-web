@@ -39,8 +39,6 @@ class AccountsForm extends Component {
         </TableCell>
 
         <TableCell align="center">{row.user}</TableCell>
-        <TableCell align="center">{row.surname_name}</TableCell>
-        <TableCell align="center">{row.password}</TableCell>
       </TableRow>
     )
   }
@@ -53,8 +51,6 @@ class AccountsForm extends Component {
         const newAccount = {
           id: data.id,
           user: data.user,
-          surname_name: data.surname_name,
-          password: data.password
         }
         this.addTableRow(newAccount)
       }
@@ -74,7 +70,6 @@ class AccountsForm extends Component {
             <TableHead className="headerCard">
               <TableRow>
                 <TableCell align="center">Username</TableCell>
-                <TableCell align="center">Password</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>{this.rows}</TableBody>
