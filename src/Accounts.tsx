@@ -1,5 +1,6 @@
 import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react'
 import ReactDOM from 'react-dom'
+import PersonIcon from '@material-ui/icons/Person'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
