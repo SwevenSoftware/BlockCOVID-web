@@ -22,6 +22,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
 
 const drawerWidth = 240;
@@ -155,10 +156,16 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         </div>
         <Divider />
         <List>
-          <ListItem button key="Users" component={Link} to="/reservations">
-            <ListItemIcon><PeopleIcon /></ListItemIcon>
-            <ListItemText primary="Users" />
+          <ListItem button key="Reservations" component={Link} to="/reservations">
+            <ListItemIcon><DnsIcon /></ListItemIcon>
+            <ListItemText primary="Reservations" />
           </ListItem>
+
+          <ListItem button key="Accoutns" component={Link} to="/accounts">
+            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemText primary="Accounts" />
+          </ListItem>
+
           <ListItem button key="Desks" component={Link} to="/desk">
             <ListItemIcon><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
