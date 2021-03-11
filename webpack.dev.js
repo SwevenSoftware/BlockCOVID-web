@@ -8,7 +8,7 @@ module.exports = merge(common, {
     devServer: {
 	contentBase: path.join(__dirname, 'dist'),
 	index: 'index.html',
-	port: 8080,
+	port: 8000,
 	proxy: {
 	    '/api/**': 'http://localhost:8091'
 	},
