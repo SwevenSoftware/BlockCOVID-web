@@ -76,76 +76,128 @@ class AccountsForm extends Component {
           <Grid item xs={3}>
             <Paper className="paper">
               <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
+              </ListItem>
+            </Paper>
+          </Grid> {/* WARNING: from here we replicate the same grid item */}
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
               </ListItem>
             </Paper>
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
               <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
-              </ListItem>
-            </Paper>
-          </Grid><Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
-              </ListItem>
-            </Paper>
-          </Grid><Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
-              </ListItem>
-            </Paper>
-          </Grid><Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
-              </ListItem>
-            </Paper>
-          </Grid><Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
               </ListItem>
             </Paper>
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
               <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
               </ListItem>
             </Paper>
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
               <ListItem className="align">
-                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
-                <ListItemText primary="Username" />
-                <IconButton><CreateIcon className="pencil" /></IconButton>
-                <IconButton><DeleteIcon className="trash" /></IconButton>
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon className="person">
+                  <PersonIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
+                <IconButton className="pencil">
+                  <CreateIcon/>
+                </IconButton>
+                <IconButton className="trash">
+                  <DeleteIcon/>
+                </IconButton>
               </ListItem>
             </Paper>
           </Grid>
