@@ -1,3 +1,15 @@
+/*body{
+    min-width:1000px;
+    width: auto !important;
+    width:1000px;
+ }
+
+#container {
+    position: relative;
+    height: auto ;
+    min-height: 100%;
+}*/
+
 .cardGrid {
     width: 40em;
     max-width: 90%;
@@ -15,19 +27,34 @@
     font-size: medium;
 }
 
+.grid{
+    min-width: 23%;
+    margin: 0 2% 2% 0;
+}
+
 .paper {
     color: white;
     height: 5em;
-    min-width: 20em;
 }
 
-.align {
+.listItem {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/*.text {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width: 9ch;
+}*/
+
+/*.icon {
+    float: right;
+    margin-right: 0em;
+}*/
 
 .pencil:hover {
     color: #1edc50;
