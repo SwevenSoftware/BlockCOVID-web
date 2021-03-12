@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import iconX from "../src/Images/x_red.png"
+import CloseIcon from '@material-ui/icons/Close';
 
 interface ModalProps {
   title: string;
@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = ({title, isOpen, onClose, children}) 
           className={'modal_close'}
           onClick={onClose}
         >
-          <img src={iconX} alt={'close'} className={'iconX'} />
+          <CloseIcon />
         </button>
         <div className={'modal_title'}>
           {title}
