@@ -22,6 +22,7 @@ import GeneralLayout from './GeneralLayout'
 import Report from './Report'
 import Token from './Token'
 import { Rowing } from '@material-ui/icons'
+import SearchUsers from './SearchUsers'
 
 interface Account {
   id: number,
@@ -162,6 +163,7 @@ const Accounts = () => {
   return (
     GeneralLayout(
       <div>
+        <SearchUsers />
         <AccountsForm />
       </div>
     )

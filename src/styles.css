@@ -34,7 +34,7 @@
 } */
 
 .pencil:hover {
-    color: blue;
+    color: #1edc50;
 }
 
 .trash:hover {
@@ -43,4 +43,10 @@
 
 .account_stl {
     
+}
+
+.search {
+    height: 5em;
+    width: 24em;
+    margin-bottom: 1em;
 }
