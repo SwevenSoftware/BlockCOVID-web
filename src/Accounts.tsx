@@ -13,7 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -74,11 +74,11 @@ class AccountsForm extends Component {
         <Grid container spacing={3}>
           <Grid item xs={3}>
             <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon style={{ fontSize: 70 }} /></ListItemIcon>
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
                 <ListItemText primary="Username" />
-                <Button className="right" variant="contained"><CreateIcon /></Button>
-                <Button className="right" variant="contained"><DeleteIcon /></Button>
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
               </ListItem>
             </Paper>
           </Grid>
