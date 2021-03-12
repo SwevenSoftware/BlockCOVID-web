@@ -84,57 +84,67 @@ class AccountsForm extends Component {
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
                 <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
+              </ListItem>
+            </Paper>
+          </Grid><Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
+                <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
+              </ListItem>
+            </Paper>
+          </Grid><Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
+                <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
+              </ListItem>
+            </Paper>
+          </Grid><Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
+                <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
+              </ListItem>
+            </Paper>
+          </Grid><Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
+                <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
               </ListItem>
             </Paper>
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
                 <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
               </ListItem>
             </Paper>
           </Grid>
           <Grid item xs={3}>
             <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
+              <ListItem className="align">
+                <ListItemIcon><PersonIcon className="person" /></ListItemIcon>
                 <ListItemText primary="Username" />
-              </ListItem>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
-                <ListItemText primary="Username" />
-              </ListItem>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
-                <ListItemText primary="Username" />
-              </ListItem>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
-                <ListItemText primary="Username" />
-              </ListItem>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className="paper">
-              <ListItem>
-                <ListItemIcon><PersonIcon /></ListItemIcon>
-                <ListItemText primary="Username" />
+                <IconButton><CreateIcon className="pencil" /></IconButton>
+                <IconButton><DeleteIcon className="trash" /></IconButton>
               </ListItem>
             </Paper>
           </Grid>
