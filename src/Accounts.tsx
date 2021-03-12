@@ -76,8 +76,8 @@ class AccountsForm extends Component {
           <Grid item xs={3}>
             <Paper className="paper">
               <ListItem className="align">
-                <ListItemIcon className="person">
-                  <PersonIcon/>
+                <ListItemIcon>
+                  <PersonIcon fontSize="large" />
                 </ListItemIcon>
                 <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
                 <IconButton className="pencil">

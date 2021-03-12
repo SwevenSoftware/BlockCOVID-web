@@ -29,10 +29,6 @@
     transform: translate(-50%, -50%);
 }
 
-.person {
-    font-size: 20em;
-}
-
 .pencil:hover {
     color: #1edc50;
 }
@@ -42,7 +38,6 @@
 }
 
 .search {
-    height: 5em;
-    width: 24em;
-    margin-bottom: 1em;
+    max-width: 24em;
+    margin-bottom: 2em;
 }
