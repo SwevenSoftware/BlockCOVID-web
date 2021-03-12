@@ -29,9 +29,9 @@
     transform: translate(-50%, -50%);
 }
 
-/* .person {
-    font-size: 50px;
-} */
+.person {
+    font-size: 20em;
+}
 
 .pencil:hover {
     color: blue;
@@ -42,5 +42,5 @@
 }
 
 .account_stl {
-    
+
 }
