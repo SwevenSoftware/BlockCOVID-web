@@ -7,6 +7,8 @@ interface ModalProps {
   onClose: () => void;
 }
 
+
+
 export const Modal: React.FC<ModalProps> = ({title, isOpen, onClose, children}) => {
   
   const outsideRef = React.useRef(null);

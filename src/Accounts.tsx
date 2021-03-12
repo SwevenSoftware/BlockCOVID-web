@@ -24,19 +24,33 @@ import Token from './Token'
 import { Rowing } from '@material-ui/icons'
 import SearchUsers from './SearchUsers'
 
+import {Modal} from './Modal'
+
 interface Account {
   id: number,
   user: string,
 }
 
+
 class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
 
+  isModalOpen: boolean;
+
   constructor(props) {
     super(props)
     this.rows = new Array()
+    this.isModalOpen = false;
+    this.toggleModal = this.toggleModal.bind(this);
   }
+
+  private toggleModal() {
+    console.log('isModalOpen', this.isModalOpen);
+    this.isModalOpen = !this.isModalOpen;
+    this.forceUpdate();
+  }
+
 
   private addTableRow(row: Account) {
     this.rows.push(
@@ -70,6 +84,7 @@ class AccountsForm extends Component {
   }
 
   render() {
+    
     return (
       <div>
         <Grid container spacing={3}>
@@ -80,12 +95,31 @@ class AccountsForm extends Component {
                   <PersonIcon fontSize="large" />
                 </ListItemIcon>
                 <ListItemText primary="Username"/> {/* TODO: get and visualize real username */}
-                <IconButton className="pencil">
+                
+                <IconButton className="pencil" onClick={this.toggleModal}>
                   <CreateIcon/>
                 </IconButton>
-                <IconButton className="trash">
+
+                <Modal
+                  title={'Kebabbo'}
+                  isOpen={this.isModalOpen}
+                  onClose={this.toggleModal}  
+                >
+                  Con o sensa scipola amico?
+                </Modal>
+
+                <IconButton className="trash" onClick={this.toggleModal}>
                   <DeleteIcon/>
                 </IconButton>
+
+                {/* <Modal
+                  title={'Seguro de eliminare tuto?'}
+                  isOpen={this.isModalOpen}
+                  onClose={this.toggleModal}  
+                >
+                  Varda ca te te penti...
+                </Modal> */}
+
               </ListItem>
             </Paper>
           </Grid> {/* WARNING: from here we replicate the same grid item */}
