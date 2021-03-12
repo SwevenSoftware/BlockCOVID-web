@@ -9,6 +9,13 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
+import Grid from '@material-ui/core/Grid';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css'
 import GeneralLayout from './GeneralLayout'
@@ -64,20 +71,74 @@ class AccountsForm extends Component {
   render() {
     return (
       <div>
-        <p> paragrafo di prova </p>
-
-        {/*<TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead className="headerCard">
-              <TableRow>
-                <TableCell align="center">Username</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{this.rows}</TableBody>
-          </Table>
-        </TableContainer>
-        */}
-
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon style={{ fontSize: 70 }} /></ListItemIcon>
+                <ListItemText primary="Username" />
+                <Button className="right" variant="contained"><CreateIcon /></Button>
+                <Button className="right" variant="contained"><DeleteIcon /></Button>
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className="paper">
+              <ListItem>
+                <ListItemIcon><PersonIcon /></ListItemIcon>
+                <ListItemText primary="Username" />
+              </ListItem>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     )
   }
