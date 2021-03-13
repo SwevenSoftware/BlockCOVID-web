@@ -20,7 +20,8 @@ import Token from './Token'
 import { Rowing } from '@material-ui/icons'
 import SearchUsers from './SearchUsers'
 
-import {Modal} from './Modal'
+import {Pencil_Modal} from './Pencil_Modal'
+import {Delete_Modal} from './Delete_Modal'
 
 interface Account {
   id: number,
@@ -32,18 +33,29 @@ class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
 
-  isModalOpen: boolean;
+  isModalOpen_P: boolean;
+  isModalOpen_D: boolean;
+
 
   constructor(props) {
     super(props)
     this.rows = new Array()
-    this.isModalOpen = false;
-    this.toggleModal = this.toggleModal.bind(this);
+    this.isModalOpen_P = false;
+    this.toggleModal_P = this.toggleModal_P.bind(this);
+
+    this.isModalOpen_D = false;
+    this.toggleModal_D = this.toggleModal_D.bind(this);
   }
 
-  private toggleModal() {
-    console.log('isModalOpen', this.isModalOpen);
-    this.isModalOpen = !this.isModalOpen;
+  private toggleModal_P() {
+    console.log('isModalOpen', this.isModalOpen_P);
+    this.isModalOpen_P = !this.isModalOpen_P;
+    this.forceUpdate();
+  }
+
+  private toggleModal_D() {
+    console.log('isModalOpen', this.isModalOpen_D);
+    this.isModalOpen_D = !this.isModalOpen_D;
     this.forceUpdate();
   }
 
@@ -92,29 +104,33 @@ class AccountsForm extends Component {
                 </ListItemIcon>
                 <ListItemText primary="Username1" className= "text"/> {/* TODO: get and visualize real username */}
                 
-                <IconButton className="pencil" onClick={this.toggleModal}>
+                <IconButton className="pencil" onClick={this.toggleModal_P} >
                   <CreateIcon className="icon"/>
                 </IconButton>
 
-                <Modal
-                  title={'Kebabbo'}
-                  isOpen={this.isModalOpen}
-                  onClose={this.toggleModal}  
+                
+                <Pencil_Modal
+                  title_P={'Kebabbo'}
+                  isOpen_P={this.isModalOpen_P}
+                  onClose_P={this.toggleModal_P}  
                 >
                   Con o sensa scipola amico?
-                </Modal>
+                </Pencil_Modal>
+                
 
-                <IconButton className="trash" onClick={this.toggleModal}>
+                <IconButton className="trash" onClick={this.toggleModal_D}>
                   <DeleteIcon className="icon"/>
                 </IconButton>
 
-                {/* <Modal
-                  title={'Seguro de eliminare tuto?'}
-                  isOpen={this.isModalOpen}
-                  onClose={this.toggleModal}  
+                
+                <Delete_Modal
+                  title_D={'Seguro de eliminare tuto?'}
+                  isOpen_D={this.isModalOpen_D}
+                  onClose_D={this.toggleModal_D}  
                 >
                   Varda ca te te penti...
-                </Modal> */}
+                </Delete_Modal>
+              
 
               </ListItem>
             </Paper>

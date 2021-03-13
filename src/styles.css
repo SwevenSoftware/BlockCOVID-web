@@ -69,7 +69,7 @@
     margin-bottom: 2em;
 }
 
-.modal {
+.pencil_modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -80,7 +80,7 @@
     height: 100vh;
 }
 
-.modal_overlay{
+.pencil_modal_overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -90,7 +90,7 @@
     cursor: pointer;
 }
 
-.modal_box {
+.pencil_modal_box {
     position: relative;
     width: 80%;
     margin: 0 10%;
@@ -101,18 +101,18 @@
     cursor: auto;
 }
 
-.modal_title {
+.pencil_modal_title {
     color: #178526;
     font-size: 30px;
 }
   
-.modal_content {
+.pencil_modal_content {
     margin-top: 30px;
     color: #6B6B6B;
     font-size: 16px;
 }
   
-.modal_close {
+.pencil_modal_close {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -120,19 +120,81 @@
     transform-origin: 50% 50%;
 }
   
-.modal_close:hover {
+.pencil_modal_close:hover {
     transform: rotate(180deg);
 }
   
 @media screen and (min-width: 800px) {
-    .modal_box {
+    .pencil_modal_box {
       max-width: 600px;
       margin: 0 30px;
     }
 }
 
 
-.modal_reserve {
+.delete_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.delete_modal_overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.664);
+    cursor: pointer;
+}
+
+.delete_modal_box {
+    position: relative;
+    width: 80%;
+    margin: 0 10%;
+    padding: 50px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: white;
+    cursor: auto;
+}
+
+.delete_modal_title {
+    color: #178526;
+    font-size: 30px;
+}
+  
+.delete_modal_content {
+    margin-top: 30px;
+    color: #6B6B6B;
+    font-size: 16px;
+}
+  
+.delete_modal_close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: transform 250ms ease-in-out;
+    transform-origin: 50% 50%;
+}
+  
+.delete_modal_close:hover {
+    transform: rotate(180deg);
+}
+  
+@media screen and (min-width: 800px) {
+    .delete_modal_box {
+      max-width: 600px;
+      margin: 0 30px;
+    }
+}
+
+/* .modal_reserve {
     margin-top: 0px;
     margin-right: 40px;
     padding: 15px 25px;
@@ -163,4 +225,4 @@
     width: 3vw;
     height: 3vh;
     background-color: #ffffff;
-}
+} */
