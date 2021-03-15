@@ -11,7 +11,7 @@ import Accounts from './Accounts';
 const App: React.FC = () => {
 
   return (
-      <div>
+      <div className="App">
         <BrowserRouter>
           <Switch>
             <Route path='/login' exact component={Login}/>
