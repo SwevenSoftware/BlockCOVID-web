@@ -70,13 +70,16 @@ const LoginForm = () => {
       username,
       password
     }));
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
 
-    const config = {headers: { 'content-type': 'multipart/form-data'}};
+    const config = {headers: { 'content-type': 'application/json'}};
 
-    axios.post("/api/login", formData, config)
+    axios.post("/api/login",
+      JSON.stringify({
+        username,
+        password
+      }),
+      config
+    )
     .then((res) => {
       successLogin();
       Token.set(res.data);
@@ -86,6 +89,7 @@ const LoginForm = () => {
       if(err.response.status == 401) {
         failLogin('Incorrect username or password')
       } else {
+        console.log(err);
         failLogin('Server error')
       }
     });
