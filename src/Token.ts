@@ -1,11 +1,16 @@
 class Token {
-
     public static get() : string | null {
         return localStorage.getItem("token_id");
     }
 
-    public static set(token : string) : void {
-        localStorage.setItem("token_id", token);
+    /* method to store every key and value into localstorage
+      *   public static set(data: any) : void {
+      *     Object.keys(data).map( key =>
+      *        localstorage.setItem("token_" + key, data[key])
+      *    );
+      * }
+    */
+
     public static setId(id: string) : void {
         localStorage.setItem("token_id", id);
     }
