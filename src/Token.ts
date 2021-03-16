@@ -4,8 +4,6 @@ class Token {
         return localStorage.getItem("token_id");
     }
 
-    public static set(token : string) : void {
-        localStorage.setItem("token_id", token);
     public static setId(id: string) : void {
         console.log(id);
         localStorage.setItem("token_id", id);
