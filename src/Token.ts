@@ -1,6 +1,15 @@
 class Token {
-    public static get() : string | null {
+
+    public static getId() : string | null {
         return localStorage.getItem("token_id");
+    }
+
+    public static getExpDate() : string | null {
+        return localStorage.getItem("token_expiration");
+    }
+
+    public static getUsername() : string | null {
+        return localStorage.getItem("token_username");
     }
 
     /* method to store every key and value into localstorage

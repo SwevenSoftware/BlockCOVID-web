@@ -177,7 +177,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         </List>
         <Divider />
         <List>
-          { Token.get() ?
+          { Token.getId() ?
             <ListItem button key="Logout" onClick={logout}>
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Logout" />

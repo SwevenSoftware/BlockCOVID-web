@@ -99,7 +99,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
 
 const CardGrid = () => {
 
-  if(!Token.get())
+  if(!Token.getId())
     location.href = "/login"
 
   return (

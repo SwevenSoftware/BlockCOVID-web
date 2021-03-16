@@ -49,7 +49,7 @@ class ReservationsForm extends Component {
   }
 
   private retrieveReservations() {
-    const config = {headers: {"Authorization": Token.get()}};
+    const config = {headers: {"Authorization": Token.getId()}};
     axios.post("/api/admin/reservations", {}, config).then((res) => {
       for(var id in res.data) {
         const data = res.data[id]
@@ -98,7 +98,7 @@ class ReservationsForm extends Component {
 
 const Reservations = () => {
 
-  if(!Token.get())
+  if(!Token.getId())
     location.href = "/login"
 
   return (

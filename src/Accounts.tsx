@@ -73,8 +73,8 @@ class AccountsForm extends Component {
   }
 
   private retrieveAccounts() {
-    const config = { headers: { "Authorization": Token.get() } }
-    axios.post("/api", {}, config).then((res) => {
+    const config = { headers: { "Authorization": Token.getId() } }
+    axios.post("/api/user/info", {}, config).then((res) => {
       for (var id in res.data) {
         const data = res.data[id]
         const newAccount = {
@@ -255,7 +255,7 @@ class AccountsForm extends Component {
 
 const Accounts = () => {
 
-  if (!Token.get())
+  if (!Token.getId())
     location.href = "/login"
 
   return (
