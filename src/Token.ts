@@ -7,17 +7,14 @@ class Token {
     public static set(token : string) : void {
         localStorage.setItem("token_id", token);
     public static setId(id: string) : void {
-        console.log(id);
         localStorage.setItem("token_id", id);
     }
 
     public static setExpDate(expDate : string) : void {
-        console.log(expDate);
         localStorage.setItem("token_expiration", expDate);
     }
 
     public static setUsername(username : string) : void {
-        console.log(username);
         localStorage.setItem("token_username", username);
     }
 
