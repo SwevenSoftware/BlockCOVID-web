@@ -48,13 +48,11 @@ class AccountsForm extends Component {
   }
 
   private toggleModal_P() {
-    console.log('isModalOpen', this.isModalOpen_P);
     this.isModalOpen_P = !this.isModalOpen_P;
     this.forceUpdate();
   }
 
   private toggleModal_D() {
-    console.log('isModalOpen', this.isModalOpen_D);
     this.isModalOpen_D = !this.isModalOpen_D;
     this.forceUpdate();
   }
