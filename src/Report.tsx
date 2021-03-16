@@ -16,7 +16,7 @@ const Report = () => {
     const classes = useStyles();
 
     const generateReport = () => {
-        const token : string | undefined = Token.get()?.toString()
+        const token : string | undefined = Token.getId()?.toString()
         if(token)
             fetch('/api/admin/report', {
                 method: 'POST',
