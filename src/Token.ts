@@ -10,6 +10,8 @@ class Token {
 
     public static remove() : void {
         localStorage.removeItem("token_id");
+        localStorage.removeItem("token_expiration");
+        localStorage.removeItem("token_username");
     }
 }
 
