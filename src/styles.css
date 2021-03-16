@@ -32,6 +32,25 @@
     margin: 0 2% 2% 0;
 }
 
+@media only screen and (max-width: 1264px) {
+    .grid {
+        min-width: 31%;
+    }
+}
+
+@media only screen and (max-width: 976px) {
+    .grid {
+        min-width: 48%;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .grid {
+        min-width: 100%;
+        margin-right: 0%;
+    }
+}
+
 .paper {
     color: white;
     height: 5em;
