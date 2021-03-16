@@ -83,6 +83,9 @@ const LoginForm = () => {
     .then((res) => {
       successLogin();
       Token.set(res.data);
+      Token.setId(res.data.id);
+      Token.setExpDate(res.data.expiryDate);
+      Token.setUsername(res.data.username);
       location.href = "/reservations";
     }).catch((err) => {
       console.log(err)
