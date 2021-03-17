@@ -71,18 +71,35 @@ class AccountsForm extends Component {
   }
 
   private retrieveAccounts() {
-    const config = { headers: { "Authorization": Token.getId() } }
-    axios.post("/api/user/info", {}, config).then((res) => {
-      for (var id in res.data) {
-        const data = res.data[id]
-        const newAccount = {
-          id: data.id,
-          user: data.user,
-        }
-        this.addTableRow(newAccount)
+
+    const config = {
+      data: {},
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": Token.getId()
       }
+    }
+
+    axios.get("/api/admin/users", config)
+    .then((res) => {
+      console.log(Token.getId());
+      for (let i in res.data._embedded.userList) {
+        const newAccount = {
+          username: res.data._embedded.userList[i].username,
+          authorities: res.data._embedded.userList[i].authorities,
+          link_modify: res.data._embedded.userList[i]._links.modify_user.href,
+          link_delete: ""
+        }
+
+        this.addPaperAccount(newAccount)
+      }
+
       this.forceUpdate()
-    })
+    }).catch((err) => {
+      console.log(err)
+      if(err.response.status == 401) { }
+      else { }
+    });
   }
 
   componentDidMount() {
