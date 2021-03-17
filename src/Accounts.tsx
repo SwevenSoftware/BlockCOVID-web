@@ -43,16 +43,18 @@ class AccountsForm extends Component {
 
   private addPaperAccount(row: Account) {
     this.rows.push(
-      <Paper key={row.username} className="paper">
-        <ListItem className="listItem">
-          <ListItemIcon>
-            <PersonIcon fontSize="large"/>
-          </ListItemIcon>
-          <ListItemText primary={row.username} className="text"/>
-          <Pencil/>
-          <Trash/>
-        </ListItem>
-      </Paper>
+      <Grid className="grid">
+        <Paper key={row.username} className="paper">
+          <ListItem className="listItem">
+            <ListItemIcon>
+              <PersonIcon fontSize="large"/>
+            </ListItemIcon>
+            <ListItemText primary={row.username} className="text"/>
+            <Pencil/>
+            <Trash/>
+          </ListItem>
+        </Paper>
+      </Grid>
     )
   }
 
@@ -97,9 +99,7 @@ class AccountsForm extends Component {
     return (
       <div>
         <Grid container spacing={3}>
-          <Grid className="grid">
             {this.rows}
-          </Grid>
         </Grid>
       </div>
     )
