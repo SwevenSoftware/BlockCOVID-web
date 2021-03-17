@@ -34,28 +34,10 @@ class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
 
-  isModalOpen_P: boolean;
-  isModalOpen_D: boolean;
-
 
   constructor(props) {
     super(props)
     this.rows = new Array()
-    this.isModalOpen_P = false;
-    this.toggleModal_P = this.toggleModal_P.bind(this);
-
-    this.isModalOpen_D = false;
-    this.toggleModal_D = this.toggleModal_D.bind(this);
-  }
-
-  private toggleModal_P() {
-    this.isModalOpen_P = !this.isModalOpen_P;
-    this.forceUpdate();
-  }
-
-  private toggleModal_D() {
-    this.isModalOpen_D = !this.isModalOpen_D;
-    this.forceUpdate();
   }
 
 
