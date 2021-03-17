@@ -61,40 +61,74 @@ class AccountsForm extends Component {
     )
   }
 
-  private retrieveAccounts() {
+  /**
+  * Visualize all existing accounts
+  * @param
+  * @returns
+  */
+  private viewAccounts() {
+    this.getAccounts()
+      .then(data => {
+        for (let i in data._embedded.userList) {
+          const newAccount = {
+            username: data._embedded.userList[i].username,
+            authorities: data._embedded.userList[i].authorities,
+            link_modify: data._embedded.userList[i]._links.modify_user.href,
+            link_delete: ""
+          }
+
+          this.addPaperAccount(newAccount);
+        }
+
+        this.forceUpdate();
+
+      }).catch(err => {
+          console.log("An error has occured in viewAccounts: ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
+  }
+
+  /**
+  * Query the API to retrieve all existing accounts
+  * @param
+  * @returns
+  */
+  private getAccounts() {
 
     const config = {
-      data: {},
+      data: {}, /* data must be set or else headers.Content-Type will be ignored */
       headers: {
         "Content-Type": "application/json",
         "Authorization": Token.getId()
       }
     }
 
-    axios.get("/api/admin/users", config)
-    .then((res) => {
-      console.log(Token.getId());
-      for (let i in res.data._embedded.userList) {
-        const newAccount = {
-          username: res.data._embedded.userList[i].username,
-          authorities: res.data._embedded.userList[i].authorities,
-          link_modify: res.data._embedded.userList[i]._links.modify_user.href,
-          link_delete: ""
-        }
-
-        this.addPaperAccount(newAccount)
-      }
-
-      this.forceUpdate()
-    }).catch((err) => {
-      console.log(err)
-      if(err.response.status == 401) { }
-      else { }
-    });
+    const promise = axios.get("/api/admin/users", config);
+    const dataPromise = promise.then((res) =>  res.data);
+    return dataPromise;
   }
 
+  /*
+  private modifyUser(username:string, account: Account) {
+
+    const config = {
+
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": Token.getId()
+      }
+    }
+    const data = {
+      username: account.username,
+      password:
+    }
+    axios.put("/api/admin/user/" + username + "/modify", {}, config)
+  }
+  */
+
   componentDidMount() {
-    this.retrieveAccounts()
+    this.viewAccounts();
   }
 
   render() {
