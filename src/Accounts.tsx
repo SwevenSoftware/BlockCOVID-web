@@ -57,7 +57,7 @@ class AccountsForm extends Component {
             <ListItemIcon>
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
-            <ListItemText primary={account.username} className="text"/>
+            <ListItemText primary={account.username}/>
             <Pencil/>
             <Trash/>
           </ListItem>

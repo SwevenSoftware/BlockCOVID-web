@@ -55,6 +55,14 @@
     color: blue;
 }
 
+.addField {
+    margin-bottom: 2%;
+}
+
+.trashField {
+    text-align: center;
+}
+
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {

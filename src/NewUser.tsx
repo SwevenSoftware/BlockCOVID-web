@@ -56,38 +56,41 @@ export default function FormDialog() {
         <AddBoxIcon fontSize="large" />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">New user</DialogTitle>
+        <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill the fields below
+            Compila i campi seguenti
           </DialogContentText>
+          <div className="addField">
           <TextField 
             required
             id="outlined-search"
             label="Username"
             variant="outlined" 
           />
-          <TextField
-            required
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-          />
+          </div>
+          <div className="addField">
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              variant="outlined"
+            />
+          </div>
+          <div className="addField">
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              variant="outlined"
+            />
+          </div>
           <DialogContentText>
-            Repeat password
-          </DialogContentText>
-          <TextField
-            required
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-          />
-          <DialogContentText>
-            Authorities
+            Ruolo
           </DialogContentText>
           <FormControlLabel
             control={<GreenCheckbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
@@ -103,11 +106,11 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" >
-            <span className="decline">Decline</span>
+          <Button onClick={handleClose} color="secondary" >
+            <span className="decline">Annulla</span>
           </Button>
-          <Button onClick={handleClose} color="primary" >
-          <span className="confirm">Confirm</span>
+          <Button onClick={handleClose} className="confirm" >
+            Conferma
           </Button>
         </DialogActions>
       </Dialog>
