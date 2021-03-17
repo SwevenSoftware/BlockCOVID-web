@@ -35,22 +35,19 @@ interface PaperAccount {
   link_delete: string
 }
 
-
 class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
-
 
   constructor(props) {
     super(props)
     this.rows = new Array()
   }
 
-
   private addPaperAccount(account: PaperAccount) {
     this.rows.push(
-      <Grid className="grid">
-        <Paper key={account.username} className="paper">
+      <Grid key={account.username} className="grid">
+        <Paper className="paper">
           <ListItem className="listItem">
             <ListItemIcon>
               <PersonIcon fontSize="large"/>
