@@ -22,6 +22,12 @@ import SearchUsers from './SearchUsers'
 import Pencil from './Pencil'
 import Trash from './Trash'
 
+interface Account {
+  username: string,
+  password: string,
+  authorities: string[]
+}
+
 interface PaperAccount {
   username: string,
   authorities: string[],
