@@ -89,3 +89,14 @@
         top: 5.5em;
     }
 }
+
+
+/* ====================== Buttons Dialog ====================== */
+
+.decline:hover {
+    color: red;
+}
+
+.confirm:hover {
+    color: green;
+}

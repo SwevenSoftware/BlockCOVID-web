@@ -17,7 +17,7 @@ import { green } from '@material-ui/core/colors';
 
 const GreenCheckbox = withStyles({
   root: {
-    color: green[400],
+    color: green[600],
     '&$checked': {
       color: green[600],
     },
@@ -103,11 +103,11 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Annulla
+          <Button onClick={handleClose} color="primary" >
+            <span className="decline">Decline</span>
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Conferma
+          <Button onClick={handleClose} color="primary" >
+          <span className="confirm">Confirm</span>
           </Button>
         </DialogActions>
       </Dialog>
