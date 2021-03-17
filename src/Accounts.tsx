@@ -23,9 +23,12 @@ import SearchUsers from './SearchUsers'
 import {Pencil_Modal} from './Pencil_Modal'
 import {Delete_Modal} from './Delete_Modal'
 
+
 interface Account {
-  id: number,
-  user: string,
+  username: string,
+  authorities: string[],
+  link_modify: string,
+  link_delete: string
 }
 
 
