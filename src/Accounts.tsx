@@ -58,15 +58,40 @@ class AccountsForm extends Component {
   }
 
 
-  private addTableRow(row: Account) {
+  private addPaperAccount(row: Account) {
     this.rows.push(
-      <TableRow key={row.id}>
-        <TableCell component="th" scope="row" align="left">
-          {row.id}
-        </TableCell>
+      <Paper key={row.username} className="paper">
+        <ListItem className="listItem">
+          <ListItemIcon>
+            <PersonIcon fontSize="large"/>
+          </ListItemIcon>
+          <ListItemText primary={row.username} className="text"/>
+          <IconButton className="pencil" onClick={this.toggleModal_P}>
+            <CreateIcon className="icon"/>
+          </IconButton>
 
-        <TableCell align="center">{row.user}</TableCell>
-      </TableRow>
+          <Pencil_Modal
+            title_P={'Kebabbo'}
+            isOpen_P={this.isModalOpen_P}
+            onClose_P={this.toggleModal_P}
+          >
+            Con o sensa scipola amico?
+          </Pencil_Modal>
+
+          <IconButton className="trash" onClick={this.toggleModal_D}>
+            <DeleteIcon className="icon"/>
+          </IconButton>
+
+          <Delete_Modal
+            title_D={'Seguro de eliminare tuto?'}
+            isOpen_D={this.isModalOpen_D}
+            onClose_D={this.toggleModal_D}
+          >
+            Varda ca te te penti...
+          </Delete_Modal>
+
+        </ListItem>
+      </Paper>
     )
   }
 
