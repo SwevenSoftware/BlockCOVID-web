@@ -19,9 +19,9 @@ import Report from './Report'
 import Token from './Token'
 import { Rowing } from '@material-ui/icons'
 import SearchUsers from './SearchUsers'
+import Pencil from './Pencil'
+import Trash from './Trash'
 
-import {Pencil_Modal} from './Pencil_Modal'
-import {Delete_Modal} from './Delete_Modal'
 
 interface Account {
   id: number,
@@ -102,34 +102,10 @@ class AccountsForm extends Component {
                 </ListItemIcon>
                 <ListItemText primary="Username1" className= "text"/> {/* TODO: get and visualize real username */}
                 
-                <IconButton className="pencil" onClick={this.toggleModal_P} >
-                  <CreateIcon className="icon"/>
-                </IconButton>
-
+                <Pencil />
                 
-                <Pencil_Modal
-                  title_P={'Kebabbo'}
-                  isOpen_P={this.isModalOpen_P}
-                  onClose_P={this.toggleModal_P}  
-                >
-                  Con o sensa scipola amico?
-                </Pencil_Modal>
-                
-
-                <IconButton className="trash" onClick={this.toggleModal_D}>
-                  <DeleteIcon className="icon"/>
-                </IconButton>
-
-                
-                <Delete_Modal
-                  title_D={'Seguro de eliminare tuto?'}
-                  isOpen_D={this.isModalOpen_D}
-                  onClose_D={this.toggleModal_D}  
-                >
-                  Varda ca te te penti...
-                </Delete_Modal>
+                <Trash />
               
-
               </ListItem>
             </Paper>
           </Grid> {/* WARNING: from here we replicate the same grid item */}
