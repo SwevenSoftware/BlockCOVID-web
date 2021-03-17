@@ -9,8 +9,37 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import IconButton from '@material-ui/core/IconButton';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: green[400],
+    '&$checked': {
+      color: green[600],
+    },
+  },
+  checked:{},
+}) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
 
 export default function FormDialog() {
+
+  const [state, setState] = React.useState({
+    checkedA: false,
+    checkedU: false,
+    checkedC: false,
+  });
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -27,18 +56,50 @@ export default function FormDialog() {
         <AddBoxIcon fontSize="large" />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Crea un nuovo utente</DialogTitle>
+        <DialogTitle id="form-dialog-title">New user</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Crea un nuovo omino che fa tante cose
+            Fill the fields below
+          </DialogContentText>
+          <TextField 
+            required
+            id="outlined-search"
+            label="Username"
+            variant="outlined" 
+          />
+          <TextField
+            required
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+          />
+          <DialogContentText>
+            Repeat password
           </DialogContentText>
           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
+            required
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+          />
+          <DialogContentText>
+            Authorities
+          </DialogContentText>
+          <FormControlLabel
+            control={<GreenCheckbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
+            label="Admin"
+          />
+          <FormControlLabel
+            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
+            label="User"
+          />
+          <FormControlLabel
+            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            label="Cleaner"
           />
         </DialogContent>
         <DialogActions>
