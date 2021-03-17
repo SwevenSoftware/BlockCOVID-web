@@ -22,7 +22,7 @@ import SearchUsers from './SearchUsers'
 import Pencil from './Pencil'
 import Trash from './Trash'
 
-interface Account {
+interface PaperAccount {
   username: string,
   authorities: string[],
   link_modify: string,
@@ -41,15 +41,15 @@ class AccountsForm extends Component {
   }
 
 
-  private addPaperAccount(row: Account) {
+  private addPaperAccount(account: PaperAccount) {
     this.rows.push(
       <Grid className="grid">
-        <Paper key={row.username} className="paper">
+        <Paper key={account.username} className="paper">
           <ListItem className="listItem">
             <ListItemIcon>
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
-            <ListItemText primary={row.username} className="text"/>
+            <ListItemText primary={account.username} className="text"/>
             <Pencil/>
             <Trash/>
           </ListItem>
