@@ -44,6 +44,11 @@ class AccountsForm extends Component {
     this.rows = new Array()
   }
 
+  /**
+  * Push into this.rows the HTML code to display an account
+  * @params PaperAccounts account which contains all the information needed
+  * @returns
+  */
   private addPaperAccount(account: PaperAccount) {
     this.rows.push(
       <Grid key={account.username} className="grid">
