@@ -71,7 +71,7 @@ class AccountsForm extends Component {
 
   /**
   * Visualize all existing accounts
-  * @param
+  * @params
   * @returns
   */
   private viewAccounts() {
