@@ -122,9 +122,23 @@ class AccountsForm extends Component {
   }
 
   /**
-  * Query the API to retrieve all existing accounts
-  * @param
+  * Modify user account
+  * @params
   * @returns
+  */
+  private modifyAccount(username: string, account: Account) {
+    this.setAccount(username, account)
+      .catch(err => {
+          console.log("An error has occured in modifyAccount(): ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
+  }
+
+  /**
+  * Query the API to retrieve all existing accounts
+  * @params
+  * @returns Set of data
   */
   private getAccounts() {
     const config = {
@@ -140,39 +154,25 @@ class AccountsForm extends Component {
     return dataPromise;
   }
 
-  /*
-  private modifyUser(username:string, account: Account) {
-
+  /**
+  * Query the API to set password and/or authorities of an account
+  * @params
+  * @returns Set of data
+  */
+  private setAccount(username: string, account: Account) {
     const config = {
-
       headers: {
         "Content-Type": "application/json",
-        "Authorization": Token.getId()
+        "Authorization": Token.getId(),
+        "username": username
       }
     }
-    const data = {
-      username: account.username,
-      password:
-    }
-    axios.put("/api/admin/user/" + username + "/modify", {}, config)
-  }
-  */
-
-  componentDidMount() {
-    this.viewAccounts();
+    const data = account;
+    const promise = axios.put("/api/admin/user/" + username + "/modify", data, config);
+    const dataPromise = promise.then((res) =>  res.data);
+    return dataPromise;
   }
 
-  render() {
-
-    return (
-      <div>
-        <Grid container spacing={3}>
-            {this.rows}
-        </Grid>
-      </div>
-    )
-  }
-}
 };
 
 const Accounts = () => {
