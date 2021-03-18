@@ -49,7 +49,7 @@ class AccountsForm extends Component {
 
   /**
   * Push into this.rows the HTML code to display an account
-  * @params PaperAccounts account which contains all the information needed
+  * @params PaperAccount which contains all the information needed
   * @returns
   */
   private addPaperAccount(account: PaperAccount) {
