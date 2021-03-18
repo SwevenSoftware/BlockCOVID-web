@@ -77,6 +77,7 @@ class AccountsForm extends Component {
   private viewAccounts() {
     this.getAccounts()
       .then(data => {
+
         for (let i in data._embedded.userList) {
           const newAccount = {
             username: data._embedded.userList[i].username,
@@ -91,7 +92,7 @@ class AccountsForm extends Component {
         this.forceUpdate();
 
       }).catch(err => {
-          console.log("An error has occured in viewAccounts: ", err);
+          console.log("An error has occured in viewAccounts(): ", err);
           if(err.response.status == 401) { }
           else { }
       });
