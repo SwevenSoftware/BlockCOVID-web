@@ -14,6 +14,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
+import Message from './Message/SuccessMessage'
+
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -25,13 +31,23 @@ const GreenCheckbox = withStyles({
   checked:{},
 }) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
 
+
+
+
+
+
 export default function FormDialog() {
 
   const [state, setState] = React.useState({
-    checkedA: false,
-    checkedU: false,
-    checkedC: false,
+    checkedAdmin: false,
+    checkedUser: false,
+    checkedCleaner: false,
   });
+
+  
+
+  
+  
 
   const [checked, setChecked] = React.useState(true);
 
@@ -40,22 +56,22 @@ export default function FormDialog() {
   };
 
 
-  const [open, setOpen] = React.useState(false);
+  const [open_Button, setOpen_Button] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen_Button = () => {
+    setOpen_Button(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose_Button = () => {
+    setOpen_Button(false);
   };
 
   return (
     <div>
-      <IconButton className="addColor" onClick={handleClickOpen}>
+      <IconButton className="addColor" onClick={handleClickOpen_Button}>
         <AddBoxIcon fontSize="large" />
       </IconButton>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open_Button} onClose={handleClose_Button} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -93,25 +109,28 @@ export default function FormDialog() {
             Ruolo
           </DialogContentText>
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
+            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedA" />}
             label="Admin"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
+            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedU" />}
             label="User"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedC" />}
             label="Cleaner"
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} className="decline" >
+          <Button onClick={handleClose_Button} className="decline" >
             Annulla
           </Button>
-          <Button onClick={handleClose} className="confirm" >
+          <Button onClick={handleClose_Button} className="confirm" >
             Conferma
           </Button>
+
+          {/* fare una reference e all'interno chiamo i due set */}
+          <Message />
         </DialogActions>
       </Dialog>
     </div>
