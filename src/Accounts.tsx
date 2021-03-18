@@ -39,6 +39,9 @@ class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
 
+  /**
+  * Initialize this.rows
+  */
   constructor(props) {
     super(props)
     this.rows = new Array()
