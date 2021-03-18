@@ -42,7 +42,7 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
           <Button onClick={handleClose} className="confirm" >

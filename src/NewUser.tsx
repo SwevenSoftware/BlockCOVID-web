@@ -106,8 +106,8 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} >
-            <span className="decline">Annulla</span>
+          <Button onClick={handleClose} className="decline" >
+            Annulla
           </Button>
           <Button onClick={handleClose} className="confirm" >
             Conferma
