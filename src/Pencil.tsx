@@ -63,12 +63,13 @@ export default function FormDialog() {
             Si possono modificare i seguenti campi
           </DialogContentText>
           <div className="addField">
-          <TextField 
-            required
-            id="outlined-search"
-            label="Username"
-            variant="outlined" 
-          />
+          <TextField
+            disabled
+            id="outlined-disabled"
+            label="Disabled"
+            defaultValue="Inserire il nome utente del possessore ID"
+            variant="outlined"
+        />
           </div>
           <div className="addField">
             <TextField
@@ -90,6 +91,9 @@ export default function FormDialog() {
               variant="outlined"
             />
           </div>
+          <DialogContentText color="secondary">
+            * indica i campi obbligatori
+          </DialogContentText>
           <DialogContentText>
             Ruolo
           </DialogContentText>
