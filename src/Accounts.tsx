@@ -55,6 +55,21 @@ class AccountsForm extends Component {
     console.log(Token.getId());
     this.viewAccounts();
   }
+
+  /**
+  * @params
+  * @returns
+  */
+  render() {
+    return (
+      <div>
+        <Grid container spacing={3}>
+          {this.rows}
+        </Grid>
+      </div>
+    )
+  }
+
   /**
   * Push into this.rows the HTML code to display an account
   * @params PaperAccount which contains all the information needed
