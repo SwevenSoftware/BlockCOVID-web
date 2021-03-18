@@ -176,15 +176,15 @@ class AccountsForm extends Component {
 };
 
 const Accounts = () => {
-
-  if (!Token.getId())
-    location.href = "/login"
+  if (!Token.getId()) {
+    location.href = "/login";
+  }
 
   return (
     GeneralLayout(
       <div>
-        <SearchUsers />
-        <AccountsForm />
+        <SearchUsers/>
+        <AccountsForm/>
       </div>
     )
   )
