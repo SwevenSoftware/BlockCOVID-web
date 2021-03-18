@@ -100,7 +100,6 @@ class AccountsForm extends Component {
   * @returns
   */
   private getAccounts() {
-
     const config = {
       data: {}, /* data must be set or else headers.Content-Type will be ignored */
       headers: {
