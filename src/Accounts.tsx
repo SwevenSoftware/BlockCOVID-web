@@ -48,6 +48,14 @@ class AccountsForm extends Component {
   }
 
   /**
+  * @params
+  * @returns
+  */
+  componentDidMount() {
+    console.log(Token.getId());
+    this.viewAccounts();
+  }
+  /**
   * Push into this.rows the HTML code to display an account
   * @params PaperAccount which contains all the information needed
   * @returns
