@@ -1,9 +1,9 @@
-import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react'
-import ReactDOM from 'react-dom'
-import PersonIcon from '@material-ui/icons/Person'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react';
+import ReactDOM from 'react-dom';
+import PersonIcon from '@material-ui/icons/Person';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,29 +11,29 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import axios from 'axios'
+import axios from 'axios';
 
-import './styles.css'
-import GeneralLayout from './GeneralLayout'
-import Report from './Report'
-import Token from './Token'
-import { Rowing } from '@material-ui/icons'
-import SearchUsers from './SearchUsers'
-import Pencil from './Pencil'
-import Trash from './Trash'
+import './styles.css';
+import GeneralLayout from './GeneralLayout';
+import Report from './Report';
+import Token from './Token';
+import { Rowing } from '@material-ui/icons';
+import SearchUsers from './SearchUsers';
+import Pencil from './Pencil';
+import Trash from './Trash';
 
 interface Account {
   username: string,
   password: string,
   authorities: string[]
-}
+};
 
 interface PaperAccount {
   username: string,
   authorities: string[],
   link_modify: string,
   link_delete: string
-}
+};
 
 class AccountsForm extends Component {
 
@@ -146,6 +146,7 @@ class AccountsForm extends Component {
     )
   }
 }
+};
 
 const Accounts = () => {
 
