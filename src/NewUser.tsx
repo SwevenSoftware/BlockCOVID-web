@@ -83,7 +83,7 @@ export default function FormDialog() {
             <TextField
               required
               id="outlined-password-input"
-              label="Password"
+              label="Ripeti Password"
               type="password"
               autoComplete="current-password"
               variant="outlined"
@@ -106,7 +106,7 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary" >
+          <Button onClick={handleClose} >
             <span className="decline">Annulla</span>
           </Button>
           <Button onClick={handleClose} className="confirm" >
