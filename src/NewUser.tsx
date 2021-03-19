@@ -75,7 +75,7 @@ export default function FormDialog() {
         <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Compila i campi seguenti
+            Compila i seguenti campi
           </DialogContentText>
           <div className="addField">
           <TextField 
@@ -105,6 +105,9 @@ export default function FormDialog() {
               variant="outlined"
             />
           </div>
+          <DialogContentText color="secondary">
+            * indica i campi obbligatori
+          </DialogContentText>
           <DialogContentText>
             Ruolo
           </DialogContentText>
@@ -113,12 +116,13 @@ export default function FormDialog() {
             label="Admin"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedU" />}
-            label="User"
+            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
+            label="Utente"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedC" />}
-            label="Cleaner"
+            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            label="Addetto alle pulizie"
+
           />
         </DialogContent>
         <DialogActions>

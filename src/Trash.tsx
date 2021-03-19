@@ -32,7 +32,10 @@ export default function FormDialog() {
         <DialogContent className="trashField">
         <PersonIcon fontSize="large" />
           <DialogContentText>
-            Nome utente
+            Username
+          </DialogContentText>
+          <DialogContentText>
+            Ruolo
           </DialogContentText>
         </DialogContent>
         <DialogActions>
