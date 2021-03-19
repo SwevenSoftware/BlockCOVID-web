@@ -15,6 +15,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
+import Token from './Token';
+import axios from 'axios';
+
 const GreenCheckbox = withStyles({
   root: {
     color: green[600],
@@ -25,7 +28,7 @@ const GreenCheckbox = withStyles({
   checked:{},
 }) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
 
-export default function FormDialog() {
+export default function FormDialog(formAccount: any) {
 
   const [state, setState] = React.useState({
     checkedA: false,
@@ -39,8 +42,9 @@ export default function FormDialog() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-
   const [open, setOpen] = React.useState(false);
+
+  const [passValue, setPassValue] = React.useState('') // TODO: da provare con false
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,6 +52,38 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleConfirm = (pass: string, auth: boolean[]) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": Token.getId(),
+        "username": formAccount.username
+      }
+    }
+
+    const aux = new Array();
+    if(auth[0]) aux.push("ADMIN");
+    if(auth[1]) aux.push("USER");
+    if(auth[2]) aux.push("CLEANER");
+
+    const data = {
+      username: formAccount.username,
+      password: pass,
+      authorities: aux
+    }
+
+    axios.put(formAccount.link_modify, data, config)
+      .then((res) => {
+        console.log(res); // WARNING: for testing purposes
+        handleClose();
+      })
+      .catch(err => {
+          console.log("An error has occured in handleConfirm(): ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
   };
 
   return (
@@ -74,17 +110,19 @@ export default function FormDialog() {
           <div className="addField">
             <TextField
               required
-              id="outlined-password-input"
+              id="outlined-password-input1"
               label="Password"
               type="password"
               autoComplete="current-password"
               variant="outlined"
+              value={passValue}
+              onChange={(e) => setPassValue(e.target.value)}
             />
           </div>
           <div className="addField">
             <TextField
               required
-              id="outlined-password-input"
+              id="outlined-password-input2"
               label="Ripeti Password"
               type="password"
               autoComplete="current-password"
@@ -111,10 +149,10 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} className="decline" >
+          <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={handleClose} className="confirm" >
+          <Button onClick={() => handleConfirm(passValue, [state.checkedA, state.checkedU, state.checkedC])} className="confirm">
             Conferma
           </Button>
         </DialogActions>
@@ -122,4 +160,3 @@ export default function FormDialog() {
     </div>
   );
 }
-

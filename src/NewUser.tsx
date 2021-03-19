@@ -44,10 +44,10 @@ export default function FormDialog() {
     checkedCleaner: false,
   });
 
-  
 
-  
-  
+
+
+
 
   const [checked, setChecked] = React.useState(true);
 
@@ -78,11 +78,11 @@ export default function FormDialog() {
             Compila i seguenti campi
           </DialogContentText>
           <div className="addField">
-          <TextField 
+          <TextField
             required
             id="outlined-search"
             label="Username"
-            variant="outlined" 
+            variant="outlined"
           />
           </div>
           <div className="addField">
@@ -116,11 +116,11 @@ export default function FormDialog() {
             label="Admin"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
+            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedU" />}
             label="Utente"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedC" />}
             label="Addetto alle pulizie"
 
           />
