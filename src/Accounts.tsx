@@ -1,9 +1,9 @@
-import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react'
-import ReactDOM from 'react-dom'
-import PersonIcon from '@material-ui/icons/Person'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react';
+import ReactDOM from 'react-dom';
+import PersonIcon from '@material-ui/icons/Person';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,42 +11,68 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import axios from 'axios'
+import axios from 'axios';
 
-import './styles.css'
-import GeneralLayout from './GeneralLayout'
-import Report from './Report'
-import Token from './Token'
-import { Rowing } from '@material-ui/icons'
-import SearchUsers from './SearchUsers'
-import Pencil from './Pencil'
-import Trash from './Trash'
+import './styles.css';
+import GeneralLayout from './GeneralLayout';
+import Report from './Report';
+import Token from './Token';
+import { Rowing } from '@material-ui/icons';
+import SearchUsers from './SearchUsers';
+import Pencil from './Pencil';
+import Trash from './Trash';
 
 interface Account {
   username: string,
   password: string,
   authorities: string[]
-}
+};
 
 interface PaperAccount {
   username: string,
   authorities: string[],
   link_modify: string,
   link_delete: string
-}
+};
 
 class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
 
+  /**
+  * Initialize this.rows
+  */
   constructor(props) {
     super(props)
     this.rows = new Array()
   }
 
   /**
+  * @params
+  * @returns
+  */
+  componentDidMount() {
+    console.log(Token.getId());
+    this.viewAccounts();
+  }
+
+  /**
+  * @params
+  * @returns
+  */
+  render() {
+    return (
+      <div>
+        <Grid container spacing={3}>
+          {this.rows}
+        </Grid>
+      </div>
+    )
+  }
+
+  /**
   * Push into this.rows the HTML code to display an account
-  * @params PaperAccounts account which contains all the information needed
+  * @params PaperAccount which contains all the information needed
   * @returns
   */
   private addPaperAccount(account: PaperAccount) {
@@ -68,12 +94,13 @@ class AccountsForm extends Component {
 
   /**
   * Visualize all existing accounts
-  * @param
+  * @params
   * @returns
   */
   private viewAccounts() {
     this.getAccounts()
       .then(data => {
+
         for (let i in data._embedded.userList) {
           const newAccount = {
             username: data._embedded.userList[i].username,
@@ -88,7 +115,21 @@ class AccountsForm extends Component {
         this.forceUpdate();
 
       }).catch(err => {
-          console.log("An error has occured in viewAccounts: ", err);
+          console.log("An error has occured in viewAccounts(): ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
+  }
+
+  /**
+  * Modify user account
+  * @params
+  * @returns
+  */
+  private modifyAccount(username: string, account: Account) {
+    this.setAccount(username, account)
+      .catch(err => {
+          console.log("An error has occured in modifyAccount(): ", err);
           if(err.response.status == 401) { }
           else { }
       });
@@ -96,11 +137,10 @@ class AccountsForm extends Component {
 
   /**
   * Query the API to retrieve all existing accounts
-  * @param
-  * @returns
+  * @params
+  * @returns Set of data
   */
   private getAccounts() {
-
     const config = {
       data: {}, /* data must be set or else headers.Content-Type will be ignored */
       headers: {
@@ -114,50 +154,37 @@ class AccountsForm extends Component {
     return dataPromise;
   }
 
-  /*
-  private modifyUser(username:string, account: Account) {
-
+  /**
+  * Query the API to set password and/or authorities of an account
+  * @params
+  * @returns Set of data
+  */
+  private setAccount(username: string, account: Account) {
     const config = {
-
       headers: {
         "Content-Type": "application/json",
-        "Authorization": Token.getId()
+        "Authorization": Token.getId(),
+        "username": username
       }
     }
-    const data = {
-      username: account.username,
-      password:
-    }
-    axios.put("/api/admin/user/" + username + "/modify", {}, config)
-  }
-  */
-
-  componentDidMount() {
-    this.viewAccounts();
+    const data = account;
+    const promise = axios.put("/api/admin/user/" + username + "/modify", data, config);
+    const dataPromise = promise.then((res) =>  res.data);
+    return dataPromise;
   }
 
-  render() {
-
-    return (
-      <div>
-        <Grid container spacing={3}>
-            {this.rows}
-        </Grid>
-      </div>
-    )
-  }
-}
+};
 
 const Accounts = () => {
-
-  if (!Token.getId())
-    location.href = "/login"
+  if (!Token.getId()) {
+    location.href = "/login";
+  }
 
   return (
     GeneralLayout(
       <div>
-        <SearchUsers />
-        <AccountsForm />
+        <SearchUsers/>
+        <AccountsForm/>
       </div>
     )
   )
