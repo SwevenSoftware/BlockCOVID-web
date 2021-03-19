@@ -22,6 +22,9 @@ import SearchUsers from './SearchUsers';
 import Pencil from './Pencil';
 import Trash from './Trash';
 
+// import * as https from 'https';
+// import * as fs from 'fs';
+
 interface Account {
   username: string,
   password: string,
@@ -127,11 +130,20 @@ class AccountsForm extends Component {
   * @returns Set of data
   */
   private getAccounts() {
+
+    // const httpsAgent = new https.Agent({
+    //   rejectUnauthorized: false, // (NOTE: this will disable client verification)
+    //   cert: fs.readFileSync("./usercert.pem"),
+    //   key: fs.readFileSync("./key.pem"),
+    //   passphrase: "YYY"
+    // })
+
     const config = {
       data: {}, /* data must be set or else headers.Content-Type will be ignored */
       headers: {
         "Content-Type": "application/json",
-        "Authorization": Token.getId()
+        "Authorization": Token.getId(),
+        // httpsAgent
       }
     }
 
