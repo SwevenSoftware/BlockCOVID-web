@@ -84,7 +84,7 @@ class AccountsForm extends Component {
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
             <ListItemText primary={account.username}/>
-            <Pencil/>
+            <Pencil {...account}/>
             <Trash/>
           </ListItem>
         </Paper>
@@ -122,20 +122,6 @@ class AccountsForm extends Component {
   }
 
   /**
-  * Modify user account
-  * @params
-  * @returns
-  */
-  private modifyAccount(username: string, account: Account) {
-    this.setAccount(username, account)
-      .catch(err => {
-          console.log("An error has occured in modifyAccount(): ", err);
-          if(err.response.status == 401) { }
-          else { }
-      });
-  }
-
-  /**
   * Query the API to retrieve all existing accounts
   * @params
   * @returns Set of data
@@ -150,25 +136,6 @@ class AccountsForm extends Component {
     }
 
     const promise = axios.get("/api/admin/users", config);
-    const dataPromise = promise.then((res) =>  res.data);
-    return dataPromise;
-  }
-
-  /**
-  * Query the API to set password and/or authorities of an account
-  * @params
-  * @returns Set of data
-  */
-  private setAccount(username: string, account: Account) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": Token.getId(),
-        "username": username
-      }
-    }
-    const data = account;
-    const promise = axios.put("/api/admin/user/" + username + "/modify", data, config);
     const dataPromise = promise.then((res) =>  res.data);
     return dataPromise;
   }
