@@ -45,6 +45,7 @@ export default function FormDialog(formAccount: any) {
   const [open, setOpen] = React.useState(false);
 
   const [passValue, setPassValue] = React.useState('') // TODO: da provare con false
+  const [passConfirmValue, setPassConfirmValue] = React.useState('') // TODO: da provare con false
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,36 +55,41 @@ export default function FormDialog(formAccount: any) {
     setOpen(false);
   };
 
-  const handleConfirm = (pass: string, auth: boolean[]) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": Token.getId(),
-        "username": formAccount.username
+  const handleConfirm = (pass: string, passConfirm: string, auth: boolean[]) => {
+    const [helpText, setHelpText] = useState('');
+
+
+    if (pass === passConfirm){
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": Token.getId(),
+            "username": formAccount.username
+          }
+        }
+
+        const aux = new Array();
+        if(auth[0]) aux.push("ADMIN");
+        if(auth[1]) aux.push("USER");
+        if(auth[2]) aux.push("CLEANER");
+
+        const data = {
+          username: formAccount.username,
+          password: pass,
+          authorities: aux
+        }
+
+        axios.put(formAccount.link_modify, data, config)
+          .then((res) => {
+            console.log(res); // WARNING: for testing purposes
+            handleClose();
+          })
+          .catch(err => {
+              console.log("An error has occured in handleConfirm(): ", err);
+              if(err.response.status == 401) { }
+              else { }
+          });
       }
-    }
-
-    const aux = new Array();
-    if(auth[0]) aux.push("ADMIN");
-    if(auth[1]) aux.push("USER");
-    if(auth[2]) aux.push("CLEANER");
-
-    const data = {
-      username: formAccount.username,
-      password: pass,
-      authorities: aux
-    }
-
-    axios.put(formAccount.link_modify, data, config)
-      .then((res) => {
-        console.log(res); // WARNING: for testing purposes
-        handleClose();
-      })
-      .catch(err => {
-          console.log("An error has occured in handleConfirm(): ", err);
-          if(err.response.status == 401) { }
-          else { }
-      });
   };
 
   return (
@@ -95,15 +101,6 @@ export default function FormDialog(formAccount: any) {
         <DialogTitle id="form-dialog-title">Modifica l'utente {formAccount.username} </DialogTitle>
         <DialogContent>
           <PersonIcon fontSize="large" />
-          {/* <div className="addField">
-          <TextField
-            disabled
-            id="outlined-disabled"
-            label="Disabled"
-            defaultValue="Inserire il nome utente del possessore ID"
-            variant="outlined"
-        />
-          </div> */}
           <DialogContentText>
             Si possono modificare i seguenti campi:
           </DialogContentText>
@@ -127,6 +124,9 @@ export default function FormDialog(formAccount: any) {
               type="password"
               autoComplete="current-password"
               variant="outlined"
+              value={passConfirmValue}
+              helperText={helpText}
+              onChange={(e) => setPassConfirmValue(e.target.value)}
             />
           </div>
           <DialogContentText color="secondary">
@@ -152,7 +152,7 @@ export default function FormDialog(formAccount: any) {
           <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={() => handleConfirm(passValue, [state.checkedA, state.checkedU, state.checkedC])} className="confirm">
+          <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedA, state.checkedU, state.checkedC])} className="confirm" >
             Conferma
           </Button>
         </DialogActions>
