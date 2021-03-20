@@ -10,6 +10,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonIcon from '@material-ui/icons/Person'
+import SecurityIcon from '@material-ui/icons/Security';
+import WorkIcon from '@material-ui/icons/Work';
+import BathtubIcon from '@material-ui/icons/Bathtub';
 
 import Token from './Token';
 import axios from 'axios';
@@ -52,14 +55,22 @@ export default function FormDialog(formAccount: any) {
         <DeleteIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Elimina utente</DialogTitle>
+        <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
         <DialogContent className="trashField">
         <PersonIcon fontSize="large" />
           <DialogContentText>
-            Username
+            {formAccount.username}
           </DialogContentText>
           <DialogContentText>
-            Ruolo
+            {formAccount.authorities.length > 1 ? "Ruoli:" : "Ruolo:"} {
+              formAccount.authorities.map( (auth) => {
+                switch(auth){
+                  case "ADMIN": return <SecurityIcon/>; break;
+                  case "USER": return <WorkIcon/>; break;
+                  case "CLEANER": return <BathtubIcon/>; break;
+                }
+              })
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
