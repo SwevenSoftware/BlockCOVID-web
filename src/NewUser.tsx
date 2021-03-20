@@ -83,7 +83,7 @@ export default function FormDialog() {
 
     /* password input control */
     // if (password does not match pattern) {
-    //   setPassErr("Invalid password");
+    //   setPassErr("Password non valida);
     //   setIsPassErr(true);
     // }
     if(pass != passConfirm) {
