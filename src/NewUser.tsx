@@ -16,10 +16,12 @@ import { green } from '@material-ui/core/colors';
 
 import Message from './Message/SuccessMessage'
 
-
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+
+import Token from './Token';
+import axios from 'axios';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -32,10 +34,6 @@ const GreenCheckbox = withStyles({
 }) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
 
 
-
-
-
-
 export default function FormDialog() {
 
   const [state, setState] = React.useState({
@@ -44,26 +42,91 @@ export default function FormDialog() {
     checkedCleaner: false,
   });
 
-
-
-
-
-
   const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-
   const [open_Button, setOpen_Button] = React.useState(false);
+  const [userValue, setUserValue] = React.useState("");
+  const [passValue, setPassValue] = React.useState("");
+  const [passConfirmValue, setPassConfirmValue] = React.useState("");
+
+  const [userErr, setUserErr] = React.useState("");
+  const [passErr, setPassErr] = React.useState("");
+  const [passConfirmErr, setPassConfirmErr] = React.useState("");
+  const [isUserErr, setIsUserErr] = React.useState(false);
+  const [isPassErr, setIsPassErr] = React.useState(false);
+  const [isPassConfirmErr, setIsPassConfirmErr] = React.useState(false);
 
   const handleClickOpen_Button = () => {
     setOpen_Button(true);
   };
 
   const handleClose_Button = () => {
+    setUserErr("");
+    setPassErr("");
+    setPassConfirmErr("");
+    setIsUserErr(false);
+    setIsPassErr(false);
+    setIsPassConfirmErr(false);
     setOpen_Button(false);
+  };
+
+  const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
+    /* username input control */
+    if(user == "") {
+      setUserErr("Username non valido");
+      setIsUserErr(true);
+    }
+
+    /* password input control */
+    // if (password does not match pattern) {
+    //   setPassErr("Invalid password");
+    //   setIsPassErr(true);
+    // }
+    if(pass != passConfirm) {
+      setPassConfirmErr("Le password inserite non corrispondono");
+      setIsPassErr(true);
+      setIsPassConfirmErr(true);
+    }
+
+    /* authorities input control */
+    // let notChecked = true;
+    // for (let i in auth) {
+    //   if(auth[i]) notChecked = false;
+    // }
+    // if(notChecked) console.log("No authorities checked");
+
+    if(!(isUserErr && isPassErr && isPassConfirmErr)) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": Token.getId()
+        }
+      }
+
+      const aux = new Array();
+      if(auth[0]) aux.push("ADMIN");
+      if(auth[1]) aux.push("USER");
+      if(auth[2]) aux.push("CLEANER");
+
+      const data = {
+        username: user,
+        password: pass,
+        authorities: aux
+      }
+
+      axios.post("/api/admin/user/new", data, config)
+        .then((res) => {
+          console.log(res); // WARNING: for testing purposes
+          handleClose_Button();
+        })
+        .catch(err => {
+            console.log("An error has occured in handleConfirm(): ", err);
+        });
+    }
   };
 
   return (
@@ -83,6 +146,10 @@ export default function FormDialog() {
             id="outlined-search"
             label="Username"
             variant="outlined"
+            error={isUserErr}
+            helperText={userErr}
+            value={userValue}
+            onChange={(e) => setUserValue(e.target.value)}
           />
           </div>
           <div className="addField">
@@ -93,6 +160,10 @@ export default function FormDialog() {
               type="password"
               autoComplete="current-password"
               variant="outlined"
+              error={isPassErr}
+              helperText={passErr}
+              value={passValue}
+              onChange={(e) => setPassValue(e.target.value)}
             />
           </div>
           <div className="addField">
@@ -103,6 +174,10 @@ export default function FormDialog() {
               type="password"
               autoComplete="current-password"
               variant="outlined"
+              error={isPassConfirmErr}
+              helperText={passConfirmErr}
+              value={passConfirmValue}
+              onChange={(e) => setPassConfirmValue(e.target.value)}
             />
           </div>
           <DialogContentText color="secondary">
@@ -122,18 +197,15 @@ export default function FormDialog() {
           <FormControlLabel
             control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedC" />}
             label="Addetto alle pulizie"
-
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose_Button} className="decline" >
             Annulla
           </Button>
-          <Button onClick={handleClose_Button} className="confirm" >
+          <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm" >
             Conferma
           </Button>
-
-          {/* fare una reference e all'interno chiamo i due set */}
           <Message />
         </DialogActions>
       </Dialog>
