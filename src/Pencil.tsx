@@ -92,13 +92,10 @@ export default function FormDialog(formAccount: any) {
         <CreateIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Modifica utente</DialogTitle>
+        <DialogTitle id="form-dialog-title">Modifica l'utente {formAccount.username} </DialogTitle>
         <DialogContent>
           <PersonIcon fontSize="large" />
-          <DialogContentText>
-            Si possono modificare i seguenti campi
-          </DialogContentText>
-          <div className="addField">
+          {/* <div className="addField">
           <TextField
             disabled
             id="outlined-disabled"
@@ -106,7 +103,10 @@ export default function FormDialog(formAccount: any) {
             defaultValue="Inserire il nome utente del possessore ID"
             variant="outlined"
         />
-          </div>
+          </div> */}
+          <DialogContentText>
+            Si possono modificare i seguenti campi:
+          </DialogContentText>
           <div className="addField">
             <TextField
               required
