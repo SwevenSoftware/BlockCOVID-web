@@ -75,10 +75,12 @@ export default function FormDialog() {
   };
 
   const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
+    let flagErr = false;
     /* username input control */
     if(user == "") {
       setUserErr("Username non valido");
       setIsUserErr(true);
+      flagErr = true;
     }
 
     /* password input control */
@@ -90,6 +92,7 @@ export default function FormDialog() {
       setPassConfirmErr("Le password inserite non corrispondono");
       setIsPassErr(true);
       setIsPassConfirmErr(true);
+      flagErr = true;
     }
 
     /* authorities input control */
@@ -99,7 +102,7 @@ export default function FormDialog() {
     // }
     // if(notChecked) console.log("No authorities checked");
 
-    if(!(isUserErr && isPassErr && isPassConfirmErr)) {
+    if(!flagErr) {
       const config = {
         headers: {
           "Content-Type": "application/json",
