@@ -88,7 +88,7 @@ class AccountsForm extends Component {
             </ListItemIcon>
             <ListItemText primary={account.username}/>
             <Pencil {...account}/>
-            <Trash/>
+            <Trash {...account}/>
           </ListItem>
         </Paper>
       </Grid>

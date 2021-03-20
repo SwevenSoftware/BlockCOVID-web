@@ -11,7 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonIcon from '@material-ui/icons/Person'
 
-export default function FormDialog() {
+import Token from './Token';
+import axios from 'axios';
+
+export default function FormDialog(formAccount: any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,9 +25,30 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const handleConfirm = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": Token.getId(),
+        "username": formAccount.username
+      }
+    }
+
+    axios.delete("/api/admin/user/" + formAccount.username, config)
+      .then((res) => {
+        console.log(res); // WARNING: for testing purposes
+        handleClose();
+      })
+      .catch(err => {
+          console.log("An error has occured in handleConfirm(): ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
+  };
+
   return (
     <div>
-      <IconButton className="trash"  onClick={handleClickOpen}>
+      <IconButton className="trash" onClick={handleClickOpen}>
         <DeleteIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -42,7 +66,7 @@ export default function FormDialog() {
           <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={handleClose} className="confirm" >
+          <Button onClick={handleConfirm} className="confirm" >
             Conferma
           </Button>
         </DialogActions>
