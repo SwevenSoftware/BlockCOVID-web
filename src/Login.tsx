@@ -71,30 +71,39 @@ const LoginForm = () => {
       password
     }));
 
-    const config = {headers: { 'content-type': 'application/json'}};
+    const config = {headers: { "Content-Type": "application/json"}};
 
     axios.post("/api/login",
-      JSON.stringify({
-        username,
-        password
-      }),
+      JSON.stringify({username, password}),
       config
     )
-    .then((res) => {
-      successLogin();
-      Token.setId(res.data.id);
-      Token.setExpDate(res.data.expiryDate);
-      Token.setUsername(res.data.username);
-      location.href = "/reservations";
-    }).catch((err) => {
-      console.log(err)
-      if(err.response.status == 401) {
-        failLogin('Incorrect username or password')
-      } else {
-        console.log(err);
-        failLogin('Server error')
-      }
-    });
+      .then((res) => { /* user exists */
+
+        // config. = config.headers // res.data.id // token id
+
+        axios.get("/api/admin/users", config)
+          .then( () => { /* user logged in and has admin authorities */
+            successLogin();
+            Token.setId(res.data.id);
+            Token.setExpDate(res.data.expiryDate);
+            Token.setUsername(res.data.username);
+            location.href = "/reservations";
+          })
+          .catch((err) => { /* user logged in and has not admin authorities */
+            console.log(err)
+            if(err.response.status == 401 || err.response.status == 403) {
+              // failLogin('Incorrect username or password') // message to send due unauthorized attempt
+            }
+          })
+      }).catch((err) => { /* user not logged in or does not exists */
+        console.log(err)
+        if(err.response.status == 401) {
+          failLogin('Incorrect username or password')
+        } else {
+          console.log(err);
+          failLogin('Server error')
+        }
+      });
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
