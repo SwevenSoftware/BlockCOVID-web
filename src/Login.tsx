@@ -59,7 +59,7 @@ const LoginForm = () => {
     setIsError(false);
   }
 
-  const failLogin = (message : string) => {
+  const failLogin = (message: string) => {
     setHelpText(message);
     setIsError(true);
     console.log("Fail error: ", isError)
@@ -79,29 +79,38 @@ const LoginForm = () => {
     )
       .then((res) => { /* user exists */
 
-        // config. = config.headers // res.data.id // token id
+        const configAux = {
+          data: {}, /* data must be set or else headers.Content-Type will be ignored */
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": res.data.id,
+          }
+        }
 
-        axios.get("/api/admin/users", config)
-          .then( () => { /* user logged in and has admin authorities */
+        axios.get("/api/admin/users", configAux)
+          .then( () => { /* user has admin authorities */
             successLogin();
             Token.setId(res.data.id);
             Token.setExpDate(res.data.expiryDate);
             Token.setUsername(res.data.username);
             location.href = "/reservations";
           })
-          .catch((err) => { /* user logged in and has not admin authorities */
-            console.log(err)
-            if(err.response.status == 401 || err.response.status == 403) {
-              // failLogin('Incorrect username or password') // message to send due unauthorized attempt
+          .catch((err) => { /* user has not admin authorities */
+            switch(err.response.status) {
+              case 401: case 403:
+                /* 400: username and/or password incorrect
+                   500: user does not exists */
+                failLogin("Accesso non autorizzato. Si prega di contattare l'amministratore");
+              break;
             }
           })
       }).catch((err) => { /* user not logged in or does not exists */
-        console.log(err)
-        if(err.response.status == 401) {
-          failLogin('Incorrect username or password')
-        } else {
-          console.log(err);
-          failLogin('Server error')
+        switch(err.response.status) {
+          case 400: case 500:
+            /* 400: username and/or password incorrect
+               500: user does not exists */
+            failLogin("Username o password scorretta. Riprova");
+          break;
         }
       });
   };
