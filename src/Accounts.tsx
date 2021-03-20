@@ -22,6 +22,7 @@ import SearchUsers from './SearchUsers';
 import Pencil from './Pencil';
 import Trash from './Trash';
 
+import NewUser from './NewUser'
 // import * as https from 'https';
 // import * as fs from 'fs';
 
@@ -163,6 +164,9 @@ const Accounts = () => {
     GeneralLayout(
       <div>
         <SearchUsers/>
+        <div className="addAccountButton">
+            <NewUser/>
+        </div>
         <AccountsForm/>
       </div>
     )
