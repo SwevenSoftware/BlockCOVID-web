@@ -65,6 +65,7 @@ export default function FormDialog() {
   const userExists = "L'username inserito non è disponibile";
   const passInvalid = "Password non valida";
   const passConfirmNoMatch = "Le password inserite non corrispondono";
+  const noAuthoritiesChecked = "Si prega di scegliere almeno una opzione";
 
   const handleClickOpen_Button = () => {
     setOpen_Button(true);
