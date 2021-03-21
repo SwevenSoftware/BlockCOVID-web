@@ -218,7 +218,10 @@ export default function FormDialog() {
             error={isUserErr}
             helperText={userErr}
             value={userValue}
-            onChange={(e) => setUserValue(e.target.value)}
+            onChange={(e) => {
+                setUserValue(e.target.value);
+                userInputControl(e.target.value);
+            }}
           />
           </div>
           <div className="addField">
@@ -232,7 +235,13 @@ export default function FormDialog() {
               error={isPassErr}
               helperText={passErr}
               value={passValue}
-              onChange={(e) => setPassValue(e.target.value)}
+              onChange={(e) => {
+                setPassValue(e.target.value);
+                passInputControl(e.target.value);
+                if(passConfirmValue != "") {
+                  passConfirmInputControl(e.target.value, passConfirmValue);
+                }
+              }}
             />
           </div>
           <div className="addField">
@@ -246,7 +255,10 @@ export default function FormDialog() {
               error={isPassConfirmErr}
               helperText={passConfirmErr}
               value={passConfirmValue}
-              onChange={(e) => setPassConfirmValue(e.target.value)}
+              onChange={(e) => {
+                setPassConfirmValue(e.target.value);
+                passConfirmInputControl(passValue, e.target.value);
+              }}
             />
           </div>
           <DialogContentText color="secondary">
