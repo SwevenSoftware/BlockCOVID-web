@@ -31,9 +31,9 @@ const GreenCheckbox = withStyles({
 export default function FormDialog(formAccount: any) {
 
   const [state, setState] = React.useState({
-    checkedA: false,
-    checkedU: false,
-    checkedC: false,
+    checkedAdmin: false,
+    checkedUser: false,
+    checkedCleaner: false,
   });
 
   const [checked, setChecked] = React.useState(true);
@@ -136,15 +136,15 @@ export default function FormDialog(formAccount: any) {
             Ruolo
           </DialogContentText>
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
+            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
             label="Admin"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
+            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
             label="Utente"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
+            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
             label="Addetto alle pulizie"
           />
         </DialogContent>
@@ -152,7 +152,7 @@ export default function FormDialog(formAccount: any) {
           <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={() => handleConfirm(passValue, [state.checkedA, state.checkedU, state.checkedC])} className="confirm">
+          <Button onClick={() => handleConfirm(passValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
             Conferma
           </Button>
         </DialogActions>
