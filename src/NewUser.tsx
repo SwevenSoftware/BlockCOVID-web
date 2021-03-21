@@ -162,7 +162,7 @@ export default function FormDialog() {
     flagErr = (passInputControl(pass) ? true : flagErr);
     flagErr = (passConfirmInputControl(pass, passConfirm) ? true : flagErr);
 
-    if(!flagErr) { /* if no error has occured */
+    if(!flagErr) { /* no error has occured */
       const config = {
         headers: {
           "Content-Type": "application/json",
