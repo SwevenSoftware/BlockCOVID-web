@@ -91,7 +91,12 @@ export default function FormDialog() {
       setUserErr(userInvalid);
       setIsUserErr(true);
       return true;
-    } else return false;
+    }
+    else {
+      setUserErr("");
+      setIsUserErr(false);
+      return false;
+    }
   };
 
   /**
@@ -106,7 +111,12 @@ export default function FormDialog() {
       setPassErr(passInvalid);
       setIsPassErr(true);
       return true;
-    } else return false;
+    }
+    else {
+      setPassErr("");
+      setIsPassErr(false);
+      return false;
+    }
   };
 
   /**
@@ -119,10 +129,14 @@ export default function FormDialog() {
   const passConfirmInputControl = (pass: string, passConfirm: string): boolean => {
     if(pass != passConfirm) {
       setPassConfirmErr(passConfirmNoMatch);
-      setIsPassErr(true);
       setIsPassConfirmErr(true);
       return true;
-    } else return false;
+    }
+    else {
+      setPassConfirmErr("");
+      setIsPassConfirmErr(false);
+      return false;
+    }
   };
 
   /*
@@ -159,7 +173,7 @@ export default function FormDialog() {
       if(auth[0]) aux.push("ADMIN");
       if(auth[1]) aux.push("USER");
       if(auth[2]) aux.push("CLEANER");
-
+    
       const data = {
         username: user,
         password: pass,
