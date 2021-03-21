@@ -46,9 +46,9 @@ import {theme} from './theme';
 
 const GreenCheckbox = withStyles({
   root: {
-    color: green[600],
+    color: "#319e77",
     '&$checked': {
-      color: green[600],
+      color: "#319e77",
     },
   },
   checked:{},
@@ -301,7 +301,7 @@ export default function FormDialog() {
                 }}
               />
             </div>
-            <DialogContentText>
+            <DialogContentText color="primary">
               * indica i campi obbligatori
             </DialogContentText>
 
