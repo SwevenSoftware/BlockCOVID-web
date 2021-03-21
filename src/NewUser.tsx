@@ -101,8 +101,8 @@ export default function FormDialog() {
   *   true if password is invalid (error has occured)
   *   false otherwise
   */
-  const passInputControl = (pass: string) => {
-    if (pass == "") {
+  const passInputControl = (pass: string): boolean => {
+    if(pass == "") {
       setPassErr(passInvalid);
       setIsPassErr(true);
       return true;
@@ -116,7 +116,7 @@ export default function FormDialog() {
   *   true if password confirmation is invalid (error has occured)
   *   false otherwise
   */
-  const passConfirmInputControl = (pass: string, passConfirm: string) => {
+  const passConfirmInputControl = (pass: string, passConfirm: string): boolean => {
     if(pass != passConfirm) {
       setPassConfirmErr(passConfirmNoMatch);
       setIsPassErr(true);
@@ -132,7 +132,7 @@ export default function FormDialog() {
   *   true if given authorities are invalid (error has occured)
   *   false otherwise
   */
-  const authInputControl = (auth: boolean[]) => {
+  const authInputControl = (auth: boolean[]): boolean => {
     let notChecked = true;
     for (let i in auth) {
       if(auth[i]) notChecked = false;
