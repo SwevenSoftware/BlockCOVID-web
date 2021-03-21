@@ -60,6 +60,11 @@ export default function FormDialog() {
   const [isPassErr, setIsPassErr] = React.useState(false);
   const [isPassConfirmErr, setIsPassConfirmErr] = React.useState(false);
 
+  /* error messages */
+  const userInvalid = "Username non valido";
+  const passInvalid = "Password non valida";
+  const passConfirmNoMatch = "Le password inserite non corrispondono";
+
   const handleClickOpen_Button = () => {
     setOpen_Button(true);
   };
@@ -74,35 +79,75 @@ export default function FormDialog() {
     setOpen_Button(false);
   };
 
-  const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
-    let flagErr = false;
-    /* username input control */
+  /**
+  * User input validation
+  * @params username
+  * @returns
+  *   true if username is invalid (error has occured)
+  *   false otherwise
+  */
+  const userInputControl = (user: string): boolean => {
     if(user == "") {
-      setUserErr("Username non valido");
+      setUserErr(userInvalid);
       setIsUserErr(true);
-      flagErr = true;
-    }
+      return true;
+    } else return false;
+  };
 
-    /* password input control */
-    // if (password does not match pattern) {
-    //   setPassErr("Password non valida);
-    //   setIsPassErr(true);
-    // }
+  /**
+  * Password input validation
+  * @params password
+  * @returns
+  *   true if password is invalid (error has occured)
+  *   false otherwise
+  */
+  const passInputControl = (pass: string) => {
+    if (pass == "") {
+      setPassErr(passInvalid);
+      setIsPassErr(true);
+      return true;
+    } else return false;
+  };
+
+  /**
+  * Password confirmation input validation
+  * @params password and password confirmation
+  * @returns
+  *   true if password confirmation is invalid (error has occured)
+  *   false otherwise
+  */
+  const passConfirmInputControl = (pass: string, passConfirm: string) => {
     if(pass != passConfirm) {
-      setPassConfirmErr("Le password inserite non corrispondono");
+      setPassConfirmErr(passConfirmNoMatch);
       setIsPassErr(true);
       setIsPassConfirmErr(true);
-      flagErr = true;
+      return true;
+    } else return false;
+  };
+
+  /*
+  * Authorities input validation
+  * @params array of authorities
+  * @returns
+  *   true if given authorities are invalid (error has occured)
+  *   false otherwise
+  */
+  const authInputControl = (auth: boolean[]) => {
+    let notChecked = true;
+    for (let i in auth) {
+      if(auth[i]) notChecked = false;
     }
+    if(notChecked) return true;
+    else return false;
+  };
 
-    /* authorities input control */
-    // let notChecked = true;
-    // for (let i in auth) {
-    //   if(auth[i]) notChecked = false;
-    // }
-    // if(notChecked) console.log("No authorities checked");
+  const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
+    let flagErr = false;
+    flagErr = userInputControl(user);
+    flagErr = passInputControl(pass);
+    flagErr = passConfirmInputControl(pass, passConfirm);
 
-    if(!flagErr) {
+    if(!flagErr) { /* if no error has occured */
       const config = {
         headers: {
           "Content-Type": "application/json",
