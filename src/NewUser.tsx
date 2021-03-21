@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core';
+import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
 import Message from './Message/SuccessMessage'
@@ -22,6 +22,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Token from './Token';
 import axios from 'axios';
+import { RotateLeft } from '@material-ui/icons';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -56,9 +57,11 @@ export default function FormDialog() {
   const [userErr, setUserErr] = React.useState("");
   const [passErr, setPassErr] = React.useState("");
   const [passConfirmErr, setPassConfirmErr] = React.useState("");
+  const [authErr, setAuthErr] = React.useState("");
   const [isUserErr, setIsUserErr] = React.useState(false);
   const [isPassErr, setIsPassErr] = React.useState(false);
   const [isPassConfirmErr, setIsPassConfirmErr] = React.useState(false);
+
 
   /* error messages */
   const userInvalid = "Username non valido";
@@ -72,12 +75,17 @@ export default function FormDialog() {
   };
 
   const handleCloseButton = () => {
+    setUserValue("");
+    setPassValue("");
+    setPassConfirmValue("");
     setUserErr("");
     setPassErr("");
     setPassConfirmErr("");
+    setAuthErr("");
     setIsUserErr(false);
     setIsPassErr(false);
     setIsPassConfirmErr(false);
+    setState({checkedAdmin:false, checkedUser:false, checkedCleaner:false});
     setOpenButton(false);
   };
 
@@ -89,7 +97,7 @@ export default function FormDialog() {
   *   false otherwise
   */
   const userInputControl = (user: string): boolean => {
-    if(user == "") {
+    if(user === "") {
       setUserErr(userInvalid);
       setIsUserErr(true);
       return true;
@@ -109,7 +117,7 @@ export default function FormDialog() {
   *   false otherwise
   */
   const passInputControl = (pass: string): boolean => {
-    if(pass == "") {
+    if(pass === "") {
       setPassErr(passInvalid);
       setIsPassErr(true);
       return true;
@@ -129,7 +137,7 @@ export default function FormDialog() {
   *   false otherwise
   */
   const passConfirmInputControl = (pass: string, passConfirm: string): boolean => {
-    if(pass != passConfirm) {
+    if(pass !== passConfirm) {
       setPassConfirmErr(passConfirmNoMatch);
       setIsPassConfirmErr(true);
       return true;
@@ -153,8 +161,16 @@ export default function FormDialog() {
     for (let i in auth) {
       if(auth[i]) notChecked = false;
     }
-    if(notChecked) return true;
-    else return false;
+    if(notChecked) {
+      setAuthErr(noAuthoritiesChecked);
+      console.log(authErr);
+      return true;
+    }
+    else {
+      setAuthErr("");
+      console.log(authErr);
+      return false;
+    }
   };
 
   const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
@@ -199,6 +215,7 @@ export default function FormDialog() {
         });
     }
   };
+
 
   return (
     <div>
@@ -263,27 +280,31 @@ export default function FormDialog() {
               }}
             />
           </div>
-          <DialogContentText color="secondary">
+          <DialogContentText>
             * indica i campi obbligatori
           </DialogContentText>
-          <DialogContentText>
-            Ruolo
-          </DialogContentText>
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
-            label="Admin"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
-            label="Utente"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
-            label="Addetto alle pulizie"
-          />
+
+          <FormControl>
+            <FormLabel className={"role_title"}>Ruolo:</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                  label="Admin"
+                />
+                <FormControlLabel
+                  control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                  label="Utente"
+                />
+                <FormControlLabel
+                  control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                  label="Addetto alle pulizie"
+                />
+              </FormGroup>
+              <FormHelperText>{authErr}</FormHelperText>
+          </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseButton} className="decline" >
+          <Button onClick={handleCloseButton} className="decline">
             Annulla
           </Button>
           <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm" >
