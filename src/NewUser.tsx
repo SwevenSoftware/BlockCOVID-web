@@ -270,15 +270,15 @@ export default function FormDialog() {
             Ruolo
           </DialogContentText>
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin"/>}
+            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
             label="Admin"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser"/>}
+            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
             label="Utente"
           />
           <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner"/>}
+            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
             label="Addetto alle pulizie"
           />
         </DialogContent>
