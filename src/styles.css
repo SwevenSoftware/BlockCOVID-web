@@ -10,7 +10,6 @@
 
 .headerCard {
     background-color: #319e77;
-    color : white;
     text-align: center;
     font-size: medium;
 }
@@ -52,7 +51,7 @@
 }
 
 .addColor:hover {
-    color: blue;
+    color: #F0B030;
 }
 
 .addField {
@@ -102,6 +101,11 @@
   opacity: 1;
 }
 
+.tableTitles {
+    color: white;
+    font-weight: 500;
+}
+
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
@@ -138,7 +142,7 @@
 }
 
 
-/* ====================== Buttons Dialog ====================== */
+/* ====================== Dialog Buttons  ====================== */
 
 .decline:hover {
     color: red;
@@ -148,6 +152,4 @@
     color: green;
 }
 
-
-/* ====================== Border colors ====================== */
 
