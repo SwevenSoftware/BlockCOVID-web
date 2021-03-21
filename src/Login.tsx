@@ -62,7 +62,6 @@ const LoginForm = () => {
   const failLogin = (message: string) => {
     setHelpText(message);
     setIsError(true);
-    console.log("Fail error: ", isError)
   }
 
   const handleLogin = () => {
@@ -78,32 +77,23 @@ const LoginForm = () => {
       config
     )
       .then((res) => { /* user exists */
-
-        const configAux = {
-          data: {}, /* data must be set or else headers.Content-Type will be ignored */
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": res.data.id,
+        let isAdmin = false;
+        for (let i in res.data.authorities) {
+          if(res.data.authorities == "ADMIN") {
+            isAdmin = true;
           }
         }
-
-        axios.get("/api/admin/users", configAux)
-          .then( () => { /* user has admin authorities */
-            successLogin();
-            Token.setId(res.data.id);
-            Token.setExpDate(res.data.expiryDate);
-            Token.setUsername(res.data.username);
-            location.href = "/reservations";
-          })
-          .catch((err) => { /* user has not admin authorities */
-            switch(err.response.status) {
-              case 401: case 403:
-                /* 401, 403: unauthorized login attempt */
-                failLogin("Accesso non autorizzato. Si prega di contattare l'amministratore");
-              break;
-            }
-          })
-      }).catch((err) => { /* user not logged in or does not exists */
+        if(isAdmin) { /* user has admin authorities */
+          successLogin();
+          Token.setId(res.data.token.id);
+          Token.setExpDate(res.data.token.expiryDate);
+          Token.setUsername(res.data.token.username);
+          location.href = "/reservations";
+        }
+        else { /* unauthorized login attempt */
+          failLogin("Accesso non autorizzato. Si prega di contattare l'amministratore");
+        }
+      }).catch((err) => { /* user not logged in, user may not exists */
         switch(err.response.status) {
           case 400: case 500:
             /* 400: incorrect password
