@@ -83,7 +83,7 @@ const LoginForm = () => {
             isAdmin = true;
           }
         }
-        if(isAdmin) { /* user has admin authorities */
+        if(isAdmin) { /* user has admin authorities, authorized login attemp */
           successLogin();
           Token.setId(res.data.token.id);
           Token.setExpDate(res.data.token.expiryDate);
