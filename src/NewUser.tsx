@@ -143,9 +143,9 @@ export default function FormDialog() {
 
   const handleConfirm = (user: string, pass: string, passConfirm: string, auth: boolean[]) => {
     let flagErr = false;
-    flagErr = userInputControl(user);
-    flagErr = passInputControl(pass);
-    flagErr = passConfirmInputControl(pass, passConfirm);
+    flagErr = (userInputControl(user) ? true : flagErr);
+    flagErr = (passInputControl(pass) ? true : flagErr);
+    flagErr = (passConfirmInputControl(pass, passConfirm) ? true : flagErr);
 
     if(!flagErr) { /* if no error has occured */
       const config = {
