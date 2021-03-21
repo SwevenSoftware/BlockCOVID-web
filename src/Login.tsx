@@ -96,19 +96,20 @@ const LoginForm = () => {
             location.href = "/reservations";
           })
           .catch((err) => { /* user has not admin authorities */
+            console.log(err);
             switch(err.response.status) {
               case 401: case 403:
-                /* 400: username and/or password incorrect
-                   500: user does not exists */
+                /* 401, 403: unauthorized login attempt */
                 failLogin("Accesso non autorizzato. Si prega di contattare l'amministratore");
               break;
             }
           })
       }).catch((err) => { /* user not logged in or does not exists */
+        console.log(err);
         switch(err.response.status) {
           case 400: case 500:
-            /* 400: username and/or password incorrect
-               500: user does not exists */
+            /* 400: incorrect password
+               500: incorrect username or user does not exists */
             failLogin("Username o password scorretta. Riprova");
           break;
         }
