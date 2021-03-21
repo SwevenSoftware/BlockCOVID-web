@@ -161,6 +161,7 @@ export default function FormDialog() {
     flagErr = (userInputControl(user) ? true : flagErr);
     flagErr = (passInputControl(pass) ? true : flagErr);
     flagErr = (passConfirmInputControl(pass, passConfirm) ? true : flagErr);
+    flagErr = (authInputControl(auth) ? true: flagErr);
 
     if(!flagErr) { /* no input validation error has occured */
       const config = {
