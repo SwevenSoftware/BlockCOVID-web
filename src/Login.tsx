@@ -96,7 +96,6 @@ const LoginForm = () => {
             location.href = "/reservations";
           })
           .catch((err) => { /* user has not admin authorities */
-            console.log(err);
             switch(err.response.status) {
               case 401: case 403:
                 /* 401, 403: unauthorized login attempt */
@@ -105,7 +104,6 @@ const LoginForm = () => {
             }
           })
       }).catch((err) => { /* user not logged in or does not exists */
-        console.log(err);
         switch(err.response.status) {
           case 400: case 500:
             /* 400: incorrect password
