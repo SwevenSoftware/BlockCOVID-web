@@ -48,7 +48,7 @@ export default function FormDialog() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const [open_Button, setOpen_Button] = React.useState(false);
+  const [openButton, setOpenButton] = React.useState(false);
   const [userValue, setUserValue] = React.useState("");
   const [passValue, setPassValue] = React.useState("");
   const [passConfirmValue, setPassConfirmValue] = React.useState("");
@@ -67,18 +67,18 @@ export default function FormDialog() {
   const passConfirmNoMatch = "Le password inserite non corrispondono";
   const noAuthoritiesChecked = "Si prega di scegliere almeno una opzione";
 
-  const handleClickOpen_Button = () => {
-    setOpen_Button(true);
+  const handleClickOpenButton = () => {
+    setOpenButton(true);
   };
 
-  const handleClose_Button = () => {
+  const handleCloseButton = () => {
     setUserErr("");
     setPassErr("");
     setPassConfirmErr("");
     setIsUserErr(false);
     setIsPassErr(false);
     setIsPassConfirmErr(false);
-    setOpen_Button(false);
+    setOpenButton(false);
   };
 
   /**
@@ -186,7 +186,7 @@ export default function FormDialog() {
       axios.post("/api/admin/user/new", data, config)
         .then((res) => {
           console.log(res); // WARNING: for testing purposes
-          handleClose_Button();
+          handleCloseButton();
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
@@ -202,10 +202,10 @@ export default function FormDialog() {
 
   return (
     <div>
-      <IconButton className="addColor" onClick={handleClickOpen_Button}>
+      <IconButton className="addColor" onClick={handleClickOpenButton}>
         <AddBoxIcon fontSize="large" />
       </IconButton>
-      <Dialog open={open_Button} onClose={handleClose_Button} aria-labelledby="form-dialog-title">
+      <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -283,7 +283,7 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose_Button} className="decline" >
+          <Button onClick={handleCloseButton} className="decline" >
             Annulla
           </Button>
           <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm" >
