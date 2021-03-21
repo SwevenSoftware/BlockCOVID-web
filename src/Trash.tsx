@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonIcon from '@material-ui/icons/Person'
@@ -65,9 +66,18 @@ export default function FormDialog(formAccount: any) {
             {formAccount.authorities.length > 1 ? "Ruoli:" : "Ruolo:"} {
               formAccount.authorities.map( (auth) => {
                 switch(auth){
-                  case "ADMIN": return <SecurityIcon/>; break;
-                  case "USER": return <WorkIcon/>; break;
-                  case "CLEANER": return <BathtubIcon/>; break;
+                  case "ADMIN": return <div className="tooltip">
+                      <SecurityIcon />
+                      <span className="tooltiptext">Admin</span>
+                    </div>;
+                  case "USER": return <div className="tooltip">
+                    <WorkIcon />
+                    <span className="tooltiptext">Utente</span>
+                  </div>;
+                  case "CLEANER": return <div className="tooltip">
+                    <BathtubIcon />
+                    <span className="tooltiptext">Addetto alle pulizie</span>
+                  </div>;
                 }
               })
             }
