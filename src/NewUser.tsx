@@ -82,7 +82,6 @@ export default function FormDialog() {
   const [isPassErr, setIsPassErr] = React.useState(false);
   const [isPassConfirmErr, setIsPassConfirmErr] = React.useState(false);
 
-
   /* error messages */
   const userInvalid = "Username non valido";
   const userExists = "L'username inserito non è disponibile";
@@ -117,8 +116,8 @@ export default function FormDialog() {
   *   false otherwise
   */
   const userInputControl = (user: string): boolean => {
-    if(user === "") {
-      setUserErr(userInvalid);
+    let reg = new RegExp("^[a-zA-Z]{8,16}$");
+    if(!user.match(reg)) {
       setIsUserErr(true);
       return true;
     }
