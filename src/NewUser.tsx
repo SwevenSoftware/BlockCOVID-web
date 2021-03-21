@@ -62,6 +62,7 @@ export default function FormDialog() {
 
   /* error messages */
   const userInvalid = "Username non valido";
+  const userExists = "L'username inserito non è disponibile";
   const passInvalid = "Password non valida";
   const passConfirmNoMatch = "Le password inserite non corrispondono";
 
@@ -173,7 +174,7 @@ export default function FormDialog() {
       if(auth[0]) aux.push("ADMIN");
       if(auth[1]) aux.push("USER");
       if(auth[2]) aux.push("CLEANER");
-    
+
       const data = {
         username: user,
         password: pass,
@@ -187,6 +188,12 @@ export default function FormDialog() {
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
+            switch(err.response.status) {
+              case 409: /* user exists, username already taken */
+                setUserErr(userExists);
+                setIsUserErr(true);
+                break;
+            }
         });
     }
   };
