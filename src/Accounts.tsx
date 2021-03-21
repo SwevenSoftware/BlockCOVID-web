@@ -56,7 +56,7 @@ class AccountsForm extends Component {
   * @returns
   */
   componentDidMount() {
-    console.log(Token.getId());
+    console.log(Token.getId()); // WARNING: for testing purposes
     this.viewAccounts();
   }
 
