@@ -18,6 +18,9 @@ import { green } from '@material-ui/core/colors';
 import Token from './Token';
 import axios from 'axios';
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {theme} from './theme';
+
 const GreenCheckbox = withStyles({
   root: {
     color: green[600],
@@ -87,76 +90,78 @@ export default function FormDialog(formAccount: any) {
   };
 
   return (
-    <div>
-      <IconButton className="pencil" onClick={handleClickOpen}>
-        <CreateIcon />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Modifica utente</DialogTitle>
-        <DialogContent>
-          <PersonIcon fontSize="large" />
-          <DialogContentText>
-            Si possono modificare i seguenti campi
-          </DialogContentText>
-          <div className="addField">
-          <TextField
-            disabled
-            id="outlined-disabled"
-            label="Disabled"
-            defaultValue="Inserire il nome utente del possessore ID"
-            variant="outlined"
-        />
-          </div>
-          <div className="addField">
+    <ThemeProvider theme={theme}>
+      <div>
+        <IconButton className="pencil" onClick={handleClickOpen}>
+          <CreateIcon />
+        </IconButton>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Modifica utente</DialogTitle>
+          <DialogContent>
+            <PersonIcon fontSize="large" />
+            <DialogContentText>
+              Si possono modificare i seguenti campi
+            </DialogContentText>
+            <div className="addField">
             <TextField
-              required
-              id="outlined-password-input1"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
+              disabled
+              id="outlined-disabled"
+              label="Disabled"
+              defaultValue="Inserire il nome utente del possessore ID"
               variant="outlined"
-              value={passValue}
-              onChange={(e) => setPassValue(e.target.value)}
+          />
+            </div>
+            <div className="addField">
+              <TextField
+                required
+                id="outlined-password-input1"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                variant="outlined"
+                value={passValue}
+                onChange={(e) => setPassValue(e.target.value)}
+              />
+            </div>
+            <div className="addField">
+              <TextField
+                required
+                id="outlined-password-input2"
+                label="Ripeti Password"
+                type="password"
+                autoComplete="current-password"
+                variant="outlined"
+              />
+            </div>
+            <DialogContentText color="secondary">
+              * indica i campi obbligatori
+            </DialogContentText>
+            <DialogContentText>
+              Ruolo
+            </DialogContentText>
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+              label="Admin"
             />
-          </div>
-          <div className="addField">
-            <TextField
-              required
-              id="outlined-password-input2"
-              label="Ripeti Password"
-              type="password"
-              autoComplete="current-password"
-              variant="outlined"
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+              label="Utente"
             />
-          </div>
-          <DialogContentText color="secondary">
-            * indica i campi obbligatori
-          </DialogContentText>
-          <DialogContentText>
-            Ruolo
-          </DialogContentText>
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
-            label="Admin"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
-            label="Utente"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
-            label="Addetto alle pulizie"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} className="decline">
-            Annulla
-          </Button>
-          <Button onClick={() => handleConfirm(passValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
-            Conferma
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+              label="Addetto alle pulizie"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} className="decline">
+              Annulla
+            </Button>
+            <Button onClick={() => handleConfirm(passValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
+              Conferma
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </ThemeProvider>
   );
 }
