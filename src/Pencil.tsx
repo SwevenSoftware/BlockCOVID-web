@@ -56,7 +56,6 @@ export default function FormDialog(formAccount: any) {
   };
 
   const handleConfirm = (pass: string, passConfirm: string, auth: boolean[]) => {
-    const [helpText, setHelpText] = useState('');
 
 
     if (pass === passConfirm){
@@ -125,7 +124,6 @@ export default function FormDialog(formAccount: any) {
               autoComplete="current-password"
               variant="outlined"
               value={passConfirmValue}
-              helperText={helpText}
               onChange={(e) => setPassConfirmValue(e.target.value)}
             />
           </div>
