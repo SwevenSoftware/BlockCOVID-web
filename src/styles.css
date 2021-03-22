@@ -10,6 +10,7 @@
 
 .headerCard {
     background-color: #319e77;
+    color: white;
     text-align: center;
     font-size: medium;
 }
@@ -152,4 +153,7 @@
     color: green;
 }
 
+.loginBtn {
+    text-decoration: white;
+}
 
