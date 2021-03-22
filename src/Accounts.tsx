@@ -110,7 +110,7 @@ class AccountsForm extends Component {
             username: data._embedded.userList[i].username,
             authorities: data._embedded.userList[i].authorities,
             link_modify: data._embedded.userList[i]._links.modify_user.href,
-            link_delete: ""
+            link_delete: data._embedded.userList[i]._links.delete_user.href
           }
 
           this.addPaperAccount(newAccount);
