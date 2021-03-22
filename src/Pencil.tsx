@@ -18,11 +18,14 @@ import { green } from '@material-ui/core/colors';
 import Token from './Token';
 import axios from 'axios';
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {theme} from './theme';
+
 const GreenCheckbox = withStyles({
   root: {
-    color: green[600],
+    color: "#319e77",
     '&$checked': {
-      color: green[600],
+      color: "#319e77",
     },
   },
   checked:{},
@@ -31,9 +34,9 @@ const GreenCheckbox = withStyles({
 export default function FormDialog(formAccount: any) {
 
   const [state, setState] = React.useState({
-    checkedA: false,
-    checkedU: false,
-    checkedC: false,
+    checkedAdmin: false,
+    checkedUser: false,
+    checkedCleaner: false,
   });
 
   const [checked, setChecked] = React.useState(true);
@@ -92,69 +95,71 @@ export default function FormDialog(formAccount: any) {
   };
 
   return (
-    <div>
-      <IconButton className="pencil" onClick={handleClickOpen}>
-        <CreateIcon />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Modifica l'utente {formAccount.username} </DialogTitle>
-        <DialogContent>
-          <PersonIcon fontSize="large" />
-          <DialogContentText>
-            Si possono modificare i seguenti campi:
-          </DialogContentText>
-          <div className="addField">
-            <TextField
-              required
-              id="outlined-password-input1"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="outlined"
-              value={passValue}
-              onChange={(e) => setPassValue(e.target.value)}
+    <ThemeProvider theme={theme}>
+      <div>
+        <IconButton className="pencil" onClick={handleClickOpen}>
+          <CreateIcon />
+        </IconButton>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Modifica utente {formAccount.username} </DialogTitle>
+          <DialogContent>
+            <PersonIcon fontSize="large" />
+            <DialogContentText>
+              Si possono modificare i seguenti campi
+            </DialogContentText>
+            <div className="addField">
+              <TextField
+                required
+                id="outlined-password-input1"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                variant="outlined"
+                value={passValue}
+                onChange={(e) => setPassValue(e.target.value)}
+              />
+            </div>
+            <div className="addField">
+              <TextField
+                required
+                id="outlined-password-input2"
+                label="Ripeti Password"
+                type="password"
+                autoComplete="current-password"
+                variant="outlined"
+                value={passConfirmValue}
+                onChange={(e) => setPassConfirmValue(e.target.value)}
+              />
+            </div>
+            <DialogContentText color="primary">
+              * indica i campi obbligatori
+            </DialogContentText>
+            <DialogContentText>
+              Ruolo
+            </DialogContentText>
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+              label="Admin"
             />
-          </div>
-          <div className="addField">
-            <TextField
-              required
-              id="outlined-password-input2"
-              label="Ripeti Password"
-              type="password"
-              autoComplete="current-password"
-              variant="outlined"
-              value={passConfirmValue}
-              onChange={(e) => setPassConfirmValue(e.target.value)}
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+              label="Utente"
             />
-          </div>
-          <DialogContentText color="secondary">
-            * indica i campi obbligatori
-          </DialogContentText>
-          <DialogContentText>
-            Ruolo
-          </DialogContentText>
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
-            label="Admin"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedU} onChange={handleChange} name="checkedU" />}
-            label="Utente"
-          />
-          <FormControlLabel
-            control={<GreenCheckbox checked={state.checkedC} onChange={handleChange} name="checkedC" />}
-            label="Addetto alle pulizie"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} className="decline">
-            Annulla
-          </Button>
-          <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedA, state.checkedU, state.checkedC])} className="confirm" >
-            Conferma
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            <FormControlLabel
+              control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+              label="Addetto alle pulizie"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} className="decline">
+              Annulla
+            </Button>
+            <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
+              Conferma
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </ThemeProvider>
   );
 }

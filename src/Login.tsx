@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,8 @@ import axios from 'axios';
 
 import GeneralLayout from './GeneralLayout';
 import Token from './Token';
+
+import {theme} from './theme';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,7 +61,7 @@ const LoginForm = () => {
     setIsError(false);
   }
 
-  const failLogin = (message : string) => {
+  const failLogin = (message: string) => {
     setHelpText(message);
     setIsError(true);
     console.log("Fail error: ", isError)
@@ -71,30 +73,47 @@ const LoginForm = () => {
       password
     }));
 
-    const config = {headers: { 'content-type': 'application/json'}};
+    const config = {headers: { "Content-Type": "application/json"}};
 
     axios.post("/api/login",
-      JSON.stringify({
-        username,
-        password
-      }),
+      JSON.stringify({username, password}),
       config
     )
-    .then((res) => {
-      successLogin();
-      Token.setId(res.data.id);
-      Token.setExpDate(res.data.expiryDate);
-      Token.setUsername(res.data.username);
-      location.href = "/reservations";
-    }).catch((err) => {
-      console.log(err)
-      if(err.response.status == 401) {
-        failLogin('Incorrect username or password')
-      } else {
-        console.log(err);
-        failLogin('Server error')
-      }
-    });
+      .then((res) => { /* user exists */
+
+        const configAux = {
+          data: {}, /* data must be set or else headers.Content-Type will be ignored */
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": res.data.id,
+          }
+        }
+
+        axios.get("/api/admin/users", configAux)
+          .then( () => { /* user has admin authorities */
+            successLogin();
+            Token.setId(res.data.id);
+            Token.setExpDate(res.data.expiryDate);
+            Token.setUsername(res.data.username);
+            location.href = "/reservations";
+          })
+          .catch((err) => { /* user has not admin authorities */
+            switch(err.response.status) {
+              case 401: case 403:
+                /* 401, 403: unauthorized login attempt */
+                failLogin("Accesso non autorizzato. Si prega di contattare l'amministratore");
+              break;
+            }
+          })
+      }).catch((err) => { /* user not logged in or does not exists */
+        switch(err.response.status) {
+          case 400: case 500:
+            /* 400: incorrect password
+               500: incorrect username or user does not exists */
+            failLogin("Username o password scorretta. Riprova");
+          break;
+        }
+      });
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -113,49 +132,51 @@ const LoginForm = () => {
       setPassword(event.target.value);
     }
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <Card className={classes.card}>
-        <CardHeader className="headerCard" title={cardTitle} />
-        <CardContent>
-          <div>
-            <TextField
-              error={isError}
-              fullWidth
-              id="username"
-              type="email"
-              label="Username"
-              placeholder="Username"
-              margin="normal"
-              onChange={handleUsernameChange}
-              onKeyPress={handleKeyPress}
-            />
-            <TextField
-              error={isError}
-              fullWidth
-              id="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-              margin="normal"
-              helperText={helpText}
-              onChange={handlePasswordChange}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button
-              variant="contained"
-              size="large"
-              color="secondary"
-              className={classes.loginBtn}
-              onClick={handleLogin}
-              disabled={isButtonDisabled}>
-              {loginBtnText}
-          </Button>
-        </CardActions>
-      </Card>
-    </form>
+    <ThemeProvider theme={theme}>
+      <form className={classes.container} noValidate autoComplete="off">
+        <Card className={classes.card}>
+          <CardHeader className="headerCard" title={cardTitle} />
+          <CardContent>
+            <div>
+              <TextField
+                error={isError}
+                fullWidth
+                id="username"
+                type="email"
+                label="Username"
+                placeholder="Username"
+                margin="normal"
+                onChange={handleUsernameChange}
+                onKeyPress={handleKeyPress}
+              />
+              <TextField
+                error={isError}
+                fullWidth
+                id="password"
+                type="password"
+                label="Password"
+                placeholder="Password"
+                margin="normal"
+                helperText={helpText}
+                onChange={handlePasswordChange}
+                onKeyPress={handleKeyPress}
+              />
+            </div>
+          </CardContent>
+          <CardActions>
+            <Button
+                variant="contained"
+                size="large"
+                color="secondary"
+                className={classes.loginBtn}
+                onClick={handleLogin}
+                disabled={isButtonDisabled}>
+                {loginBtnText}
+            </Button>
+          </CardActions>
+        </Card>
+      </form>
+    </ThemeProvider>
   );
 }
 
