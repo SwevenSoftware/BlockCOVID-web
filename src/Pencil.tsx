@@ -55,6 +55,8 @@ export default function FormDialog(formAccount: any) {
   };
 
   const handleClose = () => {
+    
+    setPassValue("");
     setOpen(false);
   };
 
