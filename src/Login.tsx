@@ -157,7 +157,7 @@ const LoginForm = () => {
             <Button
                 variant="contained"
                 size="large"
-                color="secondary"
+                color= "primary"
                 className={classes.loginBtn}
                 onClick={handleLogin}
                 disabled={isButtonDisabled}>
