@@ -304,7 +304,7 @@ export default function FormDialog() {
                     label="Addetto alle pulizie"
                   />
                 </FormGroup>
-                <FormHelperText>{authErr}</FormHelperText>
+                <FormHelperText color="red">{authErr}</FormHelperText>
             </FormControl>
           </DialogContent>
           <DialogActions>
