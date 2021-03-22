@@ -116,7 +116,7 @@ export default function FormDialog() {
   *   false otherwise
   */
   const userInputControl = (user: string): boolean => {
-    let reg = new RegExp("^[a-zA-Z]{8,16}$");
+    let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
     if(!user.match(reg)) {
       setIsUserErr(true);
       return true;
@@ -222,6 +222,7 @@ export default function FormDialog() {
         .then((res) => {
           console.log(res); // WARNING: for testing purposes
           handleCloseButton();
+          window.location.reload();
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);

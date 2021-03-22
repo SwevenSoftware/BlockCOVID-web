@@ -42,6 +42,7 @@ export default function FormDialog(formAccount: any) {
       .then((res) => {
         console.log(res); // WARNING: for testing purposes
         handleClose();
+        window.location.reload();
       })
       .catch(err => {
           console.log("An error has occured in handleConfirm(): ", err);
