@@ -48,6 +48,7 @@ export default function FormDialog(formAccount: any) {
   const [open, setOpen] = React.useState(false);
 
   const [passValue, setPassValue] = React.useState('') // TODO: da provare con false
+  const [passConfirmValue, setPassConfirmValue] = React.useState('') // TODO: da provare con false
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -57,36 +58,40 @@ export default function FormDialog(formAccount: any) {
     setOpen(false);
   };
 
-  const handleConfirm = (pass: string, auth: boolean[]) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": Token.getId(),
-        "username": formAccount.username
+  const handleConfirm = (pass: string, passConfirm: string, auth: boolean[]) => {
+
+
+    if (pass === passConfirm){
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": Token.getId(),
+            "username": formAccount.username
+          }
+        }
+
+        const aux = new Array();
+        if(auth[0]) aux.push("ADMIN");
+        if(auth[1]) aux.push("USER");
+        if(auth[2]) aux.push("CLEANER");
+
+        const data = {
+          username: formAccount.username,
+          password: pass,
+          authorities: aux
+        }
+
+        axios.put(formAccount.link_modify, data, config)
+          .then((res) => {
+            console.log(res); // WARNING: for testing purposes
+            handleClose();
+          })
+          .catch(err => {
+              console.log("An error has occured in handleConfirm(): ", err);
+              if(err.response.status == 401) { }
+              else { }
+          });
       }
-    }
-
-    const aux = new Array();
-    if(auth[0]) aux.push("ADMIN");
-    if(auth[1]) aux.push("USER");
-    if(auth[2]) aux.push("CLEANER");
-
-    const data = {
-      username: formAccount.username,
-      password: pass,
-      authorities: aux
-    }
-
-    axios.put(formAccount.link_modify, data, config)
-      .then((res) => {
-        console.log(res); // WARNING: for testing purposes
-        handleClose();
-      })
-      .catch(err => {
-          console.log("An error has occured in handleConfirm(): ", err);
-          if(err.response.status == 401) { }
-          else { }
-      });
   };
 
   return (
@@ -96,21 +101,12 @@ export default function FormDialog(formAccount: any) {
           <CreateIcon />
         </IconButton>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Modifica utente</DialogTitle>
+          <DialogTitle id="form-dialog-title">Modifica utente {formAccount.username} </DialogTitle>
           <DialogContent>
             <PersonIcon fontSize="large" />
             <DialogContentText>
               Si possono modificare i seguenti campi
             </DialogContentText>
-            <div className="addField">
-            <TextField
-              disabled
-              id="outlined-disabled"
-              label="Disabled"
-              defaultValue="Inserire il nome utente del possessore ID"
-              variant="outlined"
-          />
-            </div>
             <div className="addField">
               <TextField
                 required
@@ -131,6 +127,8 @@ export default function FormDialog(formAccount: any) {
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
+                value={passConfirmValue}
+                onChange={(e) => setPassConfirmValue(e.target.value)}
               />
             </div>
             <DialogContentText color="primary">
@@ -156,7 +154,7 @@ export default function FormDialog(formAccount: any) {
             <Button onClick={handleClose} className="decline">
               Annulla
             </Button>
-            <Button onClick={() => handleConfirm(passValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
+            <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
               Conferma
             </Button>
           </DialogActions>
