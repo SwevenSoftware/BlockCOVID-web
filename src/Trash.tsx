@@ -7,11 +7,18 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonIcon from '@material-ui/icons/Person'
+import SecurityIcon from '@material-ui/icons/Security';
+import WorkIcon from '@material-ui/icons/Work';
+import BathtubIcon from '@material-ui/icons/Bathtub';
 
-export default function FormDialog() {
+import Token from './Token';
+import axios from 'axios';
+
+export default function FormDialog(formAccount: any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,27 +29,75 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const handleConfirm = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": Token.getId(),
+        "username": formAccount.username
+      }
+    }
+
+    axios.delete("/api/admin/user/" + formAccount.username, config)
+      .then((res) => {
+        console.log(res); // WARNING: for testing purposes
+        handleClose();
+        window.location.reload();
+      })
+      .catch(err => {
+          console.log("An error has occured in handleConfirm(): ", err);
+          if(err.response.status == 401) { }
+          else { }
+      });
+  };
+
   return (
     <div>
-      <IconButton className="trash"  onClick={handleClickOpen}>
+      <IconButton className="trash" onClick={handleClickOpen}>
         <DeleteIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Elimina utente</DialogTitle>
+        <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
         <DialogContent className="trashField">
         <PersonIcon fontSize="large" />
           <DialogContentText>
-            Username
+            {formAccount.username}
           </DialogContentText>
           <DialogContentText>
-            Ruolo
+            {formAccount.authorities.length > 1 ? "Ruoli:" : "Ruolo:"} {
+              formAccount.authorities.map( (auth) => {
+                switch(auth){
+                  case "ADMIN":
+                    return (
+                      <div className="tooltip">
+                        <SecurityIcon />
+                        <span className="tooltiptext">Admin</span>
+                      </div>
+                    )
+                  case "USER":
+                    return (
+                      <div className="tooltip">
+                        <WorkIcon />
+                        <span className="tooltiptext">Utente</span>
+                      </div>
+                    )
+                  case "CLEANER":
+                    return (
+                      <div className="tooltip">
+                        <BathtubIcon />
+                        <span className="tooltiptext">Addetto alle pulizie</span>
+                      </div>
+                    ) 
+                }
+              })
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={handleClose} className="confirm" >
+          <Button onClick={handleConfirm} className="confirm" >
             Conferma
           </Button>
         </DialogActions>

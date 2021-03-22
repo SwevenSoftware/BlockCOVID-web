@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,8 @@ import axios from 'axios';
 
 import GeneralLayout from './GeneralLayout';
 import Token from './Token';
+
+import {theme} from './theme';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -130,49 +132,51 @@ const LoginForm = () => {
       setPassword(event.target.value);
     }
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <Card className={classes.card}>
-        <CardHeader className="headerCard" title={cardTitle} />
-        <CardContent>
-          <div>
-            <TextField
-              error={isError}
-              fullWidth
-              id="username"
-              type="email"
-              label="Username"
-              placeholder="Username"
-              margin="normal"
-              onChange={handleUsernameChange}
-              onKeyPress={handleKeyPress}
-            />
-            <TextField
-              error={isError}
-              fullWidth
-              id="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-              margin="normal"
-              helperText={helpText}
-              onChange={handlePasswordChange}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button
-              variant="contained"
-              size="large"
-              color="secondary"
-              className={classes.loginBtn}
-              onClick={handleLogin}
-              disabled={isButtonDisabled}>
-              {loginBtnText}
-          </Button>
-        </CardActions>
-      </Card>
-    </form>
+    <ThemeProvider theme={theme}>
+      <form className={classes.container} noValidate autoComplete="off">
+        <Card className={classes.card}>
+          <CardHeader className="headerCard" title={cardTitle} />
+          <CardContent>
+            <div>
+              <TextField
+                error={isError}
+                fullWidth
+                id="username"
+                type="email"
+                label="Username"
+                placeholder="Username"
+                margin="normal"
+                onChange={handleUsernameChange}
+                onKeyPress={handleKeyPress}
+              />
+              <TextField
+                error={isError}
+                fullWidth
+                id="password"
+                type="password"
+                label="Password"
+                placeholder="Password"
+                margin="normal"
+                helperText={helpText}
+                onChange={handlePasswordChange}
+                onKeyPress={handleKeyPress}
+              />
+            </div>
+          </CardContent>
+          <CardActions>
+            <Button
+                variant="contained"
+                size="large"
+                color="secondary"
+                className={classes.loginBtn}
+                onClick={handleLogin}
+                disabled={isButtonDisabled}>
+                {loginBtnText}
+            </Button>
+          </CardActions>
+        </Card>
+      </form>
+    </ThemeProvider>
   );
 }
 

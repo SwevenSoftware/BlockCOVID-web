@@ -132,7 +132,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Admin
+            Pannello Amministratore
           </Typography>
         </Toolbar>
       </AppBar>

@@ -78,14 +78,14 @@ class ReservationsForm extends Component {
       <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead className="headerCard">
-          <TableRow>
-            <TableCell align="left">Reservation ID</TableCell>
-            <TableCell align="center">Room</TableCell>
-            <TableCell align="center">Desk</TableCell>
-            <TableCell align="center">Date</TableCell>
-            <TableCell align="center">From</TableCell>
-            <TableCell align="center">To</TableCell>
-            <TableCell align="center">Username</TableCell>
+          <TableRow >
+            <TableCell align="left" ><span className="tableTitles">Reservation ID</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">Room</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">Desk</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">Date</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">From</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">To</span></TableCell>
+            <TableCell align="center"><span className="tableTitles">Username</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{this.rows}

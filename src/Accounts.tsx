@@ -22,6 +22,7 @@ import SearchUsers from './SearchUsers';
 import Pencil from './Pencil';
 import Trash from './Trash';
 
+import NewUser from './NewUser'
 // import * as https from 'https';
 // import * as fs from 'fs';
 
@@ -55,7 +56,7 @@ class AccountsForm extends Component {
   * @returns
   */
   componentDidMount() {
-    console.log(Token.getId());
+    console.log(Token.getId()); // WARNING: for testing purposes
     this.viewAccounts();
   }
 
@@ -88,7 +89,7 @@ class AccountsForm extends Component {
             </ListItemIcon>
             <ListItemText primary={account.username}/>
             <Pencil {...account}/>
-            <Trash/>
+            <Trash {...account}/>
           </ListItem>
         </Paper>
       </Grid>
@@ -163,6 +164,9 @@ const Accounts = () => {
     GeneralLayout(
       <div>
         <SearchUsers/>
+        <div className="addAccountButton">
+            <NewUser/>
+        </div>
         <AccountsForm/>
       </div>
     )
