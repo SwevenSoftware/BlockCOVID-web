@@ -14,14 +14,24 @@ import PersonIcon from '@material-ui/icons/Person'
 import SecurityIcon from '@material-ui/icons/Security';
 import WorkIcon from '@material-ui/icons/Work';
 import BathtubIcon from '@material-ui/icons/Bathtub';
-
+import { FormLabel, FormHelperText } from '@material-ui/core';
 import Token from './Token';
 import axios from 'axios';
 
 export default function FormDialog(formAccount: any) {
+
   const [open, setOpen] = React.useState(false);
 
+  const [delHimselfErr, setDelHimselfErr] = React.useState("");
+
+  const [isConfirmDisabled, setIsConfirmDisabled] = React.useState(false);
+  /* error messages */
+  const dontkys = "Non puoi cancellare il tuo account";
+
   const handleClickOpen = () => {
+    if(adminControl()) {
+      setIsConfirmDisabled(true);
+    }
     setOpen(true);
   };
 
@@ -30,25 +40,42 @@ export default function FormDialog(formAccount: any) {
   };
 
   const handleConfirm = () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": Token.getId(),
-        "username": formAccount.username
-      }
-    }
 
-    axios.delete("/api/admin/user/" + formAccount.username, config)
-      .then((res) => {
-        console.log(res); // WARNING: for testing purposes
-        handleClose();
-        window.location.reload();
-      })
-      .catch(err => {
-          console.log("An error has occured in handleConfirm(): ", err);
-          if(err.response.status == 401) { }
-          else { }
-      });
+    if(!adminControl()) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": Token.getId(),
+          "username": formAccount.username
+        }
+      }
+
+      axios.delete("/api/admin/user/" + formAccount.username, config)
+        .then((res) => {
+          console.log(res); // WARNING: for testing purposes
+          handleClose();
+          window.location.reload();
+        })
+        .catch(err => {
+            console.log("An error has occured in handleConfirm(): ", err);
+        });
+    }
+  };
+
+  /**
+  * Checking if admin has opened the delete window of his/her account
+  * @params
+  * @returns
+  *   true if admin is trying to delete himself/herself
+  *   false otherwise
+  */
+  const adminControl = (): boolean => {
+    if(formAccount.username === Token.getUsername()) {
+      setDelHimselfErr(dontkys);
+      return true;
+    }
+    else return false;
+
   };
 
   return (
@@ -59,45 +86,50 @@ export default function FormDialog(formAccount: any) {
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
         <DialogContent className="trashField">
-        <PersonIcon fontSize="large" />
+          <PersonIcon fontSize="large" />
           <DialogContentText>
             {formAccount.username}
           </DialogContentText>
-          <DialogContentText>
-            {formAccount.authorities.length > 1 ? "Ruoli:" : "Ruolo:"} {
-              formAccount.authorities.map( (auth) => {
-                switch(auth){
-                  case "ADMIN":
-                    return (
-                      <div className="tooltip">
-                        <SecurityIcon />
-                        <span className="tooltiptext">Admin</span>
-                      </div>
-                    )
-                  case "USER":
-                    return (
-                      <div className="tooltip">
-                        <WorkIcon />
-                        <span className="tooltiptext">Utente</span>
-                      </div>
-                    )
-                  case "CLEANER":
-                    return (
-                      <div className="tooltip">
-                        <BathtubIcon />
-                        <span className="tooltiptext">Addetto alle pulizie</span>
-                      </div>
-                    ) 
-                }
-              })
-            }
-          </DialogContentText>
+            <FormLabel className={"role_title"}>
+              {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+            </FormLabel>
+              {
+               formAccount.authorities.map( (auth) => {
+                 switch(auth){
+                   case "ADMIN":
+                     return (
+                       <div className="tooltip">
+                         <SecurityIcon />
+                         <span className="tooltiptext">Admin</span>
+                       </div>
+                     )
+                   case "USER":
+                     return (
+                       <div className="tooltip">
+                         <WorkIcon />
+                         <span className="tooltiptext">Utente</span>
+                       </div>
+                     )
+                   case "CLEANER":
+                     return (
+                       <div className="tooltip">
+                         <BathtubIcon />
+                         <span className="tooltiptext">Addetto alle pulizie</span>
+                       </div>
+                     )
+                 }
+               })
+              }
+            <FormHelperText color="red">{delHimselfErr}</FormHelperText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="decline">
             Annulla
           </Button>
-          <Button onClick={handleConfirm} className="confirm" >
+          <Button
+            className="confirm"
+            onClick={handleConfirm}
+            disabled={isConfirmDisabled}>
             Conferma
           </Button>
         </DialogActions>
