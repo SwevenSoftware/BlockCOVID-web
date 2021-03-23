@@ -33,11 +33,11 @@
 }
 
 .pencil:hover {
-    color: #1edc50;
+    color: #689f38;
 }
 
 .trash:hover {
-    color: red;
+    color: rgb(201, 33, 33);
 }
 
 .search {
@@ -57,6 +57,7 @@
 
 .addField {
     margin-bottom: 7%;
+    border-color: rgb(201, 33, 33);
 }
 
 .trashField {
@@ -65,7 +66,7 @@
 
 #trashMessage {
     text-align: center;
-    color: red;
+    color: rgb(201, 33, 33);
 }
 
 .tooltip {
@@ -151,33 +152,16 @@
 /* ====================== Dialog Buttons  ====================== */
 
 .decline:hover {
-    color: red;
+    color: rgb(201, 33, 33);
 }
 
 .confirm:hover {
     color: green;
 }
 
-.loginBtn {
-    text-decoration: white;
-    background-color: #689f38;
-    border: none;
-    align-items: center;
-    padding: 8px 22px;
-    font-size: 0.9375rem;
-}
-
-.loginBtn:hover {
-    background-color: red!important;
-}
-
-#loginBtn {
-    background-color: #673ab7;
-}
 
 /* ====================== FormHelperText  ====================== */
 
 .textField {
     width: '100%'
 }
-

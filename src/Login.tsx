@@ -14,6 +14,7 @@ import Token from './Token';
 
 import {theme} from './theme';
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -25,10 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
-      background: "#319e77",
+      background: "#689f38",
 
       "&:hover" : {
-        background: "#31729e"
+        background: "#3c611b"
       }
     },
     card: {
@@ -121,6 +122,7 @@ const LoginForm = () => {
     (event) => {
       setPassword(event.target.value);
     }
+
   return (
     <ThemeProvider theme={theme}>
       <form className={classes.container} noValidate autoComplete="off">
@@ -174,6 +176,7 @@ const LoginForm = () => {
                 disabled={isButtonDisabled}>
                 {loginBtnText}
             </Button>
+            
           </CardActions>
         </Card>
       </form>

@@ -29,9 +29,9 @@ import {theme} from './theme';
 
 const GreenCheckbox = withStyles({
   root: {
-    color: "#319e77",
+    color: "#689f38",
     '&$checked': {
-      color: "#319e77",
+      color: "#689f38",
     },
   },
   checked:{},
