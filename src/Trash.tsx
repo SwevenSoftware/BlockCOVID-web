@@ -114,21 +114,21 @@ export default function FormDialog(formAccount: any) {
                 case "ADMIN":
                   return (
                     <div className="tooltip">
-                      <SecurityIcon />
+                      <SecurityIcon className="iconColor" />
                       <span className="tooltiptext">Admin</span>
                     </div>
                   )
                 case "USER":
                   return (
                     <div className="tooltip">
-                      <WorkIcon />
+                      <WorkIcon className="iconColor" />
                       <span className="tooltiptext">Utente</span>
                     </div>
                   )
                 case "CLEANER":
                   return (
                     <div className="tooltip">
-                      <BathtubIcon />
+                      <BathtubIcon className="iconColor" />
                       <span className="tooltiptext">Addetto alle pulizie</span>
                     </div>
                   )
@@ -140,11 +140,12 @@ export default function FormDialog(formAccount: any) {
             
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} className="decline">
+            <Button variant="outlined" onClick={handleClose} id="decline">
               Annulla
             </Button>
             <Button
-              className="confirm"
+              variant="outlined"
+              id="confirm"
               onClick={handleConfirm}
               disabled={isConfirmDisabled}>
               Conferma

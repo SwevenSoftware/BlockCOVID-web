@@ -113,6 +113,14 @@
     font-weight: 500;
 }
 
+.iconColor:hover {
+    color: blue;
+}
+
+#decline {
+    margin-right: 35%;
+}
+
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
@@ -151,11 +159,11 @@
 
 /* ====================== Dialog Buttons  ====================== */
 
-.decline:hover {
+#decline:hover {
     color: rgb(201, 33, 33);
 }
 
-.confirm:hover {
+#confirm:hover {
     color: green;
 }
 
