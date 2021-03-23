@@ -64,7 +64,7 @@ export default function FormDialog(formAccount: any) {
         }
       }
 
-      axios.delete("/api/admin/user/" + formAccount.username, config)
+      axios.delete(formAccount.link_delete + formAccount.username, config)
         .then((res) => {
           console.log(res); // WARNING: for testing purposes
           handleClose();
@@ -135,9 +135,9 @@ export default function FormDialog(formAccount: any) {
               }
             })
             }
-            
+
             <FormHelperText id="trashMessage">{delHimselfErr}</FormHelperText>
-            
+
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" onClick={handleClose} id="decline">
