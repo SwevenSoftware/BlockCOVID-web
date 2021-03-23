@@ -18,6 +18,20 @@ import { FormLabel, FormHelperText } from '@material-ui/core';
 import Token from './Token';
 import axios from 'axios';
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {theme} from './theme';
+
+
+const styles = () => ({
+  textField: {
+    width: '100%'
+  },
+  helperText: {
+    position: 'absolute',
+    bottom: '-50%'
+  }
+})
+
 export default function FormDialog(formAccount: any) {
 
   const [open, setOpen] = React.useState(false);
@@ -79,61 +93,65 @@ export default function FormDialog(formAccount: any) {
   };
 
   return (
-    <div>
-      <IconButton className="trash" onClick={handleClickOpen}>
-        <DeleteIcon />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
-        <DialogContent className="trashField">
-          <PersonIcon fontSize="large" />
-          <DialogContentText>
-            {formAccount.username}
-          </DialogContentText>
-          <FormLabel className={"role_title"}>
-            {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
-          </FormLabel>
-          {
-           formAccount.authorities.map( (auth) => {
-             switch(auth){
-               case "ADMIN":
-                 return (
-                   <div className="tooltip">
-                     <SecurityIcon />
-                     <span className="tooltiptext">Admin</span>
-                   </div>
-                 )
-               case "USER":
-                 return (
-                   <div className="tooltip">
-                     <WorkIcon />
-                     <span className="tooltiptext">Utente</span>
-                   </div>
-                 )
-               case "CLEANER":
-                 return (
-                   <div className="tooltip">
-                     <BathtubIcon />
-                     <span className="tooltiptext">Addetto alle pulizie</span>
-                   </div>
-                 )
-             }
-           })
-          }
-          <FormHelperText color="red">{delHimselfErr}</FormHelperText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} className="decline">
-            Annulla
-          </Button>
-          <Button
-            className="confirm"
-            onClick={handleConfirm}
-            disabled={isConfirmDisabled}>
-            Conferma
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <IconButton className="trash" onClick={handleClickOpen}>
+          <DeleteIcon />
+        </IconButton>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
+          <DialogContent className="trashField">
+            <PersonIcon fontSize="large" />
+            <DialogContentText>
+              {formAccount.username}
+            </DialogContentText>
+            <FormLabel className={"role_title"}>
+              {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+            </FormLabel>
+            {
+            formAccount.authorities.map( (auth) => {
+              switch(auth){
+                case "ADMIN":
+                  return (
+                    <div className="tooltip">
+                      <SecurityIcon />
+                      <span className="tooltiptext">Admin</span>
+                    </div>
+                  )
+                case "USER":
+                  return (
+                    <div className="tooltip">
+                      <WorkIcon />
+                      <span className="tooltiptext">Utente</span>
+                    </div>
+                  )
+                case "CLEANER":
+                  return (
+                    <div className="tooltip">
+                      <BathtubIcon />
+                      <span className="tooltiptext">Addetto alle pulizie</span>
+                    </div>
+                  )
+              }
+            })
+            }
+            
+            <FormHelperText id="trashMessage">{delHimselfErr}</FormHelperText>
+            
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} className="decline">
+              Annulla
+            </Button>
+            <Button
+              className="confirm"
+              onClick={handleConfirm}
+              disabled={isConfirmDisabled}>
+              Conferma
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </ThemeProvider>
   );
 }

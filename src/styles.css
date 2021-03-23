@@ -9,7 +9,7 @@
 }
 
 .headerCard {
-    background-color: #319e77;
+    background-color: #689f38;
     color: white;
     text-align: center;
     font-size: medium;
@@ -61,6 +61,11 @@
 
 .trashField {
     text-align: center;
+}
+
+#trashMessage {
+    text-align: center;
+    color: red;
 }
 
 .tooltip {
@@ -155,5 +160,24 @@
 
 .loginBtn {
     text-decoration: white;
+    background-color: #689f38;
+    border: none;
+    align-items: center;
+    padding: 8px 22px;
+    font-size: 0.9375rem;
+}
+
+.loginBtn:hover {
+    background-color: red!important;
+}
+
+#loginBtn {
+    background-color: #673ab7;
+}
+
+/* ====================== FormHelperText  ====================== */
+
+.textField {
+    width: '100%'
 }
 
