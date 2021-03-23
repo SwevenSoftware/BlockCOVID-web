@@ -90,37 +90,37 @@ export default function FormDialog(formAccount: any) {
           <DialogContentText>
             {formAccount.username}
           </DialogContentText>
-            <FormLabel className={"role_title"}>
-              {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
-            </FormLabel>
-              {
-               formAccount.authorities.map( (auth) => {
-                 switch(auth){
-                   case "ADMIN":
-                     return (
-                       <div className="tooltip">
-                         <SecurityIcon />
-                         <span className="tooltiptext">Admin</span>
-                       </div>
-                     )
-                   case "USER":
-                     return (
-                       <div className="tooltip">
-                         <WorkIcon />
-                         <span className="tooltiptext">Utente</span>
-                       </div>
-                     )
-                   case "CLEANER":
-                     return (
-                       <div className="tooltip">
-                         <BathtubIcon />
-                         <span className="tooltiptext">Addetto alle pulizie</span>
-                       </div>
-                     )
-                 }
-               })
-              }
-            <FormHelperText color="red">{delHimselfErr}</FormHelperText>
+          <FormLabel className={"role_title"}>
+            {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+          </FormLabel>
+          {
+           formAccount.authorities.map( (auth) => {
+             switch(auth){
+               case "ADMIN":
+                 return (
+                   <div className="tooltip">
+                     <SecurityIcon />
+                     <span className="tooltiptext">Admin</span>
+                   </div>
+                 )
+               case "USER":
+                 return (
+                   <div className="tooltip">
+                     <WorkIcon />
+                     <span className="tooltiptext">Utente</span>
+                   </div>
+                 )
+               case "CLEANER":
+                 return (
+                   <div className="tooltip">
+                     <BathtubIcon />
+                     <span className="tooltiptext">Addetto alle pulizie</span>
+                   </div>
+                 )
+             }
+           })
+          }
+          <FormHelperText color="red">{delHimselfErr}</FormHelperText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="decline">
