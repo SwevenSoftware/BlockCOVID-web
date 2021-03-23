@@ -9,7 +9,7 @@
 }
 
 .headerCard {
-    background-color: #319e77;
+    background-color: #689f38;
     color: white;
     text-align: center;
     font-size: medium;
@@ -33,11 +33,11 @@
 }
 
 .pencil:hover {
-    color: #1edc50;
+    color: #689f38;
 }
 
 .trash:hover {
-    color: red;
+    color: rgb(201, 33, 33);
 }
 
 .search {
@@ -57,10 +57,16 @@
 
 .addField {
     margin-bottom: 7%;
+    border-color: rgb(201, 33, 33);
 }
 
 .trashField {
     text-align: center;
+}
+
+#trashMessage {
+    text-align: center;
+    color: rgb(201, 33, 33);
 }
 
 .tooltip {
@@ -107,6 +113,14 @@
     font-weight: 500;
 }
 
+.iconColor:hover {
+    color: blue;
+}
+
+#decline {
+    margin-right: 35%;
+}
+
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
@@ -145,15 +159,17 @@
 
 /* ====================== Dialog Buttons  ====================== */
 
-.decline:hover {
-    color: red;
+#decline:hover {
+    color: rgb(201, 33, 33);
 }
 
-.confirm:hover {
+#confirm:hover {
     color: green;
 }
 
-.loginBtn {
-    text-decoration: white;
-}
 
+/* ====================== FormHelperText  ====================== */
+
+.textField {
+    width: '100%'
+}
