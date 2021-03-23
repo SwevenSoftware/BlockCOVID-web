@@ -101,6 +101,7 @@ export default function FormDialog() {
   const userInputControl = (user: string): boolean => {
     let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
     if(!user.match(reg)) {
+      setUserErr(userInvalid);
       setIsUserErr(true);
       return true;
     }
