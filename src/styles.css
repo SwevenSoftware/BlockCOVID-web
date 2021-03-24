@@ -118,7 +118,11 @@
 }
 
 #decline {
-    margin-right: 35%;
+    width: 100%;
+}
+
+#confirm {
+    width: 100%;
 }
 
 /* ====================== MEDIA QUERY ====================== */

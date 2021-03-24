@@ -136,7 +136,6 @@ const LoginForm = () => {
                 id="username"
                 type="email"
                 label="Username"
-                placeholder="Username"
                 margin="normal"
                 onChange={handleUsernameChange}
                 onKeyPress={handleKeyPress}
@@ -147,7 +146,6 @@ const LoginForm = () => {
                 id="password"
                 type="password"
                 label="Password"
-                placeholder="Password"
                 margin="normal"
                 helperText={helpText}
                 onChange={handlePasswordChange}
