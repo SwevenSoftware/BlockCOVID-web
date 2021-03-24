@@ -26,6 +26,9 @@ import NewUser from './NewUser'
 // import * as https from 'https';
 // import * as fs from 'fs';
 
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
+
 interface Account {
   username: string,
   password: string,
@@ -165,7 +168,9 @@ const Accounts = () => {
       <div>
         <SearchUsers/>
         <div className="addAccountButton">
+          <SnackbarProvider maxSnack={3} autoHideDuration={6000}>
             <NewUser/>
+          </SnackbarProvider>
         </div>
         <AccountsForm/>
       </div>

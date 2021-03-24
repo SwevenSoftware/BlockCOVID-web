@@ -28,6 +28,9 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
 import './styles.css';
 
+
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
 const GreenCheckbox = withStyles({
   root: {
     color: "#689f38",
@@ -76,6 +79,12 @@ export default function FormDialog() {
   const handleClickOpenButton = () => {
     setOpenButton(true);
   };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleMessage = (variant: VariantType) => {
+    enqueueSnackbar('I love snacks.',{variant});
+  }
 
   const handleCloseButton = () => {
     setUserValue("");
@@ -207,7 +216,9 @@ export default function FormDialog() {
         .then((res) => {
           console.log(res); // WARNING: for testing purposes
           handleCloseButton();
-          window.location.reload();
+          //window.location.reload();
+          window.setTimeout(function(){location.reload()},1500)
+          console.log('prova');
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
@@ -314,10 +325,15 @@ export default function FormDialog() {
             <Button onClick={handleCloseButton} id="decline" variant="outlined">
               Annulla
             </Button>
-            <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
+            <Button onClick={() => {
+              handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner]); 
+              handleMessage('success')}
+              }
+              id="confirm" variant="outlined">
               Conferma
             </Button>
             {/* <Message /> */}
+            
           </DialogActions>
         </Dialog>
       </div>
