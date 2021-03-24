@@ -289,9 +289,10 @@ export default function FormDialog() {
             <DialogContentText color="primary">
               * indica i campi obbligatori
             </DialogContentText>
-
-            <FormControl>
+            <div>
               <FormLabel className={"role_title"}>Ruolo:</FormLabel>
+            </div>
+            <FormControl>
                 <FormGroup>
                   <FormControlLabel
                     control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
@@ -316,7 +317,7 @@ export default function FormDialog() {
             <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
               Conferma
             </Button>
-            <Message />
+            {/* <Message /> */}
           </DialogActions>
         </Dialog>
       </div>

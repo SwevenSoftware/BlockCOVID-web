@@ -55,9 +55,9 @@ class Message extends Component<{}, State>{
    }
 }
 
-interface Color {
+/* interface Color {
 
-}
+} */
 
 function Alert(props: AlertProps) {
    return <MuiAlert elevation={6} variant="filled" {...props} />;
