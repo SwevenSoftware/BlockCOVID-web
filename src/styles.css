@@ -160,11 +160,13 @@
 /* ====================== Dialog Buttons  ====================== */
 
 #decline:hover {
-    color: rgb(201, 33, 33);
+    color: white;
+    background-color:rgb(201, 33, 33);
 }
 
 #confirm:hover {
-    color: green;
+    color: white;
+    background-color: #689f38;
 }
 
 

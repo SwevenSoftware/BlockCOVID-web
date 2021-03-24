@@ -26,6 +26,7 @@ import { RotateLeft } from '@material-ui/icons';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
+import './styles.css';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -309,10 +310,10 @@ export default function FormDialog() {
             </FormControl>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseButton} className="decline">
+            <Button onClick={handleCloseButton} id="decline" variant="outlined">
               Annulla
             </Button>
-            <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm" >
+            <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
               Conferma
             </Button>
             <Message />

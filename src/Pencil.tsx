@@ -17,6 +17,7 @@ import { green } from '@material-ui/core/colors';
 
 import Token from './Token';
 import axios from 'axios';
+import './styles.css';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
@@ -256,10 +257,10 @@ export default function FormDialog(formAccount: any) {
             </FormControl>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} className="decline">
+            <Button onClick={handleClose} id="decline" variant="outlined">
               Annulla
             </Button>
-            <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} className="confirm">
+            <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
               Conferma
             </Button>
           </DialogActions>
