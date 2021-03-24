@@ -60,10 +60,6 @@
     border-color: rgb(201, 33, 33);
 }
 
-.trashField {
-    text-align: center;
-}
-
 #trashMessage {
     text-align: center;
     color: rgb(201, 33, 33);
@@ -123,6 +119,10 @@
 
 #confirm {
     width: 100%;
+}
+
+.central {
+    text-align: center;
 }
 
 /* ====================== MEDIA QUERY ====================== */

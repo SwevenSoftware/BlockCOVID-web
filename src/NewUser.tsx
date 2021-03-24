@@ -228,7 +228,7 @@ export default function FormDialog() {
         <IconButton className="addColor" onClick={handleClickOpenButton}>
           <AddBoxIcon fontSize="large" />
         </IconButton>
-        <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title">
+        <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
           <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -294,18 +294,24 @@ export default function FormDialog() {
             </div>
             <FormControl>
                 <FormGroup>
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
-                    label="Admin"
-                  />
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
-                    label="Utente"
-                  />
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
-                    label="Addetto alle pulizie"
-                  />
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                      label="Admin"
+                    />
+                  </div>
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                      label="Utente"
+                    />
+                  </div>
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                      label="Addetto alle pulizie"
+                    />
+                  </div>
                 </FormGroup>
                 <FormHelperText color="red">{authErr}</FormHelperText>
             </FormControl>

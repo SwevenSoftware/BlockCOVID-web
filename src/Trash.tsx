@@ -100,7 +100,7 @@ export default function FormDialog(formAccount: any) {
         </IconButton>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
-          <DialogContent className="trashField">
+          <DialogContent className="central">
             <PersonIcon fontSize="large" />
             <DialogContentText>
               {formAccount.username}

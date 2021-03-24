@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -189,7 +189,7 @@ export default function FormDialog(formAccount: any) {
         <IconButton className="pencil" onClick={handleClickOpen}>
           <CreateIcon />
         </IconButton>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
           <DialogTitle id="form-dialog-title">Modifica utente {formAccount.username} </DialogTitle>
           <DialogContent>
             <PersonIcon fontSize="large" />
@@ -240,18 +240,24 @@ export default function FormDialog(formAccount: any) {
             <FormControl>
               <FormLabel className={"role_title"}>Ruolo:</FormLabel>
                 <FormGroup>
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
-                    label="Admin"
-                  />
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
-                    label="Utente"
-                  />
-                  <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
-                    label="Addetto alle pulizie"
-                  />
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                      label="Admin"
+                    />
+                  </div>
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                      label="Utente"
+                    />
+                  </div>
+                  <div>
+                    <FormControlLabel
+                      control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                      label="Addetto alle pulizie"
+                    />
+                  </div>
                 </FormGroup>
                 <FormHelperText color="red">{authErr}</FormHelperText>
             </FormControl>
