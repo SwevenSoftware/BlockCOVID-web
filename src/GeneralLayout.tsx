@@ -158,17 +158,17 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         <Divider />
         <List>
           <ListItem button key="Reservations" component={Link} to="/reservations" disabled={mainElement.type.name == "LoginForm" ? true : false}>
-            <ListItemIcon><DnsIcon /></ListItemIcon>
+            <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
           </ListItem>
 
           <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name == "LoginForm" ? true : false}>
-            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
           </ListItem>
           
           <ListItem button key="Desks" component={Link} to="/desk" disabled={mainElement.type.name == "LoginForm" ? true : false}>
-            <ListItemIcon><EventSeatIcon /></ListItemIcon>
+            <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
           {/* <ListItem button key="Rooms">
