@@ -86,7 +86,7 @@ const LoginForm = () => {
             isAdmin = true;
           }
         }
-        if(isAdmin) { /* user has admin authorities, authorized login attemp */
+        if(isAdmin) { /* user has admin authorities, authorized login attempt */
           successLogin();
           Token.setId(res.data.token.id);
           Token.setExpDate(res.data.token.expiryDate);
@@ -155,14 +155,14 @@ const LoginForm = () => {
           </CardContent>
           <CardActions>
             {/* <button
-              
+
               className="loginBtn"
               color= "primary"
-              
+
               onClick={handleLogin}
               disabled={isButtonDisabled}>
               {loginBtnText}
-            
+
 
             </button> */}
             <Button
@@ -174,7 +174,7 @@ const LoginForm = () => {
                 disabled={isButtonDisabled}>
                 {loginBtnText}
             </Button>
-            
+
           </CardActions>
         </Card>
       </form>
