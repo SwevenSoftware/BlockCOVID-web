@@ -14,8 +14,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
-import Message from './Message/SuccessMessage'
-
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -54,6 +52,17 @@ export default function FormDialog() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+    switch(event.target.name) {
+      case "checkedAdmin":
+        authInputControl([event.target.checked, state.checkedUser, state.checkedCleaner]);
+      break;
+      case "checkedUser":
+        authInputControl([state.checkedAdmin, event.target.checked, state.checkedCleaner]);
+      break;
+      case "checkedCleaner":
+        authInputControl([state.checkedAdmin, state.checkedUser, event.target.checked]);
+      break;
+    }
   };
 
   const [openButton, setOpenButton] = React.useState(false);
@@ -82,8 +91,9 @@ export default function FormDialog() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleMessage = (variant: VariantType) => {
-    enqueueSnackbar('I love snacks.',{variant});
+  const handleMessage = (message: string, variant: VariantType) => {
+    // variant can be 'success', 'warning', 'error'
+    enqueueSnackbar(message, {variant});
   }
 
   const handleCloseButton = () => {
@@ -176,12 +186,10 @@ export default function FormDialog() {
     }
     if(notChecked) {
       setAuthErr(noAuthoritiesChecked);
-      console.log(authErr);
       return true;
     }
     else {
       setAuthErr("");
-      console.log(authErr);
       return false;
     }
   };
@@ -214,14 +222,14 @@ export default function FormDialog() {
 
       axios.post("/api/admin/user/new", data, config)
         .then((res) => {
-          console.log(res); // WARNING: for testing purposes
           handleCloseButton();
-          //window.location.reload();
-          window.setTimeout(function(){location.reload()},1500)
-          console.log('prova');
+          // window.location.reload();
+          handleMessage("Operazione eseguita con successo", "success");
+          window.setTimeout(function(){location.reload()}, 1500)
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
+            handleMessage("Si è verificato un errore", "error");
             switch(err.response.status) {
               case 409: /* user exists, username already taken */
                 setUserErr(userExists);
@@ -229,6 +237,9 @@ export default function FormDialog() {
                 break;
             }
         });
+    }
+    else {
+      handleMessage("Si è verificato un errore", "error");
     }
   };
 
@@ -326,14 +337,11 @@ export default function FormDialog() {
               Annulla
             </Button>
             <Button onClick={() => {
-              handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner]); 
-              handleMessage('success')}
-              }
+              handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner]);
+              }}
               id="confirm" variant="outlined">
               Conferma
             </Button>
-            {/* <Message /> */}
-            
           </DialogActions>
         </Dialog>
       </div>

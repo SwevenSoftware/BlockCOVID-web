@@ -168,7 +168,7 @@ const Accounts = () => {
       <div>
         <SearchUsers/>
         <div className="addAccountButton">
-          <SnackbarProvider maxSnack={3} autoHideDuration={6000}>
+          <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
             <NewUser/>
           </SnackbarProvider>
         </div>
@@ -176,6 +176,6 @@ const Accounts = () => {
       </div>
     )
   )
-}
+};
 
 export default Accounts
