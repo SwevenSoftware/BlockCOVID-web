@@ -180,12 +180,12 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         <List>
           { Token.getId() ?
             <ListItem button key="Logout" onClick={logout}>
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
             :
             <ListItem button key="Login" onClick={() => location.href="/login"}>
-              <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><AccountCircleIcon /></ListItemIcon>
               <ListItemText primary="Login" />
             </ListItem>
           }
