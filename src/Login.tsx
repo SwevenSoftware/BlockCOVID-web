@@ -47,7 +47,7 @@ const LoginForm = () => {
   const [isError, setIsError] = useState(false);
 
   const cardTitle = "Login";
-  const loginBtnText = "Login";
+  const loginBtnText = "Log In";
 
   useEffect(() => {
     if (username.trim() && password.trim()) {
@@ -127,7 +127,7 @@ const LoginForm = () => {
     <ThemeProvider theme={theme}>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
-          <CardHeader className="headerCard" title={cardTitle} />
+          <CardHeader className="headerCard"/>
           <CardContent>
             <div>
               <TextField
