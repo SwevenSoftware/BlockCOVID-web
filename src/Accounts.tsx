@@ -91,8 +91,8 @@ class AccountsForm extends Component {
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
             <ListItemText primary={account.username}/>
-            <Pencil {...account}/>
-            <Trash {...account}/>
+              <Pencil {...account}/>
+              <Trash {...account}/>
           </ListItem>
         </Paper>
       </Grid>
@@ -167,12 +167,12 @@ const Accounts = () => {
     GeneralLayout(
       <div>
         <SearchUsers/>
-        <div className="addAccountButton">
           <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-            <NewUser/>
+            <div className="addAccountButton">
+              <NewUser/>
+            </div>
+            <AccountsForm/>
           </SnackbarProvider>
-        </div>
-        <AccountsForm/>
       </div>
     )
   )

@@ -21,6 +21,7 @@ import axios from 'axios';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
 
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 const styles = () => ({
   textField: {
@@ -41,6 +42,13 @@ export default function FormDialog(formAccount: any) {
   const [isConfirmDisabled, setIsConfirmDisabled] = React.useState(false);
   /* error messages */
   const dontkys = "Non puoi cancellare il tuo account";
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleMessage = (message: string, variant: VariantType) => {
+    // variant can be 'success', 'warning', 'error'
+    enqueueSnackbar(message, {variant});
+  }
 
   const handleClickOpen = () => {
     if(adminControl()) {
@@ -66,12 +74,13 @@ export default function FormDialog(formAccount: any) {
 
       axios.delete(formAccount.link_delete + formAccount.username, config)
         .then((res) => {
-          console.log(res); // WARNING: for testing purposes
           handleClose();
-          window.location.reload();
+          handleMessage("Operazione eseguita con successo", "success");
+          window.setTimeout(function(){location.reload()}, 1500)
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
+            handleMessage("Si è verificato un errore", "error");
         });
     }
   };
