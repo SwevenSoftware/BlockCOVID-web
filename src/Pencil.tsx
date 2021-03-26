@@ -22,6 +22,8 @@ import './styles.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
 
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
 const GreenCheckbox = withStyles({
   root: {
     color: "#689f38",
@@ -59,7 +61,25 @@ export default function FormDialog(formAccount: any) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+    switch(event.target.name) {
+      case "checkedAdmin":
+        authInputControl([event.target.checked, state.checkedUser, state.checkedCleaner]);
+      break;
+      case "checkedUser":
+        authInputControl([state.checkedAdmin, event.target.checked, state.checkedCleaner]);
+      break;
+      case "checkedCleaner":
+        authInputControl([state.checkedAdmin, state.checkedUser, event.target.checked]);
+      break;
+    }
   };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleMessage = (message: string, variant: VariantType) => {
+    // variant can be 'success', 'warning', 'error'
+    enqueueSnackbar(message, {variant});
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -173,13 +193,17 @@ export default function FormDialog(formAccount: any) {
 
       axios.put(formAccount.link_modify, data, config)
         .then((res) => {
-          console.log(res); // WARNING: for testing purposes
           handleClose();
-          window.location.reload();
+          handleMessage("Operazione eseguita con successo", "success");
+          window.setTimeout(function(){location.reload()}, 1500)
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
+            handleMessage("Si è verificato un errore", "error");
         });
+    } 
+    else {
+      handleMessage("Si è verificato un errore", "error");
     }
   };
 
