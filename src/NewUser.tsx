@@ -251,7 +251,7 @@ export default function FormDialog() {
           <AddBoxIcon fontSize="large" />
         </IconButton>
         <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
-          <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
+          <DialogTitle id="form-dialog-title">Crea un nuovo utente</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Compila i seguenti campi

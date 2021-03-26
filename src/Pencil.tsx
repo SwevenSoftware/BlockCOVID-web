@@ -201,7 +201,7 @@ export default function FormDialog(formAccount: any) {
             console.log("An error has occured in handleConfirm(): ", err);
             handleMessage("Si è verificato un errore", "error");
         });
-    } 
+    }
     else {
       handleMessage("Si è verificato un errore", "error");
     }
@@ -214,11 +214,11 @@ export default function FormDialog(formAccount: any) {
           <CreateIcon />
         </IconButton>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
-          <DialogTitle id="form-dialog-title">Modifica utente {formAccount.username} </DialogTitle>
+          <DialogTitle id="form-dialog-title">Modifica l'utente {formAccount.username} </DialogTitle>
           <DialogContent>
             <PersonIcon fontSize="large" />
             <DialogContentText>
-              Si possono modificare i seguenti campi
+              Puoi modificare i seguenti campi
             </DialogContentText>
             <div className="addField">
               <TextField
