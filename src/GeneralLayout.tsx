@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {RefObject} from 'react'
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
@@ -24,6 +24,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
+
 
 const drawerWidth = 240;
 
@@ -156,17 +157,17 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         </div>
         <Divider />
         <List>
-          <ListItem button key="Reservations" component={Link} to="/reservations">
+          <ListItem button key="Reservations" component={Link} to="/reservations" disabled={mainElement.type.name == "LoginForm" ? true : false}>
             <ListItemIcon><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
           </ListItem>
 
-          <ListItem button key="Accoutns" component={Link} to="/accounts">
+          <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name == "LoginForm" ? true : false}>
             <ListItemIcon><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
           </ListItem>
-
-          <ListItem button key="Desks" component={Link} to="/desk">
+          
+          <ListItem button key="Desks" component={Link} to="/desk" disabled={mainElement.type.name == "LoginForm" ? true : false}>
             <ListItemIcon><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
