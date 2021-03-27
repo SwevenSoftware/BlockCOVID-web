@@ -26,6 +26,9 @@ import NewUser from './NewUser'
 // import * as https from 'https';
 // import * as fs from 'fs';
 
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+
+
 interface Account {
   username: string,
   password: string,
@@ -88,8 +91,8 @@ class AccountsForm extends Component {
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
             <ListItemText primary={account.username}/>
-            <Pencil {...account}/>
-            <Trash {...account}/>
+              <Pencil {...account}/>
+              <Trash {...account}/>
           </ListItem>
         </Paper>
       </Grid>
@@ -164,13 +167,15 @@ const Accounts = () => {
     GeneralLayout(
       <div>
         <SearchUsers/>
-        <div className="addAccountButton">
-            <NewUser/>
-        </div>
-        <AccountsForm/>
+          <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+            <div className="addAccountButton">
+              <NewUser/>
+            </div>
+            <AccountsForm/>
+          </SnackbarProvider>
       </div>
     )
   )
-}
+};
 
 export default Accounts

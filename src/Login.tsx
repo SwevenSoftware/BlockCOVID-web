@@ -47,7 +47,7 @@ const LoginForm = () => {
   const [isError, setIsError] = useState(false);
 
   const cardTitle = "Login";
-  const loginBtnText = "Login";
+  const loginBtnText = "Log In";
 
   useEffect(() => {
     if (username.trim() && password.trim()) {
@@ -86,7 +86,7 @@ const LoginForm = () => {
             isAdmin = true;
           }
         }
-        if(isAdmin) { /* user has admin authorities, authorized login attemp */
+        if(isAdmin) { /* user has admin authorities, authorized login attempt */
           successLogin();
           Token.setId(res.data.token.id);
           Token.setExpDate(res.data.token.expiryDate);
@@ -127,7 +127,7 @@ const LoginForm = () => {
     <ThemeProvider theme={theme}>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
-          <CardHeader className="headerCard" title={cardTitle} />
+          <CardHeader className="headerCard"/>
           <CardContent>
             <div>
               <TextField
@@ -163,7 +163,6 @@ const LoginForm = () => {
                 disabled={isButtonDisabled}>
                 {loginBtnText}
             </Button>
-            
           </CardActions>
         </Card>
       </form>

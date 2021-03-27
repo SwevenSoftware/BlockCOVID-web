@@ -14,8 +14,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
-import Message from './Message/SuccessMessage'
-
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -27,6 +25,9 @@ import { RotateLeft } from '@material-ui/icons';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
 import './styles.css';
+
+
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -51,6 +52,17 @@ export default function FormDialog() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+    switch(event.target.name) {
+      case "checkedAdmin":
+        authInputControl([event.target.checked, state.checkedUser, state.checkedCleaner]);
+      break;
+      case "checkedUser":
+        authInputControl([state.checkedAdmin, event.target.checked, state.checkedCleaner]);
+      break;
+      case "checkedCleaner":
+        authInputControl([state.checkedAdmin, state.checkedUser, event.target.checked]);
+      break;
+    }
   };
 
   const [openButton, setOpenButton] = React.useState(false);
@@ -76,6 +88,13 @@ export default function FormDialog() {
   const handleClickOpenButton = () => {
     setOpenButton(true);
   };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleMessage = (message: string, variant: VariantType) => {
+    // variant can be 'success', 'warning', 'error'
+    enqueueSnackbar(message, {variant});
+  }
 
   const handleCloseButton = () => {
     setUserValue("");
@@ -167,12 +186,10 @@ export default function FormDialog() {
     }
     if(notChecked) {
       setAuthErr(noAuthoritiesChecked);
-      console.log(authErr);
       return true;
     }
     else {
       setAuthErr("");
-      console.log(authErr);
       return false;
     }
   };
@@ -205,12 +222,14 @@ export default function FormDialog() {
 
       axios.post("/api/admin/user/new", data, config)
         .then((res) => {
-          console.log(res); // WARNING: for testing purposes
           handleCloseButton();
-          window.location.reload();
+          // window.location.reload();
+          handleMessage("Operazione eseguita con successo", "success");
+          window.setTimeout(function(){location.reload()}, 1500)
         })
         .catch(err => {
             console.log("An error has occured in handleConfirm(): ", err);
+            handleMessage("Si è verificato un errore", "error");
             switch(err.response.status) {
               case 409: /* user exists, username already taken */
                 setUserErr(userExists);
@@ -218,6 +237,9 @@ export default function FormDialog() {
                 break;
             }
         });
+    }
+    else {
+      handleMessage("Si è verificato un errore", "error");
     }
   };
 
@@ -229,7 +251,7 @@ export default function FormDialog() {
           <AddBoxIcon fontSize="large" />
         </IconButton>
         <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
-          <DialogTitle id="form-dialog-title">Nuovo utente</DialogTitle>
+          <DialogTitle id="form-dialog-title">Crea un nuovo utente</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Compila i seguenti campi
@@ -320,10 +342,12 @@ export default function FormDialog() {
             <Button onClick={handleCloseButton} id="decline" variant="outlined">
               Annulla
             </Button>
-            <Button onClick={() => handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
+            <Button onClick={() => {
+              handleConfirm(userValue, passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner]);
+              }}
+              id="confirm" variant="outlined">
               Conferma
             </Button>
-            {/* <Message /> */}
           </DialogActions>
         </Dialog>
       </div>
