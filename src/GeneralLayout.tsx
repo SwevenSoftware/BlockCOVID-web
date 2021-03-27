@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
