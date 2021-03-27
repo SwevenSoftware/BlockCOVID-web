@@ -134,6 +134,10 @@
     .search {
         max-width: 33%;
     }
+    .spacing {
+        padding-left: 8em;
+    }
+    
 }
 
 @media only screen and (max-width: 976px) {
@@ -144,6 +148,10 @@
         max-width: 50%;
         margin-bottom: 5%;
     }
+    .spacing {
+        padding-left: 4em;
+    }
+    
 }
 
 @media only screen and (max-width: 660px) {
@@ -158,6 +166,10 @@
         right:0.5em;
         top: 5.5em;
     }
+    .spacing {
+        padding-left: 1em;
+    }
+    
 }
 
 
@@ -179,3 +191,38 @@
 .textField {
     width: '100%'
 }
+
+/* ====================== Icons  ====================== */
+
+.people {
+    color: #121212
+}
+
+.shield {
+    color: #d68f00;
+}
+
+.bag {
+    color: rgb(134, 42, 42);
+}
+
+.cleaner {
+    color: rgb(5, 162, 235);
+}
+
+.number {
+    font-size: small;
+    margin-left: 15%;
+}
+
+.counter {
+    margin-right: 15%;
+}
+
+.h4 {
+    color: red;
+}
+
+/* .spacing {
+    padding-left: 10em;
+} */
