@@ -111,7 +111,9 @@ export default function GeneralLayout(mainElement : JSX.Element) {
     location.href = "/login";
   }
 
+
   return (
+    
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -156,18 +158,20 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           </IconButton>
         </div>
         <Divider />
+        
         <List>
-          <ListItem button key="Reservations" component={Link} to="/reservations" disabled={mainElement.type.name == "LoginForm" ? true : false}>
+          
+          <ListItem button key="Reservations" component={Link} to="/reservations" disabled={mainElement.type.name ? ["LoginForm", "ReservationForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm") }>
             <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
           </ListItem>
 
-          <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name == "LoginForm" ? true : false}>
+          <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name ? ["LoginForm", "AccountsForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("AccountsForm", "LoginForm") }>
             <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
           </ListItem>
           
-          <ListItem button key="Desks" component={Link} to="/desk" disabled={mainElement.type.name == "LoginForm" ? true : false}>
+          <ListItem button key="Desks" component={Link} to="/desk" disabled={mainElement.type.name ? ["LoginForm", "CardGridApp"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }>
             <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
