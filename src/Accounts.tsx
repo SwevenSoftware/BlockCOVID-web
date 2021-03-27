@@ -155,12 +155,12 @@ const Accounts = () => {
     GeneralLayout(
       <div>
         <SearchUsers/>
-          <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-            <div className="addAccountButton">
-              <NewUser/>
-            </div>
-            <AccountsForm/>
-          </SnackbarProvider>
+        <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+          <div className="addAccountButton">
+            <NewUser/>
+          </div>
+          <AccountsForm/>
+        </SnackbarProvider>
       </div>
     )
   )
