@@ -25,6 +25,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -110,7 +111,9 @@ export default function GeneralLayout(mainElement : JSX.Element) {
     location.href = "/login";
   }
 
+
   return (
+    
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -155,19 +158,21 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           </IconButton>
         </div>
         <Divider />
+        
         <List>
-          <ListItem button key="Reservations" component={Link} to="/reservations">
-            <ListItemIcon><DnsIcon /></ListItemIcon>
+          
+          <ListItem button key="Reservations" component={Link} to="/reservations" disabled={mainElement.type.name ? ["LoginForm", "ReservationForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm") }>
+            <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
           </ListItem>
 
-          <ListItem button key="Accoutns" component={Link} to="/accounts">
-            <ListItemIcon><PeopleIcon /></ListItemIcon>
+          <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name ? ["LoginForm", "AccountsForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("AccountsForm", "LoginForm") }>
+            <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
           </ListItem>
-
-          <ListItem button key="Desks" component={Link} to="/desk">
-            <ListItemIcon><EventSeatIcon /></ListItemIcon>
+          
+          <ListItem button key="Desks" component={Link} to="/desk" disabled={mainElement.type.name ? ["LoginForm", "CardGridApp"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }>
+            <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
           {/* <ListItem button key="Rooms">
@@ -179,12 +184,12 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         <List>
           { Token.getId() ?
             <ListItem button key="Logout" onClick={logout}>
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
             :
             <ListItem button key="Login" onClick={() => location.href="/login"}>
-              <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><AccountCircleIcon /></ListItemIcon>
               <ListItemText primary="Login" />
             </ListItem>
           }
