@@ -23,8 +23,6 @@ import Pencil from './Pencil';
 import Trash from './Trash';
 
 import NewUser from './NewUser'
-// import * as https from 'https';
-// import * as fs from 'fs';
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
@@ -134,20 +132,11 @@ class AccountsForm extends Component {
   * @returns Set of data
   */
   private getAccounts() {
-
-    // const httpsAgent = new https.Agent({
-    //   rejectUnauthorized: false, // (NOTE: this will disable client verification)
-    //   cert: fs.readFileSync("./usercert.pem"),
-    //   key: fs.readFileSync("./key.pem"),
-    //   passphrase: "YYY"
-    // })
-
     const config = {
       data: {}, /* data must be set or else headers.Content-Type will be ignored */
       headers: {
         "Content-Type": "application/json",
         "Authorization": Token.getId(),
-        // httpsAgent
       }
     }
 
@@ -155,7 +144,6 @@ class AccountsForm extends Component {
     const dataPromise = promise.then((res) =>  res.data);
     return dataPromise;
   }
-
 };
 
 const Accounts = () => {
