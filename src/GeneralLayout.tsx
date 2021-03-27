@@ -126,6 +126,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
 
   manageToken();
 
+  console.log(mainElement);
   return (
     
     <div className={classes.root}>
@@ -180,7 +181,8 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             <ListItemText primary="Reservations" />
           </ListItem>
 
-          <ListItem button key="Accounts" component={Link} to="/accounts" disabled={mainElement.type.name ? ["LoginForm", "AccountsForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("AccountsForm", "LoginForm") }>
+          <ListItem button key="Accounts" component={Link} to="/accounts" 
+          disabled={mainElement.type.name ? ["LoginForm", "AccountsForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("AccountsForm", "LoginForm") }>
             <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
           </ListItem>

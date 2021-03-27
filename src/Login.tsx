@@ -127,7 +127,7 @@ const LoginForm = () => {
     <ThemeProvider theme={theme}>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
-          <CardHeader className="headerCard"/>
+          <CardHeader className="headerCard" title={cardTitle}/>
           <CardContent>
             <div>
               <TextField
