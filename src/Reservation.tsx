@@ -104,7 +104,7 @@ const Reservations = () => {
   return (
     GeneralLayout(
       <div>
-        <ReservationsForm />
+        <ReservationsForm/>
         <Report />
       </div>
     )
