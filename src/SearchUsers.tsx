@@ -19,7 +19,7 @@ const SearchUsers = () => {
       <ThemeProvider theme={theme}>    
         <div className="search">
             <ListItem>
-              <h4 className="counter">Account:</h4>
+              <p className="counter">Account:</p>
               <ListItemIcon className="spacing"><PeopleIcon className="people"/><p className="number">34</p></ListItemIcon> 
               <ListItemIcon className="spacing"><SecurityIcon className="shield"/><p className="number">6</p> </ListItemIcon>
               <ListItemIcon className="spacing"><WorkIcon className="bag"/><p className="number">8</p> </ListItemIcon>

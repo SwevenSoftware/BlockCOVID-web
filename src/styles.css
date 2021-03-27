@@ -125,6 +125,57 @@
     text-align: center;
 }
 
+.spacing {
+    padding-left: 10em;
+}
+
+/* ====================== Dialog Buttons  ====================== */
+
+#decline:hover {
+    color: white;
+    background-color:rgb(201, 33, 33);
+}
+
+#confirm:hover {
+    color: white;
+    background-color: #689f38;
+}
+
+
+/* ====================== FormHelperText  ====================== */
+
+.textField {
+    width: '100%'
+}
+
+/* ====================== Icons  ====================== */
+
+.people {
+    color: #121212
+}
+
+.shield {
+    color: #d68f00;
+}
+
+.bag {
+    color: rgb(134, 42, 42);
+}
+
+.cleaner {
+    color: rgb(5, 162, 235);
+}
+
+.number {
+    font-size: small;
+    margin-left: 15%;
+}
+
+.counter {
+    margin-right: 15%;
+    font-weight: 600;
+}
+
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
@@ -171,58 +222,3 @@
     }
     
 }
-
-
-/* ====================== Dialog Buttons  ====================== */
-
-#decline:hover {
-    color: white;
-    background-color:rgb(201, 33, 33);
-}
-
-#confirm:hover {
-    color: white;
-    background-color: #689f38;
-}
-
-
-/* ====================== FormHelperText  ====================== */
-
-.textField {
-    width: '100%'
-}
-
-/* ====================== Icons  ====================== */
-
-.people {
-    color: #121212
-}
-
-.shield {
-    color: #d68f00;
-}
-
-.bag {
-    color: rgb(134, 42, 42);
-}
-
-.cleaner {
-    color: rgb(5, 162, 235);
-}
-
-.number {
-    font-size: small;
-    margin-left: 15%;
-}
-
-.counter {
-    margin-right: 15%;
-}
-
-.h4 {
-    color: red;
-}
-
-/* .spacing {
-    padding-left: 10em;
-} */
