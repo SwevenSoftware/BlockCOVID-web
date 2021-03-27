@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { IconButton, ListItemIcon, ListItem } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {theme} from './theme';
@@ -17,14 +18,14 @@ const SearchUsers = () => {
     const toggleModal_A = () => setModalState(!isModalOpen_A);
     return (
       <ThemeProvider theme={theme}>    
-        <div className="search">
-            <ListItem>
-              <p className="counter">Account:</p>
-              <ListItemIcon className="spacing"><PeopleIcon className="people"/><p className="number">34</p></ListItemIcon> 
-              <ListItemIcon className="spacing"><SecurityIcon className="shield"/><p className="number">6</p> </ListItemIcon>
-              <ListItemIcon className="spacing"><WorkIcon className="bag"/><p className="number">8</p> </ListItemIcon>
-              <ListItemIcon className="spacing"><BathtubIcon className="cleaner"/><p className="number">10</p></ListItemIcon>
-            </ListItem>
+        <div className="counter">
+          <ListItem>
+            <h3>Account:</h3>
+            <ListItemIcon className="spacing"><PeopleIcon className="people"/><Typography className="number">34</Typography></ListItemIcon> 
+            <ListItemIcon className="spacing"><SecurityIcon className="shield"/><Typography className="number">6</Typography> </ListItemIcon>
+            <ListItemIcon className="spacing"><WorkIcon className="bag"/><Typography className="number">8</Typography> </ListItemIcon>
+            <ListItemIcon className="spacing"><BathtubIcon className="cleaner"/><Typography className="number">10</Typography></ListItemIcon>
+          </ListItem>
         </div>
       </ThemeProvider>
     )

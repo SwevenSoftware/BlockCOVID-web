@@ -40,8 +40,7 @@
     color: rgb(201, 33, 33);
 }
 
-.search {
-    max-width: 25%;
+.counter {
     margin-bottom: 2%;
 }
 
@@ -121,12 +120,23 @@
     width: 100%;
 }
 
-.central {
+.pencilTitle {
     text-align: center;
 }
 
 .spacing {
     padding-left: 10em;
+}
+
+.centralPencil {
+    margin: auto;
+    width: 50%;
+}
+
+.alignCentralPencil {
+    margin: auto;
+    width: 50%;
+    text-align: center;
 }
 
 /* ====================== Dialog Buttons  ====================== */
@@ -166,15 +176,11 @@
     color: rgb(5, 162, 235);
 }
 
-.number {
+/* .number {
     font-size: small;
     margin-left: 15%;
-}
+} */
 
-.counter {
-    margin-right: 15%;
-    font-weight: 600;
-}
 
 /* ====================== MEDIA QUERY ====================== */
 

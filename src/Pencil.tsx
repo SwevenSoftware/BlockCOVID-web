@@ -213,78 +213,79 @@ export default function FormDialog(formAccount: any) {
         <IconButton className="pencil" onClick={handleClickOpen}>
           <CreateIcon />
         </IconButton>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
-          <DialogTitle id="form-dialog-title">Modifica l'utente {formAccount.username} </DialogTitle>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="xs">
+          <DialogTitle id="form-dialog-title" className="pencilTitle">Modifica l'utente {formAccount.username} </DialogTitle>
           <DialogContent>
-            <PersonIcon fontSize="large" />
-            <DialogContentText>
-              Puoi modificare i seguenti campi
-            </DialogContentText>
-            <div className="addField">
-              <TextField
-                required
-                id="outlined-password-input1"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                variant="outlined"
-                error={isPassErr}
-                helperText={passErr}
-                value={passValue}
-                onChange={(e) => {
-                  setPassValue(e.target.value);
-                  passInputControl(e.target.value);
-                  if(passConfirmValue != "") {
-                    passConfirmInputControl(e.target.value, passConfirmValue);
-                  }
-                }}
-              />
+            <div className="alignCentralPencil">
+              <PersonIcon fontSize="large" />
             </div>
-            <div className="addField">
-              <TextField
-                required
-                id="outlined-password-input2"
-                label="Ripeti Password"
-                type="password"
-                autoComplete="current-password"
-                variant="outlined"
-                error={isPassConfirmErr}
-                helperText={passConfirmErr}
-                value={passConfirmValue}
-                onChange={(e) => {
-                  setPassConfirmValue(e.target.value);
-                  passConfirmInputControl(passValue, e.target.value);
-                }}
-              />
+            <div className="centralPencil">
+              <DialogContentText>
+                Puoi modificare i seguenti campi
+              </DialogContentText>
             </div>
-            <DialogContentText color="primary">
-              * indica i campi obbligatori
-            </DialogContentText>
-
-            <FormControl>
-              <FormLabel className={"role_title"}>Ruolo:</FormLabel>
-                <FormGroup>
-                  <div>
-                    <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
-                      label="Admin"
-                    />
-                  </div>
-                  <div>
-                    <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
-                      label="Utente"
-                    />
-                  </div>
-                  <div>
-                    <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
-                      label="Addetto alle pulizie"
-                    />
-                  </div>
-                </FormGroup>
-                <FormHelperText color="red">{authErr}</FormHelperText>
-            </FormControl>
+            <div className="alignCentralPencil">
+              <div className="addField">
+                <TextField
+                  required
+                  id="outlined-password-input1"
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                  variant="outlined"
+                  error={isPassErr}
+                  helperText={passErr}
+                  value={passValue}
+                  onChange={(e) => {
+                    setPassValue(e.target.value);
+                    passInputControl(e.target.value);
+                    if(passConfirmValue != "") {
+                      passConfirmInputControl(e.target.value, passConfirmValue);
+                    }
+                  }}
+                />
+              </div>
+              <div className="addField">
+                <TextField
+                  required
+                  id="outlined-password-input2"
+                  label="Ripeti Password"
+                  type="password"
+                  autoComplete="current-password"
+                  variant="outlined"
+                  error={isPassConfirmErr}
+                  helperText={passConfirmErr}
+                  value={passConfirmValue}
+                  onChange={(e) => {
+                    setPassConfirmValue(e.target.value);
+                    passConfirmInputControl(passValue, e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="centralPencil">
+              <DialogContentText color="primary">
+                * indica i campi obbligatori
+              </DialogContentText>           
+              <FormControl>
+                <FormLabel>Ruolo:</FormLabel>
+                  <FormGroup>
+                      <FormControlLabel
+                        control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                        label="Admin"
+                      />
+                      <FormControlLabel
+                        control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                        label="Utente"
+                      />
+                      <FormControlLabel
+                        control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                        label="Addetto alle pulizie"
+                      />
+                  </FormGroup>
+                  <FormHelperText color="red">{authErr}</FormHelperText>
+              </FormControl>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} id="decline" variant="outlined">
