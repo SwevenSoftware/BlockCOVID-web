@@ -24,6 +24,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
+import { format, parseISO, compareAsc } from 'date-fns';
 
 const drawerWidth = 240;
 
@@ -109,6 +110,20 @@ export default function GeneralLayout(mainElement : JSX.Element) {
     Token.remove();
     location.href = "/login";
   }
+
+  const manageToken = () => {
+    let str = Token.getExpDate();
+    if(str) {
+      // 1 if the first date si after the second
+      // -1 if the first date is before the second
+      // 0 if dates are equal
+      if( compareAsc(new Date(), parseISO(str)) > -1 ) {
+        logout();
+      }
+    }
+  }
+
+  manageToken();
 
   return (
     <div className={classes.root}>
