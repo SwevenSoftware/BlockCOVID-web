@@ -107,24 +107,24 @@ class AccountsForm extends Component {
   private viewAccounts() {
     this.getAccounts()
       .then(data => {
+        let aux : PaperAccount[] = new Array();
 
-        for (let i in data._embedded.userList) {
-          const newAccount = {
-            username: data._embedded.userList[i].username,
-            authorities: data._embedded.userList[i].authorities,
-            link_modify: data._embedded.userList[i]._links.modify_user.href,
-            link_delete: data._embedded.userList[i]._links.delete_user.href
+        data._embedded.userList.map((cella) => {
+          const newAccount: PaperAccount = {
+            username: cella.username,
+            authorities: cella.authorities,
+            link_modify: cella._links.modify_user.href,
+            link_delete: cella._links.delete_user.href
           }
+          aux.push(newAccount);
+        });
 
-          this.addPaperAccount(newAccount);
-        }
+        aux.sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0));
+        aux.map((cella) => this.addPaperAccount(cella));
 
         this.forceUpdate();
-
       }).catch(err => {
           console.log("An error has occured in viewAccounts(): ", err);
-          if(err.response.status == 401) { }
-          else { }
       });
   }
 
