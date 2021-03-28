@@ -25,6 +25,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
 import { format, parseISO, compareAsc } from 'date-fns';
+import { SnackbarProvider } from 'notistack';
 
 
 const drawerWidth = 240;
@@ -125,7 +126,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
   }
 
   manageToken();
-
+  //console.log(mainElement.props.children.type.name);
   return (
 
     <div className={classes.root}>
@@ -178,6 +179,11 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Reservations"
             component={Link}
             to="/reservations"
+            disabled={ mainElement.type.name ?
+               ["LoginForm", "ReservationForm"].includes(mainElement.type.name) :
+               /* (mainElement.props.children.type.name ?
+                 ["LoginForm", "ReservationForm"].includes(mainElement.props.children.type.name) : */
+                  mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm")  }
           >
             <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
@@ -187,6 +193,9 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Accounts"
             component={Link}
             to="/accounts"
+            disabled={mainElement.type.name ?
+              ["LoginForm", "SnackbarProvider"].includes(mainElement.type.name) :
+               mainElement.props.children.map((cella) => cella.type.name).includes("SnackbarProvider", "LoginForm") }
           >
             <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
@@ -196,6 +205,9 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Desks"
             component={Link}
             to="/desk"
+            disabled={mainElement.type.name ?
+               ["LoginForm", "CardGridApp"].includes(mainElement.type.name) :
+                mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }
           >
             <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
