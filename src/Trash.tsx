@@ -110,10 +110,13 @@ export default function FormDialog(formAccount: any) {
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {formAccount.username}?</DialogTitle>
           <DialogContent className="central">
+          <div className="alignCentralPencil">
             <PersonIcon fontSize="large" />
+          
             <DialogContentText>
               {formAccount.username}
             </DialogContentText>
+            
             <FormLabel className={"role_title"}>
               {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
             </FormLabel>
@@ -123,27 +126,28 @@ export default function FormDialog(formAccount: any) {
                 case "ADMIN":
                   return (
                     <div className="tooltip">
-                      <SecurityIcon className="iconColor" />
+                      <SecurityIcon className="adminIcon" />
                       <span className="tooltiptext">Admin</span>
                     </div>
                   )
                 case "USER":
                   return (
                     <div className="tooltip">
-                      <WorkIcon className="iconColor" />
+                      <WorkIcon className="userIcon" />
                       <span className="tooltiptext">Utente</span>
                     </div>
                   )
                 case "CLEANER":
                   return (
                     <div className="tooltip">
-                      <BathtubIcon className="iconColor" />
+                      <BathtubIcon className="cleanerIcon" />
                       <span className="tooltiptext">Addetto alle pulizie</span>
                     </div>
                   )
               }
             })
             }
+          </div>
 
             <FormHelperText id="trashMessage">{delHimselfErr}</FormHelperText>
 
