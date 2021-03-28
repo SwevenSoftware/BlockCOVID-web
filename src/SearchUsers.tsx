@@ -21,7 +21,7 @@ const SearchUsers = () => {
         <div className="counter">
           <ListItem>
             <h3>Account:</h3>
-            <ListItemIcon className="spacing"><PeopleIcon className="people"/><Typography className="number">34</Typography></ListItemIcon> 
+            <ListItemIcon className="spacing"><PeopleIcon className="people"/><Typography className="number" >34</Typography></ListItemIcon> 
             <ListItemIcon className="spacing"><SecurityIcon className="shield"/><Typography className="number">6</Typography> </ListItemIcon>
             <ListItemIcon className="spacing"><WorkIcon className="bag"/><Typography className="number">8</Typography> </ListItemIcon>
             <ListItemIcon className="spacing"><BathtubIcon className="cleaner"/><Typography className="number">10</Typography></ListItemIcon>

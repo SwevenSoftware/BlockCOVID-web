@@ -22,7 +22,6 @@
 
 .usernameLayout{
   overflow: hidden;
-  /* max-width: 16ch; */
   text-overflow: ellipsis;
 }
 
@@ -60,6 +59,10 @@
 
 .addColor:hover {
     color: #F0B030;
+}
+
+.number {
+    padding-left: 15%;
 }
 
 
