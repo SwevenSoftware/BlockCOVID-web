@@ -26,10 +26,6 @@
   text-overflow: ellipsis;
 }
 
-.firstrow{
-  margin-top: 5em;
-}
-
 .grid{
     width: 23%;
     margin: 0 2% 2% 0;
@@ -117,6 +113,7 @@
 
 .counter {
     margin-bottom: 2%;
+    max-width: 75%;
 }
 
 .spacing {
