@@ -20,13 +20,24 @@
 
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
+.usernameLayout{
+  overflow: hidden;
+  /* max-width: 16ch; */
+  text-overflow: ellipsis;
+}
+
+.firstrow{
+  margin-top: 5em;
+}
+
 .grid{
-    min-width: 23%;
+    width: 23%;
     margin: 0 2% 2% 0;
 }
 
 .paper {
     height: 5em;
+    /* max-width: 30em; */
 }
 
 .listItem {
