@@ -126,7 +126,6 @@ export default function GeneralLayout(mainElement : JSX.Element) {
   }
 
   manageToken();
-  //console.log(mainElement.props.children.type.name);
   return (
 
     <div className={classes.root}>
@@ -185,6 +184,9 @@ export default function GeneralLayout(mainElement : JSX.Element) {
                  ["LoginForm", "ReservationForm"].includes(mainElement.props.children.type.name) : */
                   mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm")  }
           >
+          
+          <ListItem button key="Reservations" component={Link} to="/reservations" 
+          disabled={mainElement.type.name ? ["LoginForm", "ReservationForm"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm") }>
             <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
           </ListItem>
@@ -209,13 +211,17 @@ export default function GeneralLayout(mainElement : JSX.Element) {
                ["LoginForm", "CardGridApp"].includes(mainElement.type.name) :
                 mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }
           >
+          <ListItem button key="Accounts" component={Link} to="/accounts" 
+          disabled={mainElement.type.name ? ["LoginForm", "SearchUsers"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("SearchUsers", "LoginForm") }>
+            <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
+            <ListItemText primary="Accounts" />
+          </ListItem>
+          
+          <ListItem button key="Desks" component={Link} to="/desk" 
+          disabled={mainElement.type.name ? ["LoginForm", "CardGridApp"].includes(mainElement.type.name) : mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }>
             <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
-          {/* <ListItem button key="Rooms">
-            <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
-            <ListItemText primary="Rooms" />
-          </ListItem> */}
         </List>
         <Divider />
         <List>
