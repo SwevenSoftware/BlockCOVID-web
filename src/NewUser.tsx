@@ -251,68 +251,63 @@ export default function FormDialog() {
           <AddBoxIcon fontSize="large" />
         </IconButton>
         <Dialog open={openButton} onClose={handleCloseButton} aria-labelledby="form-dialog-title" className="central" fullWidth maxWidth="xs">
-          <DialogTitle id="form-dialog-title" className="pencilTitle">Crea un nuovo utente</DialogTitle>
+          <DialogTitle id="form-dialog-title">Crea un nuovo utente</DialogTitle>
           <DialogContent>
-            <div className="centralPencil">
-              <DialogContentText>
-                Compila i seguenti campi
-              </DialogContentText>
+            <DialogContentText>
+              Compila i seguenti campi
+            </DialogContentText>
+            <div className="addField">
+            <TextField
+              required
+              id="outlined-search"
+              label="Username"
+              variant="outlined"
+              error={isUserErr}
+              helperText={userErr}
+              value={userValue}
+              onChange={(e) => {
+                  setUserValue(e.target.value);
+                  userInputControl(e.target.value);
+              }}
+            />
             </div>
-            <div className="alignCentralPencil">
-              <div className="addField">
+            <div className="addField">
               <TextField
                 required
-                id="outlined-search"
-                label="Username"
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
                 variant="outlined"
-                error={isUserErr}
-                helperText={userErr}
-                value={userValue}
+                error={isPassErr}
+                helperText={passErr}
+                value={passValue}
                 onChange={(e) => {
-                    setUserValue(e.target.value);
-                    userInputControl(e.target.value);
+                  setPassValue(e.target.value);
+                  passInputControl(e.target.value);
+                  if(passConfirmValue != "") {
+                    passConfirmInputControl(e.target.value, passConfirmValue);
+                  }
                 }}
               />
-              </div>
-              <div className="addField">
-                <TextField
-                  required
-                  id="outlined-password-input"
-                  label="Password"
-                  type="password"
-                  autoComplete="current-password"
-                  variant="outlined"
-                  error={isPassErr}
-                  helperText={passErr}
-                  value={passValue}
-                  onChange={(e) => {
-                    setPassValue(e.target.value);
-                    passInputControl(e.target.value);
-                    if(passConfirmValue != "") {
-                      passConfirmInputControl(e.target.value, passConfirmValue);
-                    }
-                  }}
-                />
-              </div>
-              <div className="addField">
-                <TextField
-                  required
-                  id="outlined-password-input"
-                  label="Ripeti Password"
-                  type="password"
-                  autoComplete="current-password"
-                  variant="outlined"
-                  error={isPassConfirmErr}
-                  helperText={passConfirmErr}
-                  value={passConfirmValue}
-                  onChange={(e) => {
-                    setPassConfirmValue(e.target.value);
-                    passConfirmInputControl(passValue, e.target.value);
-                  }}
-                />
-              </div>
             </div>
-            <div className="centralPencil">
+            <div className="addField">
+              <TextField
+                required
+                id="outlined-password-input"
+                label="Ripeti Password"
+                type="password"
+                autoComplete="current-password"
+                variant="outlined"
+                error={isPassConfirmErr}
+                helperText={passConfirmErr}
+                value={passConfirmValue}
+                onChange={(e) => {
+                  setPassConfirmValue(e.target.value);
+                  passConfirmInputControl(passValue, e.target.value);
+                }}
+              />
+            </div>
             <DialogContentText color="primary">
               * indica i campi obbligatori
             </DialogContentText>
@@ -342,7 +337,6 @@ export default function FormDialog() {
                 </FormGroup>
                 <FormHelperText color="red">{authErr}</FormHelperText>
             </FormControl>
-            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseButton} id="decline" variant="outlined">
