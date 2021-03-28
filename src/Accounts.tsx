@@ -26,6 +26,15 @@ import NewUser from './NewUser'
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
+import Typography from '@material-ui/core/Typography';
+
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {theme} from './theme';
+import PeopleIcon from '@material-ui/icons/People';
+import SecurityIcon from '@material-ui/icons/Security';
+import WorkIcon from '@material-ui/icons/Work';
+import BathtubIcon from '@material-ui/icons/Bathtub';
+
 
 interface Account {
   username: string,
@@ -43,6 +52,8 @@ interface PaperAccount {
 class AccountsForm extends Component {
 
   rows: Array<JSX.Element>
+  aux: PaperAccount[]
+  counter: any
 
   /**
   * Initialize this.rows
@@ -50,6 +61,8 @@ class AccountsForm extends Component {
   constructor(props) {
     super(props)
     this.rows = new Array()
+    this.aux = new Array()
+    this.counter = {accounts: 0, admins: 0, users: 0, cleaners: 0};
   }
 
   /**
@@ -67,12 +80,56 @@ class AccountsForm extends Component {
   */
   render() {
     return (
-      <div>
+      <ThemeProvider theme={theme}>
+        <div className="counter">
+          <ListItem>
+            <h3>Accounts:</h3>
+            <ListItemIcon
+              className="spacing">
+              <PeopleIcon className="people"/>
+              <Typography className="number">
+                {this.counter.accounts}
+              </Typography>
+            </ListItemIcon>
+            <ListItemIcon
+              className="spacing">
+              <SecurityIcon className="shield"/>
+              <Typography className="number">
+                {this.counter.admins}
+              </Typography>
+            </ListItemIcon>
+            <ListItemIcon
+              className="spacing">
+              <WorkIcon className="bag"/>
+              <Typography className="number">
+                {this.counter.users}
+              </Typography>
+            </ListItemIcon>
+            <ListItemIcon
+              className="spacing">
+              <BathtubIcon className="cleaner"/>
+              <Typography className="number">
+                {this.counter.cleaners}
+              </Typography>
+            </ListItemIcon>
+          </ListItem>
+        </div>
         <Grid container spacing={3}>
           {this.rows}
         </Grid>
-      </div>
+      </ThemeProvider>
+
     )
+  }
+
+  private setCounter() {
+    this.counter = {
+      accounts: this.aux.length,
+      admins: this.aux.reduce((acc, cur) => cur.authorities.includes("ADMIN") ? ++acc : acc, 0),
+      users: this.aux.reduce((acc, cur) => cur.authorities.includes("USER") ? ++acc : acc, 0),
+      cleaners: this.aux.reduce((acc, cur) => cur.authorities.includes("CLEANER") ? ++acc : acc, 0)
+    };
+
   }
 
   /**
@@ -88,7 +145,7 @@ class AccountsForm extends Component {
             <ListItemIcon>
               <PersonIcon fontSize="large"/>
             </ListItemIcon>
-            <ListItemText primary={account.username}/>
+            <ListItemText primary={account.username} className="usernameLayout"/>
               <Pencil {...account}/>
               <Trash {...account}/>
           </ListItem>
@@ -98,15 +155,13 @@ class AccountsForm extends Component {
   }
 
   /**
-  * Visualize all existing accounts
+  * Visualize all existing accounts and set counter
   * @params
   * @returns
   */
   private viewAccounts() {
     this.getAccounts()
       .then(data => {
-        let aux : PaperAccount[] = new Array();
-
         data._embedded.userList.map((cella) => {
           const newAccount: PaperAccount = {
             username: cella.username,
@@ -114,12 +169,13 @@ class AccountsForm extends Component {
             link_modify: cella._links.modify_user.href,
             link_delete: cella._links.delete_user.href
           }
-          aux.push(newAccount);
+          this.aux.push(newAccount);
         });
 
-        aux.sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0));
-        aux.map((cella) => this.addPaperAccount(cella));
+        this.aux.sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0));
+        this.aux.map((cella) => this.addPaperAccount(cella));
 
+        this.setCounter(); /* set counter */
         this.forceUpdate();
       }).catch(err => {
           console.log("An error has occured in viewAccounts(): ", err);
@@ -151,10 +207,10 @@ const Accounts = () => {
     location.href = "/login";
   }
 
+
   return (
     GeneralLayout(
       <div>
-        <SearchUsers/>
           <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
             <div className="addAccountButton">
               <NewUser/>
