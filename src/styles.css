@@ -1,3 +1,73 @@
+/* (((((((((((((((((((((((((((((( INTERPAGES )))))))))))))))))))))))))))) */
+
+#decline {
+    width: 100%;
+}
+
+#confirm {
+    width: 100%;
+}
+
+#decline:hover {
+    color: white;
+    background-color:rgb(201, 33, 33);
+}
+
+#confirm:hover {
+    color: white;
+    background-color: #689f38;
+}
+
+/* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
+
+.usernameLayout{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid{
+    width: 23%;
+    margin: 0 2% 2% 0;
+}
+
+.paper {
+    height: 5em;
+    /* max-width: 30em; */
+}
+
+.listItem {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pencil:hover {
+    color: #689f38;
+}
+
+.trash:hover {
+    color: rgb(201, 33, 33);
+}
+
+.addAccountButton {
+    position: absolute;
+    right: 2em;
+    top: 6em;
+}
+
+.addColor:hover {
+    color: #F0B030;
+}
+
+.number {
+    padding-left: 15%;
+}
+
+
+/* (((((((((((((((((((((((((((((( CARDGRID )))))))))))))))))))))))))))) */
+
 .cardGrid {
     width: 40em;
     max-width: 90%;
@@ -9,8 +79,167 @@
 }
 
 .headerCard {
-    background-color: #319e77;
-    color : white;
+    background-color: #689f38;
+    color: white;
     text-align: center;
     font-size: medium;
+}
+
+.iconColor:hover{
+    color: #673ab7;
+}
+
+
+/* (((((((((((((((((((((((((((((( PENCIL )))))))))))))))))))))))))))) */
+
+.pencilTitle {
+    text-align: center;
+}
+
+.centralPencil {
+    margin: auto;
+    width: 50%;
+}
+
+.alignCentralPencil {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+
+/* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
+
+.tableTitles {
+    color: white;
+    font-weight: 500;
+}
+
+
+/* (((((((((((((((((((((((((((((( SEARCHUSERS )))))))))))))))))))))))))))) */
+
+.counter {
+    margin-bottom: 2%;
+    max-width: 75%;
+}
+
+.spacing {
+    padding-left: 10em;
+}
+
+.people {
+    color: #121212
+}
+
+.shield {
+    color: #d68f00;
+}
+
+.bag {
+    color: rgb(134, 42, 42);
+}
+
+.cleaner {
+    color: rgb(5, 162, 235);
+}
+
+
+/* (((((((((((((((((((((((((((((( TRASH )))))))))))))))))))))))))))) */
+
+.addField {
+    margin-bottom: 7%;
+    border-color: rgb(201, 33, 33);
+}
+
+#trashMessage {
+    text-align: center;
+    color: rgb(201, 33, 33);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.adminIcon:hover {
+    color: #d68f00;
+}
+
+.userIcon:hover {
+    color: rgb(134, 42, 42);
+}
+
+.cleanerIcon:hover {
+    color: rgb(5, 162, 235);
+}
+
+
+
+
+/* ====================== MEDIA QUERY ====================== */
+
+@media only screen and (max-width: 1264px) {
+    .grid {
+        min-width: 31%;
+    }
+    .spacing {
+        padding-left: 8em;
+    }
+}
+
+@media only screen and (max-width: 976px) {
+    .grid {
+        min-width: 48%;
+    }
+    .spacing {
+        padding-left: 4em;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .grid {
+        min-width: 100%;
+        margin-right: 0%;
+    }
+    .addAccountButton {
+        right:0.5em;
+        top: 5.5em;
+    }
+    .spacing {
+        padding-left: 1em;
+    }
 }

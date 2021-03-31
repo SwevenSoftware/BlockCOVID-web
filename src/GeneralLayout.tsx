@@ -22,7 +22,11 @@ import PeopleIcon from '@material-ui/icons/People';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DnsIcon from '@material-ui/icons/Dns';
 import Token from './Token'
+import { format, parseISO, compareAsc } from 'date-fns';
+import { SnackbarProvider } from 'notistack';
+
 
 const drawerWidth = 240;
 
@@ -37,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      background: "#319e77"
+      background: "#689f38"
     },
     appBarShift: {
       marginLeft: drawerWidth,
@@ -109,7 +113,22 @@ export default function GeneralLayout(mainElement : JSX.Element) {
     location.href = "/login";
   }
 
+  const manageToken = () => {
+    let str = Token.getExpDate();
+    if(str) {
+      // 1 if the first date si after the second
+      // -1 if the first date is before the second
+      // 0 if dates are equal
+      if( compareAsc(new Date(), parseISO(str)) > -1 ) {
+        logout();
+      }
+    }
+  }
+
+  manageToken();
+  //console.log(mainElement.props.children.type.name);
   return (
+
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -131,7 +150,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Admin
+            Pannello Amministratore
           </Typography>
         </Toolbar>
       </AppBar>
@@ -154,13 +173,43 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           </IconButton>
         </div>
         <Divider />
+
         <List>
-          <ListItem button key="Users" component={Link} to="/reservations">
-            <ListItemIcon><PeopleIcon /></ListItemIcon>
-            <ListItemText primary="Users" />
+          <ListItem
+            button key="Reservations"
+            component={Link}
+            to="/reservations"
+            disabled={ mainElement.type.name ?
+               ["LoginForm", "ReservationForm"].includes(mainElement.type.name) :
+               /* (mainElement.props.children.type.name ?
+                 ["LoginForm", "ReservationForm"].includes(mainElement.props.children.type.name) : */
+                  mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm")  }
+          >
+            <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
+            <ListItemText primary="Reservations" />
           </ListItem>
-          <ListItem button key="Desks" component={Link} to="/desk">
-            <ListItemIcon><EventSeatIcon /></ListItemIcon>
+
+          <ListItem
+            button key="Accounts"
+            component={Link}
+            to="/accounts"
+            disabled={mainElement.type.name ?
+              ["LoginForm", "SnackbarProvider"].includes(mainElement.type.name) :
+               mainElement.props.children.map((cella) => cella.type.name).includes("SnackbarProvider", "LoginForm") }
+          >
+            <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
+            <ListItemText primary="Accounts" />
+          </ListItem>
+
+          <ListItem
+            button key="Desks"
+            component={Link}
+            to="/desk"
+            disabled={mainElement.type.name ?
+               ["LoginForm", "CardGridApp"].includes(mainElement.type.name) :
+                mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }
+          >
+            <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
           {/* <ListItem button key="Rooms">
@@ -170,14 +219,14 @@ export default function GeneralLayout(mainElement : JSX.Element) {
         </List>
         <Divider />
         <List>
-          { Token.get() ?
+          { Token.getId() ?
             <ListItem button key="Logout" onClick={logout}>
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
             :
             <ListItem button key="Login" onClick={() => location.href="/login"}>
-              <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+              <ListItemIcon className="iconColor"><AccountCircleIcon /></ListItemIcon>
               <ListItemText primary="Login" />
             </ListItem>
           }

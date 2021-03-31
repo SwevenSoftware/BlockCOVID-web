@@ -5,17 +5,19 @@ import './styles.css';
 import Login from './Login';
 import Reservations from './Reservation';
 import CardGrid from './CardGrid';
+import Accounts from './Accounts';
 
 
 const App: React.FC = () => {
 
   return (
-      <div>
+      <div className="App">
         <BrowserRouter>
           <Switch>
             <Route path='/login' exact component={Login}/>
             <Route path='/reservations' exact component={Reservations}/>
             <Route path='/desk' exact component={CardGrid}/>
+            <Route path='/accounts' exact component={Accounts}/>
             <Redirect from='/' to='/reservations'/>
           </Switch>
         </BrowserRouter>
