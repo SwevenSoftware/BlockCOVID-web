@@ -171,9 +171,10 @@ const LoginForm = () => {
 }
 
 const Login = () => {
-  return (
-    GeneralLayout(<LoginForm />)
-  );
+  return(<LoginForm/>);
+  // return (
+  //   GeneralLayout(<LoginForm />)
+  // );
 }
 
 export default Login

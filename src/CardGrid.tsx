@@ -101,10 +101,10 @@ const CardGrid = () => {
 
   if(!Token.getId())
     location.href = "/login"
-
-  return (
-    GeneralLayout(<CardGridApp />)
-  );
+return(<div></div>)
+  // return (
+  //   GeneralLayout(<CardGridApp />)
+  // );
 }
 
 export default CardGrid;

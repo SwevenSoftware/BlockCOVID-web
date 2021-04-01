@@ -207,20 +207,25 @@ const Accounts = () => {
     location.href = "/login";
   }
 
-
-  return (
-    GeneralLayout(
-      <div>
-        <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-          <div className="addAccountButton">
-            <NewUser/>
-          </div>
-          <AccountsForm/>
-        </SnackbarProvider>
-        <div></div>
-      </div>
-    )
-  )
+return (<SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+        <div className="addAccountButton">
+          <NewUser/>
+        </div>
+        <AccountsForm/>
+      </SnackbarProvider>)
+  // return (
+  //   GeneralLayout(
+  //     <div>
+  //       <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+  //         <div className="addAccountButton">
+  //           <NewUser/>
+  //         </div>
+  //         <AccountsForm/>
+  //       </SnackbarProvider>
+  //       <div></div>
+  //     </div>
+  //   )
+  // )
 };
 
 export default Accounts

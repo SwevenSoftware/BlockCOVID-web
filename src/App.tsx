@@ -6,6 +6,7 @@ import Login from './Login';
 import Reservations from './Reservation';
 import CardGrid from './CardGrid';
 import Accounts from './Accounts';
+import GeneralLayout from './GeneralLayout';
 
 import {useSelector, useDispatch} from 'react-redux'
 import {increment, login} from './actions/index'
@@ -19,19 +20,24 @@ const App: React.FC = () => {
   const dispatch = useDispatch()
   console.log(useSelector((state: RootState)=> state.logged));
 
+/*
+<Route path='/reservations' exact component={Reservations}/>
+<Route path='/desk' exact component={CardGrid}/>
+<Route path='/accounts' exact component={Accounts}/>
+<Route path='/login' exact component={Login}/>
+*/
+
   return (
       <div className="App">
         <BrowserRouter>
+          <GeneralLayout/>
           <Switch>
-            <Route path='/login' exact component={Login}/>
-            <Route path='/reservations' exact component={Reservations}/>
-            <Route path='/desk' exact component={CardGrid}/>
             <Route path='/accounts' exact component={Accounts}/>
+            <Route path='/login' exact component={Login}/>
             <Redirect from='/' to='/reservations'/>
           </Switch>
         </BrowserRouter>
-      </div> 
-      
+      </div>
   );
 }
 
