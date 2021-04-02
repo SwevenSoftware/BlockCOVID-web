@@ -1,4 +1,9 @@
-const loggedReducer = (state = initialState, action) => {
+const initialState = {
+      isLogged: false,
+      isUsernameValid: false
+}
+
+const loginReducer = (state = initialState, action) => {
    switch(action.type) {
       case 'SIGNING_IN':
         return {
@@ -15,9 +20,4 @@ const loggedReducer = (state = initialState, action) => {
    }
 }
 
-export default loggedReducer;
-
-const initialState = {
-      isLogged: false,
-      isUsernameValid: false
-}
+export default loginReducer;

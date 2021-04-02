@@ -2,26 +2,22 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { StylesProvider } from '@material-ui/styles';
 import './styles.css';
-import Login from './Login';
-import Reservations from './Reservation';
-import CardGrid from './CardGrid';
-import Accounts from './Accounts';
-import GeneralLayout from './GeneralLayout';
+import Login from './components/Login';
+import Example from './components/Example';
+// import Reservations from './Reservation';
+// import CardGrid from './CardGrid';
+// import Accounts from './Accounts';
+// import GeneralLayout from './GeneralLayout';
 
-import {useSelector, useDispatch} from 'react-redux'
-import {increment} from './actions/index'
-import {login, logout} from './actions/loginActions'
-import {RootState} from './reducers/index'
-//import {useHistory} from 'react-redux-dom'
-
+import { useSelector, useDispatch, connect } from 'react-redux'
+import { RootState } from './reducers/rootReducer'
 
 const App: React.FC = () => {
+  const state = useSelector((state: RootState) => state)
+  console.log(state);
 
-  const counter = useSelector((state: RootState) => state.counter);
-  const logged = useSelector((state: RootState) => state.logged);
-  const dispatch = useDispatch();
-  console.log(useSelector((state: RootState)=> state.logged));
-  
+  const mapStateExample = (state) => ({ counter: state.counter, isLogged: state.login.isLogged })
+  const ConnectedExample = connect(mapStateExample)(Example);
 
 /*
 <Route path='/reservations' exact component={Reservations}/>
@@ -31,17 +27,14 @@ const App: React.FC = () => {
 */
 
   return (
-
-    <div>
-        <h1>Counter: {counter}</h1>
-        <button onClick={() => dispatch(increment())}>aumenta</button>
-        <button onClick={() => dispatch(login())}>login</button>
-        {logged.isLogged ? <h1>loggato</h1> : <h1>nope</h1>}
-        <button onClick={() => dispatch(logout())}>logout</button>
-        {logged.isLogged ? <h1>nope</h1> : <h1>loggato</h1>}
+    <div className="App">
+        <BrowserRouter>
+        <Switch>
+          <Route path='/esempio' exact component={ConnectedExample}/>
+          <Route path='/login' exact component={Login}/>
+        </Switch>
+        </BrowserRouter>
       </div>
-
-      
   );
 }
 
@@ -49,7 +42,7 @@ export default App;
 
 
 
-      
+
 /* <div className="App">
         <BrowserRouter>
           <GeneralLayout/>

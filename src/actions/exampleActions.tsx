@@ -3,9 +3,3 @@ export const increment = () => {
       type: 'INCREMENTA'
    }
 }
-
-/* export const login = () => {
-   return {
-      type: 'SING_IN'
-   }
-} */

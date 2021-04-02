@@ -4,12 +4,12 @@ import React from 'react';
 
 import App from "./App";
 
-import {createStore} from 'redux';
-import {Provider} from 'react-redux'
-import rootReducer from './reducers/index';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import rootReducer from './reducers/rootReducer';
 
 const store = createStore(rootReducer)
-console.log(store.getState())
+
 const rootElement = document.getElementById("react");
 ReactDOM.render(
   <StrictMode>
