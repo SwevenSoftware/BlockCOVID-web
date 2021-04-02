@@ -9,16 +9,19 @@ import Accounts from './Accounts';
 import GeneralLayout from './GeneralLayout';
 
 import {useSelector, useDispatch} from 'react-redux'
-import {increment, login} from './actions/index'
+import {increment} from './actions/index'
+import {login, logout} from './actions/loginActions'
 import {RootState} from './reducers/index'
+//import {useHistory} from 'react-redux-dom'
 
 
 const App: React.FC = () => {
 
   const counter = useSelector((state: RootState) => state.counter);
   const logged = useSelector((state: RootState) => state.logged);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   console.log(useSelector((state: RootState)=> state.logged));
+  
 
 /*
 <Route path='/reservations' exact component={Reservations}/>
@@ -28,7 +31,26 @@ const App: React.FC = () => {
 */
 
   return (
-      <div className="App">
+
+    <div>
+        <h1>Counter: {counter}</h1>
+        <button onClick={() => dispatch(increment())}>aumenta</button>
+        <button onClick={() => dispatch(login())}>login</button>
+        {logged.isLogged ? <h1>loggato</h1> : <h1>nope</h1>}
+        <button onClick={() => dispatch(logout())}>logout</button>
+        {logged.isLogged ? <h1>nope</h1> : <h1>loggato</h1>}
+      </div>
+
+      
+  );
+}
+
+export default App;
+
+
+
+      
+/* <div className="App">
         <BrowserRouter>
           <GeneralLayout/>
           <Switch>
@@ -37,17 +59,4 @@ const App: React.FC = () => {
             <Redirect from='/' to='/reservations'/>
           </Switch>
         </BrowserRouter>
-      </div>
-  );
-}
-
-export default App;
-
-
-
-      {/* <div>
-        <h1>Counter: {counter}</h1>
-        <button onClick={() => dispatch(increment())}>aumenta</button>
-        <button onClick={() => dispatch(login())}>login</button>
-        {logged ? <h1>loggato</h1> : <h1>nope</h1>}
-      </div> */}
+      </div> */

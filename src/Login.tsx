@@ -13,6 +13,7 @@ import GeneralLayout from './GeneralLayout';
 import Token from './Token';
 
 import {theme} from './theme';
+import {useDispatch} from 'react-redux'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,6 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const LoginForm = () => {
+
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

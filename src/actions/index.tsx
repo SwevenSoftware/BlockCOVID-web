@@ -4,8 +4,8 @@ export const increment = () => {
    }
 }
 
-export const login = () => {
+/* export const login = () => {
    return {
-      type: true
+      type: 'SING_IN'
    }
-}
+} */
