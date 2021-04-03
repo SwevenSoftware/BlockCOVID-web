@@ -5,13 +5,16 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import { login, logout, usernameTyping, passwordTyping } from '../actions/loginActions'
 
 class Login extends Component {
   login: any;
+  dispatch: any;
 
   constructor(props) {
     super(props);
     this.login = props.login;
+    this.dispatch = props.dispatch;
   }
 
   componentDidMount() {
@@ -32,6 +35,7 @@ class Login extends Component {
                   type="email"
                   label="Username"
                   margin="normal"
+                  onChange={() => this.dispatch(usernameTyping())}
                 />
                 <TextField
                   fullWidth
@@ -39,6 +43,7 @@ class Login extends Component {
                   type="password"
                   label="Password"
                   margin="normal"
+                  onChange={() => this.dispatch(passwordTyping())}
                 />
               </div>
             </CardContent>
@@ -46,7 +51,8 @@ class Login extends Component {
               <Button
                   variant="contained"
                   size="large"
-                  color= "primary"
+                  color="primary"
+                  onClick={() => this.dispatch(login())}
               > Qualcosa
               </Button>
             </CardActions>
