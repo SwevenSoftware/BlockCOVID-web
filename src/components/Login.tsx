@@ -7,9 +7,11 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
 class Login extends Component {
+  login: any;
 
   constructor(props) {
     super(props);
+    this.login = props.login;
   }
 
   componentDidMount() {
