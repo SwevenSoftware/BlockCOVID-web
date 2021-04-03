@@ -1,12 +1,12 @@
 export const login = () => {
    return {
-      type: 'SIGNING_IN'
+      type: 'SIGN_IN'
    }
 }
 
 export const logout = () => {
    return {
-      type: 'SIGNING_OUT'
+      type: 'SIGN_OUT'
    }
 }
 

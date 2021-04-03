@@ -1,12 +1,8 @@
 import { Component } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, connect } from 'react-redux'
 import { RootState } from '../reducers/rootReducer'
 import { increment } from '../actions/exampleActions'
 import { login, logout } from '../actions/loginActions'
-
-// const counter = useSelector((state: RootState) => state.counter);
-// const logged = useSelector((state: RootState) => state.logged);
-// const dispatch = useDispatch();
 
 class Example extends Component {
   counter: number;
