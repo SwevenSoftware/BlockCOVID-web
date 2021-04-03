@@ -1,7 +1,11 @@
 const exampleReducer = (state = 0, action) => {
    switch(action.type) {
-      case 'INCREMENTA': return state + 1;
-      case 'DECREMENTA': return state - 1;
+      case 'INCREMENT':
+        return state + 1;
+      break;
+      case 'DECREMENT':
+        return state - 1;
+      break;
       default: return state;
    }
 }

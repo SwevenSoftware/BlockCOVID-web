@@ -1,17 +1,15 @@
 export const login = () => {
-   return {
-      type: 'SIGN_IN'
-   }
+   return { type: 'SIGN_IN' }
 }
 
 export const logout = () => {
-   return {
-      type: 'SIGN_OUT'
-   }
+   return { type: 'SIGN_OUT' }
 }
 
 export const usernameTyping = () => {
-   return {
-      type: 'USERNAME_TYPING'
-   }
+   return { type: 'USERNAME_TYPING' }
+}
+
+export const passwordTyping = () => {
+   return { type: 'PASSWORD_TYPING' }
 }
