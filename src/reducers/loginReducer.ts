@@ -1,17 +1,21 @@
 const loginReducer = (state = initialState, action) => {
    switch(action.type) {
       case 'SIGN_IN':
-        return {
+        return { // TODO: check if username and password are valid
            ...state,
            isLogged: true,
         }
+      break;
       case 'SIGN_OUT':
-         return {
-            ...state,
-            isLogged: false,
-         }
-      default:
-         return state;
+         return initialState;
+      break;
+      case 'USERNAME_TYPING':
+        return state; // TODO: check if username is valid
+      break;
+      case 'PASSWORD_TYPING':
+        return state; // TODO: check if password is valid
+      break;
+      default: return state;
    }
 }
 
@@ -19,5 +23,6 @@ export default loginReducer;
 
 const initialState = {
       isLogged: false,
-      isUsernameValid: false
+      isUsernameValid: false,
+      isPasswordValid: false
 }
