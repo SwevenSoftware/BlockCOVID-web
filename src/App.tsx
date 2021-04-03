@@ -5,11 +5,14 @@ import Login from './components/Login';
 import Example from './components/Example';
 
 const App: React.FC = () => {
-  const state = useSelector((state: RootState) => state) // WARNING: do not remove or UI will not update
+  const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
 
   /* subscribing components to the store */
   const ConnectedExample =
-    connect((state: RootState) => ({ counter: state.counter, isLogged: state.login.isLogged }))(Example);
+    connect((state: RootState) => ({
+      counter: state.counter,
+      isLogged: state.login.isLogged
+    }))(Example);
 
   return(
     <div className="App">
