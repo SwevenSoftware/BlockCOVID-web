@@ -21,7 +21,7 @@ const loginReducer = (state = initialState, action) => {
 
 export default loginReducer;
 
-const initialState = {
+export const initialState = {
       isLogged: false,
       isUsernameValid: false,
       isPasswordValid: false

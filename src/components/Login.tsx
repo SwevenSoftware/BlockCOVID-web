@@ -6,9 +6,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { login, logout, usernameTyping, passwordTyping } from '../actions/loginActions'
+import { initialState as initialLogin} from '../reducers/loginReducer'
 
 class Login extends Component {
-  login: any;
+  login: typeof initialLogin;
   dispatch: any;
 
   constructor(props) {
