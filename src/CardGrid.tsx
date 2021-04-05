@@ -11,6 +11,8 @@ import "./styles.css";
 import { green, red } from "@material-ui/core/colors";
 import DotGrid from "./DotGrid";
 
+import DialogActions from '@material-ui/core/DialogActions';
+
 import GeneralLayout from './GeneralLayout'
 import Token from './Token'
 
@@ -76,22 +78,36 @@ class CardGridApp extends Component<{}, StateApp, any> {
   render() {
     return (
       <div>
-        <ThemeProvider theme={theme}>
-          <Card className="cardGrid">
-            <CardHeader className="headerCard" title="New room"/>
-            <CardContent ref={this.dispGrid} className="dispGrid">
-              <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
-            </CardContent>
-            <CardActions>
-              <Button size="medium" color="primary">
-                Save room
-              </Button>
-              <Button size="medium" color="secondary" onClick={this.resetGrid}>
-                Reset
-              </Button>
-            </CardActions>
-          </Card>
-        </ThemeProvider>
+        <div className="gridInline">
+          <ThemeProvider theme={theme}>
+            <Card>
+              {/* <CardHeader className="headerCard" title="New room"/> */}
+              <CardContent ref={this.dispGrid} className="dispGrid">
+                <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
+              </CardContent>
+              {/* <CardActions>
+                <Button size="medium" color="primary">
+                  Save room
+                </Button>
+                <Button size="medium" color="secondary" onClick={this.resetGrid}>
+                  Reset
+                </Button>
+              </CardActions> */}
+            </Card>
+          </ThemeProvider>
+        </div>
+        <div className="buttonInline">
+          <div className="buttonGrid">
+            <Button id="decline" variant="outlined" size="medium" color="secondary" onClick={this.resetGrid}>
+              Annulla
+            </Button>
+          </div>
+          <div className="buttonGrid">
+            <Button id="confirm" variant="outlined" size="medium" color="primary">
+              Salva
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }

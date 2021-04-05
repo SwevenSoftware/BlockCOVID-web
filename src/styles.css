@@ -68,10 +68,22 @@
 
 /* (((((((((((((((((((((((((((((( CARDGRID )))))))))))))))))))))))))))) */
 
-.cardGrid {
+.gridInline {
+    display: inline-block;
     width: 40em;
-    max-width: 90%;
-    margin: auto;
+    margin-top: -6em;
+    margin-left: -7.5em;
+}
+
+.buttonInline {
+    display: inline-block;
+    width: 35%;
+    position: absolute;
+    margin-left: 4em;
+}
+
+.buttonGrid {
+    margin-bottom: 0.5em;
 }
 
 .dispGrid {
@@ -209,10 +221,12 @@
 
 
 
-
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
+    .buttonInline {
+        width: 33%;
+    }   
     .grid {
         min-width: 31%;
     }
@@ -222,6 +236,9 @@
 }
 
 @media only screen and (max-width: 976px) {
+    .buttonInline {
+        width: 33%;
+    }   
     .grid {
         min-width: 48%;
     }
@@ -231,6 +248,9 @@
 }
 
 @media only screen and (max-width: 660px) {
+    .buttonInline {
+        width: 33%;
+    }  
     .grid {
         min-width: 100%;
         margin-right: 0%;
