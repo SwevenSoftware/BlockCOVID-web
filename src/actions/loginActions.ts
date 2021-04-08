@@ -1,15 +1,19 @@
 export const login = () => {
-   return { type: 'SIGN_IN' }
+   return {
+     type: 'SIGN_IN',
+    }
+}
+
+export const loginUP = (username: string, password: string) => {
+   return {
+     type: 'SIGN_IN_UP',
+     payload: {
+       username: username,
+       password: password
+     }
+   }
 }
 
 export const logout = () => {
    return { type: 'SIGN_OUT' }
-}
-
-export const usernameTyping = () => {
-   return { type: 'USERNAME_TYPING' }
-}
-
-export const passwordTyping = () => {
-   return { type: 'PASSWORD_TYPING' }
 }
