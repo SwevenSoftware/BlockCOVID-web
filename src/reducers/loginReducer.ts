@@ -1,19 +1,56 @@
+import { login } from "../api"
+import axios from 'axios';
+
+
 const loginReducer = (state = initialState, action) => {
    switch(action.type) {
       case 'SIGN_IN':
-        return { // TODO: check if username and password are valid
+        return {
            ...state,
            isLogged: true,
         }
       break;
+      case 'SIGN_IN_UP':
+        let update = initialState;
+        login(action.payload.username, action.payload.password).then((res) => { /* user exists */
+            let isAdmin = res.data.authorities.includes("ADMIN");
+            if(isAdmin) { /* user has admin authorities, authorized login attempt */
+              update = {
+                ...update,
+                isLogged: true,
+                errorMessage: ""
+              }
+              console.log("success")
+            }
+            else {  /* unauthorized login attempt */
+              update = {
+                ...update,
+                isLogged: false,
+                errorMessage: "Accesso non autorizzato. Si prega di contattare l'amministratore"
+              }
+              console.log("no auth")
+            }
+          }).catch((err) => { /* user not logged in, user may not exists */
+            switch(err.response?.status) {
+              case 400: case 500:
+                /* 400: incorrect password
+                   500: incorrect username or user does not exists */
+               update = {
+                 ...update,
+                 isLogged: false,
+                 errorMessage: "Username o password scorretta. Riprova"
+               }
+               console.log("bruh")
+              break;
+            }
+          })
+        return {
+           ...state,
+           ...update
+        }
+      break;
       case 'SIGN_OUT':
          return initialState;
-      break;
-      case 'USERNAME_TYPING':
-        return state; // TODO: check if username is valid
-      break;
-      case 'PASSWORD_TYPING':
-        return state; // TODO: check if password is valid
       break;
       default: return state;
    }
@@ -23,6 +60,5 @@ export default loginReducer;
 
 export const initialState = {
       isLogged: false,
-      isUsernameValid: false,
-      isPasswordValid: false
+      errorMessage: ""
 }
