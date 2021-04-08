@@ -1,23 +1,12 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { RootState } from './reducers/rootReducer';
-import Example from './components/Example';
-import Login from './components/Login';
+import { ConnectedExample, ConnectedLogin }from './connectedComponents';
 
 const App: React.FC = () => {
-  const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
-
+  // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
+  // console.log(state)
   /* subscribing components to the store */
-  const ConnectedExample =
-    connect((state: RootState) => ({
-      counter: state.counter,
-      isLogged: state.login.isLogged
-    }))(Example);
-
-  const ConnectedLogin =
-    connect((state: RootState) => ({
-      login: state.login
-    }))(Login);
 
   return(
     <div className="App">
