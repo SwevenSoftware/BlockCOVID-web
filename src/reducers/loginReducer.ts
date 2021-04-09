@@ -14,12 +14,14 @@ const loginReducer = (state = initialState, action) => {
         let update = initialState;
         login(action.payload.username, action.payload.password).then((res) => { /* user exists */
             let isAdmin = res.data.authorities.includes("ADMIN");
+            console.log(isAdmin)
             if(isAdmin) { /* user has admin authorities, authorized login attempt */
               update = {
                 ...update,
                 isLogged: true,
-                errorMessage: ""
+                errorMessage: "sei entrato!"
               }
+              console.log(isAdmin)
               console.log("success")
             }
             else {  /* unauthorized login attempt */
@@ -40,6 +42,7 @@ const loginReducer = (state = initialState, action) => {
                  isLogged: false,
                  errorMessage: "Username o password scorretta. Riprova"
                }
+               //console.log(update.errorMessage)
                console.log("bruh")
               break;
             }
