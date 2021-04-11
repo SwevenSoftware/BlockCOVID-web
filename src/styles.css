@@ -70,16 +70,18 @@
 
 .gridInline {
     display: inline-block;
-    width: 40em;
+    min-width: 50%;
     margin-top: -6em;
     margin-left: -7.5em;
 }
 
 .buttonInline {
     display: inline-block;
-    width: 35%;
+    min-width: 35%;
     position: absolute;
     margin-left: 4em;
+    margin-right: 4em;
+    text-align: center;
 }
 
 .buttonGrid {
@@ -125,6 +127,12 @@
 .tableTitles {
     color: white;
     font-weight: 500;
+}
+
+/* (((((((((((((((((((((((((((((( ROOMS )))))))))))))))))))))))))))) */
+
+.paddingAppBar {
+    padding: 0;
 }
 
 

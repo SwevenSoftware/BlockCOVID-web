@@ -204,7 +204,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           <ListItem
             button key="Desks"
             component={Link}
-            to="/desk"
+            to="/rooms"
             disabled={mainElement.type.name ?
                ["LoginForm", "CardGridApp"].includes(mainElement.type.name) :
                 mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }

@@ -3,7 +3,7 @@ import SimpleTabs from './Tabs'
 
 const RoomsForm = () => {
     return (
-        <div>{SimpleTabs()}</div>
+        <div className="paddingAppBar">{SimpleTabs()}</div>
     )
 }
 

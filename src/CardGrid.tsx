@@ -10,6 +10,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import "./styles.css";
 import { green, red } from "@material-ui/core/colors";
 import DotGrid from "./DotGrid";
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Typography from '@material-ui/core/Typography';
 
 import DialogActions from '@material-ui/core/DialogActions';
 
@@ -97,14 +99,19 @@ class CardGridApp extends Component<{}, StateApp, any> {
           </ThemeProvider>
         </div>
         <div className="buttonInline">
-          <div className="buttonGrid">
-            <Button id="decline" variant="outlined" size="medium" color="secondary" onClick={this.resetGrid}>
-              Annulla
-            </Button>
-          </div>
+        <DialogContentText>
+          <Typography>Seleziona un posto</Typography>
+          <Typography>Premi su "Salva" per prenotarlo</Typography>
+          <Typography>Premi su "Annulla" per rimuovere la selezione</Typography>
+        </DialogContentText>
           <div className="buttonGrid">
             <Button id="confirm" variant="outlined" size="medium" color="primary">
               Salva
+            </Button>
+          </div>
+          <div className="buttonGrid">
+            <Button id="decline" variant="outlined" size="medium" color="secondary" onClick={this.resetGrid}>
+              Annulla
             </Button>
           </div>
         </div>

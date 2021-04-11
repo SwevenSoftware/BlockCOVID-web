@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 import CardHeader from "@material-ui/core/CardHeader";
 import CardGrid from './CardGrid'
@@ -62,7 +63,7 @@ export default function SimpleTabs() {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Aula A" {...a11yProps(0)} />
           <Tab label="Aula B" {...a11yProps(1)} />
