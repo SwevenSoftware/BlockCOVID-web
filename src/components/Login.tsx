@@ -8,7 +8,16 @@ import Button from '@material-ui/core/Button';
 import { loginUP as login, logout } from '../actions/loginActions'
 import { initialState as initialLogin} from '../reducers/loginReducer'
 
-class Login extends Component<{onAddTodo: Function},{}> {
+interface loginProps {
+  onAddTodo: Function
+}
+
+interface loginStates {
+  usernameValue: string,
+  passwordValue: string
+}
+
+class Login extends Component<loginProps, loginStates> {
   /* login: typeof initialLogin;
   dispatch: any;
   state = {
@@ -21,6 +30,12 @@ class Login extends Component<{onAddTodo: Function},{}> {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this)
+    this.handleChangeUsername = this.handleChangeUsername.bind(this)
+    this.handleChangePassword = this.handleChangePassword.bind(this)
+    this.state = {
+      usernameValue: "",
+      passwordValue: ""
+    }
     /* this.login = props.login;
     this.dispatch = props.dispatch; */
   }
@@ -34,9 +49,17 @@ class Login extends Component<{onAddTodo: Function},{}> {
     } */
   }
 
+  handleChangeUsername(username: string) {
+    this.setState({usernameValue: username})
+  }
+
+  handleChangePassword(password: string) {
+    this.setState({passwordValue: password})
+  }
+
   handleClick(){
-    console.log("sono lillo")
-    console.log(this.props.onAddTodo({title: "titolo", userId: 3}))
+    console.log("i clicked")
+    this.props.onAddTodo({username: this.state.usernameValue, password: this.state.passwordValue})
   }
 
   render() {
@@ -55,6 +78,7 @@ class Login extends Component<{onAddTodo: Function},{}> {
                   margin="normal"
                   /* error={this.state.hasError}
                   value={this.state.usernameValue} */
+                  onChange={(e) => this.handleChangeUsername(e.target.value)}
                   /* onChange={(e) => {
                     this.setState({usernameValue: e.target.value.trim()});
                     if(e.target.value.trim() && this.state.passwordValue.trim()) {
@@ -69,6 +93,7 @@ class Login extends Component<{onAddTodo: Function},{}> {
                   type="password"
                   label="Password"
                   margin="normal"
+                  onChange={(e) => this.handleChangePassword(e.target.value)}
                   /* error={this.state.hasError}
                   helperText={this.login.errorMessage}
                   value={this.state.passwordValue}
@@ -89,7 +114,7 @@ class Login extends Component<{onAddTodo: Function},{}> {
                   color="primary"
                   /* disabled={this.state.isButtonDisabled} */
                   onClick={() => {
-                    
+
                     this.handleClick()
                   }/* this.dispatch(login(this.state.usernameValue, this.state.passwordValue)) */}
               > Qualcosa

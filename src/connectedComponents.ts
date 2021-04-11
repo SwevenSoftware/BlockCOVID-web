@@ -16,17 +16,18 @@ export const ConnectedExample =
   connect((state: RootState) => ({
     login: state.login
   }))(Login); */
-  
-  export const mapDispatchToProps = (dispatch) => {
-    return {
-      onAddTodo: todo => {
-        dispatch(addTodo(todo));
-      }
-    };
-  };
 
-export const ConnectedLogin =
-  connect(
+export const mapDispatchToProps = (dispatch) => {
+
+  console.log("connectedComponents")
+  return {
+    onAddTodo: todo => {
+      dispatch(addTodo(todo));
+    }
+  };
+};
+
+export const ConnectedLogin = connect(
     null,
     mapDispatchToProps
   )(Login);

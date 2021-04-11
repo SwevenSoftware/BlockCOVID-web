@@ -20,22 +20,25 @@ export const logout = () => {
    return { type: 'SIGN_OUT' }
 }
 
-export const addTodo = ({ title, userId }) => {
+export const addTodo = ( {username, password }) => {
   return (dispatch, getState) => {
-    dispatch(addTodoStarted());
 
     console.log('current state:', getState());
+    const config = {
+      headers: { "Content-Type": "application/json"}
+    };
+    //  axios.post("/api/login", JSON.stringify({username, password}), config);
 
+    console.log(JSON.stringify({username, password}))
     axios
-      .post(`https://jsonplaceholder.typicode.com/todos`, {
-        title,
-        userId,
-        completed: false
-      })
+      .post("/api/login",
+        JSON.stringify({username, password}),
+        config)
       .then(res => {
-        setTimeout(() => {
-          dispatch(addTodoSuccess(res.data));
-        }, 2500);
+        dispatch(addTodoSuccess(res.data));
+        // setTimeout(() => {
+        //   dispatch(addTodoSuccess(res.data));
+        // }, 2500);
       })
       .catch(err => {
         dispatch(addTodoFailure(err.message));
@@ -65,4 +68,3 @@ const ADD_TODO_SUCCESS = "SUCCESS"
 const ADD_TODO_FAILURE = "FAILURE"
 const ADD_TODO_STARTED = "STARTED"
 const DELETE_TODO = "DELETE"
-
