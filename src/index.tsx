@@ -6,6 +6,7 @@ import configStore from './configureStore';
 import App from "./App";
 
 const rootElement = document.getElementById("react");
+
 ReactDOM.render(
   <StrictMode>
     <Provider store={configStore().store}>

@@ -8,29 +8,35 @@ import Button from '@material-ui/core/Button';
 import { loginUP as login, logout } from '../actions/loginActions'
 import { initialState as initialLogin} from '../reducers/loginReducer'
 
-class Login extends Component {
-  login: typeof initialLogin;
+class Login extends Component<{onAddTodo: Function},{}> {
+  /* login: typeof initialLogin;
   dispatch: any;
   state = {
     usernameValue: "",
     passwordValue: "",
     isButtonDisabled: true,
     hasError: false
-  }
+  } */
 
   constructor(props) {
     super(props);
-    this.login = props.login;
-    this.dispatch = props.dispatch;
+    this.handleClick = this.handleClick.bind(this)
+    /* this.login = props.login;
+    this.dispatch = props.dispatch; */
   }
 
   componentDidMount() {
-    if(this.login.errorMessage) {
+    /* if(this.login.errorMessage) {
       this.setState({hasError: true});
     }
     else{
       this.setState({hasError: false});
-    }
+    } */
+  }
+
+  handleClick(){
+    console.log("sono lillo")
+    console.log(this.props.onAddTodo({title: "titolo", userId: 3}))
   }
 
   render() {
@@ -47,15 +53,15 @@ class Login extends Component {
                   type="email"
                   label="Username"
                   margin="normal"
-                  error={this.state.hasError}
-                  value={this.state.usernameValue}
-                  onChange={(e) => {
+                  /* error={this.state.hasError}
+                  value={this.state.usernameValue} */
+                  /* onChange={(e) => {
                     this.setState({usernameValue: e.target.value.trim()});
                     if(e.target.value.trim() && this.state.passwordValue.trim()) {
                       this.setState({isButtonDisabled: false})
                     }
                     else this.setState({isButtonDisabled: true})
-                  }}
+                  }} */
                 />
                 <TextField
                   fullWidth
@@ -63,7 +69,7 @@ class Login extends Component {
                   type="password"
                   label="Password"
                   margin="normal"
-                  error={this.state.hasError}
+                  /* error={this.state.hasError}
                   helperText={this.login.errorMessage}
                   value={this.state.passwordValue}
                   onChange={(e) => {
@@ -72,7 +78,7 @@ class Login extends Component {
                       this.setState({isButtonDisabled: false})
                     }
                     else this.setState({isButtonDisabled: true})
-                  }}
+                  }} */
                 />
               </div>
             </CardContent>
@@ -81,14 +87,17 @@ class Login extends Component {
                   variant="contained"
                   size="large"
                   color="primary"
-                  disabled={this.state.isButtonDisabled}
-                  onClick={() => this.dispatch(login(this.state.usernameValue, this.state.passwordValue))}
+                  /* disabled={this.state.isButtonDisabled} */
+                  onClick={() => {
+                    
+                    this.handleClick()
+                  }/* this.dispatch(login(this.state.usernameValue, this.state.passwordValue)) */}
               > Qualcosa
               </Button>
             </CardActions>
           </Card>
         </form>
-        { console.log(this.login)}
+        { console.log(this.props)}
       </div>
     );
   }
