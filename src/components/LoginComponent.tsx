@@ -7,8 +7,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { loginUP as login, logout } from '../actions/loginActions'
 import { initialState as initialLogin} from '../reducers/loginReducer'
-
-import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
+import "../styles.css";
+import { ThemeProvider} from '@material-ui/core/styles';
 import {theme} from '../theme';
 
 interface loginProps {
@@ -61,16 +61,16 @@ class Login extends Component<loginProps, loginStates> {
   }
 
   handleClick(){
-    console.log("i clicked")
+    //console.log("i clicked")
     this.props.putInfoLogin({username: this.state.usernameValue, password: this.state.passwordValue})
   }
 
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <form noValidate autoComplete="off">
-          <Card>
-            <CardHeader className="headerCard" title="Titolo"/>
+        <form noValidate autoComplete="off" className="container">
+          <Card className="cardLogin">
+            <CardHeader className="headerCard" title="Login"/>
             <CardContent>
               <div>
                 <TextField
@@ -116,11 +116,12 @@ class Login extends Component<loginProps, loginStates> {
                   size="large"
                   color="primary"
                   /* disabled={this.state.isButtonDisabled} */
+                  className="loginBtn"
                   onClick={() => {
 
                     this.handleClick()
                   }/* this.dispatch(login(this.state.usernameValue, this.state.passwordValue)) */}
-              > Qualcosa
+              > Confirm
               </Button>
             </CardActions>
           </Card>
