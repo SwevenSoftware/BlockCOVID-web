@@ -12,7 +12,7 @@ import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core
 import {theme} from '../theme';
 
 interface loginProps {
-  onAddTodo: Function
+  putInfoLogin: Function
 }
 
 interface loginStates {
@@ -62,7 +62,7 @@ class Login extends Component<loginProps, loginStates> {
 
   handleClick(){
     console.log("i clicked")
-    this.props.onAddTodo({username: this.state.usernameValue, password: this.state.passwordValue})
+    this.props.putInfoLogin({username: this.state.usernameValue, password: this.state.passwordValue})
   }
 
   render() {

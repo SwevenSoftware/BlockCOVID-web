@@ -3,7 +3,7 @@ import { RootState } from './reducers/rootReducer';
 import Example from './components/Example';
 import Login from './components/Login';
 
-import {addTodo} from './actions/loginActions'
+import {loginInfo} from './actions/loginActions'
 
 
 export const ConnectedExample =
@@ -21,8 +21,8 @@ export const mapDispatchToProps = (dispatch) => {
 
   console.log("connectedComponents")
   return {
-    onAddTodo: todo => {
-      dispatch(addTodo(todo));
+    putInfoLogin: todo => {
+      dispatch(loginInfo(todo));
     }
   };
 };

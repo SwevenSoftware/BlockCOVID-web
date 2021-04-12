@@ -20,7 +20,7 @@ export const logout = () => {
    return { type: 'SIGN_OUT' }
 }
 
-export const addTodo = ( {username, password }) => {
+export const loginInfo = ( {username, password }) => {
   return (dispatch, getState) => {
 
     console.log('current state:', getState());
@@ -35,29 +35,26 @@ export const addTodo = ( {username, password }) => {
         JSON.stringify({username, password}),
         config)
       .then(res => {
-        dispatch(addTodoSuccess(res.data));
-        // setTimeout(() => {
-        //   dispatch(addTodoSuccess(res.data));
-        // }, 2500);
+        dispatch(loginInfoSuccess(res.data));
       })
       .catch(err => {
-        dispatch(addTodoFailure(err.message));
+        dispatch(loginInfoFailure(err.message));
       });
   };
 };
 
-const addTodoSuccess = todo => ({
+const loginInfoSuccess = todo => ({
   type: ADD_TODO_SUCCESS,
   payload: {
     ...todo
   }
 });
 
-const addTodoStarted = () => ({
+/* const addTodoStarted = () => ({
   type: ADD_TODO_STARTED
-});
+}); */
 
-const addTodoFailure = error => ({
+const loginInfoFailure = error => ({
   type: ADD_TODO_FAILURE,
   payload: {
     error
