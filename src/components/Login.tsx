@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import { loginUP as login, logout } from '../actions/loginActions'
 import { initialState as initialLogin} from '../reducers/loginReducer'
 
+import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
+import {theme} from '../theme';
+
 interface loginProps {
   onAddTodo: Function
 }
@@ -64,7 +67,7 @@ class Login extends Component<loginProps, loginStates> {
 
   render() {
     return (
-      <div>
+      <ThemeProvider theme={theme}>
         <form noValidate autoComplete="off">
           <Card>
             <CardHeader className="headerCard" title="Titolo"/>
@@ -123,7 +126,7 @@ class Login extends Component<loginProps, loginStates> {
           </Card>
         </form>
         { console.log(this.props)}
-      </div>
+      </ThemeProvider>
     );
   }
 }
