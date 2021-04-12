@@ -5,26 +5,26 @@ const DELETE_TODO = "DELETE"
 
  const initialState = {
    loading: false,
-   todos: [],
+   infoLogin: [],
    error: null
  };
 
- export default function todosReducer(state = initialState, action) {
+ export default function infoLoginReducer(state = initialState, action) {
    switch (action.type) {
      case ADD_TODO_SUCCESS:
        console.log("add_todo_success")
 
        return {
          ...state,
-         loading: false,
+         //loading: false,
          error: null,
-         todos: [...state.todos, action.payload]
+         infoLogin: [...state.infoLogin, action.payload]
        };
      case ADD_TODO_FAILURE:
        console.log("add_todo_failure")
        return {
          ...state,
-         loading: false,
+         //loading: false,
          error: action.payload.error
        };
      default:

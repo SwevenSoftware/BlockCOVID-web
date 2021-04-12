@@ -6,7 +6,7 @@ import todosReducer from "./todosReducer";
 const rootReducer = combineReducers({
    counter: exampleReducer, // WARNING: read comment below
    login: loginReducer,
-   todos: todosReducer
+   //todos: todosReducer
 });
 // counter serves as a temporary example, if removed be cautious in ./App.tsx (connect)
 

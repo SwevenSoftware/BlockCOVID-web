@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { RootState } from './reducers/rootReducer';
 import Example from './components/Example';
-import Login from './components/Login';
+import Login from './components/LoginComponent';
 
 import {loginInfo} from './actions/loginActions'
+import { info } from 'node:console';
 
 
 export const ConnectedExample =
@@ -21,8 +22,8 @@ export const mapDispatchToProps = (dispatch) => {
 
   console.log("connectedComponents")
   return {
-    putInfoLogin: todo => {
-      dispatch(loginInfo(todo));
+    putInfoLogin: info => {
+      dispatch(loginInfo(info));
     }
   };
 };
