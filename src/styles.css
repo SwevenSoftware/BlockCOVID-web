@@ -89,6 +89,29 @@
     color: #673ab7;
 }
 
+/* (((((((((((((((((((((((((((((( LOGIN )))))))))))))))))))))))))))) */
+
+.container {
+    display: 'flex';
+    flex-wrap: wrap;
+    width: 30em;
+    margin: auto;
+}
+
+.loginBtn {
+    flex-grow: 1;
+    background-color: "#689f38";
+}
+
+.loginBtn:hover {
+    background-color: "#3c611b";
+}
+
+.cardLogin {
+    margin-top: 25%;
+}
+
+
 
 /* (((((((((((((((((((((((((((((( PENCIL )))))))))))))))))))))))))))) */
 

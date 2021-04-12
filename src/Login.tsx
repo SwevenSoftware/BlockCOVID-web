@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
+import { Theme, ThemeProvider} from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -15,34 +15,9 @@ import Token from './Token';
 import {theme} from './theme';
 import {useDispatch} from 'react-redux'
 
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      width: 400,
-      margin: `${theme.spacing(0)} auto`
-    },
-    loginBtn: {
-      marginTop: theme.spacing(2),
-      flexGrow: 1,
-      background: "#689f38",
-
-      "&:hover" : {
-        background: "#3c611b"
-      }
-    },
-    card: {
-      marginTop: theme.spacing(10)
-    }
-  })
-);
-
 const LoginForm = () => {
 
   const dispatch = useDispatch();
-  const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -128,8 +103,8 @@ const LoginForm = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <form className={classes.container} noValidate autoComplete="off">
-        <Card className={classes.card}>
+      <form className="container" noValidate autoComplete="off">
+        <Card className="cardLogin">
           <CardHeader className="headerCard" title={cardTitle}/>
           <CardContent>
             <div>
@@ -161,7 +136,7 @@ const LoginForm = () => {
                 variant="contained"
                 size="large"
                 color= "primary"
-                className={classes.loginBtn}
+                className="loginBtn"
                 onClick={handleLogin}
                 disabled={isButtonDisabled}>
                 {loginBtnText}
