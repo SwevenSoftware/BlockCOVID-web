@@ -4,15 +4,15 @@ import Example from './components/Example';
 import Login from './components/LoginComponent';
 import Account from './components/AccountComponent';
 
-import {loginInfo} from './actions/loginActions'
+import {loginActions} from './actions/loginActions'
 import { info } from 'node:console';
 
 
-export const ConnectedExample =
+/* export const ConnectedExample =
   connect((state: RootState) => ({
     counter: state.counter,
-    isLogged: state.login.isLogged
-  }))(Example);
+    isLogged: state.logged.isLogged
+  }))(Example); */
 
 /* export const ConnectedLogin =
   connect((state: RootState) => ({
@@ -22,7 +22,7 @@ export const ConnectedExample =
 export const mapDispatchToProps = (dispatch) => {
   return {
     putInfoLogin: info => {
-      dispatch(loginInfo(info));
+      dispatch(loginActions(info));
     }
   };
 };
@@ -34,50 +34,3 @@ export const ConnectedLogin = connect(
 
 
   /////////////////////////////////////////////////////
-
-
-export const AccountDispatchProps = (dispatch) => {
-
-  console.log("accountsComponents")
-  return {
-    putInfoLogin: info => {
-      dispatch(loginInfo(info));
-    }
-  };
-};
-
-export const ConnectedAccount = connect(
-  null,
-  AccountDispatchProps
-)(Account);
-
-
-export const ReservationDispatchProps = (dispatch) => {
-
-  console.log("reservationsComponents")
-  return {
-    putInfoLogin: info => {
-      dispatch(loginInfo(info));
-    }
-  };
-};
-
-export const ConnectedReservations = connect(
-  null,
-  AccountDispatchProps
-)(Account);
-
-export const RoomsDispatchProps = (dispatch) => {
-
-  console.log("reservationsComponents")
-  return {
-    putInfoLogin: info => {
-      dispatch(loginInfo(info));
-    }
-  };
-};
-
-export const ConnectedRooms = connect(
-  null,
-  AccountDispatchProps
-)(Account);

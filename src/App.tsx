@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RootState } from './reducers/rootReducer';
-import { ConnectedExample, ConnectedLogin, ConnectedAccount, ConnectedReservations, ConnectedRooms }from './connectedComponents';
+import { ConnectedLogin }from './connectedComponents';
 
 const App: React.FC = () => {
   // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
@@ -12,12 +12,10 @@ const App: React.FC = () => {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path='/esempio' exact component={ConnectedExample}/>
+          
           <Route path='/login' exact component={ConnectedLogin}/>
-          <Route path='/accounts' exact component={ConnectedAccount}/>
-          <Route path='/reservations' exact component={ConnectedReservations}/>
-          <Route path='/desk' exact component={ConnectedRooms}/>
-          <Redirect from='/' to='/esempio'/>
+          
+          <Redirect from='/' to='/login'/>
         </Switch>
       </BrowserRouter>
     </div>
