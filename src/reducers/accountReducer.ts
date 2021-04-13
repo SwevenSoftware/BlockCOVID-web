@@ -2,13 +2,16 @@
 const accountReducer = (state = initialState, action) => {
    switch(action.type) {
       case 'OPEN_PENCIL':
-         return  {}
+         return  {
+            
+         }
          
       break;
       case 'CONFIRM_PENCIL':
       break;
       case 'CLOSE_PENCIL':
-         
+      break;
+      case 'OPEN_NEW_ACCOUNT':
       break;
       case 'OPEN_DELETE_MODAL':
       break;

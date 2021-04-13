@@ -46,3 +46,9 @@ export const closeDeleteAccount = () => {
       type: 'CLOSE_DELETE_MODAL'
    }
 }
+
+export const openNewAccount = () => {
+   return {
+      type: 'OPEN_NEW_ACCOUNT'
+   }
+}
