@@ -5,7 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import { loginUP as login, logout } from '../actions/loginActions'
+import { loginUsernamePassword as login, logout } from '../actions/loginActions'
 import { initialState as initialLogin} from '../reducers/loginReducer'
 import "../styles.css";
 import { ThemeProvider} from '@material-ui/core/styles';

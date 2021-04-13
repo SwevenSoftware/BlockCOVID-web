@@ -20,8 +20,6 @@ export const ConnectedExample =
   }))(Login); */
 
 export const mapDispatchToProps = (dispatch) => {
-
-  console.log("connectedComponents")
   return {
     putInfoLogin: info => {
       dispatch(loginInfo(info));
@@ -33,6 +31,9 @@ export const ConnectedLogin = connect(
     null,
     mapDispatchToProps
   )(Login);
+
+
+  /////////////////////////////////////////////////////
 
 
 export const AccountDispatchProps = (dispatch) => {

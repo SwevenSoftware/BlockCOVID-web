@@ -6,7 +6,7 @@ export const login = () => {
     }
 }
 
-export const loginUP = (username: string, password: string) => {
+export const loginUsernamePassword = (username: string, password: string) => {
    return {
      type: 'SIGN_IN_UP',
      payload: {
@@ -36,6 +36,7 @@ export const loginInfo = ( {username, password }) => {
         config)
       .then(res => {
         dispatch(loginInfoSuccess(res.data));
+        
       })
       .catch(err => {
         dispatch(loginInfoFailure(err.message));

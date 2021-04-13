@@ -201,7 +201,7 @@ interface PaperAccount {
  return (<SnackbarProvider maxSnack={3} autoHideDuration={1500}>
          <div className="addAccountButton">
            <NewUser/>
-           <AccountsComponent/>
+           
          </div>
          
        </SnackbarProvider>)
