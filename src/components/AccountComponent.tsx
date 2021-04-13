@@ -1,3 +1,4 @@
+import { Component } from "react";
 import PersonIcon from '@material-ui/icons/Person';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -5,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios';
-import './styles.css';
+import '../styles.css';
 import Token from '../Token';
 import Pencil from '../Pencil';
 import Trash from '../Trash';
