@@ -24,3 +24,25 @@ export const closeAddAccount = () => {
    }
 }
 
+export const deleteAccount = () => {
+   return {
+      type: 'OPEN_DELETE_MODAL'
+   }
+}
+
+export const deleteAccountConfirm = (username: string, password: string, auth: string) => {
+   return {
+      type: 'CONFIRM_DELETE_ACCOUNT',
+      payload: {
+         username: username,
+         password: password,
+         auth: auth
+      }
+   }
+}
+
+export const closeDeleteAccount = () => {
+   return {
+      type: 'CLOSE_DELETE_MODAL'
+   }
+}
