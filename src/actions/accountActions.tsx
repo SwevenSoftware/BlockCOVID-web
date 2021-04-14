@@ -13,7 +13,7 @@ export const confirmAddAccount = (username: string, password: string, confirmPas
          username: username,
          password: password,
          confirmPassword: confirmPassword,
-         auth: auth,
+         auth: auth
       }
    }
 }
