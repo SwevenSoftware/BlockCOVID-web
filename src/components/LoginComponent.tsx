@@ -1,18 +1,18 @@
 import { Component } from "react";
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import { loginUsernamePassword as login, logout } from '../actions/loginActions'
-import { initialState as initialLogin} from '../reducers/loginReducer'
+import { ThemeProvider } from '@material-ui/core/styles';
+import { login } from '../actions/loginActions'
+import { theme } from '../theme';
 import "../styles.css";
-import { ThemeProvider} from '@material-ui/core/styles';
-import {theme} from '../theme';
 
 interface loginProps {
-  putInfoLogin: Function
+  loginFun: Function
 }
 
 interface loginStates {
@@ -61,8 +61,7 @@ class Login extends Component<loginProps, loginStates> {
   }
 
   handleClick(){
-    //console.log("i clicked")
-    this.props.putInfoLogin({username: this.state.usernameValue, password: this.state.passwordValue})
+    this.props.loginFun({username: this.state.usernameValue, password: this.state.passwordValue})
   }
 
   render() {
@@ -132,4 +131,30 @@ class Login extends Component<loginProps, loginStates> {
   }
 }
 
-export default Login;
+// import { info } from 'node:console';
+
+// const mapStateToProps = (dispatch) => {
+//   return {
+//     login: state => {
+//       state.login;
+//     }
+//   };
+// };
+
+/* export const ConnectedLogin =
+  connect((state: RootState) => ({
+    login: state.login
+  }))(Login); */
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginFun: data => {
+      dispatch(login(data));
+    }
+  };
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+  )(Login);
