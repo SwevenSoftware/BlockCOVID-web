@@ -194,10 +194,7 @@ interface PaperAccount {
  };
  
  const Accounts = () => {
-   if (!Token.getId()) {
-     location.href = "/login";
-   }
- 
+
  return (<SnackbarProvider maxSnack={3} autoHideDuration={1500}>
          <div className="addAccountButton">
            <NewUser/>

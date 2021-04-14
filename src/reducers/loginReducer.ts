@@ -7,8 +7,6 @@ import {
   ERROR_UNKNOWN
 } from "../types"
 
-import { push } from "react-router-redux"
-
 const initialState = {
   token: null,
   error: null
