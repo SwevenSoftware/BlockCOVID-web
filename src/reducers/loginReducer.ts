@@ -1,67 +1,55 @@
-import { login } from "../api"
-import axios from 'axios';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  ERROR_USER_NO_AUTH,
+  ERROR_USER_OR_PASS,
+  ERROR_UNKNOWN
+} from "../types"
 
+import { push } from "react-router-redux"
 
-const loginReducer = (state = initialState, action) => {
-   switch(action.type) {
-      case 'SIGN_IN':
+const initialState = {
+  token: null,
+  error: null
+ };
+
+export default function loginReducer(state = initialState, action) {
+  switch(action.type) {
+    case LOGIN_SUCCESS:
+      console.log(LOGIN_SUCCESS) // WARNING: testing purposes
+      let isAdmin = action.payload.authorities.includes("ADMIN");
+      if(isAdmin) { /* user has admin authorities, authorized login attempt */
+        location.href = "/accounts";
         return {
-           ...state,
-           isLogged: true,
+          token: action.payload.token,
+          error: null
         }
-      break;
-      case 'SIGN_IN_UP':
-        let update = initialState;
-        login(action.payload.username, action.payload.password).then((res) => { /* user exists */
-            let isAdmin = res.data.authorities.includes("ADMIN");
-            console.log(isAdmin)
-            if(isAdmin) { /* user has admin authorities, authorized login attempt */
-              update = {
-                ...update,
-                isLogged: true,
-                errorMessage: "sei entrato!"
-              }
-              console.log(isAdmin)
-              console.log("success")
-            }
-            else {  /* unauthorized login attempt */
-              update = {
-                ...update,
-                isLogged: false,
-                errorMessage: "Accesso non autorizzato. Si prega di contattare l'amministratore"
-              }
-              console.log("no auth")
-            }
-          }).catch((err) => { /* user not logged in, user may not exists */
-            switch(err.response?.status) {
-              case 400: case 500:
-                /* 400: incorrect password
-                   500: incorrect username or user does not exists */
-               update = {
-                 ...update,
-                 isLogged: false,
-                 errorMessage: "Username o password scorretta. Riprova"
-               }
-               //console.log(update.errorMessage)
-               console.log("bruh")
-              break;
-            }
-          })
+      }
+      else {  /* unauthorized login attempt */
         return {
-           ...state,
-           ...update
+          error: ERROR_USER_NO_AUTH
         }
-      break;
-      case 'SIGN_OUT':
-         return initialState;
-      break;
-      default: return state;
-   }
-}
-
-export default loginReducer;
-
-export const initialState = {
-      isLogged: false,
-      errorMessage: ""
+      }
+    case LOGIN_FAILURE:
+      console.log(LOGIN_FAILURE) // WARNING: testing purposes
+      switch(action.payload.error) {
+        case 400: case 500:
+          /* 400: incorrect
+          500: incorrect username or user does not exists */
+          return {
+            error: ERROR_USER_OR_PASS
+          }
+        default:
+          return {
+            error: ERROR_UNKNOWN
+          }
+      }
+    case LOGOUT:
+      return {
+        token: null
+      }
+    default:
+      return state;
+  }
 }
