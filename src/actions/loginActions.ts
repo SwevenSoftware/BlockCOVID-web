@@ -1,68 +1,48 @@
 import axios from 'axios'
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT
+} from "../types"
 
-export const login = () => {
-   return {
-     type: 'SIGN_IN',
-    }
-}
-
-export const loginUsernamePassword = (username: string, password: string) => {
-   return {
-     type: 'SIGN_IN_UP',
-     payload: {
-       username: username,
-       password: password
-     }
-   }
-}
-
-export const logout = () => {
-   return { type: 'SIGN_OUT' }
-}
-
-export const loginActions = ( {username, password }) => {
+export const login = ({username, password}) => {
   return (dispatch, getState) => {
+    console.log('current state:', getState()); // WARNING: testing purposes
+    console.log(JSON.stringify({username, password})) // WARNING: testing purposes
 
-    console.log('current state:', getState());
     const config = {
       headers: { "Content-Type": "application/json"}
     };
-    //  axios.post("/api/login", JSON.stringify({username, password}), config);
 
-    console.log(JSON.stringify({username, password}))
     axios
       .post("/api/login",
         JSON.stringify({username, password}),
         config)
       .then(res => {
-        console.log('then');
-        dispatch(loginSuccess(res.data));
-        
-        
+        dispatch(success(res.data));
       })
       .catch(err => {
-        console.log('catch');
-        dispatch(loginFailure(err.message));
-        
+        dispatch(failure(err.response.status));
       });
   };
 };
 
-const loginSuccess = todo => ({
+export const logout = () => {
+   return {
+     type: LOGOUT
+   }
+}
+
+const success = (data) => ({
   type: LOGIN_SUCCESS,
   payload: {
-    ...todo
+    ...data
   }
 });
 
-const loginFailure = error => ({
+const failure = (error) => ({
   type: LOGIN_FAILURE,
   payload: {
     error
   }
 });
-
-const LOGIN_SUCCESS = "SUCCESS"
-const LOGIN_FAILURE = "FAILURE"
-const ADD_TODO_STARTED = "STARTED"
-const DELETE_TODO = "DELETE"
