@@ -1,7 +1,8 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RootState } from './reducers/rootReducer';
-import { ConnectedLogin }from './connectedComponents';
+import Login from './components/LoginComponent'
+import Account from './components/AccountComponent'
 
 const App: React.FC = () => {
   // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
@@ -12,10 +13,9 @@ const App: React.FC = () => {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          
-          <Route path='/login' exact component={ConnectedLogin}/>
-          
-          <Redirect from='/' to='/login'/>
+          <Route path='/login' exact component={Login}/>
+          <Route path='/accounts' exact component={Account}/>
+          <Redirect path='*' to='/login'/>
         </Switch>
       </BrowserRouter>
     </div>
