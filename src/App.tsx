@@ -1,28 +1,43 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { StylesProvider } from '@material-ui/styles';
-import './styles.css';
-import Login from './Login';
-import Reservations from './Reservation';
-import CardGrid from './CardGrid';
-import Accounts from './Accounts';
-
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { RootState } from './reducers/rootReducer';
+import Login from './components/LoginComponent'
+import Account from './components/AccountComponent'
 
 const App: React.FC = () => {
+  // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
+  // console.log(state)
+  /* subscribing components to the store */
 
-  return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route path='/login' exact component={Login}/>
-            <Route path='/reservations' exact component={Reservations}/>
-            <Route path='/desk' exact component={CardGrid}/>
-            <Route path='/accounts' exact component={Accounts}/>
-            <Redirect from='/' to='/reservations'/>
-          </Switch>
-        </BrowserRouter>
-      </div>
+  return(
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route path='/login' exact component={Login}/>
+          <Route path='/accounts' exact component={Account}/>
+          <Redirect path='*' to='/login'/>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
 export default App;
+
+/* <div className="App">
+        <BrowserRouter>
+          <GeneralLayout/>
+          <Switch>
+            <Route path='/accounts' exact component={Accounts}/>
+            <Route path='/login' exact component={Login}/>
+            <Redirect from='/' to='/reservations'/>
+          </Switch>
+        </BrowserRouter>
+        </div>
+*/
+/*
+  <Route path='/reservations' exact component={Reservations}/>
+  <Route path='/desk' exact component={CardGrid}/>
+  <Route path='/accounts' exact component={Accounts}/>
+  <Route path='/login' exact component={Login}/>
+*/

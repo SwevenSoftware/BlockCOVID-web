@@ -54,7 +54,7 @@ class ReservationsForm extends Component {
       for(var id in res.data) {
         const data = res.data[id]
         const newReservation = {
-          id: data.id, 
+          id: data.id,
           room: data.nameRoom,
           desk: data.idDesk,
           date: data.date,
@@ -100,15 +100,15 @@ const Reservations = () => {
 
   if(!Token.getId())
     location.href = "/login"
-
-  return (
-    GeneralLayout(
-      <div>
-        <ReservationsForm/>
-        <Report />
-      </div>
-    )
-  );
+  return (<div></div>)
+  // return (
+  //   GeneralLayout(
+  //     <div>
+  //       <ReservationsForm/>
+  //       <Report />
+  //     </div>
+  //   )
+  // );
 }
 
 export default Reservations;

@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function GeneralLayout(mainElement : JSX.Element) {
+export default function GeneralLayout() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -179,11 +179,6 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Reservations"
             component={Link}
             to="/reservations"
-            disabled={ mainElement.type.name ?
-               ["LoginForm", "ReservationForm"].includes(mainElement.type.name) :
-               /* (mainElement.props.children.type.name ?
-                 ["LoginForm", "ReservationForm"].includes(mainElement.props.children.type.name) : */
-                  mainElement.props.children.map((cella) => cella.type.name).includes("ReservationsForm", "LoginForm")  }
           >
             <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
             <ListItemText primary="Reservations" />
@@ -193,9 +188,6 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Accounts"
             component={Link}
             to="/accounts"
-            disabled={mainElement.type.name ?
-              ["LoginForm", "SnackbarProvider"].includes(mainElement.type.name) :
-               mainElement.props.children.map((cella) => cella.type.name).includes("SnackbarProvider", "LoginForm") }
           >
             <ListItemIcon className="iconColor"><PeopleIcon /></ListItemIcon>
             <ListItemText primary="Accounts" />
@@ -205,9 +197,6 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             button key="Desks"
             component={Link}
             to="/desk"
-            disabled={mainElement.type.name ?
-               ["LoginForm", "CardGridApp"].includes(mainElement.type.name) :
-                mainElement.props.children.map((cella) => cella.type.name).includes("CardGridApp", "LoginForm") }
           >
             <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
@@ -232,10 +221,6 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           }
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {mainElement}
-      </main>
     </div>
   );
 }
