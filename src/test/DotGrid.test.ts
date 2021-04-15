@@ -1,4 +1,4 @@
-import { describe } from 'mocha'
+/* import { describe } from 'mocha'
 import { expect } from 'chai'
 import DotGrid from '../DotGrid'
 
@@ -8,3 +8,4 @@ describe('checkDistance DotGrid', () => {
         expect(grid.checkDistance(200, 200, 10, 500)).to.equals(true);
     })
 })
+ */
