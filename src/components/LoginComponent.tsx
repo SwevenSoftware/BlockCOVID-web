@@ -34,9 +34,10 @@ interface loginStates {
 class LoginComponent extends Component<loginProps, loginStates> {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this)
     this.handleChangeUsername = this.handleChangeUsername.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
     this.state = {
       usernameValue: "",
       passwordValue: "",
@@ -73,6 +74,12 @@ class LoginComponent extends Component<loginProps, loginStates> {
     this.tryLogin()
   }
 
+  handleKeyPress(key: string) {
+    if(key === "Enter" && !this.state.isButtonDisabled) {
+      this.tryLogin()
+    }
+  }
+
   tryLogin() {
     this.props.loginDispatch({username: this.state.usernameValue, password: this.state.passwordValue})
   }
@@ -101,6 +108,7 @@ class LoginComponent extends Component<loginProps, loginStates> {
                     }
                     else this.setState({isButtonDisabled: true})
                   }} */
+                  onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
                 <TextField
                   fullWidth
@@ -119,6 +127,7 @@ class LoginComponent extends Component<loginProps, loginStates> {
                     }
                     else this.setState({isButtonDisabled: true})
                   }} */
+                  onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
               </div>
             </CardContent>
