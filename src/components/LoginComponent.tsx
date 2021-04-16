@@ -60,11 +60,15 @@ class LoginComponent extends Component<loginProps, loginStates> {
   }
 
   handleChangeUsername(username: string) {
-    this.setState({usernameValue: username})
+    this.setState({usernameValue: username.trim()})
+    this.setButton(username)
   }
 
   handleChangePassword(password: string) {
-    this.setState({passwordValue: password})
+    this.setState({passwordValue: password.trim()})
+    this.setButton(this.state.usernameValue, password)
+  }
+
   handleClick() {
     this.tryLogin()
   }
@@ -130,6 +134,10 @@ class LoginComponent extends Component<loginProps, loginStates> {
                     this.handleClick()
                   }/* this.dispatch(login(this.state.usernameValue, this.state.passwordValue)) */}
               > Confirm
+                  disabled={this.state.isButtonDisabled}
+                  onClick={() => this.handleClick()}
+              >
+                Confirm
               </Button>
             </CardActions>
           </Card>
