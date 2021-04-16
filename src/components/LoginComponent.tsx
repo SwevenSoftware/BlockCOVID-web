@@ -87,6 +87,7 @@ class LoginComponent extends Component<loginProps, loginStates> {
                   type="email"
                   label="Username"
                   margin="normal"
+                  error={this.props.loginState.error? true : false}
                   onChange={(e) => this.handleChangeUsername(e.target.value)}
                   onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
@@ -96,6 +97,8 @@ class LoginComponent extends Component<loginProps, loginStates> {
                   type="password"
                   label="Password"
                   margin="normal"
+                  error={this.props.loginState.error? true : false}
+                  helperText={this.props.loginState.error? this.props.loginState.error : ""}
                   onChange={(e) => this.handleChangePassword(e.target.value)}
                   onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
