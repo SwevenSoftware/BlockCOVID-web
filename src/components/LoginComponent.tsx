@@ -21,7 +21,6 @@ interface loginStates {
   passwordValue: string
 }
 
-class Login extends Component<loginProps, loginStates> {
   /* login: typeof initialLogin;
   dispatch: any;
   state = {
@@ -31,6 +30,7 @@ class Login extends Component<loginProps, loginStates> {
     hasError: false
   } */
 
+class LoginComponent extends Component<loginProps, loginStates> {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this)
@@ -163,6 +163,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
-  )(Login);
+  )(LoginComponent)
