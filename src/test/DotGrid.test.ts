@@ -9,3 +9,6 @@ describe('checkDistance DotGrid', () => {
     })
 })
  */
+
+
+ export const nulla = ""
