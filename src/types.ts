@@ -1,6 +1,6 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAILURE = "LOGIN_FAILURE"
-export const LOGOUT = "LOGOUT"
+export const LOGIN_LOGOUT = "LOGOUT"
 
 /* login */
 export const ERROR_USER_NO_AUTH = "Accesso non autorizzato. Si prega di contattare l'amministratore"

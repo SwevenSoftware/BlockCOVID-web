@@ -3,7 +3,7 @@ import { login as loginAPI } from '../api'
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT
+  LOGIN_LOGOUT
 } from "../types"
 
 export const login = ({username, password}) => {
@@ -31,7 +31,7 @@ export const login = ({username, password}) => {
 
 export const logout = () => {
    return {
-     type: LOGOUT
+     type: LOGIN_LOGOUT
    }
 }
 
