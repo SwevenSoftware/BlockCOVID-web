@@ -12,6 +12,7 @@ import { theme } from '../theme';
 import "../styles.css";
 
 interface loginProps {
+  loginState: any,
   loginDispatch: Function
 }
 
@@ -145,6 +146,11 @@ class Login extends Component<loginProps, loginStates> {
   connect((state: RootState) => ({
     login: state.login
   }))(Login); */
+const mapStateToProps = (state) => {
+  return {
+    loginState: state.login
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
