@@ -59,10 +59,12 @@ class Login extends Component<loginProps, loginStates> {
 
   handleChangePassword(password: string) {
     this.setState({passwordValue: password})
+  handleClick() {
+    this.tryLogin()
   }
 
-  handleClick(){
-    this.props.loginFun({username: this.state.usernameValue, password: this.state.passwordValue})
+  tryLogin() {
+    this.props.loginDispatch({username: this.state.usernameValue, password: this.state.passwordValue})
   }
 
   render() {
