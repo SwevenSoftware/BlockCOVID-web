@@ -18,7 +18,8 @@ interface loginProps {
 
 interface loginStates {
   usernameValue: string,
-  passwordValue: string
+  passwordValue: string,
+  isButtonDisabled: boolean
 }
 
   /* login: typeof initialLogin;
@@ -38,7 +39,8 @@ class LoginComponent extends Component<loginProps, loginStates> {
     this.handleChangePassword = this.handleChangePassword.bind(this)
     this.state = {
       usernameValue: "",
-      passwordValue: ""
+      passwordValue: "",
+      isButtonDisabled: true
     }
     /* this.login = props.login;
     this.dispatch = props.dispatch; */
