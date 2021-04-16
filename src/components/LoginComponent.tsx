@@ -47,12 +47,16 @@ class LoginComponent extends Component<loginProps, loginStates> {
   }
 
   componentDidMount() {
-    /* if(this.login.errorMessage) {
-      this.setState({hasError: true});
+    this.setButton()
+  }
+
+  setButton(username: string = this.state.usernameValue, password: string = this.state.passwordValue) {
+    if(username && password) {
+      this.setState({isButtonDisabled: false})
     }
-    else{
-      this.setState({hasError: false});
-    } */
+    else {
+      this.setState({isButtonDisabled: true})
+    }
   }
 
   handleChangeUsername(username: string) {
