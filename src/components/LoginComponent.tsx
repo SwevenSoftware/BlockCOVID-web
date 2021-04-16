@@ -12,7 +12,7 @@ import { theme } from '../theme';
 import "../styles.css";
 
 interface loginProps {
-  loginFun: Function
+  loginDispatch: Function
 }
 
 interface loginStates {
@@ -148,7 +148,7 @@ class Login extends Component<loginProps, loginStates> {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginFun: data => {
+    loginDispatch: data => {
       dispatch(login(data));
     }
   };
