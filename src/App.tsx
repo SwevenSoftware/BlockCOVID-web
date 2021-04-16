@@ -1,5 +1,4 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { RootState } from './reducers/rootReducer';
 import Login from './components/LoginComponent'
 import Account from './components/AccountComponent'

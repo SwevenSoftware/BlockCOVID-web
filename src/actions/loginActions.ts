@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { login as loginAPI } from '../api'
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -10,14 +11,15 @@ export const login = ({username, password}) => {
     console.log('current state:', getState()); // WARNING: testing purposes
     console.log(JSON.stringify({username, password})) // WARNING: testing purposes
 
-    const config = {
-      headers: { "Content-Type": "application/json"}
-    };
-
-    axios
-      .post("/api/login",
-        JSON.stringify({username, password}),
-        config)
+    // const config = {
+    //   headers: { "Content-Type": "application/json"}
+    // };
+    //
+    // axios
+    //   .post("/api/login",
+    //     JSON.stringify({username, password}),
+    //     config)
+    loginAPI({username, password})
       .then(res => {
         dispatch(success(res.data));
       })

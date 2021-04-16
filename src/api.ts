@@ -1,12 +1,9 @@
 import axios from 'axios';
-import Token from './Token';
 
-export const login = (username: string, password: string) => {
+export const login = ({username, password}) => {
   const config = {
     headers: { "Content-Type": "application/json"}
   };
 
-  const promise = axios.post("/api/login", JSON.stringify({username, password}), config);
-  const dataPromise = promise.then((res) =>  res.data);
-  return dataPromise;
+  return axios.post("/api/login", JSON.stringify({username, password}), config);
 }
