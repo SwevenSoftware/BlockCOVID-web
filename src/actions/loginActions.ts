@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { login as loginAPI } from '../api'
 import {
   LOGIN_SUCCESS,

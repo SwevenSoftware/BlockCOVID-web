@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
+  LOGIN_LOGOUT,
   ERROR_USER_NO_AUTH,
   ERROR_USER_OR_PASS,
   ERROR_UNKNOWN
@@ -43,7 +43,7 @@ export default function loginReducer(state = initialState, action) {
             error: ERROR_UNKNOWN
           }
       }
-    case LOGOUT:
+    case LOGIN_LOGOUT:
       return {
         token: null
       }

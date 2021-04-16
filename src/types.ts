@@ -9,6 +9,8 @@ export const PENCIL_SUCCESS = "PENCIL_SUCCESS"
 
 export const TRASH_CONFIRM = "TRASH_CONFIRM"
 export const TRASH_CANCEL = "TRASH_CANCEL"
+export const TRASH_SUCCESS = "TRASH_SUCCESS"
+export const TRASH_FAILURE = "TRASH_FAILURE"
 
 /* login */
 export const ERROR_USER_NO_AUTH = "Accesso non autorizzato. Si prega di contattare l'amministratore"

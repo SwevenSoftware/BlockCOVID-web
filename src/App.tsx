@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { RootState } from './reducers/rootReducer';
 import Login from './components/LoginComponent'
-import Account from './components/AccountComponent'
+import Account from './Accounts'
 
 const App: React.FC = () => {
   // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
