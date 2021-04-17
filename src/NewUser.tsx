@@ -323,19 +323,19 @@ export default function FormDialog() {
                 <FormGroup>
                   <div>
                     <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                      control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" className="styleCheckbox" />}
                       label="Admin"
                     />
                   </div>
                   <div>
                     <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                      control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" className="styleCheckbox" />}
                       label="Utente"
                     />
                   </div>
                   <div>
                     <FormControlLabel
-                      control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                      control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" className="styleCheckbox" />}
                       label="Addetto alle pulizie"
                     />
                   </div>

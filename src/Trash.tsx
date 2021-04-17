@@ -23,15 +23,6 @@ import {theme} from './theme';
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
-const styles = () => ({
-  textField: {
-    width: '100%'
-  },
-  helperText: {
-    position: 'absolute',
-    bottom: '-50%'
-  }
-})
 
 export default function FormDialog(formAccount: any) {
 
