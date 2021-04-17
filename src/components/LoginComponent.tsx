@@ -1,28 +1,32 @@
+/* react */
 import { Component } from "react";
+/* redux */
 import { connect } from 'react-redux';
+import { login } from '../actions/loginActions'
+/* material-ui */
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+/* styles */
 import { ThemeProvider } from '@material-ui/core/styles';
-import { login } from '../actions/loginActions'
 import { theme } from '../theme';
 import "../styles.css";
 
-interface loginProps {
+interface LoginProps {
   loginState: any,
   loginDispatch: Function
 }
 
-interface loginStates {
+interface LoginStates {
   usernameValue: string,
   passwordValue: string,
   isButtonDisabled: boolean
 }
 
-class LoginComponent extends Component<loginProps, loginStates> {
+class LoginComponent extends Component<LoginProps, LoginStates> {
   constructor(props) {
     super(props);
     this.handleChangeUsername = this.handleChangeUsername.bind(this)
@@ -40,6 +44,11 @@ class LoginComponent extends Component<loginProps, loginStates> {
     this.setButton()
   }
 
+  /**
+  * Enables button if there is input, else disables it
+  * @params username and password
+  * @returns
+  */
   setButton(username: string = this.state.usernameValue, password: string = this.state.passwordValue) {
     if(username && password) {
       this.setState({isButtonDisabled: false})
@@ -49,26 +58,50 @@ class LoginComponent extends Component<loginProps, loginStates> {
     }
   }
 
+  /**
+  * Sets local state and button
+  * @params username
+  * @returns
+  */
   handleChangeUsername(username: string) {
     this.setState({usernameValue: username.trim()})
     this.setButton(username)
   }
 
+  /**
+  * Sets local state and button
+  * @params password
+  * @returns
+  */
   handleChangePassword(password: string) {
     this.setState({passwordValue: password.trim()})
     this.setButton(this.state.usernameValue, password)
   }
 
+  /**
+  * If the button is clicked, tries to login
+  * @params
+  * @returns
+  */
   handleClick() {
     this.tryLogin()
   }
 
+  /**
+  * If key "Enter" is pressed, tries to login
+  * @params key pressed from the user
+  * @returns
+  */
   handleKeyPress(key: string) {
     if(key === "Enter" && !this.state.isButtonDisabled) {
       this.tryLogin()
     }
   }
 
+  /**
+  * @params
+  * @returns
+  */
   tryLogin() {
     this.props.loginDispatch({username: this.state.usernameValue, password: this.state.passwordValue})
   }
@@ -131,7 +164,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginDispatch: data => {
+    loginDispatch: (data) => {
       dispatch(login(data));
     }
   }
