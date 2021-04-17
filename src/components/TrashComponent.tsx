@@ -15,6 +15,8 @@ import { FormLabel, FormHelperText } from '@material-ui/core';
 
 import { Component } from "react";
 import { connect } from 'react-redux';
+import Token from '../Token'
+import { trashConfirm } from '../api';
 
 interface trashProps {
    trashState: any,
@@ -22,16 +24,57 @@ interface trashProps {
 }
 
 interface trashStates {
-   isTrashOpen: boolean
-   usernameValue: string
+   isOpen: boolean,
+   usernameValue: string,
+   errorDelHimself: string,
+   isButtonDisabled: boolean
 }
 
 class TrashComponent extends Component<trashProps, trashStates> {
    constructor(props) {
       super(props);
+      this.handleClickOpen = this.handleClickOpen.bind(this),
       this.state = {
          usernameValue: "",
-         isTrashOpen: false
+         isOpen: false,
+         errorDelHimself: "Non puoi cancellare il tuo account",
+         isButtonDisabled: true,
       }
    }
+
+   handleClickOpen() {
+      //if (this.state.usernameValue)
+   }
+
+   componentDidMount() {
+      this.setButton()
+   }
+
+   setButton() {
+      if(this.state.usernameValue === Token.getUsername()) {
+        this.setState({isButtonDisabled: true})
+      }
+      else this.setState({isButtonDisabled: false});
+  
+    };
 }
+
+
+const mapStateToProps = (state) => {
+   return{
+      trashState: state.trash
+   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+     trashDispatch: data => {
+       dispatch(trashConfirm(data));
+     }
+   }
+ }
+
+ export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+ )(TrashComponent)
