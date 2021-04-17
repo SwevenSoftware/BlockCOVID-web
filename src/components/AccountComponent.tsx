@@ -195,13 +195,16 @@ interface PaperAccount {
  
  const Accounts = () => {
 
- return (<SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-         <div className="addAccountButton">
-           <NewUser/>
-           
-         </div>
+ return (
+      <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+          
+          <div className="addAccountButton">
+            <NewUser/>
+            
+          </div>
          
-       </SnackbarProvider>)
+      </SnackbarProvider>
+    )
  };
  
  export default Accounts
