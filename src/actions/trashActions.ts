@@ -7,11 +7,17 @@ import {
    ERROR_USER_CANNOT_BE_DELETED
 } from "../types"
 
-export const cancelTrash = (isOpen: boolean) => {
+export const trashCancel = (isOpen: boolean) => {
    return {
       type: TRASH_CANCEL,
       payload: {
          isOpen: false
       }
+   }
+}
+
+export const trashConfirm = ({username, password}) => {
+   return (dispatch, getState) => {
+      
    }
 }
