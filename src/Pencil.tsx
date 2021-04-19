@@ -264,22 +264,22 @@ export default function FormDialog(formAccount: any) {
               </div>
             </div>
             <div className="centralPencil">
-              <DialogContentText color="primary">
+              <DialogContentText id="primaryColor">
                 * indica i campi obbligatori
               </DialogContentText>           
               <FormControl>
                 <FormLabel>Ruolo:</FormLabel>
                   <FormGroup>
                       <FormControlLabel
-                        control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                        control={<Checkbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" color="primary" />}
                         label="Admin"
                       />
                       <FormControlLabel
-                        control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                        control={<Checkbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" color="primary" />}
                         label="Utente"
                       />
                       <FormControlLabel
-                        control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                        control={<Checkbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" color="primary" />}
                         label="Addetto alle pulizie"
                       />
                   </FormGroup>

@@ -108,7 +108,7 @@ export default function FormDialog(formAccount: any) {
               {formAccount.username}
             </DialogContentText>
             
-            <FormLabel className={"role_title"}>
+            <FormLabel>
               {formAccount.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
             </FormLabel>
             {

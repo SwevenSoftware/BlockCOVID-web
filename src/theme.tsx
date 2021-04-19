@@ -5,8 +5,5 @@ export const theme = createMuiTheme ({
       primary: {
          main: "#689f38",
       },
-      secondary: {
-         main: "#ff8c00",
-      }
    },
 })

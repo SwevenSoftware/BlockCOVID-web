@@ -105,7 +105,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
           <Typography>Premi su "Annulla" per rimuovere la selezione</Typography>
         </DialogContentText>
           <div className="buttonGrid">
-            <Button id="confirm" variant="outlined" size="medium" color="primary">
+            <Button id="confirm" variant="outlined" size="medium">
               Salva
             </Button>
           </div>
