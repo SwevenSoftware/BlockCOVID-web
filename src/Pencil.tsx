@@ -24,15 +24,6 @@ import {theme} from './theme';
 
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
-const GreenCheckbox = withStyles({
-  root: {
-    color: "#689f38",
-    '&$checked': {
-      color: "#689f38",
-    },
-  },
-  checked:{},
-}) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
 
 export default function FormDialog(formAccount: any) {
 
