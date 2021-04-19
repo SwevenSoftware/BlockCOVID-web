@@ -14,6 +14,9 @@ export default function trashReducer(state= initialState, action) {
    switch(action.type) {
       case TRASH_SUCCESS:
          console.log("eliminato con successo")
+         return {
+            error: null
+         }
       break;
       case TRASH_CANCEL:
          console.log("annullata l'eliminazione")
