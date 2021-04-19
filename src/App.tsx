@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './components/LoginComponent'
 import Accounts from './components/AccountsComponent'
 /* others */
+import { SnackbarProvider } from 'notistack'
 
 const App: React.FC = () => {
   // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
@@ -12,13 +13,15 @@ const App: React.FC = () => {
 
   return(
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path='/login' exact component={Login}/>
-          <Route path='/accounts' exact component={Account}/>
-          <Redirect path='*' to='/login'/>
-        </Switch>
-      </BrowserRouter>
+      <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+        <BrowserRouter>
+          <Switch>
+            <Route path='/login' exact component={Login}/>
+            <Route path='/accounts' exact component={Accounts}/>
+            <Redirect path='*' to='/login'/>
+          </Switch>
+        </BrowserRouter>
+      </SnackbarProvider>
     </div>
   );
 }
