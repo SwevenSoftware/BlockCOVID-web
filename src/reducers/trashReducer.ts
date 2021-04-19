@@ -12,10 +12,13 @@ const initialState = {
 
 export default function trashReducer(state= initialState, action) {
    switch(action.type) {
-      case TRASH_CONFIRM:
+      case TRASH_SUCCESS:
          console.log("eliminato con successo")
       break;
       case TRASH_CANCEL:
          console.log("annullata l'eliminazione")
+      break;
+      case TRASH_FAILURE:
+         console.log("l'eliminazione è fallita contatta l'assistenza")
    }
 }
