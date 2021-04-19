@@ -2,10 +2,17 @@ import {
   ACCOUNT_SUCCESS,
   ACCOUNT_FAILURE
 } from "../types"
+import { getAccounts as getAccountsAPI } from '../api'
 
-export const getAccounts = () => {
+export const getAccounts = (tokenID: string) => {
   return (dispatch, getState) => {
-    console.log('current state:', getState()) // WARNING: testing purposes
+    getAccountsAPI(tokenID)
+      .then(res => {
+        dispatch(success(res.data))
+      })
+      .catch(err => {
+        dispatch(failure(err.response.status))
+      })
   }
 }
 
