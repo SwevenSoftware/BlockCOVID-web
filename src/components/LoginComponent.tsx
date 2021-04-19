@@ -16,8 +16,8 @@ import { theme } from '../theme';
 import "../styles.css";
 
 interface LoginProps {
-  loginState: any,
-  loginDispatch: Function
+  state: any,
+  dispatch: any
 }
 
 interface LoginStates {
@@ -44,68 +44,6 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
     this.setButton()
   }
 
-  /**
-  * Enables button if there is input, else disables it
-  * @params username and password
-  * @returns
-  */
-  setButton(username: string = this.state.usernameValue, password: string = this.state.passwordValue) {
-    if(username && password) {
-      this.setState({isButtonDisabled: false})
-    }
-    else {
-      this.setState({isButtonDisabled: true})
-    }
-  }
-
-  /**
-  * Sets local state and button
-  * @params username
-  * @returns
-  */
-  handleChangeUsername(username: string) {
-    this.setState({usernameValue: username.trim()})
-    this.setButton(username)
-  }
-
-  /**
-  * Sets local state and button
-  * @params password
-  * @returns
-  */
-  handleChangePassword(password: string) {
-    this.setState({passwordValue: password.trim()})
-    this.setButton(this.state.usernameValue, password)
-  }
-
-  /**
-  * If the button is clicked, tries to login
-  * @params
-  * @returns
-  */
-  handleClick() {
-    this.tryLogin()
-  }
-
-  /**
-  * If key "Enter" is pressed, tries to login
-  * @params key pressed from the user
-  * @returns
-  */
-  handleKeyPress(key: string) {
-    if(key === "Enter" && !this.state.isButtonDisabled) {
-      this.tryLogin()
-    }
-  }
-
-  /**
-  * @params
-  * @returns
-  */
-  tryLogin() {
-    this.props.loginDispatch({username: this.state.usernameValue, password: this.state.passwordValue})
-  }
-
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -120,7 +58,7 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                   type="email"
                   label="Username"
                   margin="normal"
-                  error={this.props.loginState.error? true : false}
+                  error={this.props.state.login.error? true : false}
                   onChange={(e) => this.handleChangeUsername(e.target.value)}
                   onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
@@ -130,8 +68,8 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                   type="password"
                   label="Password"
                   margin="normal"
-                  error={this.props.loginState.error? true : false}
-                  helperText={this.props.loginState.error? this.props.loginState.error : ""}
+                  error={this.props.state.login.error? true : false}
+                  helperText={this.props.state.login.error? this.props.state.login.error : ""}
                   onChange={(e) => this.handleChangePassword(e.target.value)}
                   onKeyPress={(e) => this.handleKeyPress(e.key)}
                 />
@@ -154,18 +92,86 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
       </ThemeProvider>
     )
   }
+
+  /**
+  * Enables button if there is input or else disables it
+  * @params username and password
+  * @returns
+  */
+  private setButton(username: string = this.state.usernameValue, password: string = this.state.passwordValue): void {
+    if(username && password) {
+      this.setState({isButtonDisabled: false})
+    }
+    else {
+      this.setState({isButtonDisabled: true})
+    }
+  }
+
+  /**
+  * Sets local state (username) and button
+  * @params username
+  * @returns
+  */
+  private handleChangeUsername(username: string): void {
+    this.setState({usernameValue: username.trim()})
+    this.setButton(username)
+  }
+
+  /**
+  * Sets local state (password) and button
+  * @params password
+  * @returns
+  */
+  private handleChangePassword(password: string): void {
+    this.setState({passwordValue: password.trim()})
+    this.setButton(this.state.usernameValue, password)
+  }
+
+  /**
+  * If key "Enter" is pressed, tries to login
+  * @params key pressed from the user
+  * @returns
+  */
+  private handleKeyPress(key: string): void {
+    if(key === "Enter" && !this.state.isButtonDisabled) {
+      this.tryLogin()
+    }
+  }
+
+  /**
+  * If the button is clicked, tries to login
+  * @params
+  * @returns
+  */
+  private handleClick(): void {
+    if(!this.state.isButtonDisabled) {
+      this.tryLogin()
+    }
+  }
+
+  /**
+  * @params
+  * @returns
+  */
+  private tryLogin(): void {
+    this.props.dispatch.login({username: this.state.usernameValue, password: this.state.passwordValue})
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    loginState: state.login
+    state: {
+      login: state.login
+    }
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginDispatch: (data) => {
-      dispatch(login(data));
+    dispatch: {
+      login: (data) => {
+        dispatch(login(data));
+      }
     }
   }
 }
