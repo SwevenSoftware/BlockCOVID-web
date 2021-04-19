@@ -10,15 +10,15 @@ import {
 const initialState = {
   token: null,
   error: null
- };
+ }
 
 export default function loginReducer(state = initialState, action) {
   switch(action.type) {
     case LOGIN_SUCCESS:
       console.log(LOGIN_SUCCESS) // WARNING: testing purposes
-      let isAdmin = action.payload.authorities.includes("ADMIN");
+      let isAdmin = action.payload.authorities.includes("ADMIN")
       if(isAdmin) { /* user has admin authorities, authorized login attempt */
-        location.href = "/accounts";
+        location.href = "/accounts"
         return {
           token: action.payload.token,
           error: null
@@ -48,6 +48,6 @@ export default function loginReducer(state = initialState, action) {
         token: null
       }
     default:
-      return state;
+      return state
   }
 }

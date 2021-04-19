@@ -1,9 +1,11 @@
-import { combineReducers } from 'redux';
-import loginReducer from './loginReducer';
+import { combineReducers } from 'redux'
+import loginReducer from './loginReducer'
+import accountsReducer from './accountsReducer'
 
 const rootReducer = combineReducers({
-   login: loginReducer
-});
+   login: loginReducer,
+   accounts: accountsReducer
+})
 
-export default rootReducer;
+export default rootReducer
 export type RootState = ReturnType<typeof rootReducer>
