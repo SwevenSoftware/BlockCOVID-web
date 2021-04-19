@@ -27,7 +27,8 @@ interface trashStates {
    isOpen: boolean,
    usernameValue: string,
    errorDelHimself: string,
-   isButtonDisabled: boolean
+   isButtonDisabled: boolean,
+   isTrashOpen: boolean
 }
 
 class TrashComponent extends Component<trashProps, trashStates> {
@@ -39,11 +40,14 @@ class TrashComponent extends Component<trashProps, trashStates> {
          isOpen: false,
          errorDelHimself: "Non puoi cancellare il tuo account",
          isButtonDisabled: true,
+         isTrashOpen: false
       }
    }
 
    handleClickOpen() {
-      //if (this.state.usernameValue)
+      if (this.state.usernameValue === Token.getUsername()) {
+         this.setState({isButtonDisabled: true})
+      }
    }
 
    componentDidMount() {
