@@ -12,15 +12,20 @@ import SecurityIcon from '@material-ui/icons/Security';
 import WorkIcon from '@material-ui/icons/Work';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { FormLabel, FormHelperText } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core/styles';
+import {theme} from '../theme';
 
 import { Component } from "react";
 import { connect } from 'react-redux';
 import Token from '../Token'
-import { trashConfirm } from '../api';
+import { trashConfirm } from '../actions/trashActions'
+
 
 interface trashProps {
    trashState: any,
-   trashDispatch: Function
+   trashDispatch: Function,
+   link_delete: string,
+   authorities: string[],
 }
 
 interface trashStates {
@@ -35,6 +40,8 @@ class TrashComponent extends Component<trashProps, trashStates> {
    constructor(props) {
       super(props);
       this.handleClickOpen = this.handleClickOpen.bind(this),
+      this.handleClose = this.handleClose.bind(this),
+      this.handleConfirm = this.handleConfirm.bind(this),
       this.state = {
          usernameValue: "",
          isOpen: false,
@@ -44,14 +51,27 @@ class TrashComponent extends Component<trashProps, trashStates> {
       }
    }
 
+   componentDidMount() {
+      this.setButton()
+   }
+
    handleClickOpen() {
       if (this.state.usernameValue === Token.getUsername()) {
          this.setState({isButtonDisabled: true})
       }
+      this.setState({isTrashOpen: true})
    }
 
-   componentDidMount() {
-      this.setButton()
+   handleClose() {
+      this.setState({isTrashOpen: false})
+   }
+
+   handleConfirm() {
+      if (this.state.usernameValue != Token.getUsername()){
+         trashConfirm({username: this.state.usernameValue,link_delete: this.props.link_delete})
+         this.handleClose();
+         window.setTimeout(function(){location.reload()}, 1500)
+      }
    }
 
    setButton() {
@@ -59,8 +79,84 @@ class TrashComponent extends Component<trashProps, trashStates> {
         this.setState({isButtonDisabled: true})
       }
       else this.setState({isButtonDisabled: false});
-  
-    };
+   
+   };
+
+   render() {
+      return (
+         <ThemeProvider theme={theme}>
+           <div>
+             <IconButton 
+               className="trash" 
+               onClick={(e) => this.handleClickOpen()}>
+               <DeleteIcon />
+             </IconButton>
+             <Dialog 
+               open={this.state.isOpen}
+               onClose={(e) => this.handleClose()}
+               aria-labelledby="form-dialog-title"
+               >
+               <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {this.state.usernameValue}?</DialogTitle>
+               <DialogContent className="central">
+               <div className="alignCentralPencil">
+                 <PersonIcon fontSize="large" />
+               
+                 <DialogContentText>
+                   {this.state.usernameValue}
+                 </DialogContentText>
+                 
+                 <FormLabel className={"role_title"}>
+                   {this.props.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+                 </FormLabel>
+                 {
+                 this.props.authorities.map( (auth) => {
+                   switch(auth){
+                     case "ADMIN":
+                       return (
+                         <div className="tooltip">
+                           <SecurityIcon className="adminIcon" />
+                           <span className="tooltiptext">Admin</span>
+                         </div>
+                       )
+                     case "USER":
+                       return (
+                         <div className="tooltip">
+                           <WorkIcon className="userIcon" />
+                           <span className="tooltiptext">Utente</span>
+                         </div>
+                       )
+                     case "CLEANER":
+                       return (
+                         <div className="tooltip">
+                           <BathtubIcon className="cleanerIcon" />
+                           <span className="tooltiptext">Addetto alle pulizie</span>
+                         </div>
+                       )
+                   }
+                 })
+                 }
+               </div>
+     
+                 <FormHelperText id="trashMessage">{this.state.errorDelHimself}</FormHelperText>
+     
+               </DialogContent>
+               <DialogActions>
+                 <Button variant="outlined" onClick={(e) =>this.handleClose()} id="decline">
+                   Annulla
+                 </Button>
+                 <Button
+                   variant="outlined"
+                   id="confirm"
+                   onClick={(e) => this.handleConfirm()}
+                   disabled={this.state.isButtonDisabled}>
+                   Conferma
+                 </Button>
+               </DialogActions>
+             </Dialog>
+           </div>
+         </ThemeProvider>
+       );
+   }
 }
 
 
