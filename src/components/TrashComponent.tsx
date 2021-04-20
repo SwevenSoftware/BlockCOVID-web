@@ -57,6 +57,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   }
 
   render() {
+    console.log(this.props) // WARNING: testing purposes
     return(
       <ThemeProvider theme={theme}>
         <div>
@@ -78,9 +79,9 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                   {this.state.usernameValue}
                 </DialogContentText>
                 <FormLabel className={"role_title"}>
-                  {this.props.state.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+                  {/* this.props.state.authorities.length > 1 ? "Ruoli: " : "Ruolo: " */}
                 </FormLabel>
-                {
+                {/*
                   this.props.state.authorities.map((auth) => {
                     switch(auth) {
                       case "ADMIN":
@@ -106,7 +107,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                         )
                     }
                   })
-                }
+                */}
               </div>
               <FormHelperText id="trashMessage">{this.state.errorDelHimself}</FormHelperText>
             </DialogContent>
@@ -158,7 +159,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   */
   handleConfirm() {
     if(this.state.usernameValue != Token.getUsername()) {
-      this.props.dispatch.deleteAccount(this.state.usernameValue, this.props.state.link_delete, this.props.state.login.token.id)
+      this.props.dispatch.deleteAccount(this.state.usernameValue, "link", "token")
       this.handleClose()
       window.setTimeout(function() { location.reload() }, 1500)
     }
