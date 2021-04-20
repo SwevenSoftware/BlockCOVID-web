@@ -1,9 +1,7 @@
 import {
+   TRASH_ACCOUNTS_SUCCESS,
    TRASH_CANCEL,
-   TRASH_CONFIRM,
-   TRASH_FAILURE,
-   TRASH_SUCCESS,
-   ERROR_USER_CANNOT_BE_DELETED
+   TRASH_FAILURE
 } from "../types"
 
 const initialState = {
@@ -12,7 +10,7 @@ const initialState = {
 
 export default function trashReducer(state = initialState, action) {
    switch(action.type) {
-      case TRASH_SUCCESS:
+      case TRASH_ACCOUNTS_SUCCESS:
          console.log("eliminato con successo")
          return {
             error: null

@@ -1,9 +1,7 @@
 import {
   TRASH_CANCEL,
-  TRASH_CONFIRM,
-  TRASH_FAILURE,
-  TRASH_SUCCESS,
-  ERROR_USER_CANNOT_BE_DELETED
+  TRASH_ACCOUNTS_SUCCESS,
+  TRASH_FAILURE
 } from "../types"
 import { deleteAccount as deleteAccountAPI } from '../api';
 
@@ -23,19 +21,19 @@ export const deleteAccount = (username: string, link: string, token: string) => 
         dispatch(successAccount(res.data))
       })
       .catch(err => {
-        dispatch(failureAccount(err))
+        dispatch(failure(err))
       })
   }
 }
 
 const successAccount = (data) => ({
-  type: TRASH_SUCCESS,
+  type: TRASH_ACCOUNTS_SUCCESS,
   payload: {
     ...data
   }
 })
 
-const failureAccount = (error) => ({
+const failure = (error) => ({
   type: TRASH_FAILURE,
   payload: {
     error
