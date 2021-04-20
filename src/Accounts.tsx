@@ -70,10 +70,10 @@ class AccountsForm extends Component {
   */
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      <div className="marginAccounts">
         <div className="counter">
           <ListItem>
-            <h3>Accounts:</h3>
+            <h3 className="titleAccounts">Accounts:</h3>
             <ListItemIcon
               className="spacing">
               <PeopleIcon className="people"/>
@@ -107,8 +107,7 @@ class AccountsForm extends Component {
         <Grid container spacing={3}>
           {this.rows}
         </Grid>
-      </ThemeProvider>
-
+      </div>
     )
   }
 

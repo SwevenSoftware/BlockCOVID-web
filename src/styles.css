@@ -24,6 +24,23 @@
 
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
+.marginAccounts {
+    margin-left: 1em;
+}
+
+.titleAccounts {
+    margin-left: -1.5em;
+}
+
+.counter {
+    margin-bottom: 1%;
+    max-width: 75%;
+}
+
+.spacing {
+    padding-left: 10em;
+}
+
 .usernameLayout{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -58,11 +75,26 @@
 .addAccountButton {
     position: absolute;
     right: 2em;
-    top: 6em;
 }
 
 .number {
     padding-left: 15%;
+}
+
+.people {
+    color: #121212
+}
+
+.shield {
+    color: #d68f00;
+}
+
+.bag {
+    color: rgb(134, 42, 42);
+}
+
+.cleaner {
+    color: rgb(5, 162, 235);
 }
 
 
@@ -175,34 +207,6 @@
 
 .paddingAppBar {
     padding: 0;
-}
-
-
-/* (((((((((((((((((((((((((((((( SEARCHUSERS )))))))))))))))))))))))))))) */
-
-.counter {
-    margin-bottom: 2%;
-    max-width: 75%;
-}
-
-.spacing {
-    padding-left: 10em;
-}
-
-.people {
-    color: #121212
-}
-
-.shield {
-    color: #d68f00;
-}
-
-.bag {
-    color: rgb(134, 42, 42);
-}
-
-.cleaner {
-    color: rgb(5, 162, 235);
 }
 
 
