@@ -1,19 +1,19 @@
 import {
-   TRASH_CANCEL,
-   TRASH_CONFIRM,
-   TRASH_FAILURE,
-   TRASH_SUCCESS,
-   ERROR_USER_CANNOT_BE_DELETED
+  TRASH_CANCEL,
+  TRASH_CONFIRM,
+  TRASH_FAILURE,
+  TRASH_SUCCESS,
+  ERROR_USER_CANNOT_BE_DELETED
 } from "../types"
 import { deleteAccount as deleteAccountAPI } from '../api';
 
 export const trashCancel = (isOpen: boolean) => {
-   return {
-      type: TRASH_CANCEL,
-      payload: {
-         isOpen: false
-      }
-   }
+  return {
+    type: TRASH_CANCEL,
+    payload: {
+      isOpen: false
+    }
+  }
 }
 
 export const deleteAccount = (username: string, link: string, token: string) => {

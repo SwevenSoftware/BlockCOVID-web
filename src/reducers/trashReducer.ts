@@ -10,7 +10,7 @@ const initialState = {
    error: null,
 }
 
-export default function trashReducer(state= initialState, action) {
+export default function trashReducer(state = initialState, action) {
    switch(action.type) {
       case TRASH_SUCCESS:
          console.log("eliminato con successo")
