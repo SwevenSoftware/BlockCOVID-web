@@ -131,7 +131,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
   }
 
   /**
-  * Counts how many accounts there are and how many type per each
+  * Counts how many accounts there are and how many accounts per each type
   * @params
   * @returns
   */
