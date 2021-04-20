@@ -15,13 +15,13 @@ export default function trashReducer(state = initialState, action) {
          return {
             error: null
          }
-      break;
       case TRASH_CANCEL:
          console.log("annullata l'eliminazione")
          return state
-      break;
       case TRASH_FAILURE:
          console.log("l'eliminazione è fallita contatta l'assistenza")
          return state
+      default:
+        return state
    }
 }
