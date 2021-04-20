@@ -1,4 +1,5 @@
 import React from 'react'
+/* material-ui/core */
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
@@ -17,9 +18,8 @@ import EventSeatIcon from '@material-ui/icons/EventSeat';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-/* icons */
+/* material-ui/icons */
 import PeopleIcon from '@material-ui/icons/People';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DnsIcon from '@material-ui/icons/Dns';

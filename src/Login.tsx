@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+/* material-ui/core */
 import { createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
-
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
-
+/* other files */
 import GeneralLayout from './GeneralLayout';
-import Token from './Token';
-
 import {theme} from './theme';
+import Token from './Token';
 
 
 const useStyles = makeStyles((theme: Theme) =>

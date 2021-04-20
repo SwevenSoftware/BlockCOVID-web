@@ -1,3 +1,4 @@
+/* other files */
 import GeneralLayout from './GeneralLayout';
 import SimpleTabs from './Tabs'
 

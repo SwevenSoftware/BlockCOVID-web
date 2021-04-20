@@ -1,16 +1,15 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import { IconButton, ListItemIcon, ListItem } from '@material-ui/core';
+/* material-ui/core */
+import { ListItemIcon, ListItem } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import {theme} from './theme';
+import { ThemeProvider } from '@material-ui/core/styles';
+/* material-ui/icons */
 import PeopleIcon from '@material-ui/icons/People';
 import SecurityIcon from '@material-ui/icons/Security';
 import WorkIcon from '@material-ui/icons/Work';
 import BathtubIcon from '@material-ui/icons/Bathtub';
+/* other files */
+import {theme} from './theme';
 
 const SearchUsers = () => {
     const [isModalOpen_A, setModalState] = React.useState(false);

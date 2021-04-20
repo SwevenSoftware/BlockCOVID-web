@@ -1,17 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+/* material-ui/core */
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import DialogContentText from '@material-ui/core/DialogContentText';
-
-import CardHeader from "@material-ui/core/CardHeader";
+/* other files */
 import CardGrid from './CardGrid'
-
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
 
 interface TabPanelProps {
   children?: React.ReactNode;

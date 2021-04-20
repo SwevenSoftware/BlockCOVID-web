@@ -1,4 +1,8 @@
 import React from 'react';
+import axios from 'axios';
+import clsx from 'clsx';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+/* material-ui/core */
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,29 +10,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { ThemeProvider } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
-
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-
-import Token from './Token';
-import axios from 'axios';
-import { RotateLeft } from '@material-ui/icons';
-import clsx from 'clsx';
-
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { FormGroup, FormLabel, FormControl, FormHelperText, FormControlLabel } from '@material-ui/core';
+/* material-ui/icons */
+import AddBoxIcon from '@material-ui/icons/AddBox';
+/* other files */
 import {theme} from './theme';
+import Token from './Token';
 import './styles.css';
-
-
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 
 export default function FormDialog(props: CheckboxProps) {

@@ -1,5 +1,6 @@
 import React, { Component, createRef, RefObject } from "react";
-import Room, { Desk } from "./Room";
+/* other files */
+import Room from "./Room";
 import "./styles.css";
 
 interface Pos2d {

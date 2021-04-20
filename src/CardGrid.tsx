@@ -1,23 +1,16 @@
 import React, { Component, createRef, RefObject } from "react";
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
+/* material-ui/core */
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
-import "./styles.css";
-import { green, red } from "@material-ui/core/colors";
-import DotGrid from "./DotGrid";
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Typography from '@material-ui/core/Typography';
-
-import DialogActions from '@material-ui/core/DialogActions';
-
-import GeneralLayout from './GeneralLayout'
-import Token from './Token'
+/* other files */
+import DotGrid from "./DotGrid";
+import GeneralLayout from './GeneralLayout';
 import {theme} from './theme';
+import Token from './Token';
 
 
 interface StateApp {

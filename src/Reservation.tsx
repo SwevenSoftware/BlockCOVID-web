@@ -1,5 +1,7 @@
 import React, { RefObject, useEffect, createRef, ReactNode, Component } from 'react';
+import axios from 'axios'
 import ReactDOM from 'react-dom'
+/* material-ui/core */
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,12 +9,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import axios from 'axios'
 
-import './styles.css'
-import GeneralLayout from './GeneralLayout'
-import Report from './Report'
-import Token from './Token'
+/* other files */
+import GeneralLayout from './GeneralLayout';
+import Report from './Report';
+import './styles.css';
+import Token from './Token';
+
 
 interface Reservation {
   id : number,
