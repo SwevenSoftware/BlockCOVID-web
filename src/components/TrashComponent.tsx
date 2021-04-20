@@ -22,10 +22,8 @@ import { trashConfirm } from '../actions/trashActions'
 
 
 interface trashProps {
-   trashState: any,
-   trashDispatch: Function,
-   link_delete: string,
-   authorities: string[],
+  state: any,
+  dispatch: any
 }
 
 interface trashStates {
@@ -68,7 +66,7 @@ class TrashComponent extends Component<trashProps, trashStates> {
 
    handleConfirm() {
       if (this.state.usernameValue != Token.getUsername()){
-         trashConfirm({username: this.state.usernameValue,link_delete: this.props.link_delete})
+         trashConfirm({username: this.state.usernameValue,link_delete: this.props.state.link_delete})
          this.handleClose();
          window.setTimeout(function(){location.reload()}, 1500)
       }
@@ -106,10 +104,10 @@ class TrashComponent extends Component<trashProps, trashStates> {
                  </DialogContentText>
                  
                  <FormLabel className={"role_title"}>
-                   {this.props.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
+                   {this.props.state.authorities.length > 1 ? "Ruoli: " : "Ruolo: "}
                  </FormLabel>
                  {
-                 this.props.authorities.map( (auth) => {
+                 this.props.state.authorities.map( (auth) => {
                    switch(auth){
                      case "ADMIN":
                        return (
@@ -160,19 +158,23 @@ class TrashComponent extends Component<trashProps, trashStates> {
 }
 
 
-const mapStateToProps = (state) => {
-   return{
-      trashState: state.trash
-   }
+const mapStateToProps = (state: any) => {
+  return {
+    state: {
+      trash: state.trash
+    }
+  }
 }
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-     trashDispatch: data => {
-       dispatch(trashConfirm(data));
-     }
-   }
- }
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    dispatch: {
+      trash: (data: any) => {
+        dispatch(trashConfirm(data));
+      }
+    }
+  }
+}
 
  export default connect(
     mapStateToProps,
