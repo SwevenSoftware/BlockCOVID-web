@@ -23,7 +23,6 @@ import './styles.css';
 
 
 export default function FormDialog(props: CheckboxProps) {
-  // const classes = useStyles();
 
   const [state, setState] = React.useState({
     checkedAdmin: false,
@@ -66,7 +65,7 @@ export default function FormDialog(props: CheckboxProps) {
   const userExists = "L'username inserito non è disponibile";
   const passInvalid = "Password non valida";
   const passConfirmNoMatch = "Le password inserite non corrispondono";
-  const noAuthoritiesChecked = "Si prega di scegliere almeno una opzione";
+  const noAuthoritiesChecked = "Si prega di scegliere almeno un'opzione";
 
   const handleClickOpenButton = () => {
     setOpenButton(true);
@@ -323,7 +322,11 @@ export default function FormDialog(props: CheckboxProps) {
                     />
                   </div>
                 </FormGroup>
-                <FormHelperText color="red">{authErr}</FormHelperText>
+                <FormHelperText>
+                  <div id="colorError">
+                    {authErr}
+                  </div>
+                </FormHelperText>
               </FormControl>
             </div>
           </DialogContent>

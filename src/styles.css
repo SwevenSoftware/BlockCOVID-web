@@ -22,9 +22,14 @@
     color: #689f38;
 }
 
+#colorError {
+    color: red;
+}
+
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
 .marginAccounts {
+    margin-top: -1.5em;
     margin-left: 1em;
 }
 
