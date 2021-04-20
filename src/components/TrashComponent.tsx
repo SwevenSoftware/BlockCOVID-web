@@ -138,6 +138,17 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @params
   * @returns
   */
+  setButton() {
+    if(this.state.usernameValue === Token.getUsername()) {
+      this.setState({ isButtonDisabled: true })
+    }
+    else this.setState({ isButtonDisabled: false })
+  }
+
+  /**
+  * @params
+  * @returns
+  */
   handleClickOpen() {
     if(this.state.usernameValue === Token.getUsername()) {
       this.setState({isButtonDisabled: true})
@@ -163,17 +174,6 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
       this.handleClose()
       window.setTimeout(function() { location.reload() }, 1500)
     }
-  }
-
-  /**
-  * @params
-  * @returns
-  */
-  setButton() {
-    if(this.state.usernameValue === Token.getUsername()) {
-      this.setState({ isButtonDisabled: true })
-    }
-    else this.setState({ isButtonDisabled: false })
   }
 }
 
