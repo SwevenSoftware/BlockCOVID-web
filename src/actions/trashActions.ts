@@ -1,4 +1,3 @@
-import { trashConfirm as trashConfirmAPI }  from '../api';
 import {
    TRASH_CANCEL,
    TRASH_CONFIRM,
@@ -6,6 +5,7 @@ import {
    TRASH_SUCCESS,
    ERROR_USER_CANNOT_BE_DELETED
 } from "../types"
+import { deleteAccount as deleteAccountAPI } from '../api';
 
 export const trashCancel = (isOpen: boolean) => {
    return {
@@ -16,16 +16,16 @@ export const trashCancel = (isOpen: boolean) => {
    }
 }
 
-export const trashConfirm = ({username, link_delete}) => {
-   return (dispatch, getState) => {
-      trashConfirmAPI({username, link_delete})
-         .then((res) => {
-            dispatch(successMessage(res.data))
-         })
-         .catch(err => {
-            dispatch(failureMessage(err))
-         })
-   }
+export const deleteAccount = (username: string, link: string, token: string) => {
+  return (dispatch, getState) => {
+    deleteAccountAPI(username, link, token)
+      .then((res) => {
+        dispatch(successAccount(res.data))
+      })
+      .catch(err => {
+        dispatch(failureAccount(err))
+      })
+  }
 }
 const successMessage = (data) => ({
    type: TRASH_SUCCESS,
