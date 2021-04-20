@@ -5,7 +5,7 @@ import {
 } from "../types"
 
 const initialState = {
-   error: null,
+   error: null
 }
 
 export default function trashReducer(state = initialState, action) {
@@ -18,8 +18,10 @@ export default function trashReducer(state = initialState, action) {
       break;
       case TRASH_CANCEL:
          console.log("annullata l'eliminazione")
+         return state
       break;
       case TRASH_FAILURE:
          console.log("l'eliminazione è fallita contatta l'assistenza")
+         return state
    }
 }
