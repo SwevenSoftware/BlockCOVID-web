@@ -18,8 +18,8 @@ import WorkIcon from '@material-ui/icons/Work'
 import BathtubIcon from '@material-ui/icons/Bathtub'
 import { FormLabel, FormHelperText } from '@material-ui/core'
 /* styles */
-import { ThemeProvider } from '@material-ui/core/styles'
-import { theme } from '../theme'
+// import { ThemeProvider } from '@material-ui/core/styles'
+// import { theme } from '../theme'
 /* others */
 import Token from '../Token'
 
@@ -33,8 +33,7 @@ interface TrashStates {
   isOpen: boolean,
   usernameValue: string,
   errorDelHimself: string,
-  isButtonDisabled: boolean,
-  isTrashOpen: boolean
+  isButtonDisabled: boolean
 }
 
 class TrashComponent extends Component<TrashProps, TrashStates> {
@@ -44,8 +43,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
       usernameValue: "",
       isOpen: false,
       errorDelHimself: "Non puoi cancellare il tuo account",
-      isButtonDisabled: true,
-      isTrashOpen: false
+      isButtonDisabled: true
     }
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -59,7 +57,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   render() {
     console.log(this.props) // WARNING: testing purposes
     return(
-      <ThemeProvider theme={theme}>
+
         <div>
           <IconButton
             className="trash"
@@ -130,7 +128,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
             </DialogActions>
           </Dialog>
         </div>
-      </ThemeProvider>
+
     )
   }
 
@@ -140,9 +138,9 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   */
   setButton() {
     if(this.state.usernameValue === Token.getUsername()) {
-      this.setState({ isButtonDisabled: true })
+      this.setState({isButtonDisabled: true})
     }
-    else this.setState({ isButtonDisabled: false })
+    else this.setState({isButtonDisabled: false})
   }
 
   /**
@@ -153,7 +151,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
     if(this.state.usernameValue === Token.getUsername()) {
       this.setState({isButtonDisabled: true})
     }
-    this.setState({isTrashOpen: true})
+    this.setState({isOpen: true})
   }
 
   /**
@@ -161,7 +159,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   handleClose() {
-    this.setState({isTrashOpen: false})
+    this.setState({isOpen: false})
   }
 
   /**
