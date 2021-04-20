@@ -21,17 +21,18 @@ import Token from '../Token'
 import { trashConfirm } from '../actions/trashActions'
 
 
-interface trashProps {
+interface TrashProps {
   state: any,
-  dispatch: any
+  dispatch: any,
+  mode: string
 }
 
-interface trashStates {
-   isOpen: boolean,
-   usernameValue: string,
-   errorDelHimself: string,
-   isButtonDisabled: boolean,
-   isTrashOpen: boolean
+interface TrashStates {
+  isOpen: boolean,
+  usernameValue: string,
+  errorDelHimself: string,
+  isButtonDisabled: boolean,
+  isTrashOpen: boolean
 }
 
 class TrashComponent extends Component<trashProps, trashStates> {
