@@ -157,10 +157,10 @@ class TrashComponent extends Component<trashProps, trashStates> {
    }
 }
 
-
 const mapStateToProps = (state: any) => {
   return {
     state: {
+      login: state.login,
       trash: state.trash
     }
   }
