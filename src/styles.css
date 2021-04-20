@@ -103,6 +103,38 @@
     color: #673ab7;
 }
 
+/* (((((((((((((((((((((((((((((( GENERALLAYOUT )))))))))))))))))))))))))))) */
+
+.root {
+    display: 'flex';
+}
+
+.menuButton {
+    margin-right: 36em;
+}
+
+.hide {
+    display: none;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1em;
+    padding-right: 1em;
+    /* necessary for content to be below app bar */
+    min-height: 60px;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 3em;
+    /* necessary for content to be right app bar */
+    margin-left: 50px;
+}
+
+
 /* (((((((((((((((((((((((((((((( NEWUSER )))))))))))))))))))))))))))) */
 
 .addColor:hover {

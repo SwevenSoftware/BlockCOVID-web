@@ -17,22 +17,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import GeneralLayout from './GeneralLayout'
 import Token from './Token'
+import {theme} from './theme';
 
-const theme = createMuiTheme({
-  palette: {
-    //type: "dark",
-    secondary: {
-      main: red[500]
-    },
-    primary: {
-      main: green[700]
-    }
-  },
-  typography: {
-    // Use the system font instead of the default Roboto font.
-    fontFamily: ['"Lato"', "sans-serif"].join(",")
-  }
-});
 
 interface StateApp {
   width: number | null;
@@ -110,7 +96,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
             </Button>
           </div>
           <div className="buttonGrid">
-            <Button id="decline" variant="outlined" size="medium" color="secondary" onClick={this.resetGrid}>
+            <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
               Annulla
             </Button>
           </div>

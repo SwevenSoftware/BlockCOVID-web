@@ -32,9 +32,6 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex',
-    },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -50,12 +47,6 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    hide: {
-      display: 'none',
     },
     drawer: {
       width: drawerWidth,
@@ -79,18 +70,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9) + 1,
       },
-    },
-    toolbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
     },
   }),
 );
@@ -129,7 +108,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
   //console.log(mainElement.props.children.type.name);
   return (
 
-    <div className={classes.root}>
+    <div className="root">
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -143,8 +122,8 @@ export default function GeneralLayout(mainElement : JSX.Element) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+            className={clsx("menuButton", {
+              ["hide"]: open,
             })}
           >
             <MenuIcon />
@@ -167,7 +146,7 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           }),
         }}
       >
-        <div className={classes.toolbar}>
+        <div className="toolbar">
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
@@ -232,8 +211,8 @@ export default function GeneralLayout(mainElement : JSX.Element) {
           }
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+      <main className="content">
+        <div className="toolbar" />
         {mainElement}
       </main>
     </div>
