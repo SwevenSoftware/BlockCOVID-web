@@ -26,7 +26,8 @@ import Token from '../Token'
 interface TrashProps {
   state: any,
   dispatch: any,
-  mode: string
+  mode: string,
+  data: any
 }
 
 interface TrashStates {

@@ -120,7 +120,12 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                     </ListItemIcon>
                     <ListItemText primary={user.username} className="usernameLayout"/>
                     <PersonIcon fontSize="large"/>
-                    <Trash mode="accounts"/>
+                    <Trash
+                      mode="accounts"
+                      data={
+                        {user: { username: user.username, authorities: "value"}}
+                      }
+                    />
                   </ListItem>
                 </Paper>
               </Grid>
