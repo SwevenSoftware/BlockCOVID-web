@@ -22,7 +22,7 @@ import { theme } from '../theme'
 import '../styles.css'
 /* others */
 // import Pencil from '../Pencil'
-// import Trash from '../Trash'
+import Trash from './TrashComponent'
 // import NewUser from '../NewUser'
 
 interface AccountProps {
@@ -120,7 +120,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                     </ListItemIcon>
                     <ListItemText primary={user.username} className="usernameLayout"/>
                     <PersonIcon fontSize="large"/>
-                    <PersonIcon fontSize="large"/>
+                    <Trash mode="accounts"/>
                   </ListItem>
                 </Paper>
               </Grid>
