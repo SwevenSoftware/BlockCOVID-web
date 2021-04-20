@@ -27,16 +27,17 @@ export const deleteAccount = (username: string, link: string, token: string) => 
       })
   }
 }
-const successMessage = (data) => ({
-   type: TRASH_SUCCESS,
-   payload: {
-      ...data
-   }
+
+const successAccount = (data) => ({
+  type: TRASH_SUCCESS,
+  payload: {
+    ...data
+  }
 })
 
-const failureMessage = (error) => ({
-   type: TRASH_FAILURE,
-   payload: {
-      error
-   }
+const failureAccount = (error) => ({
+  type: TRASH_FAILURE,
+  payload: {
+    error
+  }
 })
