@@ -1,11 +1,30 @@
 import axios from 'axios'
 
+/* post */
+
 export const login = ({username, password}) => {
   const config = {
     headers: { "Content-Type": "application/json"}
   }
   return axios.post("/api/login", JSON.stringify({username, password}), config)
 }
+
+export const createAccount = (tokenID: string, username: string, password: string, authorities: string[]) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": tokenID
+    }
+  }
+  const data = {
+    username: username,
+    password: password,
+    authorities: authorities
+  }
+  return axios.post("/api/admin/user/new", data, config)
+}
+
+/* get */
 
 export const getAccounts = (tokenID: string) => {
   const config = {
@@ -17,6 +36,8 @@ export const getAccounts = (tokenID: string) => {
   }
   return axios.get("/api/admin/users", config)
 }
+
+/* delete */
 
 export const deleteAccount = (username: string, link: string, tokenID: string) => {
   const config = {
