@@ -33,6 +33,7 @@ interface TrashProps {
 interface TrashStates {
   isOpen: boolean,
   isButtonDisabled: boolean
+  error: string
 }
 
 class TrashComponent extends Component<TrashProps, TrashStates> {
@@ -40,7 +41,8 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
     super(props)
     this.state = {
       isOpen: false,
-      isButtonDisabled: true
+      isButtonDisabled: true,
+      error: ""
     }
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
