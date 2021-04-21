@@ -21,7 +21,7 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import { theme } from '../theme'
 /* others */
-import Token from '../Token'
+import { ERROR_USER_CANNOT_BE_DELETED } from '../types'
 
 interface TrashProps {
   state: any,
@@ -51,6 +51,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
 
   componentDidMount() {
     this.setButton()
+    this.setError()
   }
 
   render() {
@@ -105,7 +106,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                   })
                 }
               </div>
-              <FormHelperText id="trashMessage">{}</FormHelperText>
+              <FormHelperText id="trashMessage">{this.state.error}</FormHelperText>
             </DialogContent>
             <DialogActions>
               <Button
@@ -132,31 +133,48 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
 
   /**
   * @params
-  * @returns
+  * @returns true if the user tries to delete his own account
+  *          false otherwise
   */
-  setButton() {
-    if(this.props.data.user.username === this.props.state.tokenID) {
-      this.setState({isButtonDisabled: true})
-    }
-    else this.setState({isButtonDisabled: false})
+  private isUserDeletingHimself(): boolean {
+    return (this.props.data.user.username === this.props.state.token.username)
   }
 
   /**
+  * Disables the confirm button if the user tries to delete himself
   * @params
   * @returns
   */
-  handleClickOpen() {
-    if(this.props.data.user.username === this.props.state.tokenID) {
-      this.setState({isButtonDisabled: true})
+  private setButton(): void {
+    this.setState({isButtonDisabled: this.isUserDeletingHimself()})
+  }
+
+  /**
+  * Disables the confirm button if the user tries to delete himself
+  * @params
+  * @returns
+  */
+  private setError(): void {
+    if(this.isUserDeletingHimself()) {
+      this.setState({error: ERROR_USER_CANNOT_BE_DELETED})
     }
+  }
+
+  /**
+  * Sets the visibility of the 'deleting' window to visible
+  * @params
+  * @returns
+  */
+  private handleClickOpen(): void {
     this.setState({isOpen: true})
   }
 
   /**
+  * Sets the visibility of the 'deleting' window to not visible
   * @params
   * @returns
   */
-  handleClose() {
+  private handleClose(): void {
     this.setState({isOpen: false})
   }
 
@@ -164,9 +182,9 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @params
   * @returns
   */
-  handleConfirm() {
-    if(this.props.data.user.username != this.props.state.tokenID) {
-      this.props.dispatch.deleteAccount(this.props.data.user.username, this.props.data.user.link, this.props.state.tokenID)
+  private handleConfirm(): void {
+    if(!this.isUserDeletingHimself()) {
+      this.props.dispatch.deleteAccount(this.props.data.user.username, this.props.data.user.link, this.props.state.token.id)
       this.handleClose()
       //window.setTimeout(function() { location.reload() }, 1500)
     }
@@ -176,7 +194,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
 const mapStateToProps = (state: any) => {
   return {
     state: {
-      tokenID: state.login.token.id,
+      token: state.login.token,
       trash: state.trash
     }
   }
