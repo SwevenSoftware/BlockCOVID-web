@@ -1,4 +1,4 @@
-import { trashConfirm as trashConfirmAPI }  from '../api';
+import { deleteAccount as trashConfirmAPI }  from '../api';
 import {
    TRASH_CANCEL,
    TRASH_CONFIRM,
@@ -16,9 +16,9 @@ export const trashCancel = (isOpen: boolean) => {
    }
 }
 
-export const trashConfirm = ({username, link_delete}) => {
+export const trashConfirm = ({username, link_delete, tokenID}) => {
    return (dispatch, getState) => {
-      trashConfirmAPI({username, link_delete})
+      trashConfirmAPI(username, link_delete, tokenID)
          .then((res) => {
             dispatch(successMessage(res.data))
          })
