@@ -1,6 +1,5 @@
 import {
   TRASH_ACCOUNTS_SUCCESS,
-  TRASH_CANCEL,
   TRASH_FAILURE
 } from "../types"
 
@@ -15,9 +14,6 @@ export default function trashReducer(state = initialState, action) {
       return {
         error: null
       }
-    case TRASH_CANCEL:
-      console.log("annullata l'eliminazione")
-      return state
     case TRASH_FAILURE:
       console.log("l'eliminazione è fallita contatta l'assistenza")
       return state

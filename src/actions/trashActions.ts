@@ -5,15 +5,6 @@ import {
 } from "../types"
 import { deleteAccount as deleteAccountAPI } from '../api';
 
-export const trashCancel = (isOpen: boolean) => {
-  return {
-    type: TRASH_CANCEL,
-    payload: {
-      isOpen: false
-    }
-  }
-}
-
 export const deleteAccount = (username: string, link_delete: string, tokenID: string) => {
   return (dispatch, getState) => {
     deleteAccountAPI(username, link_delete, tokenID)
