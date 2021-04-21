@@ -18,7 +18,7 @@ export const getAccounts = (tokenID: string) => {
   return axios.get("/api/admin/users", config)
 }
 
-export const deleteAccount = (username: string, link: string, tokenID: string) => {
+export const deleteAccount = (username: string, link_delete: string, tokenID: string) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -26,5 +26,7 @@ export const deleteAccount = (username: string, link: string, tokenID: string) =
       "username": username
     }
   }
-  return axios.delete(link + username, config)
+  console.log(link_delete + username)
+  console.log(config)
+  return axios.delete(link_delete + username, config)
 }

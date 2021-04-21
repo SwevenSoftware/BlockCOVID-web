@@ -14,9 +14,9 @@ export const trashCancel = (isOpen: boolean) => {
   }
 }
 
-export const deleteAccount = (username: string, link: string, token: string) => {
+export const deleteAccount = (username: string, link_delete: string, tokenID: string) => {
   return (dispatch, getState) => {
-    deleteAccountAPI(username, link, token)
+    deleteAccountAPI(username, link_delete, tokenID)
       .then((res) => {
         dispatch(successAccount(res.data))
       })
