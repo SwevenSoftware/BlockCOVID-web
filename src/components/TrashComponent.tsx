@@ -58,7 +58,6 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   render() {
     console.log(this.props) // WARNING: testing purposes
     return(
-
         <div>
           <IconButton
             className="trash"
@@ -70,7 +69,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
             onClose={(e) => this.handleClose()}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {this.state.usernameValue}?</DialogTitle>
+            <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {this.props.data.user.username}?</DialogTitle>
             <DialogContent className="central">
               <div className="alignCentralPencil">
                 <PersonIcon fontSize="large"/>
@@ -78,10 +77,10 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                   {this.state.usernameValue}
                 </DialogContentText>
                 <FormLabel className={"role_title"}>
-                  {/* this.props.state.authorities.length > 1 ? "Ruoli: " : "Ruolo: " */}
+                  { this.props.data.user.authorities.length > 1 ? "Ruoli: " : "Ruolo: " }
                 </FormLabel>
-                {/*
-                  this.props.state.authorities.map((auth) => {
+                {
+                  this.props.data.user.authorities.map((auth) => {
                     switch(auth) {
                       case "ADMIN":
                         return(
@@ -106,7 +105,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                         )
                     }
                   })
-                */}
+                }
               </div>
               <FormHelperText id="trashMessage">{this.state.errorDelHimself}</FormHelperText>
             </DialogContent>
