@@ -79,7 +79,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private handleChangeAuthorities() {
-
+      this.setState({...this.state, })
    }
 }
 
