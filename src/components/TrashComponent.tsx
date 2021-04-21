@@ -32,8 +32,6 @@ interface TrashProps {
 
 interface TrashStates {
   isOpen: boolean,
-  usernameValue: string,
-  errorDelHimself: string,
   isButtonDisabled: boolean
 }
 
@@ -41,9 +39,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   constructor(props) {
     super(props)
     this.state = {
-      usernameValue: "",
       isOpen: false,
-      errorDelHimself: "Non puoi cancellare il tuo account",
       isButtonDisabled: true
     }
     this.handleClickOpen = this.handleClickOpen.bind(this)
@@ -74,7 +70,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
               <div className="alignCentralPencil">
                 <PersonIcon fontSize="large"/>
                 <DialogContentText>
-                  {this.state.usernameValue}
+                  {this.props.data.user.username}
                 </DialogContentText>
                 <FormLabel className={"role_title"}>
                   { this.props.data.user.authorities.length > 1 ? "Ruoli: " : "Ruolo: " }
@@ -107,7 +103,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                   })
                 }
               </div>
-              <FormHelperText id="trashMessage">{this.state.errorDelHimself}</FormHelperText>
+              <FormHelperText id="trashMessage">{}</FormHelperText>
             </DialogContent>
             <DialogActions>
               <Button
@@ -137,7 +133,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   setButton() {
-    if(this.state.usernameValue === Token.getUsername()) {
+    if(this.props.data.user.username === this.props.state.tokenID) {
       this.setState({isButtonDisabled: true})
     }
     else this.setState({isButtonDisabled: false})
@@ -148,7 +144,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   handleClickOpen() {
-    if(this.state.usernameValue === Token.getUsername()) {
+    if(this.props.data.user.username === this.props.state.tokenID) {
       this.setState({isButtonDisabled: true})
     }
     this.setState({isOpen: true})
@@ -167,10 +163,10 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   handleConfirm() {
-    if(this.state.usernameValue != Token.getUsername()) {
-      this.props.dispatch.deleteAccount(this.state.usernameValue, "link", "token")
+    if(this.props.data.user.username != this.props.state.tokenID) {
+      this.props.dispatch.deleteAccount(this.props.data.user.username, this.props.data.user.link, this.props.state.tokenID)
       this.handleClose()
-      window.setTimeout(function() { location.reload() }, 1500)
+      //window.setTimeout(function() { location.reload() }, 1500)
     }
   }
 }
@@ -178,7 +174,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
 const mapStateToProps = (state: any) => {
   return {
     state: {
-      login: state.login,
+      tokenID: state.login.token.id,
       trash: state.trash
     }
   }
@@ -187,8 +183,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     dispatch: {
-      deleteAccount: (username: string, link: string, tokenID: string) => {
-        dispatch(deleteAccount(username, link, tokenID))
+      deleteAccount: (username: string, link_delete: string, tokenID: string) => {
+        dispatch(deleteAccount(username, link_delete, tokenID))
       }
     }
   }
