@@ -185,8 +185,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     dispatch: {
-      deleteAccount: (username: string, link_delete: string, tokenID: string) => {
-        dispatch(deleteAccount(username, link_delete, tokenID))
+      deleteAccount: (username: string, link: string, tokenID: string) => {
+        dispatch(deleteAccount(username, link, tokenID))
       }
     }
   }

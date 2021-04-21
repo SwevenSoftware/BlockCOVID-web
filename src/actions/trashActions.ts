@@ -5,9 +5,9 @@ import {
 } from "../types"
 import { deleteAccount as deleteAccountAPI } from '../api';
 
-export const deleteAccount = (username: string, link_delete: string, tokenID: string) => {
+export const deleteAccount = (username: string, link: string, tokenID: string) => {
   return (dispatch, getState) => {
-    deleteAccountAPI(username, link_delete, tokenID)
+    deleteAccountAPI(username, link, tokenID)
       .then((res) => {
         dispatch(successAccount(res.data))
       })
