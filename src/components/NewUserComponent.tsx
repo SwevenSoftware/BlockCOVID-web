@@ -39,20 +39,26 @@ interface NewUserStates {
    confirmPasswordValue: string,
    isButtonDisabled: boolean,
    isNewUserOpen: boolean,
-   authorities: boolean[]
+   authorities: any
 }
 
 class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    constructor(props) {
       super(props);
       this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
+      this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
+      this.handleCloseButton = this.handleCloseButton.bind(this)
       this.state = {
          usernameValue: "",
          passwordValue: "",
          confirmPasswordValue: "",
          isButtonDisabled: true,
          isNewUserOpen: false,
-         authorities: [false, false, false]
+         authorities: {
+            checkedAdmin: false,
+            checkedUser: false,
+            checkedCleaner: false
+         }
       }
    }
 
@@ -80,6 +86,27 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 
    private handleChangeAuthorities() {
       this.setState({...this.state, })
+   }
+
+   private handleClickOpenButton() {
+      this.setState({isButtonDisabled: true}) 
+   }
+
+   private handleCloseButton() {
+      this.setState({usernameValue: ""})
+      this.setState({passwordValue: ""})
+      this.setState({confirmPasswordValue: ""})
+      this.setState({isButtonDisabled: true})
+      this.setState({})
+      this.setState({
+         authorities: {
+            checkedAdmin: false,
+            checkedUser: false,
+            checkedCleaner: false
+         }
+      })
+
+      //not ended
    }
 }
 
