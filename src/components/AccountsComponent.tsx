@@ -122,9 +122,13 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                     <PersonIcon fontSize="large"/>
                     <Trash
                       mode="accounts"
-                      data={
-                        {user: { username: user.username, authorities: "value"}}
-                      }
+                      data={{
+                        user: {
+                          username: user.username,
+                          authorities: user.authorities,
+                          link: user._links.delete_user
+                        }
+                      }}
                     />
                   </ListItem>
                 </Paper>
