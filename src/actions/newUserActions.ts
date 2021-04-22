@@ -2,8 +2,13 @@ import {
 
 } from "../types"
 
-export const newUserConfirm = ({username, password, confirmPassword}) => {
+import {createAccount} from "../api"
+
+export const newUserConfirm = ({tokenID, username, password, auth}) => {
    return (dispatch, getState) => {
-      //APIcall will be implemented
+      createAccount(tokenID, username, password, auth)
+         .then((res) => {
+            dispatch()
+         })
    }
 }
