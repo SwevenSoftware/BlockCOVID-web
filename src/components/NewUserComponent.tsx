@@ -130,6 +130,18 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          return false
       }
    }
+
+   private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
+      if (passwordValue === "") {
+         //displayError = PasswordError
+         this.setState({passwordError: true})
+         return true
+      } else {
+         //displayError = null
+         this.setState({passwordError: false})
+         return false
+      }
+   }
 }
 
 
