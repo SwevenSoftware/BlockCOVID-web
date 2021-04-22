@@ -23,7 +23,7 @@ import '../styles.css'
 /* others */
 // import Pencil from '../Pencil'
 // import Trash from '../Trash'
-// import NewUser from '../NewUser'
+import NewUser from './NewUserComponent'
 
 interface AccountProps {
   state: any
@@ -56,6 +56,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
     console.log(this.props) // WARNING: testing purposes
     return (
       <ThemeProvider theme={theme}>
+        <NewUser/>
         <div className="counter">
           <ListItem>
             <h3>Accounts:</h3>
