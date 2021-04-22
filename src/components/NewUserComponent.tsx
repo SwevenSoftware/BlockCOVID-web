@@ -158,23 +158,36 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    //todo
-   /* private authInputControl(
-      
-   ) */ 
+   private authInputControl() {
+      let notChecked = true
+      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
+      for(let i in auth) {
+         if (auth[i]) notChecked = false
+      }
+      if (notChecked) {
+         //authorities error
+         return true;
+      } else {
+         //auth erro empty
+         return false;
+      }
+   }
 
    private handleConfirm(
       username: string = this.state.usernameValue,
       password: string = this.state.passwordValue,
       confirmPassword: string = this.state.confirmPasswordValue,
-      //auth missing
+      tokenID: string = this.props.state.token,
+      auth: boolean[] = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner] 
    ) :void {
       let flagErr = false;
       flagErr = (this.userInputControl() ? true : flagErr);
       flagErr = (this.passInputControl() ? true : flagErr);
       flagErr = (this.confirmPassInputControl() ? true : flagErr);
-      //flagErr = (this.authInputControl() ? true : flagErr);
+      flagErr = (this.authInputControl() ? true : flagErr);
 
       if (!flagErr) {
+         newUserConfirm({tokenID, username, password, auth} )
          
       }
    }
@@ -188,7 +201,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 const mapStateToProps = (state) => {
   return {
     state: {
-      newUser: state.newUser
+      newUser: state.newUser,
+      token: state.login.token
     }
   }
 }
