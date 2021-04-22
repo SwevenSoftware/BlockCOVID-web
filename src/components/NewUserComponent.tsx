@@ -39,7 +39,10 @@ interface NewUserStates {
    confirmPasswordValue: string,
    isButtonDisabled: boolean,
    isNewUserOpen: boolean,
-   authorities: any
+   authorities: any,
+   usernameError: boolean,
+   passwordError: boolean,
+   confirmPasswordError: boolean
 }
 
 class NewUserComponent extends Component<NewUserProps, NewUserStates> {
@@ -48,6 +51,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
       this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
       this.handleCloseButton = this.handleCloseButton.bind(this)
+      this.userInputControl = this.userInputControl.bind(this),
       this.state = {
          usernameValue: "",
          passwordValue: "",
@@ -58,7 +62,11 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
             checkedAdmin: false,
             checkedUser: false,
             checkedCleaner: false
-         }
+         },
+         usernameError: false,
+         passwordError: false,
+         confirmPasswordError: false
+
       }
    }
 
@@ -97,7 +105,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       this.setState({passwordValue: ""})
       this.setState({confirmPasswordValue: ""})
       this.setState({isButtonDisabled: true})
-      this.setState({})
+      this.setState({isNewUserOpen: false})
       this.setState({
          authorities: {
             checkedAdmin: false,
@@ -105,10 +113,23 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
             checkedCleaner: false
          }
       })
+      this.setState({usernameError: false})
+      this.setState({passwordError: false})
+      this.setState({confirmPasswordError: false})
+   }
 
-      //not ended
+   private userInputControl(usernameValue: string = this.state.usernameValue): boolean {
+      let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
+      if(usernameValue.match(reg)) {
+         //displayError = userInvalid
+      }
    }
 }
+
+
+
+
+
 
 const mapStateToProps = (state) => {
    return {
