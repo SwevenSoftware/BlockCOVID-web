@@ -1,8 +1,13 @@
 /* react */
 import React, { Component } from 'react'
+
 /* redux */
 import { connect } from 'react-redux'
 import { newUserConfirm } from '../actions/newUserActions'
+
+/* api */
+import { createAccount } from '../api'
+
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -45,8 +50,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       super(props);
       this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
       this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-      this.handleCloseButton = this.handleCloseButton.bind(this)
-      this.userInputControl = this.userInputControl.bind(this),
+      this.handleCloseButton = this.handleCloseButton.bind(this),
+      this.handleConfirm = this.handleConfirm.bind(this),
       this.state = {
          usernameValue: "",
          passwordValue: "",
@@ -150,6 +155,28 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
             this.setState({confirmPasswordError: false})
             return false
          }
+   }
+
+   //todo
+   /* private authInputControl(
+      
+   ) */ 
+
+   private handleConfirm(
+      username: string = this.state.usernameValue,
+      password: string = this.state.passwordValue,
+      confirmPassword: string = this.state.confirmPasswordValue,
+      //auth missing
+   ) :void {
+      let flagErr = false;
+      flagErr = (this.userInputControl() ? true : flagErr);
+      flagErr = (this.passInputControl() ? true : flagErr);
+      flagErr = (this.confirmPassInputControl() ? true : flagErr);
+      //flagErr = (this.authInputControl() ? true : flagErr);
+
+      if (!flagErr) {
+         
+      }
    }
 }
 
