@@ -15,6 +15,11 @@ export const TRASH_CANCEL = "TRASH_CANCEL"
 export const TRASH_SUCCESS = "TRASH_SUCCESS"
 export const TRASH_FAILURE = "TRASH_FAILURE"
 
+export const NEW_USER_CONFIRM = "NEW_USER_CONFIRM"
+export const NEW_USER_FAILURE = "NEW_USER_FAILURE"
+export const NEW_USER_SUCCESS = "NEW_USER_SUCCESS"
+export const NEW_USER_CANCEL = "NEW_USER_CANCEL"
+
 /* login */
 export const ERROR_USER_NO_AUTH = "Accesso non autorizzato. Si prega di contattare l'amministratore"
 export const ERROR_USER_OR_PASS = "Username o password scorretta. Riprova"
@@ -26,6 +31,10 @@ export const ERROR_AUTHORITIES = "Si prega di scegliere almeno una opzione"
 
 /* trash */
 export const ERROR_USER_CANNOT_BE_DELETED = "Non puoi eliminare il tuo account"
+
+/* newUser */
+export const ERROR_WRONG_CONFIRM_PASSWORD = "Le due password non corrispondono"
+export const ERROR_USERNAME_NOT_AVAILABLE = "Questo username è già presente nel database"
 
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"
