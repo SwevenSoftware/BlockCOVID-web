@@ -142,6 +142,20 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          return false
       }
    }
+
+   private confirmPassInputControl(
+      passwordValue: string = this.state.confirmPasswordValue,
+      confirmPasswordValue: string = this.state.confirmPasswordValue): boolean {
+         if (confirmPasswordValue !== passwordValue) {
+            //displayError = PasswordError
+            this.setState({confirmPasswordError: true})
+            return true
+         } else {
+            //displayError = null
+            this.setState({confirmPasswordError: false})
+            return false
+         }
+   }
 }
 
 
