@@ -188,7 +188,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 
       if (!flagErr) {
          newUserConfirm({tokenID, username, password, auth} )
-         
+         //window.setTimeout(function(){location.reload()}, 1500)
       }
    }
 }
