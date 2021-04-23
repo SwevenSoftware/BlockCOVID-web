@@ -1,7 +1,8 @@
 import {
    NEW_USER_SUCCESS,
    NEW_USER_FAILURE,
-   NEW_USER_CONFIRM
+   NEW_USER_CONFIRM,
+   ERROR_USERNAME_NOT_AVAILABLE
 } from "../types"
 
 const initialState = {
@@ -17,7 +18,13 @@ export default function newUserReducer(state = initialState, action) {
          }
       break;
       case NEW_USER_FAILURE:
-         console.log("annullata eliminazione")
+         console.log("impossibile creare utente")
+         switch(action.payload.error) {
+            case 409: /* user exists, username already taken */
+            return {
+               error: ERROR_USERNAME_NOT_AVAILABLE
+            }
+         }
       break;
       default:
          return state
