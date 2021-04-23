@@ -71,9 +71,132 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    render() {
-      return(
-         <div></div>
-      )
+      return (
+         <ThemeProvider theme={theme}>
+           <div>
+             <IconButton 
+               className="addColor"
+               onClick={this.handleClickOpenButton}>
+               <AddBoxIcon fontSize="large" />
+             </IconButton>
+             <Dialog 
+               open={this.state.isNewUserOpen}
+               onClose={this.handleCloseButton}
+               aria-labelledby="form-dialog-title"
+               className="central"
+               fullWidth maxWidth="xs">
+               <DialogTitle
+                  id="form-dialog-title"
+                  className="pencilTitle">
+                     Crea un nuovo utente
+               </DialogTitle>
+               <DialogContent>
+                 <div className="centralPencil">
+                   <DialogContentText>
+                     Compila i seguenti campi
+                   </DialogContentText>
+                 </div>
+                 <div className="alignCentralPencil">
+                   <div className="addField">
+                   <TextField
+                     required
+                     id="outlined-search"
+                     label="Username"
+                     variant="outlined"
+                     error={this.state.usernameError}
+                     helperText={userErr}
+                     value={this.state.usernameValue}
+                     onChange={(e) => {
+                         setUserValue(e.target.value);
+                         userInputControl(e.target.value);
+                     }}
+                   />
+                   </div>
+                   <div className="addField">
+                     <TextField
+                       required
+                       id="outlined-password-input"
+                       label="Password"
+                       type="password"
+                       autoComplete="current-password"
+                       variant="outlined"
+                       error={isPassErr}
+                       helperText={this.state.passwordError}
+                       value={this.state.passwordValue}
+                       onChange={(e) => {
+                         setPassValue(e.target.value);
+                         passInputControl(e.target.value);
+                         if(this.state.confirmPasswordValue != "") {
+                           passConfirmInputControl(e.target.value, this.state.confirmPasswordValue);
+                         }
+                       }}
+                     />
+                   </div>
+                   <div className="addField">
+                     <TextField
+                       required
+                       id="outlined-password-input"
+                       label="Ripeti Password"
+                       type="password"
+                       autoComplete="current-password"
+                       variant="outlined"
+                       error={isPassConfirmErr}
+                       helperText={this.state.confirmPasswordError}
+                       value={this.state.confirmPasswordValue}
+                       onChange={(e) => {
+                         setPassConfirmValue(e.target.value);
+                         passConfirmInputControl(this.state.PasswordValue, e.target.value);
+                       }}
+                     />
+                   </div>
+                 </div>
+                 <div className="centralPencil">
+                 <DialogContentText color="primary">
+                   * indica i campi obbligatori
+                 </DialogContentText>
+                 <div>
+                   <FormLabel className={"role_title"}>Ruolo:</FormLabel>
+                 </div>
+                 <FormControl>
+                     <FormGroup>
+                       <div>
+                         <FormControlLabel
+                           control={<GreenCheckbox checked={this.state.authorities[0]} onChange={this.handleChangeAuthorities} name="checkedAdmin" />}
+                           label="Admin"
+                         />
+                       </div>
+                       <div>
+                         <FormControlLabel
+                           control={<GreenCheckbox checked={this.state.authorities[1]} onChange={this.handleChangeAuthorities} name="checkedUser" />}
+                           label="Utente"
+                         />
+                       </div>
+                       <div>
+                         <FormControlLabel
+                           control={<GreenCheckbox checked={this.state.authorities[2]} onChange={this.handleChangeAuthorities} name="checkedCleaner" />}
+                           label="Addetto alle pulizie"
+                         />
+                       </div>
+                     </FormGroup>
+                     <FormHelperText color="red">{authErr}</FormHelperText>
+                 </FormControl>
+                 </div>
+               </DialogContent>
+               <DialogActions>
+                 <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
+                   Annulla
+                 </Button>
+                 <Button onClick={() => {
+                   this.handleConfirm(this.state.usernameValue, this.state.passwordValue, this.props.state.tokenID, this.state.authorities);
+                   }}
+                   id="confirm" variant="outlined">
+                   Conferma
+                 </Button>
+               </DialogActions>
+             </Dialog>
+           </div>
+         </ThemeProvider>
+       );
    }
 
    componentDidMount() {
@@ -189,6 +312,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       if (!flagErr) {
          newUserConfirm({tokenID, username, password, auth} )
          //window.setTimeout(function(){location.reload()}, 1500)
+      } else {
+         //message: si è verificato un errore
       }
    }
 }
