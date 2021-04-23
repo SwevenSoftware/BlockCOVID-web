@@ -1,7 +1,6 @@
 import {
    NEW_USER_SUCCESS,
    NEW_USER_FAILURE,
-   NEW_USER_CONFIRM,
    ERROR_USERNAME_NOT_AVAILABLE
 } from "../types"
 
