@@ -28,6 +28,16 @@ import '../styles.css'
 /* others */
 import { VariantType, useSnackbar } from 'notistack'
 
+const GreenCheckbox = withStyles({
+   root: {
+     color: "#689f38",
+     '&$checked': {
+       color: "#689f38",
+     },
+   },
+   checked:{},
+ }) ((props:CheckboxProps) => <Checkbox color="default" {...props} />);
+
 interface NewUserProps {
   state: any,
   dispatch: any
@@ -49,9 +59,13 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    constructor(props) {
       super(props);
       this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
+      this.handleChangeUsername = this.handleChangeUsername.bind(this),
+      this.handleChangePassword = this.handleChangePassword.bind(this),
+      this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this),
       this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
       this.handleCloseButton = this.handleCloseButton.bind(this),
       this.handleConfirm = this.handleConfirm.bind(this),
+      
       this.state = {
          usernameValue: "",
          passwordValue: "",
@@ -76,12 +90,12 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
            <div>
              <IconButton 
                className="addColor"
-               onClick={this.handleClickOpenButton}>
+               onClick={() => this.handleClickOpenButton()}>
                <AddBoxIcon fontSize="large" />
              </IconButton>
              <Dialog 
                open={this.state.isNewUserOpen}
-               onClose={this.handleCloseButton}
+               onClose={() => this.handleCloseButton()}
                aria-labelledby="form-dialog-title"
                className="central"
                fullWidth maxWidth="xs">
@@ -104,11 +118,11 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      label="Username"
                      variant="outlined"
                      error={this.state.usernameError}
-                     helperText={userErr}
+                     //helperText={userErr}
                      value={this.state.usernameValue}
                      onChange={(e) => {
-                         setUserValue(e.target.value);
-                         userInputControl(e.target.value);
+                         this.handleChangeUsername(e.target.value);
+                         this.userInputControl(e.target.value);
                      }}
                    />
                    </div>
@@ -120,14 +134,14 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        type="password"
                        autoComplete="current-password"
                        variant="outlined"
-                       error={isPassErr}
+                       //error={isPassErr}
                        helperText={this.state.passwordError}
                        value={this.state.passwordValue}
                        onChange={(e) => {
-                         setPassValue(e.target.value);
-                         passInputControl(e.target.value);
+                         this.handleChangePassword(e.target.value);
+                         this.passInputControl(e.target.value);
                          if(this.state.confirmPasswordValue != "") {
-                           passConfirmInputControl(e.target.value, this.state.confirmPasswordValue);
+                           //this.passInputControl(e.target.value, this.state.confirmPasswordValue);
                          }
                        }}
                      />
@@ -140,12 +154,12 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        type="password"
                        autoComplete="current-password"
                        variant="outlined"
-                       error={isPassConfirmErr}
+                       //error={isPassConfirmErr}
                        helperText={this.state.confirmPasswordError}
                        value={this.state.confirmPasswordValue}
                        onChange={(e) => {
-                         setPassConfirmValue(e.target.value);
-                         passConfirmInputControl(this.state.PasswordValue, e.target.value);
+                         this.handleChangeConfirmPassword(e.target.value);
+                         this.confirmPassInputControl(this.state.passwordValue, e.target.value);
                        }}
                      />
                    </div>
@@ -161,24 +175,24 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      <FormGroup>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities[0]} onChange={this.handleChangeAuthorities} name="checkedAdmin" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e.target.name, e.target.value)} name="checkedAdmin" />}
                            label="Admin"
                          />
                        </div>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities[1]} onChange={this.handleChangeAuthorities} name="checkedUser" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={this.handleChangeAuthorities} name="checkedUser" />}
                            label="Utente"
                          />
                        </div>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities[2]} onChange={this.handleChangeAuthorities} name="checkedCleaner" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={this.handleChangeAuthorities} name="checkedCleaner" />}
                            label="Addetto alle pulizie"
                          />
                        </div>
                      </FormGroup>
-                     <FormHelperText color="red">{authErr}</FormHelperText>
+                     {/* <FormHelperText color="red">{authErr}</FormHelperText> */}
                  </FormControl>
                  </div>
                </DialogContent>
@@ -215,12 +229,30 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          }
    }
 
-   private handleChangeAuthorities() {
-      this.setState({...this.state, })
+   //in progress
+   private handleChangeAuthorities(name: any, value: any) {
+      console.log(name)
+      console.log(value)
+      //this.setState({...this.state, })
+   }
+
+   private handleChangeUsername(username: string): void {
+      this.setState({usernameValue: username.trim()})
+      this.setButton(username)
+   }
+
+   private handleChangePassword(password: string) : void {
+      this.setState({passwordValue: password.trim()})
+      this.setButton(this.state.usernameValue, password)
+   }
+
+   private handleChangeConfirmPassword(confirmPassword: string) : void {
+      this.setState({confirmPasswordValue: confirmPassword.trim()})
+      this.setButton(this.state.usernameValue, this.state.passwordValue, confirmPassword)
    }
 
    private handleClickOpenButton() {
-      this.setState({isButtonDisabled: true}) 
+      this.setState({isNewUserOpen: true}) 
    }
 
    private handleCloseButton() {
@@ -312,6 +344,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       if (!flagErr) {
          newUserConfirm({tokenID, username, password, auth} )
          //window.setTimeout(function(){location.reload()}, 1500)
+         this.handleCloseButton()
       } else {
          //message: si è verificato un errore
       }
