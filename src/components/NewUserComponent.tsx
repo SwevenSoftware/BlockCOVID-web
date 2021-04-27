@@ -149,7 +149,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                    <div className="addField">
                      <TextField
                        required
-                       id="outlined-password-input"
+                       id="outlined-confirm-password-input"
                        label="Ripeti Password"
                        type="password"
                        autoComplete="current-password"
