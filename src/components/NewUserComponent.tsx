@@ -275,7 +275,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 
    private userInputControl(usernameValue: string = this.state.usernameValue): boolean {
       let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
-      if(usernameValue.match(reg)) {
+      if(!usernameValue.match(reg)) {
          //displayError = userError
          this.setState({usernameError: true})
          return true
