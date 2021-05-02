@@ -207,7 +207,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                    Annulla
                  </Button>
                  <Button onClick={() => {
-                   this.handleConfirm(this.state.usernameValue, this.state.passwordValue, this.props.state.tokenID, this.state.authorities);
+                   this.handleConfirm();
                    }}
                    id="confirm" variant="outlined">
                    Conferma
@@ -344,23 +344,22 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       }
    }
 
-   private handleConfirm(
-      username: string = this.state.usernameValue,
-      password: string = this.state.passwordValue,
-      confirmPassword: string = this.state.confirmPasswordValue,
-      tokenID: string = this.props.state.token,
-      auth: boolean[] = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner] 
-   ) :void {
+   private handleConfirm() :void {
       let flagErr = false;
+      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
       flagErr = (this.userInputControl() ? true : flagErr);
       flagErr = (this.passInputControl() ? true : flagErr);
       flagErr = (this.confirmPassInputControl() ? true : flagErr);
       flagErr = (this.authInputControl(auth) ? true : flagErr);
 
       if (!flagErr) {
-         newUserConfirm({tokenID, username, password, auth} )
-         //window.setTimeout(function(){location.reload()}, 1500)
-         this.handleCloseButton()
+        const aux = new Array();
+        if(auth[0]) aux.push("ADMIN");
+        if(auth[1]) aux.push("USER");
+        if(auth[2]) aux.push("CLEANER");
+        this.props.dispatch.newUser({tokenID: this.props.state.tokenID, username: this.state.usernameValue, password: this.state.passwordValue, auth: aux} )
+        //window.setTimeout(function(){location.reload()}, 1500)
+        this.handleCloseButton()
       } else {
          //message: si è verificato un errore
       }
@@ -376,7 +375,7 @@ const mapStateToProps = (state) => {
   return {
     state: {
       newUser: state.newUser,
-      token: state.login.token
+      tokenID: state.login.token.id
     }
   }
 }
