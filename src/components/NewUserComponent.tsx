@@ -8,6 +8,12 @@ import { newUserConfirm } from '../actions/newUserActions'
 /* api */
 import { createAccount } from '../api'
 
+/* types */
+import {
+  ERROR_WRONG_CONFIRM_PASSWORD,
+  ERROR_USERNAME_NOT_AVAILABLE
+} from '../types'
+
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -118,7 +124,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      label="Username"
                      variant="outlined"
                      error={this.state.usernameError}
-                     //helperText={userErr}
+                     helperText={this.state.usernameError ? ERROR_USERNAME_NOT_AVAILABLE : ""}
                      value={this.state.usernameValue}
                      onChange={(e) => {
                          this.handleChangeUsername(e.target.value);
@@ -134,8 +140,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        type="password"
                        autoComplete="current-password"
                        variant="outlined"
-                       //error={isPassErr}
-                       helperText={this.state.passwordError}
+                       error={this.state.passwordError}
+                       //helperText={this.state.passwordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
                        value={this.state.passwordValue}
                        onChange={(e) => {
                          this.handleChangePassword(e.target.value);
@@ -154,7 +160,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        type="password"
                        autoComplete="current-password"
                        variant="outlined"
-                       //error={isPassConfirmErr}
+                       error={this.state.passwordError}
                        helperText={this.state.confirmPasswordError}
                        value={this.state.confirmPasswordValue}
                        onChange={(e) => {
@@ -175,19 +181,19 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      <FormGroup>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e.target.name, e.target.value)} name="checkedAdmin" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
                            label="Admin"
                          />
                        </div>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={this.handleChangeAuthorities} name="checkedUser" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
                            label="Utente"
                          />
                        </div>
                        <div>
                          <FormControlLabel
-                           control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={this.handleChangeAuthorities} name="checkedCleaner" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
                            label="Addetto alle pulizie"
                          />
                        </div>
@@ -230,10 +236,20 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    //in progress
-   private handleChangeAuthorities(name: any, value: any) {
-      console.log(name)
-      console.log(value)
-      //this.setState({...this.state, })
+   private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
+    switch(event.target.name) {
+      case "checkedAdmin":
+        this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
+      break;
+      case "checkedUser":
+        this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
+      break;
+      case "checkedCleaner":
+        this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
+      break;
+    }
+      
    }
 
    private handleChangeUsername(username: string): void {
@@ -313,9 +329,9 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    //todo
-   private authInputControl() {
+   private authInputControl(auth: boolean[]): boolean {
       let notChecked = true
-      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
+      //let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
       for(let i in auth) {
          if (auth[i]) notChecked = false
       }
@@ -339,7 +355,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       flagErr = (this.userInputControl() ? true : flagErr);
       flagErr = (this.passInputControl() ? true : flagErr);
       flagErr = (this.confirmPassInputControl() ? true : flagErr);
-      flagErr = (this.authInputControl() ? true : flagErr);
+      flagErr = (this.authInputControl(auth) ? true : flagErr);
 
       if (!flagErr) {
          newUserConfirm({tokenID, username, password, auth} )
