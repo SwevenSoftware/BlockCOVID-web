@@ -128,8 +128,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      value={this.state.usernameValue}
                      onChange={(e) => {
                          this.handleChangeUsername(e.target.value);
-                         console.log("user",this.userInputControl(e.target.value))
-                         //this.userInputControl(e.target.value);
+                         this.userInputControl(e.target.value);
                      }}
                    />
                    </div>
@@ -147,8 +146,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                          this.handleChangePassword(e.target.value);
                          this.passInputControl(e.target.value);
                          if(this.state.confirmPasswordValue != "") {
-                           console.log("pass",this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue))
-                           //this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue);
+                           this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue);
                          }
                        }}
                      />
@@ -166,8 +164,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        value={this.state.confirmPasswordValue}
                        onChange={(e) => {
                          this.handleChangeConfirmPassword(e.target.value);
-                         console.log("passconf", this.confirmPassInputControl(this.state.passwordValue, e.target.value))
-                         //this.confirmPassInputControl(this.state.passwordValue, e.target.value);
+                         this.confirmPassInputControl(this.state.passwordValue, e.target.value);
                        }}
                      />
                    </div>
@@ -237,7 +234,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          }
    }
 
-   //in progress
    private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
     switch(event.target.name) {
@@ -294,11 +290,9 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    private userInputControl(usernameValue: string): boolean {
       let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
       if(!usernameValue.match(reg)) {
-         //displayError = userError
          this.setState({usernameError: true})
          return true
       } else {
-         //displayError = userError empty
          this.setState({usernameError: false})
          return false
       }
@@ -308,13 +302,11 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       if (this.state.confirmPasswordValue === "" && passwordValue === ""){
           this.setState({confirmPasswordError: false})
           this.setState({passwordError: false})
-          return false
+          return true
       } else if (passwordValue === "") {
-         //displayError = PasswordError
          this.setState({passwordError: true})
          return true
       } else {
-         //displayError = null
          this.setState({passwordError: false})
          return false
       }
@@ -324,14 +316,12 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          if (confirmPasswordValue === "" && passwordValue === ""){
             this.setState({confirmPasswordError: false})
             this.setState({passwordError: false})
-            return false
+            return true
          } else if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
-          //displayError = PasswordError
           this.setState({confirmPasswordError: true})
           this.setState({passwordError: true})
           return true
          } else {
-            //displayError = null
             this.setState({confirmPasswordError: false})
             this.setState({passwordError: false})
             return false
@@ -341,7 +331,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    //todo
    private authInputControl(auth: boolean[]): boolean {
       let notChecked = true
-      //let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
       for(let i in auth) {
          if (auth[i]) notChecked = false
       }
