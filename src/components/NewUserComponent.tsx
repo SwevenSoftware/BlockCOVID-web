@@ -346,12 +346,16 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 
    private handleConfirm() :void {
       let flagErr = false;
-      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
-      flagErr = (this.userInputControl() ? true : flagErr);
-      flagErr = (this.passInputControl() ? true : flagErr);
-      flagErr = (this.confirmPassInputControl() ? true : flagErr);
+      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner];
+      let pass  = this.state.passwordValue;
+      let confPass = this.state.confirmPasswordValue;
+      let username = this.state.usernameValue;
+      flagErr = (this.userInputControl(username) ? true : flagErr);
+      flagErr = (this.passInputControl(pass) ? true : flagErr);
+      flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr);
       flagErr = (this.authInputControl(auth) ? true : flagErr);
 
+      console.log(flagErr);
       if (!flagErr) {
         const aux = new Array();
         if(auth[0]) aux.push("ADMIN");
