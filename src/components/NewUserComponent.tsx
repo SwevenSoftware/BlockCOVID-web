@@ -142,7 +142,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        autoComplete="current-password"
                        variant="outlined"
                        error={this.state.passwordError}
-                       helperText={this.state.passwordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
                        value={this.state.passwordValue}
                        onChange={(e) => {
                          this.handleChangePassword(e.target.value);
@@ -163,7 +162,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        autoComplete="current-password"
                        variant="outlined"
                        error={this.state.confirmPasswordError}
-                       helperText={this.state.confirmPasswordError ? "errore" : ""}
+                       helperText={this.state.confirmPasswordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
                        value={this.state.confirmPasswordValue}
                        onChange={(e) => {
                          this.handleChangeConfirmPassword(e.target.value);
@@ -306,7 +305,11 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
-      if (passwordValue === "") {
+      if (this.state.confirmPasswordValue === "" && passwordValue === ""){
+          this.setState({confirmPasswordError: false})
+          this.setState({passwordError: false})
+          return false
+      } else if (passwordValue === "") {
          //displayError = PasswordError
          this.setState({passwordError: true})
          return true
@@ -318,13 +321,19 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
-         if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
-            //displayError = PasswordError
-            this.setState({confirmPasswordError: true})
-            return true
+         if (confirmPasswordValue === "" && passwordValue === ""){
+            this.setState({confirmPasswordError: false})
+            this.setState({passwordError: false})
+            return false
+         } else if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
+          //displayError = PasswordError
+          this.setState({confirmPasswordError: true})
+          this.setState({passwordError: true})
+          return true
          } else {
             //displayError = null
             this.setState({confirmPasswordError: false})
+            this.setState({passwordError: false})
             return false
          }
    }
@@ -356,7 +365,9 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr);
       flagErr = (this.authInputControl(auth) ? true : flagErr);
 
-      console.log(flagErr);
+      if (flagErr) console.log("manca qualcosa");
+      else console.log("tutto ok capo");
+
       if (!flagErr) {
         const aux = new Array();
         if(auth[0]) aux.push("ADMIN");
