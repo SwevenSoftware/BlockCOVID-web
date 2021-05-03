@@ -128,7 +128,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                      value={this.state.usernameValue}
                      onChange={(e) => {
                          this.handleChangeUsername(e.target.value);
-                         this.userInputControl(e.target.value);
+                         console.log("user",this.userInputControl(e.target.value))
+                         //this.userInputControl(e.target.value);
                      }}
                    />
                    </div>
@@ -141,13 +142,14 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        autoComplete="current-password"
                        variant="outlined"
                        error={this.state.passwordError}
-                       //helperText={this.state.passwordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
+                       helperText={this.state.passwordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
                        value={this.state.passwordValue}
                        onChange={(e) => {
                          this.handleChangePassword(e.target.value);
                          this.passInputControl(e.target.value);
                          if(this.state.confirmPasswordValue != "") {
-                           //this.passInputControl(e.target.value, this.state.confirmPasswordValue);
+                           console.log("pass",this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue))
+                           //this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue);
                          }
                        }}
                      />
@@ -160,12 +162,13 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        type="password"
                        autoComplete="current-password"
                        variant="outlined"
-                       error={this.state.passwordError}
-                       helperText={this.state.confirmPasswordError}
+                       error={this.state.confirmPasswordError}
+                       helperText={this.state.confirmPasswordError ? "errore" : ""}
                        value={this.state.confirmPasswordValue}
                        onChange={(e) => {
                          this.handleChangeConfirmPassword(e.target.value);
-                         this.confirmPassInputControl(this.state.passwordValue, e.target.value);
+                         console.log("passconf", this.confirmPassInputControl(this.state.passwordValue, e.target.value))
+                         //this.confirmPassInputControl(this.state.passwordValue, e.target.value);
                        }}
                      />
                    </div>
@@ -289,7 +292,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       this.setState({confirmPasswordError: false})
    }
 
-   private userInputControl(usernameValue: string = this.state.usernameValue): boolean {
+   private userInputControl(usernameValue: string): boolean {
       let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
       if(!usernameValue.match(reg)) {
          //displayError = userError
@@ -314,10 +317,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       }
    }
 
-   private confirmPassInputControl(
-      passwordValue: string = this.state.confirmPasswordValue,
-      confirmPasswordValue: string = this.state.confirmPasswordValue): boolean {
-         if (confirmPasswordValue !== passwordValue) {
+   private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
+         if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
             //displayError = PasswordError
             this.setState({confirmPasswordError: true})
             return true
