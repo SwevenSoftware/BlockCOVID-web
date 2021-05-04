@@ -21,7 +21,7 @@ export const createAccount = (tokenID: string, username: string, password: strin
     password: password,
     authorities: authorities
   }
-  return axios.post("/api/admin/user/new", data, config)
+  return axios.post("/api/users", data, config)
 }
 
 /* get */
@@ -50,5 +50,5 @@ export const deleteAccount = (username: string, link: string, tokenID: string) =
   }
   // console.log(link_delete + username)
   // console.log(config)
-  return axios.delete(link_delete + username, config)
+  return axios.delete(link + username, config)
 }

@@ -20,9 +20,11 @@ export default function newUserReducer(state = initialState, action) {
          //console.log("impossibile creare utente")
          switch(action.payload.error) {
             case 409: /* user exists, username already taken */
-            return {
-               error: ERROR_USERNAME_NOT_AVAILABLE
-            }
+               return {
+                  error: ERROR_USERNAME_NOT_AVAILABLE
+               }
+            default:
+               return state
          }
       break;
       default:
