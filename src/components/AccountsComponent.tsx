@@ -22,8 +22,8 @@ import { theme } from '../theme'
 import '../styles.css'
 /* others */
 // import Pencil from '../Pencil'
+import NewUser from './NewUserComponent'
 import Trash from './TrashComponent'
-// import NewUser from '../NewUser'
 
 interface AccountProps {
   state: any
@@ -56,6 +56,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
     console.log(this.props) // WARNING: testing purposes
     return (
       <ThemeProvider theme={theme}>
+        <NewUser/>
         <div className="counter">
           <ListItem>
             <h3>Accounts:</h3>
@@ -162,7 +163,8 @@ const mapStateToProps = (state: any) => {
   return {
     state: {
       login: state.login,
-      accounts: state.accounts
+      accounts: state.accounts,
+      reducer: state.newUser
     }
   }
 }
