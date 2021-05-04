@@ -81,7 +81,7 @@ export default function FormDialog() {
   /* error messages */
   const userInvalid = "Username non valido";
   const userExists = "L'username inserito non è disponibile";
-  const passInvalid = "Password non valida";
+  const passInvalid = "Password non valida. Minimo 8 caratteri";
   const passConfirmNoMatch = "Le password inserite non corrispondono";
   const noAuthoritiesChecked = "Si prega di scegliere almeno una opzione";
 
