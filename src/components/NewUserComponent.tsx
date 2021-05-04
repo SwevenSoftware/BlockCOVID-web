@@ -272,21 +272,22 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private handleCloseButton() {
-      this.setState({usernameValue: ""})
-      this.setState({passwordValue: ""})
-      this.setState({confirmPasswordValue: ""})
-      this.setState({isButtonDisabled: true})
-      this.setState({isNewUserOpen: false})
       this.setState({
-         authorities: {
-            checkedAdmin: false,
-            checkedUser: false,
-            checkedCleaner: false
-         }
+        usernameValue: "",
+        passwordValue: "",
+        confirmPasswordValue: "",
+        isButtonDisabled: true,
+        isNewUserOpen: false,
+        authorities: {
+          checkedAdmin: false,
+          checkedUser: false,
+          checkedCleaner: false
+        },
+        usernameError: false,
+        passwordError: false,
+        confirmPasswordError: false,
+        authoritiesError: false
       })
-      this.setState({usernameError: false})
-      this.setState({passwordError: false})
-      this.setState({confirmPasswordError: false})
    }
 
    private userInputControl(usernameValue: string): boolean {
