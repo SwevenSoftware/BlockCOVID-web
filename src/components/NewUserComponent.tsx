@@ -299,11 +299,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
-      if (this.state.confirmPasswordValue === "" && passwordValue === ""){
-          this.setState({confirmPasswordError: false})
-          this.setState({passwordError: false})
-          return true
-      } else if (passwordValue === "") {
+      if (passwordValue === "") {
          this.setState({passwordError: true})
          return true
       } else {
@@ -313,11 +309,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
-         if (confirmPasswordValue === "" && passwordValue === ""){
-            this.setState({confirmPasswordError: false})
-            this.setState({passwordError: false})
-            return true
-         } else if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
+         if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
           this.setState({confirmPasswordError: true})
           this.setState({passwordError: true})
           return true
