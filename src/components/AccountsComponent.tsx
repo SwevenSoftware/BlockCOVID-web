@@ -22,8 +22,8 @@ import { theme } from '../theme'
 import '../styles.css'
 /* others */
 // import Pencil from '../Pencil'
-// import Trash from '../Trash'
 import NewUser from './NewUserComponent'
+import Trash from './TrashComponent'
 
 interface AccountProps {
   state: any
@@ -121,7 +121,16 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                     </ListItemIcon>
                     <ListItemText primary={user.username} className="usernameLayout"/>
                     <PersonIcon fontSize="large"/>
-                    <PersonIcon fontSize="large"/>
+                    <Trash
+                      mode="accounts"
+                      data={{
+                        user: {
+                          username: user.username,
+                          authorities: user.authorities,
+                          link: user._links.delete_user.href
+                        }
+                      }}
+                    />
                   </ListItem>
                 </Paper>
               </Grid>
@@ -132,7 +141,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
   }
 
   /**
-  * Counts how many accounts there are and how many type per each
+  * Counts how many accounts there are and how many accounts per each type
   * @params
   * @returns
   */

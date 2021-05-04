@@ -1,42 +1,32 @@
-import { deleteAccount as trashConfirmAPI }  from '../api';
 import {
-   TRASH_CANCEL,
-   TRASH_CONFIRM,
-   TRASH_FAILURE,
-   TRASH_SUCCESS,
-   ERROR_USER_CANNOT_BE_DELETED
+  TRASH_CANCEL,
+  TRASH_ACCOUNTS_SUCCESS,
+  TRASH_FAILURE
 } from "../types"
+import { deleteAccount as deleteAccountAPI } from '../api';
 
-export const trashCancel = (isOpen: boolean) => {
-   return {
-      type: TRASH_CANCEL,
-      payload: {
-         isOpen: false
-      }
-   }
+export const deleteAccount = (username: string, link: string, tokenID: string) => {
+  return (dispatch, getState) => {
+    deleteAccountAPI(username, link, tokenID)
+      .then((res) => {
+        dispatch(successAccount(res.data))
+      })
+      .catch(err => {
+        dispatch(failure(err))
+      })
+  }
 }
 
-export const trashConfirm = ({username, link_delete, tokenID}) => {
-   return (dispatch, getState) => {
-      trashConfirmAPI(username, link_delete, tokenID)
-         .then((res) => {
-            dispatch(successMessage(res.data))
-         })
-         .catch(err => {
-            dispatch(failureMessage(err))
-         })
-   }
-}
-const successMessage = (data) => ({
-   type: TRASH_SUCCESS,
-   payload: {
-      ...data
-   }
+const successAccount = (data) => ({
+  type: TRASH_ACCOUNTS_SUCCESS,
+  payload: {
+    ...data
+  }
 })
 
-const failureMessage = (error) => ({
-   type: TRASH_FAILURE,
-   payload: {
-      error
-   }
+const failure = (error) => ({
+  type: TRASH_FAILURE,
+  payload: {
+    error
+  }
 })
