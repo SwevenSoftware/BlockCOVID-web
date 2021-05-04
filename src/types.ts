@@ -34,7 +34,8 @@ export const ERROR_USER_CANNOT_BE_DELETED = "Non puoi eliminare il tuo account"
 
 /* newUser */
 export const ERROR_WRONG_CONFIRM_PASSWORD = "Le due password non corrispondono"
-export const ERROR_USERNAME_NOT_AVAILABLE = "Min 5 caratteri, max 16 "
+export const ERROR_USERNAME_NOT_AVAILABLE = "Min 5 caratteri, max 16"
+export const ERROR_AUTHORITIES_NOT_SELECTED = "Seleziona almeno un'opzione"
 
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"
