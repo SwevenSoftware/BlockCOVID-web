@@ -11,7 +11,8 @@ import { createAccount } from '../api'
 /* types */
 import {
   ERROR_WRONG_CONFIRM_PASSWORD,
-  ERROR_USERNAME_NOT_AVAILABLE
+  ERROR_USERNAME_NOT_AVAILABLE,
+  ERROR_AUTHORITIES_NOT_SELECTED
 } from '../types'
 
 /* material-ui */
@@ -58,7 +59,8 @@ interface NewUserStates {
    authorities: any,
    usernameError: boolean,
    passwordError: boolean,
-   confirmPasswordError: boolean
+   confirmPasswordError: boolean,
+   authoritiesError: boolean
 }
 
 class NewUserComponent extends Component<NewUserProps, NewUserStates> {
@@ -85,8 +87,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          },
          usernameError: false,
          passwordError: false,
-         confirmPasswordError: false
-
+         confirmPasswordError: false,
+         authoritiesError: false
       }
    }
 
@@ -197,7 +199,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                          />
                        </div>
                      </FormGroup>
-                     {/* <FormHelperText color="red">{authErr}</FormHelperText> */}
+                     <FormHelperText color="red">{this.state.authoritiesError ? ERROR_AUTHORITIES_NOT_SELECTED : ""}</FormHelperText>
                  </FormControl>
                  </div>
                </DialogContent>
@@ -320,17 +322,16 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          }
    }
 
-   //todo
    private authInputControl(auth: boolean[]): boolean {
       let notChecked = true
       for(let i in auth) {
          if (auth[i]) notChecked = false
       }
       if (notChecked) {
-         //authorities error
+         this.setState({authoritiesError: true})
          return true;
       } else {
-         //auth erro empty
+         this.setState({authoritiesError: false})
          return false;
       }
    }
@@ -346,16 +347,12 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
       flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr);
       flagErr = (this.authInputControl(auth) ? true : flagErr);
 
-      if (flagErr) console.log("manca qualcosa");
-      else console.log("tutto ok capo");
-
       if (!flagErr) {
         const aux = new Array();
         if(auth[0]) aux.push("ADMIN");
         if(auth[1]) aux.push("USER");
         if(auth[2]) aux.push("CLEANER");
         this.props.dispatch.newUser({tokenID: this.props.state.tokenID, username: this.state.usernameValue, password: this.state.passwordValue, auth: aux} )
-        //window.setTimeout(function(){location.reload()}, 1500)
         this.handleCloseButton()
       } else {
          //message: si è verificato un errore
