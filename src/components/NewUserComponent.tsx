@@ -12,7 +12,8 @@ import { createAccount } from '../api'
 import {
   ERROR_WRONG_CONFIRM_PASSWORD,
   ERROR_USERNAME_NOT_AVAILABLE,
-  ERROR_AUTHORITIES_NOT_SELECTED
+  ERROR_AUTHORITIES_NOT_SELECTED,
+  ERROR_LENGTH_PASSWORD
 } from '../types'
 
 /* material-ui */
@@ -60,7 +61,8 @@ interface NewUserStates {
    usernameError: boolean,
    passwordError: boolean,
    confirmPasswordError: boolean,
-   authoritiesError: boolean
+   authoritiesError: boolean,
+   lengthPasswordError: boolean
 }
 
 class NewUserComponent extends Component<NewUserProps, NewUserStates> {
@@ -88,7 +90,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
          usernameError: false,
          passwordError: false,
          confirmPasswordError: false,
-         authoritiesError: false
+         authoritiesError: false,
+         lengthPasswordError: false,
       }
    }
 
@@ -143,6 +146,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                        autoComplete="current-password"
                        variant="outlined"
                        error={this.state.passwordError}
+                       helperText={this.state.lengthPasswordError ? ERROR_LENGTH_PASSWORD : ""}
                        value={this.state.passwordValue}
                        onChange={(e) => {
                          this.handleChangePassword(e.target.value);
@@ -286,7 +290,8 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
         usernameError: false,
         passwordError: false,
         confirmPasswordError: false,
-        authoritiesError: false
+        authoritiesError: false,
+        lengthPasswordError: false,
       })
    }
 
@@ -302,17 +307,26 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
    }
 
    private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
-      if (passwordValue === "") {
-         this.setState({passwordError: true})
-         return true
+      let reg = new RegExp("^[a-zA-Z0-9]{8,16}$");
+      if(passwordValue.match(reg)){
+        if (passwordValue === "") {
+          this.setState({passwordError: true})
+          this.setState({lengthPasswordError: false})
+          return true
+        } else {
+          this.setState({passwordError: false})
+          this.setState({lengthPasswordError: false})
+          return false
+        }
       } else {
-         this.setState({passwordError: false})
-         return false
+        this.setState({passwordError: true})
+        this.setState({lengthPasswordError: true})
+        return true
       }
    }
 
    private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
-         if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
+        if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
           this.setState({confirmPasswordError: true})
           this.setState({passwordError: true})
           return true

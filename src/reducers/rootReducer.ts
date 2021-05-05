@@ -6,9 +6,9 @@ import trashReducer from './trashReducer'
 
 const rootReducer = combineReducers({
    login: loginReducer,
-   accounts: accountsReducer
-   newUser: newUserReducer
-   trash: trashReducer
+   accounts: accountsReducer,
+   newUser: newUserReducer,
+   trash: trashReducer,
 })
 
 export default rootReducer
