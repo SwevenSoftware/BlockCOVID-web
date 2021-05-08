@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { config } from 'node:process'
 
 /* post */
 
@@ -52,3 +53,15 @@ export const deleteAccount = (username: string, link: string, tokenID: string) =
   // console.log(config)
   return axios.delete(link + username, config)
 }
+
+/* logout */
+
+export const logout = (tokenID: string) => {
+  const config = {
+    headers:{
+      "Authorization": tokenID
+    }
+  }
+  return axios.delete("/api/account/logout", config)
+}
+

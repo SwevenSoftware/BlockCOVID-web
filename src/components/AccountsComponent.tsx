@@ -3,6 +3,7 @@ import { Component } from "react"
 /* redux */
 import { connect } from 'react-redux'
 import { getAccounts } from '../actions/accountsActions'
+import { logout } from '../actions/loginActions'
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -50,6 +51,10 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
   componentDidMount() {
     this.props.dispatch.getAccounts(this.props.state.login.token.id)
     this.setCounter()
+  }
+
+  provaLogout(){
+    this.props.dispatch.logout(this.props.state.login.token.id)
   }
 
   render() {
@@ -174,6 +179,9 @@ const mapDispatchToProps = (dispatch: Function) => {
     dispatch: {
       getAccounts: (tokenID: string) => {
         dispatch(getAccounts(tokenID))
+      },
+      logout: (tokenID:string) =>{
+        dispatch(logout(tokenID))
       }
     }
   }

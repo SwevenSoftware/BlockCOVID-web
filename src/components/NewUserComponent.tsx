@@ -384,7 +384,7 @@ const mapStateToProps = (state) => {
   return {
     state: {
       newUser: state.newUser,
-      tokenID: state.login.token.id
+      tokenID: state.login.token?.id
     }
   }
 }
