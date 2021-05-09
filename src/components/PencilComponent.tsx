@@ -188,5 +188,19 @@ class PencilComponent extends Component<PencilProps, PencilState> {
          this.setState({passwordError: false})
          return false
       }
- }
+   }
+
+   private authInputControl(auth: boolean[]): boolean {
+      let notChecked = true
+      for(let i in auth) {
+         if (auth[i]) notChecked = false
+      }
+      if (notChecked) {
+         this.setState({authoritiesError: true})
+         return true;
+      } else {
+         this.setState({authoritiesError: false})
+         return false;
+      }
+   }
 }
