@@ -186,7 +186,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                </div>
             </DialogContent>
             <DialogActions>
-               <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
+               <Button onClick={() => this.handleCloseButton()} id="decline" variant="outlined">
                Annulla
                </Button>
                <Button onClick={() => {
@@ -205,6 +205,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
 
    componentDidMount() {
       this.setButton()
+      this.setCheckboxes()
    }
 
    private setButton(
@@ -216,6 +217,16 @@ class PencilComponent extends Component<PencilProps, PencilState> {
          } else {
             this.setState({isButtonDisabled: true})
          }
+   }
+
+   private setCheckboxes() {
+      this.setState({
+         authorities: {
+            checkedAdmin: this.props.data.user.authorities.includes("ADMIN"),
+            checkedUser: this.props.data.user.authorities.includes("USER"),
+            checkedCleaner: this.props.data.user.authorities.includes("CLEANER")
+         },
+      })
    }
 
    private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
@@ -247,22 +258,20 @@ class PencilComponent extends Component<PencilProps, PencilState> {
       this.setState({isPencilOpen: true}) 
    }
 
-   private handleCloseButton() {
+   private handleCloseButton(confirm: boolean = false) {
       this.setState({
          passwordValue: "",
          confirmPasswordValue: "",
          isButtonDisabled: true,
          isPencilOpen: false,
-         authorities: {
-            checkedAdmin: false,
-            checkedUser: false,
-            checkedCleaner: false
-         },
          passwordError: false,
          confirmPasswordError: false,
          authoritiesError: false,
          lengthPasswordError: false,
       })
+      if (!confirm) {
+         this.setCheckboxes()
+      }
    }
 
    private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
@@ -325,7 +334,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         if(auth[1]) aux.push("USER");
         if(auth[2]) aux.push("CLEANER");
         this.props.dispatch.pencil({tokenID: this.props.state.tokenID, link: this.props.data.user.link, username: this.props.data.user.username, password: this.state.passwordValue, auth: aux} )
-        this.handleCloseButton()
+        this.handleCloseButton(true)
       } else {
          //message: si è verificato un errore
       }
