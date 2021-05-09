@@ -113,7 +113,7 @@ export default function GeneralLayout() {
 
     const dispatch = useDispatch()
     const logout = () => {
-        dispatch(logoutAction())
+        dispatch(logoutAction(token))
     }
 
     return (
