@@ -1,29 +1,34 @@
 /* react */
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-// import { RootState } from './reducers/rootReducer';
+import { useSelector } from 'react-redux'
+import { RootState } from './reducers/rootReducer'
+/* others */
+import GeneralLayout from './GeneralLayout'
 import Login from './components/LoginComponent'
 import Accounts from './components/AccountsComponent'
-/* others */
-import { SnackbarProvider } from 'notistack'
-
+import './styles.css'
 const App: React.FC = () => {
-    // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
-    // console.log(state)
-    /* subscribing components to the store */
 
-    return (
-        <div className="App">
-            <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path='/login' exact component={Login} />
-                        <Route path='/accounts' exact component={Accounts} />
-                        <Redirect path='*' to='/login' />
-                    </Switch>
-                </BrowserRouter>
-            </SnackbarProvider>
-        </div>
-    );
+  const token = useSelector((state: RootState) => state.login.token)
+
+  return(
+    <div className="App">
+      <BrowserRouter>
+        {GeneralLayout()}
+        {token ?
+          <Switch>
+            <Route path='/accounts' exact component={Accounts}/>
+            <Redirect path='*' to='/accounts'/>
+          </Switch>
+          :
+          <Switch>
+            <Route path='/login' exact component={Login}/>
+            <Redirect path='*' to='/login'/>
+          </Switch>
+        }
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
