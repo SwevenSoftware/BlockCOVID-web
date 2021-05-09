@@ -42,7 +42,7 @@ export const modifyAccount = (tokenID: string, link: string, username: string, p
     password: password,
     authorities: authorities
   }
-
+  
   return axios.put(link, data, config)
 }
 
