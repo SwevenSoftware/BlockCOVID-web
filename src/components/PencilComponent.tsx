@@ -94,7 +94,102 @@ class PencilComponent extends Component<PencilProps, PencilState> {
 
    render() {
       return (
-         <div>PIZZA</div>
+      <ThemeProvider theme={theme}>
+         <div>
+         <IconButton 
+            className="pencil"
+            onClick={() => this.handleClickOpenButton()}>
+            <CreateIcon />
+         </IconButton>
+         <Dialog
+            open={this.state.isPencilOpen}
+            onClose={() => this.handleCloseButton()}
+            aria-labelledby="form-dialog-title"
+            fullWidth maxWidth="xs">
+            <DialogTitle id="form-dialog-title" className="pencilTitle">Modifica l'utente {formAccount.username} </DialogTitle>
+            <DialogContent>
+               <div className="alignCentralPencil">
+               <PersonIcon fontSize="large" />
+               </div>
+               <div className="centralPencil">
+               <DialogContentText>
+                  Puoi modificare i seguenti campi
+               </DialogContentText>
+               </div>
+               <div className="alignCentralPencil">
+               <div className="addField">
+                  <TextField
+                     required
+                     id="outlined-password-input1"
+                     label="Password"
+                     type="password"
+                     autoComplete="current-password"
+                     variant="outlined"
+                     error={isPassErr}
+                     helperText={passErr}
+                     value={passValue}
+                     onChange={(e) => {
+                     setPassValue(e.target.value);
+                     passInputControl(e.target.value);
+                     if(passConfirmValue != "") {
+                        passConfirmInputControl(e.target.value, passConfirmValue);
+                     }
+                     }}
+                  />
+               </div>
+               <div className="addField">
+                  <TextField
+                     required
+                     id="outlined-password-input2"
+                     label="Ripeti Password"
+                     type="password"
+                     autoComplete="current-password"
+                     variant="outlined"
+                     error={isPassConfirmErr}
+                     helperText={passConfirmErr}
+                     value={passConfirmValue}
+                     onChange={(e) => {
+                     setPassConfirmValue(e.target.value);
+                     passConfirmInputControl(passValue, e.target.value);
+                     }}
+                  />
+               </div>
+               </div>
+               <div className="centralPencil">
+               <DialogContentText color="primary">
+                  * indica i campi obbligatori
+               </DialogContentText>           
+               <FormControl>
+                  <FormLabel>Ruolo:</FormLabel>
+                     <FormGroup>
+                        <FormControlLabel
+                           control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                           label="Admin"
+                        />
+                        <FormControlLabel
+                           control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                           label="Utente"
+                        />
+                        <FormControlLabel
+                           control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                           label="Addetto alle pulizie"
+                        />
+                     </FormGroup>
+                     <FormHelperText color="red">{authErr}</FormHelperText>
+               </FormControl>
+               </div>
+            </DialogContent>
+            <DialogActions>
+               <Button onClick={handleClose} id="decline" variant="outlined">
+               Annulla
+               </Button>
+               <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
+               Conferma
+               </Button>
+            </DialogActions>
+         </Dialog>
+         </div>
+      </ThemeProvider>
       )
    }
 
