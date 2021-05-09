@@ -203,4 +203,26 @@ class PencilComponent extends Component<PencilProps, PencilState> {
          return false;
       }
    }
+
+   private handleConfirm() :void {
+      let flagErr = false;
+      let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner];
+      let pass  = this.state.passwordValue;
+      let confPass = this.state.confirmPasswordValue;
+      flagErr = (this.passInputControl(pass) ? true : flagErr);
+      flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr);
+      flagErr = (this.authInputControl(auth) ? true : flagErr);
+
+      if (!flagErr) {
+        const aux = new Array();
+        if(auth[0]) aux.push("ADMIN");
+        if(auth[1]) aux.push("USER");
+        if(auth[2]) aux.push("CLEANER");
+        /* CHANGE CALL NAME FUNCTION */
+        this.props.dispatch.newUser({tokenID: this.props.state.tokenID, password: this.state.passwordValue, auth: aux} )
+        this.handleCloseButton()
+      } else {
+         //message: si è verificato un errore
+      }
+   }
 }
