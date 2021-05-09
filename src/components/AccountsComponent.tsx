@@ -125,7 +125,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                         user: {
                           username: user.username,
                           authorities: user.authorities,
-                          link: user._links.delete_user.href
+                          link: user._links.modify_user.href
                         }
                       }} 
                     />
