@@ -28,8 +28,14 @@ export const createAccount = (tokenID: string, username: string, password: strin
 
 /* Pencil */
 
-export const modifyAccount = () => {
-
+export const modifyAccount = (tokenID: string, username: string, password:string, authorities: string[]) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": tokenID,
+      "username": username
+    }
+  }
 }
 
 
