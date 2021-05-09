@@ -10,7 +10,9 @@ import { modifyAccount } from '../api'
 
 /* types */
 import {
-
+   ERROR_LENGTH_PASSWORD,
+   ERROR_WRONG_CONFIRM_PASSWORD,
+   ERROR_AUTHORITIES_NOT_SELECTED
 } from '../types'
 
 /* material-ui */
@@ -106,10 +108,14 @@ class PencilComponent extends Component<PencilProps, PencilState> {
             onClose={() => this.handleCloseButton()}
             aria-labelledby="form-dialog-title"
             fullWidth maxWidth="xs">
-            <DialogTitle id="form-dialog-title" className="pencilTitle">Modifica l'utente {formAccount.username} </DialogTitle>
+            <DialogTitle
+               id="form-dialog-title"
+               className="pencilTitle">
+                  Modifica l'utente {this.props.data.user.username}
+            </DialogTitle>
             <DialogContent>
                <div className="alignCentralPencil">
-               <PersonIcon fontSize="large" />
+                  <PersonIcon fontSize="large" />
                </div>
                <div className="centralPencil">
                <DialogContentText>
@@ -117,43 +123,43 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                </DialogContentText>
                </div>
                <div className="alignCentralPencil">
-               <div className="addField">
-                  <TextField
-                     required
-                     id="outlined-password-input1"
-                     label="Password"
-                     type="password"
-                     autoComplete="current-password"
-                     variant="outlined"
-                     error={isPassErr}
-                     helperText={passErr}
-                     value={passValue}
-                     onChange={(e) => {
-                     setPassValue(e.target.value);
-                     passInputControl(e.target.value);
-                     if(passConfirmValue != "") {
-                        passConfirmInputControl(e.target.value, passConfirmValue);
-                     }
-                     }}
-                  />
-               </div>
-               <div className="addField">
-                  <TextField
-                     required
-                     id="outlined-password-input2"
-                     label="Ripeti Password"
-                     type="password"
-                     autoComplete="current-password"
-                     variant="outlined"
-                     error={isPassConfirmErr}
-                     helperText={passConfirmErr}
-                     value={passConfirmValue}
-                     onChange={(e) => {
-                     setPassConfirmValue(e.target.value);
-                     passConfirmInputControl(passValue, e.target.value);
-                     }}
-                  />
-               </div>
+                  <div className="addField">
+                     <TextField
+                        required
+                        id="outlined-password-input1"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        variant="outlined"
+                        error={this.state.passwordError}
+                        helperText={this.state.lengthPasswordError ? ERROR_LENGTH_PASSWORD : ""}
+                        value={this.state.passwordValue}
+                        onChange={(e) => {
+                           this.handleChangePassword(e.target.value);
+                           this.passInputControl(e.target.value);
+                           if(this.state.confirmPasswordValue != "") {
+                              this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue);
+                           }
+                        }}
+                     />
+                  </div>
+                  <div className="addField">
+                     <TextField
+                        required
+                        id="outlined-password-input2"
+                        label="Ripeti Password"
+                        type="password"
+                        autoComplete="current-password"
+                        variant="outlined"
+                        error={this.state.confirmPasswordError}
+                        helperText={this.state.confirmPasswordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
+                        value={this.state.confirmPasswordValue}
+                        onChange={(e) => {
+                           this.handleChangeConfirmPassword(e.target.value);
+                           this.confirmPassInputControl(this.state.passwordValue, e.target.value);
+                        }}
+                     />
+                  </div>
                </div>
                <div className="centralPencil">
                <DialogContentText color="primary">
@@ -163,27 +169,31 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                   <FormLabel>Ruolo:</FormLabel>
                      <FormGroup>
                         <FormControlLabel
-                           control={<GreenCheckbox checked={state.checkedAdmin} onChange={handleChange} name="checkedAdmin" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
                            label="Admin"
                         />
                         <FormControlLabel
-                           control={<GreenCheckbox checked={state.checkedUser} onChange={handleChange} name="checkedUser" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
                            label="Utente"
                         />
                         <FormControlLabel
-                           control={<GreenCheckbox checked={state.checkedCleaner} onChange={handleChange} name="checkedCleaner" />}
+                           control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
                            label="Addetto alle pulizie"
                         />
                      </FormGroup>
-                     <FormHelperText color="red">{authErr}</FormHelperText>
+                     <FormHelperText color="red">{this.state.authoritiesError ? ERROR_AUTHORITIES_NOT_SELECTED : ""}</FormHelperText>
                </FormControl>
                </div>
             </DialogContent>
             <DialogActions>
-               <Button onClick={handleClose} id="decline" variant="outlined">
+               <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
                Annulla
                </Button>
-               <Button onClick={() => handleConfirm(passValue, passConfirmValue, [state.checkedAdmin, state.checkedUser, state.checkedCleaner])} id="confirm" variant="outlined">
+               <Button onClick={() => {
+                     this.handleConfirm();
+                  }}
+                  id="confirm"
+                  variant="outlined">
                Conferma
                </Button>
             </DialogActions>
