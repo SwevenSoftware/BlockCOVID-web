@@ -1,9 +1,4 @@
-import {
-    LOGIN_SUCCESS,
-    LOGIN_FAILURE,
-    LOGIN_LOGOUT,
-    LOGIN_LOGOUT_SUCCESS
-} from "../types"
+import { loginTypes } from "../types"
 import { login as loginAPI, logout as logoutAPI } from '../api'
 
 export const login = ({ username, password }) => {
@@ -31,21 +26,21 @@ export const logout = (tokenID: string) => {
 }
 
 const success = (data) => ({
-    type: LOGIN_SUCCESS,
+    type: loginTypes.LOGIN_SUCCESS,
     payload: {
         ...data
     }
 })
 
 const successLogout = (data) => ({
-    type: LOGIN_LOGOUT_SUCCESS,
+    type: loginTypes.LOGIN_LOGOUT_SUCCESS,
     payload: {
         ...data
     }
 })
 
 const failure = (error) => ({
-    type: LOGIN_FAILURE,
+    type: loginTypes.LOGIN_FAILURE,
     payload: {
         error
     }
