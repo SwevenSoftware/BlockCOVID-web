@@ -32,7 +32,7 @@ import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles';
 import {theme} from '../theme';
-import '..styles.css'
+import '../styles.css'
 
 /* others */
 import { VariantType, useSnackbar } from 'notistack';
@@ -50,7 +50,7 @@ const GreenCheckbox = withStyles({
 interface PencilProps {
    state: any,
    dispatch: any,
-   username: string
+   data: any
 }
 
 interface PencilState {
@@ -220,7 +220,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         if(auth[1]) aux.push("USER");
         if(auth[2]) aux.push("CLEANER");
         /* CHANGE CALL NAME FUNCTION */
-        this.props.dispatch.pencil({tokenID: this.props.state.tokenID, username: this.props.state.data.user.username, password: this.state.passwordValue, auth: aux} )
+        this.props.dispatch.pencil({tokenID: this.props.state.tokenID, username: this.props.data.user.username, password: this.state.passwordValue, auth: aux} )
         this.handleCloseButton()
       } else {
          //message: si è verificato un errore
