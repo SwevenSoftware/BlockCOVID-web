@@ -336,7 +336,7 @@ const mapStateToProps = (state) => {
    return {
       state: {
          pencil: state.pencil,
-         token: state.login.token.id
+         tokenID: state.login.token.id
       }
    }
 }
