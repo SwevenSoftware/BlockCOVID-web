@@ -1,10 +1,10 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_LOGOUT,
   ERROR_USER_NO_AUTH,
   ERROR_USER_OR_PASS,
-  ERROR_UNKNOWN
+  ERROR_UNKNOWN,
+  LOGIN_LOGOUT_SUCCESS
 } from "../types"
 import { Reducer } from 'redux'
 
@@ -52,7 +52,8 @@ const loginReducer: Reducer<loginState> = (state = initialState, action) => {
             error: ERROR_UNKNOWN
           }
       }
-    case LOGIN_LOGOUT:
+    case LOGIN_LOGOUT_SUCCESS:
+      location.href = "/login"
       return {
         token: null,
         error: ""

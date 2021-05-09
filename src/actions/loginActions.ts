@@ -1,9 +1,10 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_LOGOUT
+  LOGIN_LOGOUT,
+  LOGIN_LOGOUT_SUCCESS
 } from "../types"
-import { login as loginAPI } from '../api'
+import { login as loginAPI, logout as logoutAPI } from '../api'
 
 export const login = ({username, password}) => {
   return (dispatch, getState) => {
@@ -17,14 +18,27 @@ export const login = ({username, password}) => {
   }
 }
 
-export const logout = () => {
-   return {
-     type: LOGIN_LOGOUT
-   }
+export const logout = (tokenID:string) => {
+  return (dispatch, gestState) => {
+    logoutAPI(tokenID)
+      .then(res => {
+        dispatch(successLogout(res.data))
+      })
+      .catch(err => {
+        dispatch(failure(err.response.status))
+      })
+  }
 }
 
 const success = (data) => ({
   type: LOGIN_SUCCESS,
+  payload: {
+    ...data
+  }
+})
+
+const successLogout = (data) => ({
+  type: LOGIN_LOGOUT_SUCCESS,
   payload: {
     ...data
   }
