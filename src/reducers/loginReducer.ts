@@ -6,13 +6,19 @@ import {
   ERROR_USER_OR_PASS,
   ERROR_UNKNOWN
 } from "../types"
+import { Reducer } from 'redux'
 
-const initialState = {
+interface loginState {
+  token: any,
+  error: string
+}
+
+const initialState: loginState = {
   token: null,
-  error: null
+  error: ""
  }
 
-export default function loginReducer(state = initialState, action) {
+const loginReducer: Reducer<loginState> = (state = initialState, action) => {
   switch(action.type) {
     case LOGIN_SUCCESS:
       console.log(LOGIN_SUCCESS) // WARNING: testing purposes
@@ -21,11 +27,12 @@ export default function loginReducer(state = initialState, action) {
         location.href = "/accounts"
         return {
           token: action.payload.token,
-          error: null
+          error: ""
         }
       }
       else {  /* unauthorized login attempt */
         return {
+          token: null,
           error: ERROR_USER_NO_AUTH
         }
       }
@@ -36,18 +43,23 @@ export default function loginReducer(state = initialState, action) {
           /* 400: incorrect
           500: incorrect username or user does not exists */
           return {
+            token: null,
             error: ERROR_USER_OR_PASS
           }
         default:
           return {
+            token: null,
             error: ERROR_UNKNOWN
           }
       }
     case LOGIN_LOGOUT:
       return {
-        token: null
+        token: null,
+        error: ""
       }
     default:
       return state
   }
 }
+
+export default loginReducer

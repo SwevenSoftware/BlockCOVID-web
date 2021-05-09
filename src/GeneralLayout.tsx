@@ -1,34 +1,35 @@
+/* react */
 import React from 'react'
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import EventSeatIcon from '@material-ui/icons/EventSeat';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom'
+/* redux */
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from './reducers/rootReducer'
+import { logout as logoutAction } from './actions/loginActions'
+/* material-ui */
+import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import EventSeatIcon from '@material-ui/icons/EventSeat'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 /* icons */
-import PeopleIcon from '@material-ui/icons/People';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import DnsIcon from '@material-ui/icons/Dns';
-import Token from './Token'
-import { format, parseISO, compareAsc } from 'date-fns';
-import { SnackbarProvider } from 'notistack';
+import PeopleIcon from '@material-ui/icons/People'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import DnsIcon from '@material-ui/icons/Dns'
+/* others */
+import clsx from 'clsx'
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,44 +94,31 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
   }),
-);
+)
 
 export default function GeneralLayout() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
+  const token = useSelector((state: RootState) => state.login.token)
+
+  const dispatch = useDispatch()
   const logout = () => {
-    Token.remove();
-    location.href = "/login";
+    dispatch(logoutAction())
   }
 
-  const manageToken = () => {
-    let str = Token.getExpDate();
-    if(str) {
-      // 1 if the first date si after the second
-      // -1 if the first date is before the second
-      // 0 if dates are equal
-      if( compareAsc(new Date(), parseISO(str)) > -1 ) {
-        logout();
-      }
-    }
-  }
-
-  manageToken();
-  //console.log(mainElement.props.children.type.name);
   return (
-
-    <div className={classes.root}>
-      <CssBaseline />
+    <>
+      <CssBaseline/>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -147,7 +135,7 @@ export default function GeneralLayout() {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
           <Typography variant="h6" noWrap>
             Pannello Amministratore
@@ -172,16 +160,19 @@ export default function GeneralLayout() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Divider />
+        <Divider/>
 
         <List>
+
           <ListItem
             button key="Reservations"
             component={Link}
             to="/reservations"
           >
-            <ListItemIcon className="iconColor"><DnsIcon /></ListItemIcon>
-            <ListItemText primary="Reservations" />
+            <ListItemIcon className="iconColor">
+              <DnsIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Reservations"/>
           </ListItem>
 
           <ListItem
@@ -201,26 +192,19 @@ export default function GeneralLayout() {
             <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
             <ListItemText primary="Desks" />
           </ListItem>
-          {/* <ListItem button key="Rooms">
-            <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
-            <ListItemText primary="Rooms" />
-          </ListItem> */}
         </List>
         <Divider />
         <List>
-          { Token.getId() ?
+          { token ?
             <ListItem button key="Logout" onClick={logout}>
               <ListItemIcon className="iconColor"><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
             :
-            <ListItem button key="Login" onClick={() => location.href="/login"}>
-              <ListItemIcon className="iconColor"><AccountCircleIcon /></ListItemIcon>
-              <ListItemText primary="Login" />
-            </ListItem>
+            ""
           }
         </List>
       </Drawer>
-    </div>
-  );
+    </>
+  )
 }
