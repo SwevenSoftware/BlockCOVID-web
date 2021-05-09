@@ -1,20 +1,14 @@
 /* react */
-import React, { Component } from 'react';
-
+import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { pencilConfirm } from '../actions/pencilActions'
-
-/* api */
-import { modifyAccount } from '../api'
-
+import { modifyAccount as pencilConfirm } from '../actions/accountsActions'
 /* types */
 import {
     ERROR_LENGTH_PASSWORD,
     ERROR_WRONG_CONFIRM_PASSWORD,
     ERROR_AUTHORITIES_NOT_SELECTED
 } from '../types'
-
 /* material-ui */
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -30,12 +24,10 @@ import PersonIcon from '@material-ui/icons/Person';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
-
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from '../theme';
 import '../styles.css'
-
 /* others */
 import { VariantType, useSnackbar } from 'notistack';
 

@@ -1,6 +1,5 @@
-
-import { reducerFactory } from "./reducerFactory";
-import { accountHandlers } from "./handlers/accountHandlers";
+import { reducerFactory } from "./reducerFactory"
+import { accountHandlers } from "./handlers/accountHandlers"
 
 const initialState = {
     users: null,
@@ -13,5 +12,5 @@ const initialState = {
     }
 }
 
-export default reducerFactory(initialState, accountHandlers);
+export default reducerFactory(initialState, accountHandlers)
 

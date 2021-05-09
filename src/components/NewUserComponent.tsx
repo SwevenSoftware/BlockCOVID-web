@@ -1,13 +1,8 @@
 /* react */
 import React, { Component } from 'react'
-
 /* redux */
 import { connect } from 'react-redux'
-import { newUserConfirm } from '../actions/newUserActions'
-
-/* api */
-import { createAccount } from '../api'
-
+import { createAccount as newUserConfirm } from '../actions/accountsActions'
 /* types */
 import {
     ERROR_WRONG_CONFIRM_PASSWORD,
@@ -15,7 +10,6 @@ import {
     ERROR_AUTHORITIES_NOT_SELECTED,
     ERROR_LENGTH_PASSWORD
 } from '../types'
-
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'

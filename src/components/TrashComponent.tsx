@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { deleteAccount } from '../actions/trashActions'
+import { deleteAccount } from '../actions/accountsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
