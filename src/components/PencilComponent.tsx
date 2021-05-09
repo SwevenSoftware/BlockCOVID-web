@@ -140,4 +140,22 @@ class PencilComponent extends Component<PencilProps, PencilState> {
    private handleClickOpenButton() {
       this.setState({isPencilOpen: true}) 
    }
+
+   private handleCloseButton() {
+      this.setState({
+        passwordValue: "",
+        confirmPasswordValue: "",
+        isButtonDisabled: true,
+        isPencilOpen: false,
+        authorities: {
+          checkedAdmin: false,
+          checkedUser: false,
+          checkedCleaner: false
+        },
+        passwordError: false,
+        confirmPasswordError: false,
+        authoritiesError: false,
+        lengthPasswordError: false,
+      })
+   }
 }
