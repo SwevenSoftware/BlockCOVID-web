@@ -115,15 +115,15 @@ class PencilComponent extends Component<PencilProps, PencilState> {
    private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
       this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
       switch(event.target.name) {
-        case "checkedAdmin":
-          this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
-        break;
-        case "checkedUser":
-          this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
-        break;
-        case "checkedCleaner":
-          this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
-        break;
+         case "checkedAdmin":
+            this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
+         break;
+         case "checkedUser":
+            this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
+         break;
+         case "checkedCleaner":
+            this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
+         break;
    }
 }
 
@@ -143,50 +143,50 @@ class PencilComponent extends Component<PencilProps, PencilState> {
 
    private handleCloseButton() {
       this.setState({
-        passwordValue: "",
-        confirmPasswordValue: "",
-        isButtonDisabled: true,
-        isPencilOpen: false,
-        authorities: {
-          checkedAdmin: false,
-          checkedUser: false,
-          checkedCleaner: false
-        },
-        passwordError: false,
-        confirmPasswordError: false,
-        authoritiesError: false,
-        lengthPasswordError: false,
+         passwordValue: "",
+         confirmPasswordValue: "",
+         isButtonDisabled: true,
+         isPencilOpen: false,
+         authorities: {
+            checkedAdmin: false,
+            checkedUser: false,
+            checkedCleaner: false
+         },
+         passwordError: false,
+         confirmPasswordError: false,
+         authoritiesError: false,
+         lengthPasswordError: false,
       })
    }
 
    private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
       let reg = new RegExp("^[a-zA-Z0-9]{8,16}$");
       if(passwordValue.match(reg)){
-        if (passwordValue === "") {
-          this.setState({passwordError: true})
-          this.setState({lengthPasswordError: false})
-          return true
-        } else {
-          this.setState({passwordError: false})
-          this.setState({lengthPasswordError: false})
-          return false
-        }
+         if (passwordValue === "") {
+            this.setState({passwordError: true})
+            this.setState({lengthPasswordError: false})
+            return true
+         } else {
+            this.setState({passwordError: false})
+            this.setState({lengthPasswordError: false})
+            return false
+         }
       } else {
-        this.setState({passwordError: true})
-        this.setState({lengthPasswordError: true})
-        return true
+         this.setState({passwordError: true})
+         this.setState({lengthPasswordError: true})
+         return true
       }
    }
 
    private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
       if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
-        this.setState({confirmPasswordError: true})
-        this.setState({passwordError: true})
-        return true
-       } else {
-          this.setState({confirmPasswordError: false})
-          this.setState({passwordError: false})
-          return false
-       }
+         this.setState({confirmPasswordError: true})
+         this.setState({passwordError: true})
+         return true
+      } else {
+         this.setState({confirmPasswordError: false})
+         this.setState({passwordError: false})
+         return false
+      }
  }
 }
