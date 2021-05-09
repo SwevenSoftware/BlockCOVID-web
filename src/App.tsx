@@ -7,23 +7,23 @@ import Accounts from './components/AccountsComponent'
 import { SnackbarProvider } from 'notistack'
 
 const App: React.FC = () => {
-  // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
-  // console.log(state)
-  /* subscribing components to the store */
+    // const state = useSelector((state: RootState) => state) // WARNING: do not remove or else UI will not update
+    // console.log(state)
+    /* subscribing components to the store */
 
-  return(
-    <div className="App">
-      <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
-        <BrowserRouter>
-          <Switch>
-            <Route path='/login' exact component={Login}/>
-            <Route path='/accounts' exact component={Accounts}/>
-            <Redirect path='*' to='/login'/>
-          </Switch>
-        </BrowserRouter>
-      </SnackbarProvider>
-    </div>
-  );
+    return (
+        <div className="App">
+            <SnackbarProvider maxSnack={3} autoHideDuration={1500}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path='/login' exact component={Login} />
+                        <Route path='/accounts' exact component={Accounts} />
+                        <Redirect path='*' to='/login' />
+                    </Switch>
+                </BrowserRouter>
+            </SnackbarProvider>
+        </div>
+    );
 }
 
 export default App;
