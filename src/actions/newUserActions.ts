@@ -5,7 +5,7 @@ import {
    NEW_USER_CANCEL,
 } from "../types"
 
-import {createAccount} from "../api"
+import { createAccount } from "../api"
 import { getAccounts } from './accountsActions'
 
 export const newUserConfirm = ({tokenID, username, password, auth}) => {
