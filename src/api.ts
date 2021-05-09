@@ -36,6 +36,14 @@ export const modifyAccount = (tokenID: string, username: string, password:string
       "username": username
     }
   }
+
+  const data = {
+    username: username,
+    password: password,
+    authorities: authorities
+  }
+
+  return axios.put(username.link_modify, data, config)
 }
 
 
