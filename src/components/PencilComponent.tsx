@@ -177,4 +177,16 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         return true
       }
    }
+
+   private confirmPassInputControl(passwordValue: string, confirmPasswordValue: string): boolean {
+      if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
+        this.setState({confirmPasswordError: true})
+        this.setState({passwordError: true})
+        return true
+       } else {
+          this.setState({confirmPasswordError: false})
+          this.setState({passwordError: false})
+          return false
+       }
+ }
 }
