@@ -1,8 +1,4 @@
-import {
-   PENCIL_SUCCESS,
-   PENCIL_FAILURE,
-   NEW_USER_SUCCESS
-} from "../types"
+import { pencilTypes } from "../types"
 
 import { modifyAccount } from '../api'
 import { getAccounts } from './accountsActions'
@@ -21,14 +17,14 @@ export const pencilConfirm = ({tokenID, link, username, password, auth}) => {
 }
 
 const successMessage = (data) => ({
-   type: PENCIL_SUCCESS,
+   type: pencilTypes.PENCIL_SUCCESS,
    payload: {
       ...data
    }
 })
 
 const failureMessage = (error) => ({
-   type: PENCIL_FAILURE,
+   type: pencilTypes.PENCIL_FAILURE,
    payload: {
       error
    }
