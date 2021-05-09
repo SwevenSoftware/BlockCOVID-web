@@ -54,28 +54,28 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
               className="spacing">
               <PeopleIcon className="people"/>
               <Typography className="number">
-                {this.props.state.accounts.counter.accounts}
+                {this.props.state.accounts.counter?.accounts}
               </Typography>
             </ListItemIcon>
             <ListItemIcon
               className="spacing">
               <SecurityIcon className="shield"/>
               <Typography className="number">
-                {this.props.state.accounts.counter.admins}
+                {this.props.state.accounts.counter?.admins}
               </Typography>
             </ListItemIcon>
             <ListItemIcon
               className="spacing">
               <WorkIcon className="bag"/>
               <Typography className="number">
-                {this.props.state.accounts.counter.users}
+                {this.props.state.accounts.counter?.users}
               </Typography>
             </ListItemIcon>
             <ListItemIcon
               className="spacing">
               <BathtubIcon className="cleaner"/>
               <Typography className="number">
-                {this.props.state.accounts.counter.cleaners}
+                {this.props.state.accounts.counter?.cleaners}
               </Typography>
             </ListItemIcon>
           </ListItem>
