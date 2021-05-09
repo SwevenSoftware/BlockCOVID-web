@@ -158,4 +158,23 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         lengthPasswordError: false,
       })
    }
+
+   private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
+      let reg = new RegExp("^[a-zA-Z0-9]{8,16}$");
+      if(passwordValue.match(reg)){
+        if (passwordValue === "") {
+          this.setState({passwordError: true})
+          this.setState({lengthPasswordError: false})
+          return true
+        } else {
+          this.setState({passwordError: false})
+          this.setState({lengthPasswordError: false})
+          return false
+        }
+      } else {
+        this.setState({passwordError: true})
+        this.setState({lengthPasswordError: true})
+        return true
+      }
+   }
 }
