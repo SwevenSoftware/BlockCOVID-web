@@ -1,7 +1,4 @@
-import {
-   PENCIL_SUCCESS,
-   PENCIL_FAILURE,
-} from '../types'
+import { pencilTypes } from '../types'
 
 const initialState = {
    error: null,
@@ -9,12 +6,12 @@ const initialState = {
 
 export default function pencilReducer(state = initialState, action) {
    switch(action.type) {
-      case PENCIL_SUCCESS:
+      case pencilTypes.PENCIL_SUCCESS:
          return {
             error: null
          }
       break;
-      case PENCIL_FAILURE:
+      case pencilTypes.PENCIL_FAILURE:
          return state
       break;
       default:
