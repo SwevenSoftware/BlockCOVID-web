@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x]
 
     steps:
     - name: Checkout repository
@@ -24,7 +24,7 @@ jobs:
       run: npm install
 
     - name: Verify code formatting
-      run: npm run formatVerfiy
+      run: npm run formatVerify
 
     - name: Npm Build
       run: npm run build
