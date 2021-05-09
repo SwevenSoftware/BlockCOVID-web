@@ -49,7 +49,8 @@ const GreenCheckbox = withStyles({
 
 interface PencilProps {
    state: any,
-   dispatch: any
+   dispatch: any,
+   username: string
 }
 
 interface PencilState {
@@ -219,7 +220,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         if(auth[1]) aux.push("USER");
         if(auth[2]) aux.push("CLEANER");
         /* CHANGE CALL NAME FUNCTION */
-        this.props.dispatch.pencil({tokenID: this.props.state.tokenID, password: this.state.passwordValue, auth: aux} )
+        this.props.dispatch.pencil({tokenID: this.props.state.tokenID, username: this.props.state.data.user.username, password: this.state.passwordValue, auth: aux} )
         this.handleCloseButton()
       } else {
          //message: si è verificato un errore
