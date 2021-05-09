@@ -1,4 +1,4 @@
-import {accountTypes} from "../types"
+import { accountTypes } from "../types"
 import {
     getAccounts as getAccountsAPI,
     createAccount as createAccountAPI,
@@ -21,39 +21,39 @@ export const getAccounts = (tokenID: string) => {
 export const createAccount = ({ tokenID, username, password, auth }) => {
     return (dispatch, getState) => {
         createAccountAPI(tokenID, username, password, auth)
-          .then((res) => {
-              dispatch(successCreateAccount(res.data))
-              dispatch(getAccounts(tokenID))
-          })
-          .catch(err => {
-              dispatch(failureCreateAccount(err))
-          })
+            .then((res) => {
+                dispatch(successCreateAccount(res.data))
+                dispatch(getAccounts(tokenID))
+            })
+            .catch(err => {
+                dispatch(failureCreateAccount(err))
+            })
     }
 }
 
 export const modifyAccount = ({ tokenID, link, username, password, auth }) => {
     return (dispatch, getState) => {
         modifyAccountAPI(tokenID, link, username, password, auth)
-          .then((res) => {
-              dispatch(successModifyAccount(res.data))
-              dispatch(getAccounts(tokenID))
-          })
-          .catch(err => {
-              dispatch(failureModifyAccount(err))
-          })
+            .then((res) => {
+                dispatch(successModifyAccount(res.data))
+                dispatch(getAccounts(tokenID))
+            })
+            .catch(err => {
+                dispatch(failureModifyAccount(err))
+            })
     }
 }
 
 export const deleteAccount = (username: string, link: string, tokenID: string) => {
     return (dispatch, getState) => {
         deleteAccountAPI(username, link, tokenID)
-          .then((res) => {
-              dispatch(successDeleteAccount(res.data))
-              dispatch(getAccounts(tokenID))
-          })
-          .catch(err => {
-              dispatch(failureDeleteAccount(err))
-          })
+            .then((res) => {
+                dispatch(successDeleteAccount(res.data))
+                dispatch(getAccounts(tokenID))
+            })
+            .catch(err => {
+                dispatch(failureDeleteAccount(err))
+            })
     }
 }
 
