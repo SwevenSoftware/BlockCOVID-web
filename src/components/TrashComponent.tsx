@@ -55,9 +55,8 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   }
 
   render() {
-    console.log(this.props) // WARNING: testing purposes
     return(
-        <div>
+        <div >
           <IconButton
             className="trash"
             onClick={(e) => this.handleClickOpen()}>
@@ -83,21 +82,21 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
                     switch(auth) {
                       case "ADMIN":
                         return(
-                          <div className="tooltip">
+                          <div className="tooltip" key={this.props.data.user.username + "ADMIN"}>
                             <SecurityIcon className="adminIcon" />
                             <span className="tooltiptext">Admin</span>
                           </div>
                         )
                       case "USER":
                         return(
-                          <div className="tooltip">
+                          <div className="tooltip" key={this.props.data.user.username + 'USER'}>
                             <WorkIcon className="userIcon" />
                             <span className="tooltiptext">Utente</span>
                           </div>
                         )
                       case "CLEANER":
                         return(
-                          <div className="tooltip">
+                          <div className="tooltip" key={this.props.data.user.username + 'CLEANER'}>
                             <BathtubIcon className="cleanerIcon" />
                             <span className="tooltiptext">Addetto alle pulizie</span>
                           </div>
@@ -127,7 +126,6 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
             </DialogActions>
           </Dialog>
         </div>
-
     )
   }
 
