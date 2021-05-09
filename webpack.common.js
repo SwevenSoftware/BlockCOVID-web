@@ -2,21 +2,21 @@ const path = require('path')
 
 module.exports = {
     entry: {
-	app: './src/index.tsx',
+        app: './src/index.tsx',
     },
-    
+
     module: {
         rules: [
-	    {
-		test: path.join(__dirname, 'src'),
-		use: {
-		    loader: 'babel-loader',
-		    options: {
-			presets: ["@babel/preset-env", "@babel/preset-react"]
-		    }
-		},
-		exclude: /node_modules/
-	    },
+            {
+                test: path.join(__dirname, 'src'),
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                    }
+                },
+                exclude: /node_modules/
+            },
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
@@ -30,10 +30,10 @@ module.exports = {
 
         ],
     }, resolve: {
-	extensions: ['.tsx', '.ts', '.js', '.jsx', '.css'],
+        extensions: ['.tsx', '.ts', '.js', '.jsx', '.css'],
     },
     output: {
-	filename: 'blockcovid.bundle.js',
-	path: path.resolve(__dirname, 'dist'),
+        filename: 'blockcovid.bundle.js',
+        path: path.resolve(__dirname, 'dist'),
     },
 };

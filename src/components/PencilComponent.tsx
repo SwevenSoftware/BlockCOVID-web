@@ -17,6 +17,6 @@ import Token from '../Token';
 import axios from 'axios';
 import './styles.css';
 import { ThemeProvider } from '@material-ui/core/styles';
-import {theme} from '../theme';
+import { theme } from '../theme';
 
 import { VariantType, useSnackbar } from 'notistack';

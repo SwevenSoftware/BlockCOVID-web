@@ -9,26 +9,26 @@ import Accounts from './components/AccountsComponent'
 import './styles.css'
 const App: React.FC = () => {
 
-  const token = useSelector((state: RootState) => state.login.token)
+    const token = useSelector((state: RootState) => state.login.token)
 
-  return(
-    <div className="App">
-      <BrowserRouter>
-        {GeneralLayout()}
-        {token ?
-          <Switch>
-            <Route path='/accounts' exact component={Accounts}/>
-            <Redirect path='*' to='/accounts'/>
-          </Switch>
-          :
-          <Switch>
-            <Route path='/login' exact component={Login}/>
-            <Redirect path='*' to='/login'/>
-          </Switch>
-        }
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                {GeneralLayout()}
+                {token ?
+                    <Switch>
+                        <Route path='/accounts' exact component={Accounts} />
+                        <Redirect path='*' to='/accounts' />
+                    </Switch>
+                    :
+                    <Switch>
+                        <Route path='/login' exact component={Login} />
+                        <Redirect path='*' to='/login' />
+                    </Switch>
+                }
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

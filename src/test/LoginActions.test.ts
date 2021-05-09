@@ -10,7 +10,7 @@ import expect from 'expect'
 import React from 'react';
 
 
-it('It should render without errors', () =>{
+it('It should render without errors', () => {
 
 })
 
