@@ -1,7 +1,5 @@
 import {
-    TRASH_CANCEL,
-    TRASH_ACCOUNTS_SUCCESS,
-    TRASH_FAILURE
+    trashTypes
 } from "../types"
 import { deleteAccount as deleteAccountAPI } from '../api';
 
@@ -18,14 +16,14 @@ export const deleteAccount = (username: string, link: string, tokenID: string) =
 }
 
 const successAccount = (data) => ({
-    type: TRASH_ACCOUNTS_SUCCESS,
+    type: trashTypes.TRASH_ACCOUNTS_SUCCESS,
     payload: {
         ...data
     }
 })
 
 const failure = (error) => ({
-    type: TRASH_FAILURE,
+    type: trashTypes.TRASH_FAILURE,
     payload: {
         error
     }

@@ -1,6 +1,5 @@
 import {
-    ACCOUNTS_SUCCESS,
-    ACCOUNTS_FAILURE
+    accountTypes
 } from "../types"
 import { getAccounts as getAccountsAPI } from '../api'
 
@@ -17,14 +16,14 @@ export const getAccounts = (tokenID: string) => {
 }
 
 const success = (data) => ({
-    type: ACCOUNTS_SUCCESS,
+    type: accountTypes.ACCOUNTS_SUCCESS,
     payload: {
         ...data
     }
 })
 
 const failure = (error) => ({
-    type: ACCOUNTS_FAILURE,
+    type: accountTypes.ACCOUNTS_FAILURE,
     payload: {
         error
     }
