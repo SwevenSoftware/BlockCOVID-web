@@ -8,12 +8,12 @@ import App from "./App";
 const rootElement = document.getElementById("react");
 
 ReactDOM.render(
-  <StrictMode>
-    <Provider store={configStore().store}>
-      <PersistGate loading={null} persistor={configStore().persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </StrictMode>,
-  rootElement
+    <StrictMode>
+        <Provider store={configStore().store}>
+            <PersistGate loading={null} persistor={configStore().persistor}>
+                <App />
+            </PersistGate>
+        </Provider>
+    </StrictMode>,
+    rootElement
 );

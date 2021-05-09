@@ -154,7 +154,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   */
   private setError(): void {
     if(this.isUserDeletingHimself()) {
-      this.setState({error: ERROR_USER_CANNOT_BE_DELETED})
+      this.setState({ error: ERROR_USER_CANNOT_BE_DELETED })
     }
   }
 
@@ -164,7 +164,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   private handleClickOpen(): void {
-    this.setState({isOpen: true})
+    this.setState({ isOpen: true })
   }
 
   /**
@@ -173,7 +173,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
   * @returns
   */
   private handleClose(): void {
-    this.setState({isOpen: false})
+    this.setState({ isOpen: false })
   }
 
   /**

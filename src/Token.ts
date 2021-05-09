@@ -1,14 +1,14 @@
 class Token {
 
-    public static getId() : string | null {
+    public static getId(): string | null {
         return localStorage.getItem("token_id");
     }
 
-    public static getExpDate() : string | null {
+    public static getExpDate(): string | null {
         return localStorage.getItem("token_expiration");
     }
 
-    public static getUsername() : string | null {
+    public static getUsername(): string | null {
         return localStorage.getItem("token_username");
     }
 
@@ -20,19 +20,19 @@ class Token {
       * }
     */
 
-    public static setId(id: string) : void {
+    public static setId(id: string): void {
         localStorage.setItem("token_id", id);
     }
 
-    public static setExpDate(expDate : string) : void {
+    public static setExpDate(expDate: string): void {
         localStorage.setItem("token_expiration", expDate);
     }
 
-    public static setUsername(username : string) : void {
+    public static setUsername(username: string): void {
         localStorage.setItem("token_username", username);
     }
 
-    public static remove() : void {
+    public static remove(): void {
         localStorage.removeItem("token_id");
         localStorage.removeItem("token_expiration");
         localStorage.removeItem("token_username");
