@@ -12,7 +12,7 @@ accountHandlers[accountTypes.ACCOUNTS_SUCCESS] = function(state, action) {
             admins: action.payload._embedded.userList.reduce((acc, cur) => cur.authorities.includes("ADMIN") ? ++acc : acc, 0),
             users: action.payload._embedded.userList.reduce((acc, cur) => cur.authorities.includes("USER") ? ++acc : acc, 0),
             cleaners: action.payload._embedded.userList.reduce((acc, cur) => cur.authorities.includes("CLEANER") ? ++acc : acc, 0)
-          }
+        }
     };
 }
 

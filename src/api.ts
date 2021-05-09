@@ -27,22 +27,22 @@ export const createAccount = (tokenID: string, username: string, password: strin
 
 /* Pencil */
 
-export const modifyAccount = (tokenID: string, link: string, username: string, password:string, authorities: string[]) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": tokenID,
-      "username": username
+export const modifyAccount = (tokenID: string, link: string, username: string, password: string, authorities: string[]) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": tokenID,
+            "username": username
+        }
     }
-  }
 
-  const data = {
-    username: username,
-    password: password,
-    authorities: authorities
-  }
-  
-  return axios.put(link, data, config)
+    const data = {
+        username: username,
+        password: password,
+        authorities: authorities
+    }
+
+    return axios.put(link, data, config)
 }
 
 
