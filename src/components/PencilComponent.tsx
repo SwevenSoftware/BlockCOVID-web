@@ -124,5 +124,20 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         case "checkedCleaner":
           this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
         break;
-      }
+   }
+}
+
+   private handleChangePassword(password: string) : void {
+      this.setState({passwordValue: password.trim()})
+      this.setButton(password)
+   }
+
+   private handleChangeConfirmPassword(confirmPassword: string) : void {
+      this.setState({confirmPasswordValue: confirmPassword.trim()})
+      this.setButton(this.state.passwordValue, confirmPassword)
+   }
+
+   private handleClickOpenButton() {
+      this.setState({isPencilOpen: true}) 
+   }
 }
