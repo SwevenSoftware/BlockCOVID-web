@@ -112,7 +112,6 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
         this.props.state.accounts.users
           .sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0))
           .map((user) => {
-            console.log(user)
             rows.push(
               <Grid key={user.username} className="grid">
                 <Paper className="paper">
@@ -126,7 +125,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                         user: {
                           username: user.username,
                           authorities: user.authorities,
-                          /* link: user._links.delete_user.href */
+                          link: user._links.delete_user.href
                         }
                       }} 
                     />
