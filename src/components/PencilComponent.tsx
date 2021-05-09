@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 /* redux */
 import { connect } from 'react-redux'
-import {} from '../actions/pencilActions'
+import { pencilConfirm } from '../actions/pencilActions'
 
 /* api */
 import { modifyAccount } from '../api'
@@ -219,10 +219,34 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         if(auth[1]) aux.push("USER");
         if(auth[2]) aux.push("CLEANER");
         /* CHANGE CALL NAME FUNCTION */
-        this.props.dispatch.newUser({tokenID: this.props.state.tokenID, password: this.state.passwordValue, auth: aux} )
+        this.props.dispatch.pencil({tokenID: this.props.state.tokenID, password: this.state.passwordValue, auth: aux} )
         this.handleCloseButton()
       } else {
          //message: si è verificato un errore
       }
    }
 }
+
+const mapStateToProps = (state) => {
+   return {
+      state: {
+         pencil: state.pencil,
+         token: state.login.token.id
+      }
+   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      dispatch: {
+         pencil: (data) => {
+            dispatch(pencilConfirm(data))
+         }
+      }
+   }
+}
+
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(PencilComponent)
