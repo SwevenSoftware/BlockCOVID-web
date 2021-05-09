@@ -9,6 +9,8 @@ export const login = ({username, password}) => {
   return axios.post("/api/account/login", JSON.stringify({username, password}), config)
 }
 
+/* NewUser */
+
 export const createAccount = (tokenID: string, username: string, password: string, authorities: string[]) => {
   const config = {
     headers: {
@@ -23,6 +25,13 @@ export const createAccount = (tokenID: string, username: string, password: strin
   }
   return axios.post("/api/users", data, config)
 }
+
+/* Pencil */
+
+export const modifyAccount = () => {
+
+}
+
 
 /* get */
 
