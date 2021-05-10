@@ -85,18 +85,8 @@ export const logout = (tokenID: string) => {
     }
     return axios.delete("/api/account/logout", config)
 }
-/* delete room*/
 
-export const deleteRoom = (roomName: string, link: string, tokenID: string) => {
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": tokenID,
-            "roomName": roomName
-        }
-    }
-    return axios.delete(link + roomName, config)
-}
+/* room create */
 
 export const createRoom = ({ name, openingAt, closingAt, openingDays, width, height }, tokenID: string) => {
     const config = {
@@ -114,4 +104,38 @@ export const createRoom = ({ name, openingAt, closingAt, openingDays, width, hei
         height: height
     }
     return axios.post("/api/rooms", data, config)
+}
+
+/* room modify */
+
+export const modifyRoom = (tokenID: string, roomName: string, link: string, { name, openingAt, closingAt, openingDays, width, height }) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": tokenID,
+            "roomName": roomName
+        }
+    }
+    const data = {
+        name: name,
+        openingAt: openingAt,
+        closingAt: closingAt,
+        openingDays: openingDays,
+        width: width,
+        height: height
+    }
+    return axios.put(link + roomName, data, config)
+}
+
+/* room delete */
+
+export const deleteRoom = (roomName: string, link: string, tokenID: string) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": tokenID,
+            "roomName": roomName
+        }
+    }
+    return axios.delete(link + roomName, config)
 }
