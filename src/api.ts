@@ -85,3 +85,15 @@ export const logout = (tokenID: string) => {
     }
     return axios.delete("/api/account/logout", config)
 }
+
+/* delete room*/
+
+export const deleteRoom = (roomName: string, link: string) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "roomName": roomName
+        }
+    }
+    return axios.delete(link + roomName,config)
+}
