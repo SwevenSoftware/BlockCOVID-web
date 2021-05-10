@@ -14,7 +14,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <BrowserRouter>
-                {GeneralLayout(token)}
+                {GeneralLayout()}
                 {token ?
                     <Switch>
                         <Route path='/accounts' exact component={Accounts} />

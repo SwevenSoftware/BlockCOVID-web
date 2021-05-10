@@ -13,7 +13,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
-import Token from '../Token';
+// import Token from '../Token';
 import axios from 'axios';
 import './styles.css';
 import { ThemeProvider } from '@material-ui/core/styles';
