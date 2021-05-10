@@ -85,7 +85,6 @@ export const logout = (tokenID: string) => {
     }
     return axios.delete("/api/account/logout", config)
 }
-
 /* delete room*/
 
 export const deleteRoom = (roomName: string, link: string) => {
@@ -97,3 +96,21 @@ export const deleteRoom = (roomName: string, link: string) => {
     }
     return axios.delete(link + roomName, config)
 }
+
+    export const createRoom = ({name, openingAt, closingAt, openingDays, width, height}, tokenID: string) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        const data = {
+            name: name,
+            openingAt: openingAt,
+            closingAt: closingAt,
+            openingDays: openingDays,
+            width: width,
+            height: height
+        }
+        return axios.post("/api/rooms", data, config)
+    }
