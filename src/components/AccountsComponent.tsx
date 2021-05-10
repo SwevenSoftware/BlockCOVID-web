@@ -25,7 +25,7 @@ import Pencil from './PencilComponent'
 import NewUser from './NewUserComponent'
 import Trash from './TrashComponent'
 
-import {createRoom} from "../api";
+import { createRoom } from "../api";
 
 interface AccountProps {
     state: any
@@ -56,17 +56,17 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                                 name: "stanza1",
                                 openingAt: "08:00",
                                 closingAt: "20:00",
-                                openingDays: [ "MONDAY" ],
+                                openingDays: ["MONDAY"],
                                 width: 10,
                                 height: 10
                             }
                             createRoom(data, this.props.state.login.token.id)
-                              .then( res => {
-                                console.log(res.data)
-                              })
-                              .catch( err => {
-                                  console.log(err)
-                              })
+                                .then(res => {
+                                    console.log(res.data)
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
                         }} id="prova" variant="outlined">
                             prova
                         </Button>

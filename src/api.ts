@@ -86,7 +86,7 @@ export const logout = (tokenID: string) => {
     return axios.delete("/api/account/logout", config)
 }
 
-export const createRoom = ({name, openingAt, closingAt, openingDays, width, height}, tokenID: string) => {
+export const createRoom = ({ name, openingAt, closingAt, openingDays, width, height }, tokenID: string) => {
     const config = {
         headers: {
             "Content-Type": "application/json",
