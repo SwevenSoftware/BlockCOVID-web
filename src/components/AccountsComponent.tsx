@@ -1,5 +1,5 @@
 /* react */
-import { Component } from "react"
+import React, { Component } from "react"
 /* redux */
 import { connect } from 'react-redux'
 import { getAccounts } from '../actions/accountsActions'
@@ -15,7 +15,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import SecurityIcon from '@material-ui/icons/Security'
 import WorkIcon from '@material-ui/icons/Work'
 import BathtubIcon from '@material-ui/icons/Bathtub'
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
@@ -24,6 +24,8 @@ import '../styles.css'
 import Pencil from './PencilComponent'
 import NewUser from './NewUserComponent'
 import Trash from './TrashComponent'
+
+import {createRoom} from "../api";
 
 interface AccountProps {
     state: any
@@ -48,6 +50,26 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                 <ThemeProvider theme={theme}>
                     <div className="addAccountButton">
                         <NewUser />
+                        <Button onClick={() => {
+                            console.log("sto provando")
+                            let data = {
+                                name: "stanza1",
+                                openingAt: "08:00",
+                                closingAt: "20:00",
+                                openingDays: [ "MONDAY" ],
+                                width: 10,
+                                height: 10
+                            }
+                            createRoom(data, this.props.state.login.token.id)
+                              .then( res => {
+                                console.log(res.data)
+                              })
+                              .catch( err => {
+                                  console.log(err)
+                              })
+                        }} id="prova" variant="outlined">
+                            prova
+                        </Button>
                     </div>
                     <div className="counter">
                         <ListItem>
