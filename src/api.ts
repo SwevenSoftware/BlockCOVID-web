@@ -108,7 +108,7 @@ export const createRoom = ({ name, openingAt, closingAt, openingDays, width, hei
 
 /* room modify */
 
-export const modifyRoom = (tokenID: string, roomName: string, link: string, {name, openingAt, closingAt, openingDays, width, height}) => {
+export const modifyRoom = (tokenID: string, roomName: string, link: string, { name, openingAt, closingAt, openingDays, width, height }) => {
     const config = {
         headers: {
             "Content-Type": "application/json",
