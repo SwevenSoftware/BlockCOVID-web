@@ -95,5 +95,5 @@ export const deleteRoom = (roomName: string, link: string) => {
             "roomName": roomName
         }
     }
-    return axios.delete(link + roomName,config)
+    return axios.delete(link + roomName, config)
 }
