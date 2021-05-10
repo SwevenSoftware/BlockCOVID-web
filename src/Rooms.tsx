@@ -10,8 +10,8 @@ const RoomsForm = () => {
 
 const Room = () => {
     return (
-      GeneralLayout(<RoomsForm />)
+        GeneralLayout(<RoomsForm />)
     );
 }
-  
+
 export default Room

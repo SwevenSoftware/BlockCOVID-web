@@ -1,27 +1,52 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Accounts from './Accounts';
-import Login from './Login';
-import Reservations from './Reservation';
-import Rooms from './Rooms';
-import './styles.css';
-
-
+/* react */
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import { RootState } from './reducers/rootReducer'
+/* others */
+import GeneralLayout from './GeneralLayout'
+import Login from './components/LoginComponent'
+import Accounts from './components/AccountsComponent'
+import './styles.css'
 const App: React.FC = () => {
 
-  return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route path='/login' exact component={Login}/>
-            <Route path='/reservations' exact component={Reservations}/>
-            <Route path='/rooms' exact component={Rooms}/>
-            <Route path='/accounts' exact component={Accounts}/>
-            <Redirect from='/' to='/reservations'/>
-          </Switch>
-        </BrowserRouter>
-      </div>
-  );
+    const token = useSelector((state: RootState) => state.login.token)
+
+    return (
+        <div className="App">
+            <BrowserRouter>
+                {GeneralLayout(token)}
+                {token ?
+                    <Switch>
+                        <Route path='/accounts' exact component={Accounts} />
+                        <Redirect path='*' to='/accounts' />
+                    </Switch>
+                    :
+                    <Switch>
+                        <Route path='/login' exact component={Login} />
+                        <Redirect path='*' to='/login' />
+                    </Switch>
+                }
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
+
+/* <div className="App">
+        <BrowserRouter>
+          <GeneralLayout/>
+          <Switch>
+            <Route path='/accounts' exact component={Accounts}/>
+            <Route path='/login' exact component={Login}/>
+            <Redirect from='/' to='/reservations'/>
+          </Switch>
+        </BrowserRouter>
+        </div>
+*/
+/*
+  <Route path='/reservations' exact component={Reservations}/>
+  <Route path='/desk' exact component={CardGrid}/>
+  <Route path='/accounts' exact component={Accounts}/>
+  <Route path='/login' exact component={Login}/>
+*/
