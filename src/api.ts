@@ -87,10 +87,11 @@ export const logout = (tokenID: string) => {
 }
 /* delete room*/
 
-export const deleteRoom = (roomName: string, link: string) => {
+export const deleteRoom = (roomName: string, link: string, tokenID: string) => {
     const config = {
         headers: {
             "Content-Type": "application/json",
+            "Authorization": tokenID,
             "roomName": roomName
         }
     }
