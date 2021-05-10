@@ -12,9 +12,9 @@ const App: React.FC = () => {
     const token = useSelector((state: RootState) => state.login.token)
 
     return (
-            <BrowserRouter>
-                {GeneralLayout()}
-                <div className="marginAccounts">
+        <BrowserRouter>
+            {GeneralLayout()}
+            <div className="marginAccounts">
                 {token ?
                     <Switch>
                         <Route path='/accounts' exact component={Accounts} />
@@ -26,8 +26,8 @@ const App: React.FC = () => {
                         <Redirect path='*' to='/login' />
                     </Switch>
                 }
-                </div>
-            </BrowserRouter>
+            </div>
+        </BrowserRouter>
     );
 }
 
