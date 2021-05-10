@@ -1,4 +1,4 @@
-*.bundle.js
+dist
 package-lock.json
 node_modules
 node
@@ -6,3 +6,5 @@ node
 .idea
 *.log
 log
+coverage
+.nyc_output

@@ -6,14 +6,14 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-	contentBase: path.join(__dirname, 'dist'),
-	index: 'index.html',
-	port: 8080,
-	proxy: {
-	    '/api/**': 'http://localhost:8091'
-	},
-	historyApiFallback: {
-	    index: 'index.html'
-	}
+        contentBase: path.join(__dirname, 'dist'),
+        index: 'index.html',
+        port: 8000,
+        proxy: {
+            '/api/**': 'http://localhost:8091'
+        },
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
 });
