@@ -44,49 +44,53 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 
     render() {
         return (
-            <ThemeProvider theme={theme}>
-                <NewUser />
-                <div className="counter">
-                    <ListItem>
-                        <h3>Accounts:</h3>
-                        <ListItemIcon
-                            className="spacing">
-                            <PeopleIcon className="people" />
-                            <Typography className="number">
-                                {this.props.state.accounts.counter?.accounts}
-                            </Typography>
-                        </ListItemIcon>
-                        <ListItemIcon
-                            className="spacing">
-                            <SecurityIcon className="shield" />
-                            <Typography className="number">
-                                {this.props.state.accounts.counter?.admins}
-                            </Typography>
-                        </ListItemIcon>
-                        <ListItemIcon
-                            className="spacing">
-                            <WorkIcon className="bag" />
-                            <Typography className="number">
-                                {this.props.state.accounts.counter?.users}
-                            </Typography>
-                        </ListItemIcon>
-                        <ListItemIcon
-                            className="spacing">
-                            <BathtubIcon className="cleaner" />
-                            <Typography className="number">
-                                {this.props.state.accounts.counter?.cleaners}
-                            </Typography>
-                        </ListItemIcon>
-                    </ListItem>
-                </div>
-                <div>
-                    {this.props.state.accounts.error ?
-                        this.props.state.accounts.error : ""}
-                    <Grid container spacing={3}>
-                        {this.popolate()}
-                    </Grid>
-                </div>
-            </ThemeProvider>
+            <div className="marginAccounts">
+                <ThemeProvider theme={theme}>
+                    <div className="addAccountButton">
+                        <NewUser />
+                    </div>
+                    <div className="counter">
+                        <ListItem>
+                            <h3 className="titleAccounts">Accounts:</h3>
+                            <ListItemIcon
+                                className="spacing">
+                                <PeopleIcon className="people" />
+                                <Typography className="number">
+                                    {this.props.state.accounts.counter?.accounts}
+                                </Typography>
+                            </ListItemIcon>
+                            <ListItemIcon
+                                className="spacing">
+                                <SecurityIcon className="shield" />
+                                <Typography className="number">
+                                    {this.props.state.accounts.counter?.admins}
+                                </Typography>
+                            </ListItemIcon>
+                            <ListItemIcon
+                                className="spacing">
+                                <WorkIcon className="bag" />
+                                <Typography className="number">
+                                    {this.props.state.accounts.counter?.users}
+                                </Typography>
+                            </ListItemIcon>
+                            <ListItemIcon
+                                className="spacing">
+                                <BathtubIcon className="cleaner" />
+                                <Typography className="number">
+                                    {this.props.state.accounts.counter?.cleaners}
+                                </Typography>
+                            </ListItemIcon>
+                        </ListItem>
+                    </div>
+                    <div>
+                        {this.props.state.accounts.error ?
+                            this.props.state.accounts.error : ""}
+                        <Grid container spacing={3}>
+                            {this.popolate()}
+                        </Grid>
+                    </div>
+                </ThemeProvider>
+            </div>
         )
     }
 

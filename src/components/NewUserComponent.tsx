@@ -102,7 +102,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                         open={this.state.isNewUserOpen}
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
-                        className="central"
+                        className="pencilTitle"
                         fullWidth maxWidth="xs">
                         <DialogTitle
                             id="form-dialog-title"

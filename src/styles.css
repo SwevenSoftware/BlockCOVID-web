@@ -18,7 +18,33 @@
     background-color: #689f38;
 }
 
+#primaryColor {
+    color: #689f38;
+}
+
+#colorError {
+    color: red;
+}
+
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
+
+.marginAccounts {
+    margin-top: 5em;
+    margin-left: 4em;
+}
+
+.titleAccounts {
+    margin-left: -1.5em;
+}
+
+.counter {
+    margin-bottom: 1%;
+    max-width: 75%;
+}
+
+.spacing {
+    padding-left: 10em;
+}
 
 .usernameLayout{
   overflow: hidden;
@@ -54,24 +80,49 @@
 .addAccountButton {
     position: absolute;
     right: 2em;
-    top: 6em;
-}
-
-.addColor:hover {
-    color: #F0B030;
 }
 
 .number {
     padding-left: 15%;
 }
 
+.people {
+    color: #121212
+}
+
+.shield {
+    color: #d68f00;
+}
+
+.bag {
+    color: rgb(134, 42, 42);
+}
+
+.cleaner {
+    color: rgb(5, 162, 235);
+}
+
 
 /* (((((((((((((((((((((((((((((( CARDGRID )))))))))))))))))))))))))))) */
 
-.cardGrid {
-    width: 40em;
-    max-width: 90%;
-    margin: auto;
+.gridInline {
+    display: inline-block;
+    min-width: 50%;
+    margin-top: -6em;
+    margin-left: -7.5em;
+}
+
+.buttonInline {
+    display: inline-block;
+    min-width: 35%;
+    position: absolute;
+    margin-left: 4em;
+    margin-right: 4em;
+    text-align: center;
+}
+
+.buttonGrid {
+    margin-bottom: 0.5em;
 }
 
 .dispGrid {
@@ -89,6 +140,43 @@
     color: #673ab7;
 }
 
+/* (((((((((((((((((((((((((((((( GENERALLAYOUT )))))))))))))))))))))))))))) */
+
+.root {
+    display: 'flex';
+}
+
+.menuButton {
+    margin-right: 36em;
+}
+
+.hide {
+    display: none;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1em;
+    padding-right: 1em;
+    /* necessary for content to be below app bar */
+    min-height: 60px;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 3em;
+    /* necessary for content to be right app bar */
+    margin-left: 50px;
+}
+
+
+/* (((((((((((((((((((((((((((((( NEWUSER )))))))))))))))))))))))))))) */
+
+.addColor:hover {
+    color: #F0B030;
+}
 /* (((((((((((((((((((((((((((((( LOGIN )))))))))))))))))))))))))))) */
 
 .container {
@@ -130,6 +218,11 @@
     text-align: center;
 }
 
+/* (((((((((((((((((((((((((((((( REPORT )))))))))))))))))))))))))))) */
+
+.marginButton {
+    margin-top: 1em;
+}
 
 /* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
 
@@ -138,32 +231,10 @@
     font-weight: 500;
 }
 
+/* (((((((((((((((((((((((((((((( ROOMS )))))))))))))))))))))))))))) */
 
-/* (((((((((((((((((((((((((((((( SEARCHUSERS )))))))))))))))))))))))))))) */
-
-.counter {
-    margin-bottom: 2%;
-    max-width: 75%;
-}
-
-.spacing {
-    padding-left: 10em;
-}
-
-.people {
-    color: #121212
-}
-
-.shield {
-    color: #d68f00;
-}
-
-.bag {
-    color: rgb(134, 42, 42);
-}
-
-.cleaner {
-    color: rgb(5, 162, 235);
+.paddingAppBar {
+    padding: 0;
 }
 
 
@@ -232,10 +303,12 @@
 
 
 
-
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
+    .buttonInline {
+        width: 33%;
+    }   
     .grid {
         min-width: 31%;
     }
@@ -245,6 +318,9 @@
 }
 
 @media only screen and (max-width: 976px) {
+    .buttonInline {
+        width: 33%;
+    }   
     .grid {
         min-width: 48%;
     }
@@ -254,6 +330,9 @@
 }
 
 @media only screen and (max-width: 660px) {
+    .buttonInline {
+        width: 33%;
+    }  
     .grid {
         min-width: 100%;
         margin-right: 0%;
