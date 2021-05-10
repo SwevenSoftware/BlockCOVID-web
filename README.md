@@ -14,6 +14,7 @@ nom install
 npm run build
 ```
 A dist folder will be created with the bundled app in it, configured for a production environment
+
 #### Dev
 ```shell
 npm run dev
