@@ -3,18 +3,18 @@ import {
     ERROR_UNKNOWN
 } from "../../types"
 
-export const roomHandlers = {}
+export const roomsHandlers = {}
 
-roomHandlers[roomTypes.FETCH_SUCCESS] = function(state, action) {
+roomsHandlers[roomTypes.FETCH_SUCCESS] = function(state, action) {
     console.log(roomTypes.FETCH_SUCCESS)
     return {
         // TODO: return proper 'rooms' property
-        rooms: action.payload._embedded.userList,
+        rooms: action.payload,
         error: ""
     }
 }
 
-roomHandlers[roomTypes.CREATE_SUCCESS] = function(state, action) {
+roomsHandlers[roomTypes.CREATE_SUCCESS] = function(state, action) {
     console.log(roomTypes.CREATE_SUCCESS)
     return {
         ...state,
@@ -22,7 +22,7 @@ roomHandlers[roomTypes.CREATE_SUCCESS] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.MODIFY_SUCCESS] = function(state, action) {
+roomsHandlers[roomTypes.MODIFY_SUCCESS] = function(state, action) {
     console.log(roomTypes.MODIFY_SUCCESS)
     return {
         ...state,
@@ -30,7 +30,7 @@ roomHandlers[roomTypes.MODIFY_SUCCESS] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.DELETE_SUCCESS] = function(state, action) {
+roomsHandlers[roomTypes.DELETE_SUCCESS] = function(state, action) {
     console.log(roomTypes.DELETE_SUCCESS)
     if (action.payload.error) {
         return {
@@ -43,7 +43,7 @@ roomHandlers[roomTypes.DELETE_SUCCESS] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.FETCH_FAILURE] = function(state, action) {
+roomsHandlers[roomTypes.FETCH_FAILURE] = function(state, action) {
     console.log(roomTypes.FETCH_FAILURE)
     if (action.payload.error) {
         return {
@@ -56,7 +56,7 @@ roomHandlers[roomTypes.FETCH_FAILURE] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
+roomsHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
     console.log(roomTypes.CREATE_FAILURE)
     switch (action.payload.error) {
         default:
@@ -67,7 +67,7 @@ roomHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
+roomsHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
     console.log(roomTypes.MODIFY_FAILURE)
     if (action.payload.error) {
         return {
@@ -80,7 +80,7 @@ roomHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
     }
 }
 
-roomHandlers[roomTypes.DELETE_FAILURE] = function(state, action) {
+roomsHandlers[roomTypes.DELETE_FAILURE] = function(state, action) {
     console.log(roomTypes.DELETE_FAILURE)
     if (action.payload.error) {
         return {

@@ -4,9 +4,9 @@ import {
     ERROR_USERNAME_NOT_AVAILABLE
 } from "../../types"
 
-export const accountHandlers = {}
+export const accountsHandlers = {}
 
-accountHandlers[accountTypes.FETCH_SUCCESS] = function(state, action) {
+accountsHandlers[accountTypes.FETCH_SUCCESS] = function(state, action) {
     console.log(accountTypes.FETCH_SUCCESS)
     return {
         users: action.payload._embedded.userList,
@@ -20,7 +20,7 @@ accountHandlers[accountTypes.FETCH_SUCCESS] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.CREATE_SUCCESS] = function(state, action) {
+accountsHandlers[accountTypes.CREATE_SUCCESS] = function(state, action) {
     console.log(accountTypes.CREATE_SUCCESS)
     return {
         ...state,
@@ -28,7 +28,7 @@ accountHandlers[accountTypes.CREATE_SUCCESS] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.MODIFY_SUCCESS] = function(state, action) {
+accountsHandlers[accountTypes.MODIFY_SUCCESS] = function(state, action) {
     console.log(accountTypes.MODIFY_SUCCESS)
     return {
         ...state,
@@ -36,7 +36,7 @@ accountHandlers[accountTypes.MODIFY_SUCCESS] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.DELETE_SUCCESS] = function(state, action) {
+accountsHandlers[accountTypes.DELETE_SUCCESS] = function(state, action) {
     console.log(accountTypes.DELETE_SUCCESS)
     if (action.payload.error) {
         return {
@@ -49,7 +49,7 @@ accountHandlers[accountTypes.DELETE_SUCCESS] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.FETCH_FAILURE] = function(state, action) {
+accountsHandlers[accountTypes.FETCH_FAILURE] = function(state, action) {
     console.log(accountTypes.FETCH_FAILURE)
     if (action.payload.error) {
         return {
@@ -63,7 +63,7 @@ accountHandlers[accountTypes.FETCH_FAILURE] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.CREATE_FAILURE] = function(state, action) {
+accountsHandlers[accountTypes.CREATE_FAILURE] = function(state, action) {
     console.log(accountTypes.CREATE_FAILURE)
     switch (action.payload.error) {
         case 409: /* user exists, username already taken */
@@ -79,7 +79,7 @@ accountHandlers[accountTypes.CREATE_FAILURE] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.MODIFY_FAILURE] = function(state, action) {
+accountsHandlers[accountTypes.MODIFY_FAILURE] = function(state, action) {
     console.log(accountTypes.MODIFY_FAILURE)
     if (action.payload.error) {
         return {
@@ -92,7 +92,7 @@ accountHandlers[accountTypes.MODIFY_FAILURE] = function(state, action) {
     }
 }
 
-accountHandlers[accountTypes.DELETE_FAILURE] = function(state, action) {
+accountsHandlers[accountTypes.DELETE_FAILURE] = function(state, action) {
     console.log(accountTypes.DELETE_FAILURE)
     if (action.payload.error) {
         return {
