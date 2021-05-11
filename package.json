@@ -32,7 +32,8 @@
     "coverage": "react-scripts test --coverage",
     "formatApply": "tsfmt -r",
     "formatVerify": "tsfmt -r --verify",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "docker-init": "mkdir -p logs"
   },
   "browserslist": {
     "production": [
