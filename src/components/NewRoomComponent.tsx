@@ -1,15 +1,7 @@
 /* react */
 import React, { Component } from 'react'
-
 /* redux */
 import { connect } from 'react-redux'
-//import { createAccount as newUserConfirm } from '../actions/accountsActions' // to do
-
-/* types */
-import {
-    //inserire gli errori
-} from '../types'
-
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -23,7 +15,6 @@ import AddBoxIcon from '@material-ui/icons/AddBox'
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
-
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
@@ -36,12 +27,12 @@ interface NewRoomProps {
 
 interface NewRoomStates {
     isButtonDisabled: boolean,
-    isModalOpen: boolean,
+    isModalOpen: boolean
 }
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     constructor(props) {
-        super(props);
+        super(props)
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
             this.handleCloseButton = this.handleCloseButton.bind(this),
             this.handleConfirm = this.handleConfirm.bind(this),
@@ -80,19 +71,15 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                             </div>
                             <div className="alignCentralPencil">
                                 <div className="addField">
+                                    {/* TODO: add grid of the room */}
                                     <TextField
                                         required
                                         id="outlined-search"
-                                        label="RoomName"
+                                        label="Nome stanza"
                                         variant="outlined"
-                                        //error={this.state.usernameError}
-                                        //helperText={this.state.usernameError ? ERROR_USERNAME_NOT_AVAILABLE : ""}
-                                        //value={this.state.usernameValue}
-                                        onChange={(e) => {
-                                            //this.handleChangeUsername(e.target.value);
-                                            //this.userInputControl(e.target.value);
-                                        }}
+                                        // TODO: implement error, helperText, value, onChange
                                     />
+                                    {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
                             </div>
                             <div className="centralPencil">
@@ -106,7 +93,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                 Annulla
                  </Button>
                             <Button onClick={() => {
-                                this.handleConfirm();
+                                this.handleConfirm()
                             }}
                                 id="confirm" variant="outlined">
                                 Conferma
@@ -115,17 +102,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                     </Dialog>
                 </div>
             </ThemeProvider>
-        );
+        )
     }
-
-    componentDidMount() {
-        this.setButton()
-    }
-
-    private setButton(): void {
-
-    }
-
 
     private handleClickOpenButton() {
         this.setState({ isModalOpen: true })
@@ -138,32 +116,28 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         })
     }
 
-    private roomInputControl(roomNameValue: string): boolean {
-        let reg = new RegExp("^[a-zA-Z0-9]{5,16}$");
-        if (!roomNameValue.match(reg)) {
-            //this.setState({ roomNameValue: true })
+    private roomNameValidate(roomName: string): boolean {
+        let reg = new RegExp("^[a-zA-Z0-9]{5,16}$")
+        if (!roomName.match(reg)) {
+            // TODO: set error (state) to true
             return true
         } else {
-            //this.setState({ roomNameValue: false })
+            // TODO: set error (state) to false
             return false
         }
     }
 
     private handleConfirm(): void {
-
+      // TODO: implement confirmation
     }
 }
-
-
-
-
-
 
 const mapStateToProps = (state) => {
     return {
         state: {
-            tokenID: state.login.token?.id
-            //rooms: state.rooms
+            tokenID: state.login.token?.id,
+            // TODO: add roomsReducer to rootReducer
+            // rooms: state.rooms
         }
     }
 }
@@ -171,8 +145,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            newUser: (data) => {
-                //dispatch(newRoomConfirm(data))
+            createRoom: (data) => {
+              // TODO: add createRoom() to roomsActions
+              // dispatch(createRoom(data))
             }
         }
     }
