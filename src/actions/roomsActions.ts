@@ -20,12 +20,12 @@ export const getRooms = (fromTimestamp: string, toTimestamp: string) => {
         let tokenID = getState().login.token?.id
         if (tokenID) {
             getRoomsAPI(tokenID, fromTimestamp, toTimestamp)
-               .then(res => {
-                   dispatch(successGetRooms(res.data))
-               })
-               .catch(err => {
-                   dispatch(failureGetRooms(err))
-               })
+                .then(res => {
+                    dispatch(successGetRooms(res.data))
+                })
+                .catch(err => {
+                    dispatch(failureGetRooms(err))
+                })
         }
         else {
             // TODO: test '401' parameter
