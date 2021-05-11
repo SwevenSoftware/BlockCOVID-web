@@ -139,3 +139,14 @@ export const deleteRoom = (tokenID: string, roomName: string, link: string) => {
     }
     return axios.delete(link + roomName, config)
 }
+
+export const getRooms = (tokenID: string, fromTimestamp: string, toTimestamp: string) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": tokenID,
+        }
+    }
+    const url = '/api/rooms' + (fromTimestamp && toTimestamp ? '?from=' + fromTimestamp + "&to=" + toTimestamp : '')
+    return axios.get(url, config)
+}

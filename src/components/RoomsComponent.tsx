@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
+import { getRooms } from '../actions/roomsActions'
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -35,10 +36,11 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     componentDidMount() {
-        // TODO: dispatch getRooms()
+        // this.props.dispatch.getRooms('2020-01-01T01:00', '2021-01-01T01:00')
     }
 
     render() {
+        console.log(this.props.state)
         return (
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
@@ -133,9 +135,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 const mapStateToProps = (state: any) => {
     return {
         state: {
-            login: state.login,
-            // TODO: add roomsReducer to rootReducer
-            // rooms: state.rooms
+            rooms: state.rooms
         }
     }
 }
@@ -143,9 +143,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            getRooms: (tokenID: string) => {
-                // TODO: add getRooms() to roomsActions
-                // dispatch(getRooms(tokenID))
+            getRooms: (fromTimestamp: string, toTimestamp: string) => {
+                dispatch(getRooms(fromTimestamp, toTimestamp))
             }
         }
     }
