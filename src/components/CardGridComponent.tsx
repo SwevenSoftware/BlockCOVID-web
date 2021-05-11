@@ -45,19 +45,53 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
 
     render() {
         console.log(this.props.mode)
-        return (
-            <div>
-                <div className="gridInline">
-                    <ThemeProvider theme={theme}>
-                        <Card>
-                            <CardContent ref={this.dispGrid} className="dispGrid">
-                                <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
-                            </CardContent>
-                        </Card>
-                    </ThemeProvider>
-                </div>
-            </div>
-        );
+        switch (this.props.mode) {
+            case 'mod':
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
+                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
+                    </div>
+                );
+                break;
+            case 'del':
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
+                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
+                    </div>
+                );
+                break;
+            default:
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
+                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
+                    </div>
+                );
+        }
+
     }
 
     componentDidMount() {
