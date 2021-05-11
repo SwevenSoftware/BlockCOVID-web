@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
+import { createRoom } from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -116,6 +117,11 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         })
     }
 
+
+    private handleConfirm(): void {
+      // TODO: implement confirmation
+    }
+
     private roomNameValidate(roomName: string): boolean {
         let reg = new RegExp("^[a-zA-Z0-9]{5,16}$")
         if (!roomName.match(reg)) {
@@ -126,18 +132,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             return false
         }
     }
-
-    private handleConfirm(): void {
-      // TODO: implement confirmation
-    }
 }
 
 const mapStateToProps = (state) => {
     return {
         state: {
-            tokenID: state.login.token?.id,
-            // TODO: add roomsReducer to rootReducer
-            // rooms: state.rooms
+            rooms: state.rooms
         }
     }
 }
@@ -145,9 +145,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            createRoom: (data) => {
-              // TODO: add createRoom() to roomsActions
-              // dispatch(createRoom(data))
+            createRoom: (data: any) => {
+              dispatch(createRoom(data))
             }
         }
     }
