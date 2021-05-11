@@ -6,6 +6,7 @@ import { RootState } from './reducers/rootReducer'
 import GeneralLayout from './GeneralLayout'
 import Login from './components/LoginComponent'
 import Accounts from './components/AccountsComponent'
+import Rooms from './Rooms'
 import './styles.css'
 const App: React.FC = () => {
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
                 {token ?
                     <Switch>
                         <Route path='/accounts' exact component={Accounts} />
+                        <Route path='/rooms' exact component= {Rooms} />
                         <Redirect path='*' to='/accounts' />
                     </Switch>
                     :
