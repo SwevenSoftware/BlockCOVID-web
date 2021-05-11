@@ -146,8 +146,7 @@ const mapStateToProps = (state: any) => {
     return {
         state: {
             login: state.login,
-            accounts: state.accounts,
-            reducer: state.newUser
+            accounts: state.accounts
         }
     }
 }
