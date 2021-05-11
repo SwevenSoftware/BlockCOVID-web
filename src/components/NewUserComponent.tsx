@@ -102,7 +102,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                         open={this.state.isNewUserOpen}
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
-                        className="modalTitle"
                         fullWidth maxWidth="xs">
                         <DialogTitle
                             id="form-dialog-title"
@@ -114,8 +113,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                                 <DialogContentText>
                                     Compila i seguenti campi
                                 </DialogContentText>
-                            </div>
-                            <div className="centralModal">
                                 <div className="addField">
                                     <TextField
                                         required

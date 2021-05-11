@@ -108,13 +108,9 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                         <DialogContent>
                             <div className="centralModal">
                                 <PersonIcon fontSize="large" />
-                            </div>
-                            <div className="centralModal">
                                 <DialogContentText>
                                     Puoi modificare i seguenti campi
                                 </DialogContentText>
-                            </div>
-                            <div className="centralModal">
                                 <div className="addField">
                                     <TextField
                                         required
