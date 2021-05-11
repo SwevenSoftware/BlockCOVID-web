@@ -8,25 +8,25 @@ import {
 } from '../api'
 
 interface roomInformation {
-  name: string,
-  openingAt: string,
-  closingAt: string,
-  openingDays: string[],
-  width: number,
-  height: number
+    name: string,
+    openingAt: string,
+    closingAt: string,
+    openingDays: string[],
+    width: number,
+    height: number
 }
 
 export const getRooms = () => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if(tokenID) {
-          // getRoomsAPI(tokenID)
-          //     .then(res => {
-          //         dispatch(successGetRooms(res.data))
-          //     })
-          //     .catch(err => {
-          //         dispatch(failureGetRooms(err))
-          //     })
+        if (tokenID) {
+            // getRoomsAPI(tokenID)
+            //     .then(res => {
+            //         dispatch(successGetRooms(res.data))
+            //     })
+            //     .catch(err => {
+            //         dispatch(failureGetRooms(err))
+            //     })
         }
         else {
             dispatch(failureGetRooms(401))
@@ -37,58 +37,57 @@ export const getRooms = () => {
 export const createRoom = (data: roomInformation) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if(tokenID) {
-          createRoomAPI(tokenID, data)
-              .then((res) => {
-                  dispatch(successCreateRoom(res.data))
-                  // dispatch(getRooms())
-              })
-              .catch(err => {
-                  dispatch(failureCreateRoom(err))
-              })
-       }
-       else {
-         dispatch(failureCreateRoom(401))
-       }
+        if (tokenID) {
+            createRoomAPI(tokenID, data)
+                .then((res) => {
+                    dispatch(successCreateRoom(res.data))
+                    // dispatch(getRooms())
+                })
+                .catch(err => {
+                    dispatch(failureCreateRoom(err))
+                })
+        }
+        else {
+            dispatch(failureCreateRoom(401))
+        }
     }
 }
 
 export const modifyRoom = (roomName: string, link: string, data: roomInformation) => {
     return (dispatch, getState) => {
-      let tokenID = getState().login.token?.id
-      if(tokenID) {
-        modifyRoomAPI(tokenID, roomName, link, data)
-            .then((res) => {
-                dispatch(successModifyRoom(res.data))
-                // dispatch(getRooms())
-            })
-            .catch(err => {
-                dispatch(failureModifyRoom(err))
-            })
-      }
-      else {
-        dispatch(failureModifyRoom(401))
-      }
+        let tokenID = getState().login.token?.id
+        if (tokenID) {
+            modifyRoomAPI(tokenID, roomName, link, data)
+                .then((res) => {
+                    dispatch(successModifyRoom(res.data))
+                    // dispatch(getRooms())
+                })
+                .catch(err => {
+                    dispatch(failureModifyRoom(err))
+                })
+        }
+        else {
+            dispatch(failureModifyRoom(401))
+        }
     }
 }
 
 export const deleteRoom = (roomName: string, link: string) => {
     return (dispatch, getState) => {
-      let tokenID = getState().login.token?.id
-      if(tokenID) {
-        deleteRoomAPI(tokenID, roomName, link)
-            .then((res) => {
-                dispatch(successDeleteRoom(res.data))
-                // dispatch(getRooms()
-            })
-            .catch(err => {
-                dispatch(failureDeleteRoom(err))
-            })
-      }
-      else
-      {
-        dispatch(failureDeleteRoom(401))
-      }
+        let tokenID = getState().login.token?.id
+        if (tokenID) {
+            deleteRoomAPI(tokenID, roomName, link)
+                .then((res) => {
+                    dispatch(successDeleteRoom(res.data))
+                    // dispatch(getRooms()
+                })
+                .catch(err => {
+                    dispatch(failureDeleteRoom(err))
+                })
+        }
+        else {
+            dispatch(failureDeleteRoom(401))
+        }
     }
 }
 

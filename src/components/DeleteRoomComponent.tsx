@@ -107,7 +107,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     * @returns
     */
     private handleConfirm(): void {
-      // TODO: implement confirmation
+        // TODO: implement confirmation
     }
 }
 

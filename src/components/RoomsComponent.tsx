@@ -43,7 +43,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
                     <div className="addAccountButton"> {/* TODO: change className */}
-                        <NewRoom/>
+                        <NewRoom />
                     </div>
                     <div>
                         <Grid container spacing={3}>
@@ -72,18 +72,18 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         </ListItemIcon>
 
                         <ListItemText className="usernameLayout">
-                          <ModifyRoom data={{
-                            room: {
-                              name: 'static room'
-                            }
-                          }}/>
+                            <ModifyRoom data={{
+                                room: {
+                                    name: 'static room'
+                                }
+                            }} />
                         </ListItemText>
                         {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
                         <DeleteRoom data={{
-                          room: {
-                            name: 'static room'
-                          }
-                        }}/>
+                            room: {
+                                name: 'static room'
+                            }
+                        }} />
                     </ListItem>
                 </Paper>
             </Grid>

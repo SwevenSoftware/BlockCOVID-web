@@ -35,7 +35,7 @@ interface ModifyRoomState {
 class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
     constructor(props) {
         super(props)
-            this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
+        this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
             this.handleCloseButton = this.handleCloseButton.bind(this),
             this.handleConfirm = this.handleConfirm.bind(this),
 
@@ -49,7 +49,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             <ThemeProvider theme={theme}>
                 <div>
                     <Button className="usernameLayout pencil" onClick={() => this.handleClickOpenButton()}>
-                      {this.props.data.room.name}
+                        {this.props.data.room.name}
                     </Button>
                     <Dialog
                         open={this.state.isModalOpen}
@@ -75,7 +75,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         id="outlined-search"
                                         label="Nome stanza"
                                         variant="outlined"
-                                        // TODO: implement error, helperText, value, onChange
+                                    // TODO: implement error, helperText, value, onChange
                                     />
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
@@ -115,7 +115,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 
 
     private handleConfirm(): void {
-      // TODO: implement confirmation
+        // TODO: implement confirmation
     }
 
     private roomNameValidate(roomName: string): boolean {
@@ -133,7 +133,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 const mapStateToProps = (state) => {
     return {
         state: {
-          rooms: state.rooms
+            rooms: state.rooms
         }
     }
 }
@@ -142,7 +142,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
             modifyRoom: (roomName: string, link: string, data: any) => {
-              dispatch(modifyRoom(roomName, link, data))
+                dispatch(modifyRoom(roomName, link, data))
             }
         }
     }

@@ -78,7 +78,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         id="outlined-search"
                                         label="Nome stanza"
                                         variant="outlined"
-                                        // TODO: implement error, helperText, value, onChange
+                                    // TODO: implement error, helperText, value, onChange
                                     />
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
@@ -119,7 +119,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 
 
     private handleConfirm(): void {
-      // TODO: implement confirmation
+        // TODO: implement confirmation
     }
 
     private roomNameValidate(roomName: string): boolean {
@@ -146,7 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
             createRoom: (data: any) => {
-              dispatch(createRoom(data))
+                dispatch(createRoom(data))
             }
         }
     }
