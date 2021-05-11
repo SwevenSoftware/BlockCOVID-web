@@ -6,7 +6,7 @@ import { RootState } from './reducers/rootReducer'
 import GeneralLayout from './GeneralLayout'
 import Login from './components/LoginComponent'
 import Accounts from './components/AccountsComponent'
-import Rooms from './Rooms'
+import Rooms from './components/RoomsComponent'
 import './styles.css'
 const App: React.FC = () => {
 
