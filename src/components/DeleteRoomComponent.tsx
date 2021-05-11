@@ -20,6 +20,8 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 /* styles */
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import { theme } from '../theme'
+/* others */
+import CardGridComponent from './CardGridComponent'
 
 interface DeleteRoomProps {
     state: any,
@@ -44,6 +46,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
+            
             <div >
                 <IconButton
                     className="trash"
@@ -58,7 +61,11 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     <DialogTitle id="form-dialog-title">Sei sicuro di eliminare '{this.props.data.room.name}'?</DialogTitle>
                     <DialogContent className="central">
                         <div className="alignCentralPencil">
-                            {/* TODO: add grid of the room */}
+                            <CardGridComponent
+                                mode = "delete"
+                                data = {{
+                                }}
+                            />
                         </div>
                         {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
                     </DialogContent>
