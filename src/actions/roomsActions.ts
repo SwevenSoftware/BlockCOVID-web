@@ -29,7 +29,8 @@ export const getRooms = () => {
             //     })
         }
         else {
-            dispatch(failureGetRooms(401))
+            // TODO: test '401' parameter
+            // dispatch(failureGetRooms(401))
         }
     }
 }
@@ -48,7 +49,8 @@ export const createRoom = (data: roomInformation) => {
                 })
         }
         else {
-            dispatch(failureCreateRoom(401))
+            // TODO: test '401' parameter
+            // dispatch(failureCreateRoom(401))
         }
     }
 }
@@ -67,7 +69,8 @@ export const modifyRoom = (roomName: string, link: string, data: roomInformation
                 })
         }
         else {
-            dispatch(failureModifyRoom(401))
+            // TODO: test '401' parameter
+            // dispatch(failureModifyRoom(401))
         }
     }
 }
@@ -86,7 +89,8 @@ export const deleteRoom = (roomName: string, link: string) => {
                 })
         }
         else {
-            dispatch(failureDeleteRoom(401))
+            // TODO: test '401' parameter
+            // dispatch(failureDeleteRoom(401))
         }
     }
 }
