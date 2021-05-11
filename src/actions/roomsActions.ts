@@ -1,7 +1,6 @@
 import { roomTypes } from "../types"
 import {
-    // TODO: add getRoom() in api
-    // getRoom as getRoomAPI
+    getRooms as getRoomsAPI,
     createRoom as createRoomAPI,
     modifyRoom as modifyRoomAPI,
     deleteRoom as deleteRoomAPI
@@ -16,17 +15,17 @@ interface roomInformation {
     height: number
 }
 
-export const getRooms = () => {
+export const getRooms = (fromTimestamp: string, toTimestamp: string) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
         if (tokenID) {
-            // getRoomsAPI(tokenID)
-            //     .then(res => {
-            //         dispatch(successGetRooms(res.data))
-            //     })
-            //     .catch(err => {
-            //         dispatch(failureGetRooms(err))
-            //     })
+            getRoomsAPI(tokenID, fromTimestamp, toTimestamp)
+               .then(res => {
+                   dispatch(successGetRooms(res.data))
+               })
+               .catch(err => {
+                   dispatch(failureGetRooms(err))
+               })
         }
         else {
             // TODO: test '401' parameter
