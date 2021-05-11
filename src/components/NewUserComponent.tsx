@@ -176,18 +176,18 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                                 <FormLabel>Ruolo:</FormLabel>
                                 <FormControl>
                                     <FormGroup>
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
-                                                label="Admin"
-                                            />
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
-                                                label="Utente"
-                                            />
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
-                                                label="Addetto alle pulizie"
-                                            />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
+                                            label="Admin"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
+                                            label="Utente"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
+                                            label="Addetto alle pulizie"
+                                        />
                                     </FormGroup>
                                     <FormHelperText color="red">{this.state.authoritiesError ? ERROR_AUTHORITIES_NOT_SELECTED : ""}</FormHelperText>
                                 </FormControl>
