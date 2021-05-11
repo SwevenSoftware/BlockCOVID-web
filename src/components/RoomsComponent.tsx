@@ -17,7 +17,9 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
 /* others */
-import NewRoomComponent from './NewRoomComponent'
+import NewRoom from './NewRoomComponent'
+import ModifyRoom from './ModifyRoomComponent'
+import DeleteRoom from './DeleteRoomComponent'
 
 interface RoomsProps {
     state: any
@@ -41,7 +43,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
                     <div className="addAccountButton"> {/* TODO: change className */}
-                        <NewRoomComponent/>
+                        <NewRoom/>
                     </div>
                     <div>
                         <Grid container spacing={3}>
@@ -68,13 +70,20 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         <ListItemIcon>
                             <MeetingRoomIcon fontSize="large" />
                         </ListItemIcon>
-                        {/* TODO: clicking on the room name should open the modification modal */}
-                        <ListItemText primary="static room" className="usernameLayout" />
+
+                        <ListItemText className="usernameLayout">
+                          <ModifyRoom data={{
+                            room: {
+                              name: 'static room'
+                            }
+                          }}/>
+                        </ListItemText>
                         {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
-                        {/* TODO: replace button with proper component */}
-                        <Button>
-                            Canc
-            </Button>
+                        <DeleteRoom data={{
+                          room: {
+                            name: 'static room'
+                          }
+                        }}/>
                     </ListItem>
                 </Paper>
             </Grid>
