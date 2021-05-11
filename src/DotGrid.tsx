@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from "react";
 /* other files */
-import Room from "./Room";
+import Grid from "./Grid";
 import "./styles.css";
 
 interface Pos2d {
@@ -25,7 +25,7 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
         posStart: Pos2d;
         posEnd: Pos2d;
     };
-    room: Room;
+    grid: Grid;
     constructor(props) {
         super(props);
         this.canvasRef = createRef<HTMLCanvasElement>();
@@ -49,7 +49,7 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
             height: props.height
         };
 
-        this.room = new Room(20, 20);
+        this.grid = new Grid(20, 20);
     }
 
     public setSize(width: number, height: number) {
@@ -73,8 +73,8 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
 
     checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
         const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect();
-        if (!boundRect || (e.clientX - boundRect.x) / boundRect.width >= 1 - 1 / this.room.cells.x ||
-            (e.clientY - boundRect.y) / boundRect.height >= 1 - 1 / this.room.cells.y) return;
+        if (!boundRect || (e.clientX - boundRect.x) / boundRect.width >= 1 - 1 / this.grid.cells.x ||
+            (e.clientY - boundRect.y) / boundRect.height >= 1 - 1 / this.grid.cells.y) return;
         const pointPos: Pos2d = {
             x:
                 Math.floor((e.clientX - boundRect.x) / this.gridSettings.dist.x) *
@@ -87,8 +87,8 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
                 this.gridSettings.dist.y / 2 +
                 this.gridSettings.radius
         };
-        const id: number | null = this.room.addDesk(pointPos.x, pointPos.y);
-        if (id && pointPos.x < 100 && pointPos.y < 100) this.room.setInUse(id, true); // debug
+        const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y);
+        if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
         this.updateCanvas();
     }
 
@@ -119,7 +119,7 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
     }
 
     public resetView() {
-        this.room.clearDesks();
+        this.grid.clearDesks();
         this.updateCanvas();
     }
 
@@ -132,8 +132,8 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
         );
         if (!ctx) return;
         this.gridSettings.dist = {
-            x: canvas.width / this.room.cells.x,
-            y: canvas.height / this.room.cells.y
+            x: canvas.width / this.grid.cells.x,
+            y: canvas.height / this.grid.cells.y
         };
         const dist: Pos2d = this.gridSettings.dist;
         const radius: number = this.gridSettings.radius;
@@ -159,10 +159,10 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
         }
 
         // desks
-        const ids: Array<number> = this.room.getIds();
+        const ids: Array<number> = this.grid.getIds();
         for (var i in ids) {
-            const pos: Pos2d | null | undefined = this.room.getPosition(ids[i]);
-            const inUse: boolean | null | undefined = this.room.isInUse(ids[i]);
+            const pos: Pos2d | null | undefined = this.grid.getPosition(ids[i]);
+            const inUse: boolean | null | undefined = this.grid.isInUse(ids[i]);
             if (pos && inUse != undefined && inUse != null)
                 DotGrid.drawDesk(
                     ctx,
