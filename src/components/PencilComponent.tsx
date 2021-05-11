@@ -102,19 +102,15 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                         fullWidth maxWidth="xs">
                         <DialogTitle
                             id="form-dialog-title"
-                            className="pencilTitle">
+                            className="modalTitle">
                             Modifica l'utente {this.props.data.user.username}
                         </DialogTitle>
                         <DialogContent>
-                            <div className="alignCentralPencil">
+                            <div className="centralModal">
                                 <PersonIcon fontSize="large" />
-                            </div>
-                            <div className="centralPencil">
                                 <DialogContentText>
                                     Puoi modificare i seguenti campi
-               </DialogContentText>
-                            </div>
-                            <div className="alignCentralPencil">
+                                </DialogContentText>
                                 <div className="addField">
                                     <TextField
                                         required
@@ -153,10 +149,10 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                                     />
                                 </div>
                             </div>
-                            <div className="centralPencil">
+                            <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
-               </DialogContentText>
+                                </DialogContentText>
                                 <FormControl>
                                     <FormLabel>Ruolo:</FormLabel>
                                     <FormGroup>

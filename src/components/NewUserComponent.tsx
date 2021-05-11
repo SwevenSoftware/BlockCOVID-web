@@ -102,20 +102,17 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                         open={this.state.isNewUserOpen}
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
-                        className="pencilTitle"
                         fullWidth maxWidth="xs">
                         <DialogTitle
                             id="form-dialog-title"
-                            className="pencilTitle">
+                            className="modalTitle">
                             Crea un nuovo utente
-               </DialogTitle>
+                        </DialogTitle>
                         <DialogContent>
-                            <div className="centralPencil">
+                            <div className="centralModal">
                                 <DialogContentText>
                                     Compila i seguenti campi
-                   </DialogContentText>
-                            </div>
-                            <div className="alignCentralPencil">
+                                </DialogContentText>
                                 <div className="addField">
                                     <TextField
                                         required
@@ -169,33 +166,25 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                                     />
                                 </div>
                             </div>
-                            <div className="centralPencil">
+                            <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
-                 </DialogContentText>
-                                <div>
-                                    <FormLabel className={"role_title"}>Ruolo:</FormLabel>
-                                </div>
+                                </DialogContentText>
+                                <FormLabel>Ruolo:</FormLabel>
                                 <FormControl>
                                     <FormGroup>
-                                        <div>
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
-                                                label="Admin"
-                                            />
-                                        </div>
-                                        <div>
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
-                                                label="Utente"
-                                            />
-                                        </div>
-                                        <div>
-                                            <FormControlLabel
-                                                control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
-                                                label="Addetto alle pulizie"
-                                            />
-                                        </div>
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}
+                                            label="Admin"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedUser} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedUser" />}
+                                            label="Utente"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.authorities.checkedCleaner} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedCleaner" />}
+                                            label="Addetto alle pulizie"
+                                        />
                                     </FormGroup>
                                     <FormHelperText color="red">{this.state.authoritiesError ? ERROR_AUTHORITIES_NOT_SELECTED : ""}</FormHelperText>
                                 </FormControl>
@@ -204,13 +193,13 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                         <DialogActions>
                             <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
                                 Annulla
-                 </Button>
+                            </Button>
                             <Button onClick={() => {
                                 this.handleConfirm();
                             }}
                                 id="confirm" variant="outlined">
                                 Conferma
-                 </Button>
+                            </Button>
                         </DialogActions>
                     </Dialog>
                 </div>
