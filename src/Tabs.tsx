@@ -55,6 +55,12 @@ export default function SimpleTabs() {
                     <Tab label="Aula A" {...a11yProps(0)} />
                     <Tab label="Aula B" {...a11yProps(1)} />
                     <Tab label="Aula C" {...a11yProps(2)} />
+                    <Tab label="Aula D" {...a11yProps(0)} />
+                    <Tab label="Aula e" {...a11yProps(1)} />
+                    <Tab label="Aula f" {...a11yProps(2)} />
+                    <Tab label="Aula g" {...a11yProps(0)} />
+                    <Tab label="Aula h" {...a11yProps(1)} />
+                    <Tab label="Aula i" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

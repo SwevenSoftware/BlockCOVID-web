@@ -88,7 +88,7 @@ export const logout = (tokenID: string) => {
 
 /* room create */
 
-export const createRoom = ({ name, openingAt, closingAt, openingDays, width, height }, tokenID: string) => {
+export const createRoom = (tokenID: string, { name, openingAt, closingAt, openingDays, width, height }) => {
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export const modifyRoom = (tokenID: string, roomName: string, link: string, { na
 
 /* room delete */
 
-export const deleteRoom = (roomName: string, link: string, tokenID: string) => {
+export const deleteRoom = (tokenID: string, roomName: string, link: string) => {
     const config = {
         headers: {
             "Content-Type": "application/json",

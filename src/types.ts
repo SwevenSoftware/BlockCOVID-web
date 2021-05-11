@@ -16,6 +16,17 @@ export const accountTypes = {
     DELETE_FAILURE: "DELETE_FAILURE"
 }
 
+export const roomTypes = {
+    FETCH_SUCCESS: "FETCH_SUCCESS",
+    FETCH_FAILURE: "FETCH_FAILURE",
+    CREATE_SUCCESS: "CREATE_SUCCESS",
+    CREATE_FAILURE: "CREATE_FAILURE",
+    MODIFY_SUCCESS: "MODIFY_SUCCESS",
+    MODIFY_FAILURE: "MODIFY_FAILURE",
+    DELETE_SUCCESS: "DELETE_SUCCESS",
+    DELETE_FAILURE: "DELETE_FAILURE"
+}
+
 /* login */
 export const ERROR_USER_NO_AUTH = "Accesso non autorizzato. Si prega di contattare l'amministratore"
 export const ERROR_USER_OR_PASS = "Username o password scorretta. Riprova"

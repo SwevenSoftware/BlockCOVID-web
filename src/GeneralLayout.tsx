@@ -166,7 +166,7 @@ export default function GeneralLayout() {
                     <ListItem
                         button key="Desks"
                         component={Link}
-                        to="/desk"
+                        to="/rooms"
                     >
                         <ListItemIcon className="iconColor"><EventSeatIcon /></ListItemIcon>
                         <ListItemText primary="Desks" />
