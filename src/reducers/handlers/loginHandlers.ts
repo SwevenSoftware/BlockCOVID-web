@@ -39,11 +39,22 @@ loginHandlers[loginTypes.LOGIN_FAILURE] = function(state, action) {
     }
 }
 
-loginHandlers[loginTypes.LOGIN_LOGOUT_SUCCESS] = function(state, action) {
+loginHandlers[loginTypes.LOGOUT_SUCCESS] = function(state, action) {
     location.href = "/login"
     return {
         token: null,
         error: ""
+    }
+}
+
+loginHandlers[loginTypes.LOGOUT_FAILURE] = function(state, action) {
+    console.log(loginTypes.LOGOUT_FAILURE) // WARNING: testing purposes
+    switch (action.payload.error) {
+        default:
+            return {
+                ...state,
+                error: ERROR_UNKNOWN
+            }
     }
 }
 
