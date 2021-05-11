@@ -19,7 +19,7 @@ const App: React.FC = () => {
                 {token ?
                     <Switch>
                         <Route path='/accounts' exact component={Accounts} />
-                        <Route path='/rooms' exact component= {Rooms} />
+                        <Route path='/rooms' exact component={Rooms} />
                         <Redirect path='*' to='/accounts' />
                     </Switch>
                     :

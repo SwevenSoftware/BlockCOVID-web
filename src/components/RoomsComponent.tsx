@@ -39,7 +39,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     componentDidMount() {
-        
+
     }
 
     render() {
@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             getRooms: (tokenID: string) => {
-               //dispatch(getRooms(tokenID))
+                //dispatch(getRooms(tokenID))
             }
         }
     }
