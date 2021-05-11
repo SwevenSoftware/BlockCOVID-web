@@ -46,7 +46,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
-            
+
             <div >
                 <IconButton
                     className="trash"
@@ -62,8 +62,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     <DialogContent className="central">
                         <div className="alignCentralPencil">
                             <CardGridComponent
-                                mode = "delete"
-                                data = {{
+                                mode="delete"
+                                data={{
                                 }}
                             />
                         </div>
