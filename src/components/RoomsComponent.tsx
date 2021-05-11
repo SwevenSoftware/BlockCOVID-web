@@ -16,6 +16,8 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
+/* others */
+import NewRoomComponent from './NewRoomComponent'
 
 interface RoomsProps {
     state: any
@@ -39,9 +41,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
                     <div className="addAccountButton"> {/* TODO: change className */}
-                        <Button>
-                            Crea
-            </Button>
+                        <NewRoomComponent/>
                     </div>
                     <div>
                         <Grid container spacing={3}>
