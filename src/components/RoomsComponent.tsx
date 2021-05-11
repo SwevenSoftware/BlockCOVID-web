@@ -1,10 +1,7 @@
 /* react */
-import React, { Component } from "react"
-
+import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-// import { getAccounts } from '../actions/accountsActions' //will be updated
-
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -14,16 +11,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
-/* others */
-// import Pencil from './PencilComponent'
-// import NewUser from './NewUserComponent'     //will be updated
-// import Trash from './TrashComponent'
-
 
 interface RoomsProps {
     state: any
@@ -39,20 +31,19 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     componentDidMount() {
-
+        // TODO: dispatch getRooms()
     }
 
     render() {
         return (
-            <div className="marginAccounts">
+            <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
-                    <div className="addAccountButton">
-                        <Button>CREA</Button>
+                    <div className="addAccountButton"> {/* TODO: change className */}
+                        <Button>
+                            Crea
+            </Button>
                     </div>
-
                     <div>
-                        {/* {this.props.state.accounts.error ?
-                            this.props.state.accounts.error : ""} */}
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
@@ -63,12 +54,32 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     /**
-    * Provides the HTML code to display the accounts
+    * Provides the HTML code to display the rooms
     * @params
-    * @returns An array of HTML code to display each account
+    * @returns An array of HTML code to display each room
     */
     private popolate(): Array<JSX.Element> {
         let rows: Array<JSX.Element> = new Array()
+        // TODO: remove 'rows.push()' once dynamic code is functional
+        rows.push(
+            <Grid key={"staticRoom"} className="grid">
+                <Paper className="paper"> {/* TODO: change style, might change className as well */}
+                    <ListItem className="listItem">
+                        <ListItemIcon>
+                            <MeetingRoomIcon fontSize="large" />
+                        </ListItemIcon>
+                        {/* TODO: clicking on the room name should open the modification modal */}
+                        <ListItemText primary="static room" className="usernameLayout" />
+                        {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
+                        {/* TODO: replace button with proper component */}
+                        <Button>
+                            Canc
+            </Button>
+                    </ListItem>
+                </Paper>
+            </Grid>
+        )
+        // TODO: dynamic code, correctly fetch rooms information
         /* if (this.props.state.accounts.users) {
             this.props.state.accounts.users
                 .sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0))
@@ -114,7 +125,8 @@ const mapStateToProps = (state: any) => {
     return {
         state: {
             login: state.login,
-            //rooms: state.rooms
+            // TODO: add roomsReducer to rootReducer
+            // rooms: state.rooms
         }
     }
 }
@@ -123,7 +135,8 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             getRooms: (tokenID: string) => {
-                //dispatch(getRooms(tokenID))
+                // TODO: add getRooms() to roomsActions
+                // dispatch(getRooms(tokenID))
             }
         }
     }
