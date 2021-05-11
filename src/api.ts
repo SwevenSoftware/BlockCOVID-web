@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = "http://192.168.210.30:8091"
+axios.defaults.baseURL = "http://localhost:8091"
 
 /* post */
 
