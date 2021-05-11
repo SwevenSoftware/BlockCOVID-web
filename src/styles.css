@@ -26,6 +26,16 @@
     color: red;
 }
 
+.modalTitle {
+    text-align: center;
+}
+
+.centralModal {
+    margin: auto;
+    width: 50%;
+    
+}
+
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
 .marginAccounts {
@@ -177,6 +187,7 @@
 .addColor:hover {
     color: #F0B030;
 }
+
 /* (((((((((((((((((((((((((((((( LOGIN )))))))))))))))))))))))))))) */
 
 .container {
@@ -197,25 +208,6 @@
 
 .cardLogin {
     margin-top: 25%;
-}
-
-
-
-/* (((((((((((((((((((((((((((((( PENCIL )))))))))))))))))))))))))))) */
-
-.pencilTitle {
-    text-align: center;
-}
-
-.centralPencil {
-    margin: auto;
-    width: 50%;
-}
-
-.alignCentralPencil {
-    margin: auto;
-    width: 50%;
-    text-align: center;
 }
 
 /* (((((((((((((((((((((((((((((( REPORT )))))))))))))))))))))))))))) */
