@@ -6,6 +6,7 @@ export const login = ({ username, password }) => {
     const config = {
         headers: { "Content-Type": "application/json" }
     }
+    console.log(axios.defaults.baseURL);
     return axios.post("/api/account/login", JSON.stringify({ username, password }), config)
 }
 
