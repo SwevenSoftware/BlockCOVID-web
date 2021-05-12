@@ -17,29 +17,32 @@ redirects all api requests to `my.api.server:8091`
 The latest version of npm is also necessary in order to test, build and run the server, a detailed guide on how to install it can be found [here](https://www.npmjs.com/get-npm).
 
 ### Building
+The following process builds a static version of the server and deploys it through a docker container running a [nginx](https://nginx.org/en/)
+web server. Api redirection is handled through nginx, so configure it as described in the previous section. The steps to accomplish in order to 
+run the application are
 ```shell
+# Install the dependencies
 npm install
+# Build the static bundle
 npm run build
+# build and run the container
+docker-compose up --build -d
 ```
-A dist folder will be created with the bundled app in it, configured for a production environment
+A daemonized container will be created, running the application.
 
-#### Dev
+#### Development environment
 ```shell
 npm run dev
 ```
-Builds the bundled application for a development environment
+Builds the bundled application for a development environment, do this instead of `npm run build` in the building process
+to run the development environment.
 
-### Running
-#### Deploy
-```shell
-docker-compose up --build -d
-```
-builds the container and starts it as a daemon, logs can be found in the `logs` folder (if not present it should be created). 
-#### Development environment
+#### Dynamic development
 ```shell
 npm start
 ```
-Starts a `serve` server to test the application. 
+Starts a `serve` server to test the application, this solution allows a dynamic recompiling of the application after 
+every change.  
 
 ## Contributing
 We adopt a [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
