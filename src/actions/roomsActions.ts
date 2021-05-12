@@ -18,79 +18,55 @@ interface roomInformation {
 export const getRooms = (fromTimestamp: string, toTimestamp: string) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if (tokenID) {
-            getRoomsAPI(tokenID, fromTimestamp, toTimestamp)
-                .then(res => {
-                    dispatch(successGetRooms(res.data))
-                })
-                .catch(err => {
-                    dispatch(failureGetRooms(err))
-                })
-        }
-        else {
-            // TODO: test '401' parameter
-            // dispatch(failureGetRooms(401))
-        }
+        getRoomsAPI(tokenID, fromTimestamp, toTimestamp)
+            .then(res => {
+                dispatch(successGetRooms(res.data))
+            })
+            .catch(err => {
+                dispatch(failureGetRooms(err))
+            })
     }
 }
 
 export const createRoom = (data: roomInformation) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if (tokenID) {
-            createRoomAPI(tokenID, data)
-                .then((res) => {
-                    dispatch(successCreateRoom(res.data))
-                    // dispatch(getRooms())
-                })
-                .catch(err => {
-                    dispatch(failureCreateRoom(err))
-                })
-        }
-        else {
-            // TODO: test '401' parameter
-            // dispatch(failureCreateRoom(401))
-        }
+        createRoomAPI(tokenID, data)
+            .then((res) => {
+                dispatch(successCreateRoom(res.data))
+                // dispatch(getRooms())
+            })
+            .catch(err => {
+                dispatch(failureCreateRoom(err))
+            })
     }
 }
 
 export const modifyRoom = (roomName: string, link: string, data: roomInformation) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if (tokenID) {
-            modifyRoomAPI(tokenID, roomName, link, data)
-                .then((res) => {
-                    dispatch(successModifyRoom(res.data))
-                    // dispatch(getRooms())
-                })
-                .catch(err => {
-                    dispatch(failureModifyRoom(err))
-                })
-        }
-        else {
-            // TODO: test '401' parameter
-            // dispatch(failureModifyRoom(401))
-        }
+        modifyRoomAPI(tokenID, roomName, link, data)
+            .then((res) => {
+                dispatch(successModifyRoom(res.data))
+                // dispatch(getRooms())
+            })
+            .catch(err => {
+                dispatch(failureModifyRoom(err))
+            })
     }
 }
 
 export const deleteRoom = (roomName: string, link: string) => {
     return (dispatch, getState) => {
         let tokenID = getState().login.token?.id
-        if (tokenID) {
-            deleteRoomAPI(tokenID, roomName, link)
-                .then((res) => {
-                    dispatch(successDeleteRoom(res.data))
-                    // dispatch(getRooms()
-                })
-                .catch(err => {
-                    dispatch(failureDeleteRoom(err))
-                })
-        }
-        else {
-            // TODO: test '401' parameter
-            // dispatch(failureDeleteRoom(401))
-        }
+        deleteRoomAPI(tokenID, roomName, link)
+            .then((res) => {
+                dispatch(successDeleteRoom(res.data))
+                // dispatch(getRooms()
+            })
+            .catch(err => {
+                dispatch(failureDeleteRoom(err))
+            })
     }
 }
 
