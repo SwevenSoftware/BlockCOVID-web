@@ -64,7 +64,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="delete"
-                                width= {500 || 0}
+                                width={500 || 0}
                                 height={500 || 0}
                             />
                         </div>
