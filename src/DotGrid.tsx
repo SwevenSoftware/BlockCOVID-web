@@ -13,9 +13,16 @@ interface Settings {
     dist: Pos2d;
     width: number;
     height: number;
+    mode: string;
 }
 
-class DotGrid extends Component<{ width: number }, { height: number }> {
+interface DotGridProps {
+    width: number;
+    height: number;
+    mode: string;
+}
+
+class DotGrid extends Component<DotGridProps> {
     canvasRef: RefObject<HTMLCanvasElement>;
     gridSettings: Settings;
     mousePos: Pos2d;
@@ -46,7 +53,8 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
                 y: 0,
             },
             width: props.width,
-            height: props.height
+            height: props.height,
+            mode: props.mode
         };
 
         this.grid = new Grid(20, 20);
@@ -175,15 +183,52 @@ class DotGrid extends Component<{ width: number }, { height: number }> {
     }
 
     render() {
-        return (
-            <canvas
-                ref={this.canvasRef}
-                onMouseMove={this.handleMouseMove}
-                onClick={this.checkBox}
-                width={this.gridSettings.width}
-                height={this.gridSettings.height}
-            />
-        );
+        switch (this.props.mode) {
+            case 'new':
+                return (
+                    <canvas
+                        ref={this.canvasRef}
+                        onMouseMove={this.handleMouseMove}
+                        onClick={this.checkBox}
+                        width={this.gridSettings.width}
+                        height={this.gridSettings.height}
+                    />
+                );
+                break;
+            case 'delete':
+                console.log('delete mode')
+                return (
+                    <canvas
+                        ref={this.canvasRef}
+                        /* onMouseMove={this.handleMouseMove}
+                        onClick={this.checkBox} */
+                        width={this.gridSettings.width}
+                        height={this.gridSettings.height}
+                    />
+                );
+                break;
+            case 'modify':
+                return (
+                    <canvas
+                        ref={this.canvasRef}
+                        onMouseMove={this.handleMouseMove}
+                        onClick={this.checkBox}
+                        width={this.gridSettings.width}
+                        height={this.gridSettings.height}
+                    />
+                );
+                break;
+            default:
+                return (
+                    <canvas
+                        ref={this.canvasRef}
+                        onMouseMove={this.handleMouseMove}
+                        onClick={this.checkBox}
+                        width={this.gridSettings.width}
+                        height={this.gridSettings.height}
+                    />
+                );
+        }
     }
 }
 
