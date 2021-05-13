@@ -16,15 +16,13 @@ interface Pos2d {
 
 interface Settings {
     radius: number;
-    dist: Pos2d;
     width: number;
     height: number;
     mode: string;
+    dim: number;
 }
 
 interface DotGridProps {
-    width: number;
-    height: number;
     mode: string;
     sizeH: number;
     sizeW: number;
@@ -59,13 +57,10 @@ class DotGrid extends Component<DotGridProps> {
         };
         this.gridSettings = {
             radius: 2,
-            dist: {
-                x: 0,
-                y: 0,
-            },
-            width: props.width,
-            height: props.height,
+            width: props.sizeW*30,
+            height: props.sizeH*30,
             mode: props.mode,
+            dim: 30
         };
 
         /* let dim
@@ -75,7 +70,7 @@ class DotGrid extends Component<DotGridProps> {
             dim = this.props.sizeW
         } */
 
-        this.grid = new Grid(this.props.sizeW, this.props.sizeH);
+        this.grid = new Grid(2, 10);
     }
 
     public setSize(width: number, height: number) {
@@ -103,18 +98,18 @@ class DotGrid extends Component<DotGridProps> {
             (e.clientY - boundRect.y) / boundRect.height >= 1 - 1 / this.grid.cells.y) return;
         const pointPos: Pos2d = {
             x:
-                Math.floor((e.clientX - boundRect.x) / this.gridSettings.dist.x) *
-                this.gridSettings.dist.x +
-                this.gridSettings.dist.x / 2 +
+                Math.floor((e.clientX - boundRect.x) / this.gridSettings.dim) *
+                this.gridSettings.dim +
+                this.gridSettings.dim / 2 +
                 this.gridSettings.radius,
             y:
-                Math.floor((e.clientY - boundRect.y) / this.gridSettings.dist.y) *
-                this.gridSettings.dist.y +
-                this.gridSettings.dist.y / 2 +
+                Math.floor((e.clientY - boundRect.y) / this.gridSettings.dim) *
+                this.gridSettings.dim +
+                this.gridSettings.dim / 2 +
                 this.gridSettings.radius
         };
         const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y);
-        if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
+        //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
         this.updateCanvas();
     }
 
@@ -157,15 +152,13 @@ class DotGrid extends Component<DotGridProps> {
             "2d"
         );
         if (!ctx) return;
-        this.gridSettings.dist = {
-            x: canvas.width / this.grid.cells.x,
-            y: canvas.height / this.grid.cells.y
-        };
-        const dist: Pos2d = this.gridSettings.dist;
+
+        const dim: number = this.gridSettings.dim;
+
         const radius: number = this.gridSettings.radius;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var x: number = radius; x < canvas.width - radius; x += dist.x) {
-            for (var y: number = radius; y < canvas.height - radius; y += dist.y) {
+        for (var x: number = radius; x < canvas.width - radius; x += dim) {
+            for (var y: number = radius; y < canvas.height - radius; y += dim) {
                 ctx.beginPath();
                 ctx.arc(x, y, radius, 0, 2 * Math.PI);
                 ctx.fillStyle = "grey";
@@ -173,12 +166,12 @@ class DotGrid extends Component<DotGridProps> {
                 ctx.closePath();
 
                 if (
-                    this.checkDistance(this.mousePos.x - canvasRect.x, x, dist.x, canvasRect.width) &&
-                    this.checkDistance(this.mousePos.y - canvasRect.y, y, dist.y, canvasRect.height)
+                    this.checkDistance(this.mousePos.x - canvasRect.x, x, dim, canvasRect.width) &&
+                    this.checkDistance(this.mousePos.y - canvasRect.y, y, dim, canvasRect.height)
                 ) {
                     ctx.beginPath();
                     ctx.fillStyle = "#f005";
-                    ctx.fillRect(x, y, dist.x, dist.y);
+                    ctx.fillRect(x, y, dim, dim);
                     ctx.closePath();
                 }
             }
@@ -233,7 +226,7 @@ class DotGrid extends Component<DotGridProps> {
                         <DialogContentText color="primary">
                             Renderizzata in:
                         </DialogContentText>
-                        <FormLabel>{this.props.height}x{this.props.width}</FormLabel>
+                        <FormLabel>{this.gridSettings.width}x{this.gridSettings.height}</FormLabel>
 
                         <DialogContentText color="primary">
                             Orario di apertura:
