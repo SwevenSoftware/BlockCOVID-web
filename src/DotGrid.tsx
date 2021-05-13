@@ -20,6 +20,8 @@ interface DotGridProps {
     width: number;
     height: number;
     mode: string;
+    sizeH: number;
+    sizeW: number;
 }
 
 class DotGrid extends Component<DotGridProps> {
@@ -54,10 +56,17 @@ class DotGrid extends Component<DotGridProps> {
             },
             width: props.width,
             height: props.height,
-            mode: props.mode
+            mode: props.mode,
         };
 
-        this.grid = new Grid(10, 10);
+        let dim
+        if (this.props.sizeW < this.props.sizeH) {
+            dim = this.props.sizeH
+        } else {
+            dim = this.props.sizeW
+        }
+
+        this.grid = new Grid(dim, dim);
     }
 
     public setSize(width: number, height: number) {
