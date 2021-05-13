@@ -66,6 +66,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                                 mode="delete"
                                 width={this.props.data.room.width || 0}
                                 height={this.props.data.room.height || 0}
+                                sizeH={1 || 0}
+                                sizeW={6 || 0}
                             />
                         </div>
                         {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
