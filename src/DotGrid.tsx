@@ -57,7 +57,7 @@ class DotGrid extends Component<DotGridProps> {
             mode: props.mode
         };
 
-        this.grid = new Grid(20, 20);
+        this.grid = new Grid(10, 10);
     }
 
     public setSize(width: number, height: number) {
