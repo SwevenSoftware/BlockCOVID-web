@@ -64,10 +64,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="delete"
-                                width={this.props.data.room.width || 0}
-                                height={this.props.data.room.height || 0}
-                                sizeH={1 || 0}
-                                sizeW={6 || 0}
+                                sizeH={3 || 0}
+                                sizeW={15 || 0}
                                 openingTime="8:00"
                                 closingTime="18:00"
                                 weekDays="lun - mar - mer - gio - ven"
