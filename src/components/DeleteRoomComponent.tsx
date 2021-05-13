@@ -68,6 +68,9 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                                 height={this.props.data.room.height || 0}
                                 sizeH={1 || 0}
                                 sizeW={6 || 0}
+                                openingTime="8:00"
+                                closingTime="18:00"
+                                weekDays="lun - mar - mer - gio - ven"
                             />
                         </div>
                         {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
