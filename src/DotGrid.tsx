@@ -57,8 +57,8 @@ class DotGrid extends Component<DotGridProps> {
         };
         this.gridSettings = {
             radius: 2,
-            width: props.sizeW*30,
-            height: props.sizeH*30,
+            width: props.sizeW * 30,
+            height: props.sizeH * 30,
             mode: props.mode,
             dim: 30
         };
