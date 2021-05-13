@@ -53,7 +53,7 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
                             <ThemeProvider theme={theme}>
                                 <Card>
                                     <CardContent ref={this.dispGrid} className="dispGrid">
-{/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
  */}                                    </CardContent>
                                 </Card>
                             </ThemeProvider>
@@ -68,7 +68,7 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
                             <ThemeProvider theme={theme}>
                                 <Card>
                                     <CardContent ref={this.dispGrid} className="dispGrid">
-{/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
  */}                                    </CardContent>
                                 </Card>
                             </ThemeProvider>
@@ -83,7 +83,7 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
                             <ThemeProvider theme={theme}>
                                 <Card>
                                     <CardContent ref={this.dispGrid} className="dispGrid">
-{/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
  */}                                    </CardContent>
                                 </Card>
                             </ThemeProvider>

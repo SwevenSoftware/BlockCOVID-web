@@ -62,7 +62,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
                         <Card>
                             {/* <CardHeader className="headerCard" title="New room"/> */}
                             <CardContent ref={this.dispGrid} className="dispGrid">
-{/*                                 <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+                                {/*                                 <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
  */}                            </CardContent>
                             {/* <CardActions>
                 <Button size="medium" color="primary">
