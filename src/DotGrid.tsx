@@ -28,6 +28,9 @@ interface DotGridProps {
     mode: string;
     sizeH: number;
     sizeW: number;
+    openingTime: string;
+    closingTime: string;
+    weekDays: string;
 }
 
 class DotGrid extends Component<DotGridProps> {
@@ -65,14 +68,14 @@ class DotGrid extends Component<DotGridProps> {
             mode: props.mode,
         };
 
-        let dim
+        /* let dim
         if (this.props.sizeW < this.props.sizeH) {
             dim = this.props.sizeH
         } else {
             dim = this.props.sizeW
-        }
+        } */
 
-        this.grid = new Grid(dim, dim);
+        this.grid = new Grid(this.props.sizeW, this.props.sizeH);
     }
 
     public setSize(width: number, height: number) {
@@ -231,6 +234,16 @@ class DotGrid extends Component<DotGridProps> {
                             Renderizzata in:
                         </DialogContentText>
                         <FormLabel>{this.props.height}x{this.props.width}</FormLabel>
+
+                        <DialogContentText color="primary">
+                            Orario di apertura:
+                        </DialogContentText>
+                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
+                        </DialogContentText>
+                        <FormLabel>{this.props.weekDays}</FormLabel>
                     </div>
                 );
                 break;
