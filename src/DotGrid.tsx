@@ -1,7 +1,13 @@
+/* react */
 import React, { Component, createRef, RefObject } from "react";
+/* materia ui */
+import DialogContentText from '@material-ui/core/DialogContentText'
+import FormLabel from '@material-ui/core/DialogContentText'
+/* style */
+import "./styles.css";
+
 /* other files */
 import Grid from "./Grid";
-import "./styles.css";
 
 interface Pos2d {
     x: number;
@@ -207,13 +213,25 @@ class DotGrid extends Component<DotGridProps> {
             case 'delete':
                 console.log('delete mode')
                 return (
-                    <canvas
-                        ref={this.canvasRef}
-                        /* onMouseMove={this.handleMouseMove}
-                        onClick={this.checkBox} */
-                        width={this.gridSettings.width}
-                        height={this.gridSettings.height}
-                    />
+                    <div>
+                        <canvas
+                            ref={this.canvasRef}
+                            /* onMouseMove={this.handleMouseMove}
+                            onClick={this.checkBox} */
+                            width={this.gridSettings.width}
+                            height={this.gridSettings.height}
+                        />
+
+                        <DialogContentText color="primary">
+                            Dimensioni stanza:
+                        </DialogContentText>
+                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+
+                        <DialogContentText color="primary">
+                            Renderizzata in:
+                        </DialogContentText>
+                        <FormLabel>{this.props.height}x{this.props.width}</FormLabel>
+                    </div>
                 );
                 break;
             case 'modify':
