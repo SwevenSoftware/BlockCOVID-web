@@ -64,8 +64,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="delete"
-                                width={500 || 0}
-                                height={500 || 0}
+                                width={this.props.data.room.width || 0}
+                                height={this.props.data.room.height || 0}
                             />
                         </div>
                         {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
