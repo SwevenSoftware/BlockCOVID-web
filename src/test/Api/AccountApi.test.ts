@@ -24,7 +24,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.login({username: 'user', password: 'password'})).resolves.toEqual(axiosResponse);
+        expect(accountApi.login({ username: 'user', password: 'password' })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.post).lastCalledWith(
             "/api/account/login",
             JSON.stringify({ username: 'user', password: 'password' }),

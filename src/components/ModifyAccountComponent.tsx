@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import accountActionResolver, {accountInformation} from '../actions/accountsActions'
+import accountActionResolver, { accountInformation } from '../actions/accountsActions'
 /* types */
 import {
     ERROR_LENGTH_PASSWORD,

@@ -25,7 +25,7 @@ export class accountAPI {
     }
 
     createAccount(tokenID: string,
-                  data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
+        data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export class accountAPI {
     }
 
     modifyAccount(tokenID: string, url: string,
-                  data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
+        data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
         const config = {
             headers: {
                 "Content-Type": "application/json",

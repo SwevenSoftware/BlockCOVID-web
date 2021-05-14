@@ -33,7 +33,7 @@ class roomActions {
     modifyRoom(url: string, roomName: string, data: roomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName})
+            roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
                 .then((res) => {
                     dispatch(this.successModifyRoom(res.data))
                 })
@@ -60,12 +60,12 @@ class roomActions {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.getRooms(tokenID, data)
-              .then(res => {
-                  dispatch(this.successGetRooms(res.data))
-              })
-              .catch(err => {
-                  dispatch(this.failureGetRooms(err))
-              })
+                .then(res => {
+                    dispatch(this.successGetRooms(res.data))
+                })
+                .catch(err => {
+                    dispatch(this.failureGetRooms(err))
+                })
         }
     }
 

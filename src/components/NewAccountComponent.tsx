@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import accountActionsResolver, {accountInformation} from '../actions/accountsActions';
+import accountActionsResolver, { accountInformation } from '../actions/accountsActions';
 /* types */
 import {
     ERROR_WRONG_CONFIRM_PASSWORD,

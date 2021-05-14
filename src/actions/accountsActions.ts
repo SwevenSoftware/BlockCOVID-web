@@ -60,12 +60,12 @@ class accountsActions {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.accountApi.getAccounts(tokenID)
-              .then(res => {
-                  dispatch(this.successGetAccounts(res.data))
-              })
-              .catch(err => {
-                  dispatch(this.failureGetAccounts(err.response.status))
-              })
+                .then(res => {
+                    dispatch(this.successGetAccounts(res.data))
+                })
+                .catch(err => {
+                    dispatch(this.failureGetAccounts(err.response.status))
+                })
         }
     }
 

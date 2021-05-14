@@ -8,14 +8,14 @@ export class roomAPI {
     }
 
     createRoom(tokenID: string,
-               data: {
-                   name: string,
-                   openingAt: string,
-                   closingAt: string,
-                   openingDays: string[],
-                   width: number,
-                   height: number
-               }
+        data: {
+            name: string,
+            openingAt: string,
+            closingAt: string,
+            openingDays: string[],
+            width: number,
+            height: number
+        }
     ) {
         const config = {
             headers: {
@@ -27,15 +27,15 @@ export class roomAPI {
     }
 
     modifyRoom(tokenID: string, url: string,
-               data: {
-                   roomName: string,
-                   name: string,
-                   openingAt: string,
-                   closingAt: string,
-                   openingDays: string[],
-                   width: number,
-                   height: number
-               }
+        data: {
+            roomName: string,
+            name: string,
+            openingAt: string,
+            closingAt: string,
+            openingDays: string[],
+            width: number,
+            height: number
+        }
     ) {
         const config = {
             headers: {
@@ -48,9 +48,9 @@ export class roomAPI {
     }
 
     deleteRoom(tokenID: string, url: string,
-               data: {
-                   roomName: string
-               }
+        data: {
+            roomName: string
+        }
     ) {
         const config = {
             headers: {
@@ -63,10 +63,10 @@ export class roomAPI {
     }
 
     getRooms(tokenID: string,
-             data: {
-                 fromTimestamp: string,
-                 toTimestamp: string
-             }
+        data: {
+            fromTimestamp: string,
+            toTimestamp: string
+        }
     ) {
         const config = {
             headers: {
@@ -75,7 +75,7 @@ export class roomAPI {
             }
         }
         const url = '/api/rooms' +
-          (data.fromTimestamp && data.toTimestamp ? '?from=' + data.fromTimestamp + "&to=" + data.toTimestamp : '')
+            (data.fromTimestamp && data.toTimestamp ? '?from=' + data.fromTimestamp + "&to=" + data.toTimestamp : '')
         return this.axios.get(url, config)
     }
 }
