@@ -74,7 +74,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     </DialogContent>
                     <DialogContent>
                         <div>
-                            <DotGrid 
+                            <DotGrid
                                 mode="deleteInformation"
                                 sizeH={25 || 0}
                                 sizeW={78 || 0}

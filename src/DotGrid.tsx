@@ -209,18 +209,18 @@ class DotGrid extends Component<DotGridProps> {
                 break;
             case 'newInformation':
                 console.log('delete info')
-                return(
+                return (
                     <div>
                         <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
                         <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
-    
+
                         <DialogContentText color="primary">
                             Orario di apertura:
                         </DialogContentText>
                         <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
-    
+
                         <DialogContentText color="primary">
                             Giorni di apertura:
                         </DialogContentText>
@@ -241,7 +241,7 @@ class DotGrid extends Component<DotGridProps> {
                 break;
             case 'deleteInformation':
                 console.log('delete info')
-                return(
+                return (
                     <div>
                         <DialogContentText color="primary">
                             Dimensioni stanza:
@@ -258,7 +258,7 @@ class DotGrid extends Component<DotGridProps> {
                         </DialogContentText>
                         <FormLabel>{this.props.weekDays}</FormLabel>
                     </div>
-                ); 
+                );
             case 'modifyGrid':
                 return (
                     <div>
