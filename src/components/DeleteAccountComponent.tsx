@@ -190,7 +190,7 @@ const mapStateToProps = (state: any) => {
     return {
         state: {
             token: state.login.token,
-            trash: state.trash
+            error: state.accounts.error
         }
     }
 }

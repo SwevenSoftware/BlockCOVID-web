@@ -359,8 +359,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            newUser: state.newUser,
-            tokenID: state.login.token?.id
+            error: state.accounts.error
         }
     }
 }

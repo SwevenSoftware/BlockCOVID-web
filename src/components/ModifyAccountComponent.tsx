@@ -332,8 +332,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            pencil: state.pencil,
-            tokenID: state.login.token.id
+            error: state.accounts.error
         }
     }
 }

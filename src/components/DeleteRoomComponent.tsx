@@ -136,7 +136,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 const mapStateToProps = (state: any) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }

@@ -133,7 +133,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }
