@@ -104,8 +104,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     />
                                 </div>
                                 <div className="addField">
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    {/* <KeyboardTimePicker
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        {/* <KeyboardTimePicker
                                         margin="normal"
                                         id="time-picker"
                                         label="Time picker"
@@ -115,7 +115,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             'aria-label': 'change time',
                                         }}
                                     /> */}
-                                </MuiPickersUtilsProvider>
+                                    </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
                                     <TextField
@@ -192,9 +192,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 
     private setButton(roomName: string = this.state.roomNameValue): void {
         if (roomName) {
-            this.setState({isButtonDisabled: false})
+            this.setState({ isButtonDisabled: false })
         } else {
-            this.setState({isButtonDisabled: true})
+            this.setState({ isButtonDisabled: true })
         }
     }
 
@@ -210,7 +210,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private handleChangeRoomName(roomName: string): void {
-        this.setState({ roomNameValue: roomName})
+        this.setState({ roomNameValue: roomName })
         this.setButton(roomName)
     }
 
@@ -221,10 +221,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private roomNameValidate(roomName: string): boolean {
         let reg = new RegExp("^[a-zA-Z0-9]{5,16}$")
         if (!roomName.match(reg)) {
-            this.setState({roomNameError: true})
+            this.setState({ roomNameError: true })
             return true
         } else {
-            this.setState({roomNameError: false})
+            this.setState({ roomNameError: false })
             return false
         }
     }
