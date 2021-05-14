@@ -39,6 +39,7 @@ interface NewRoomProps {
 interface NewRoomStates {
     isButtonDisabled: boolean,
     isModalOpen: boolean,
+    selectedDateValue: Date,
     roomNameValue: string,
     roomNameError: boolean,
 }
@@ -55,7 +56,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 isButtonDisabled: true,
                 isModalOpen: false,
                 roomNameError: false,
-                roomNameValue: ""
+                roomNameValue: "",
+                selectedDateValue: new Date('2014-08-18T21:11:54'),
             }
     }
 
@@ -102,16 +104,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     />
                                 </div>
                                 <div className="addField">
-                                <KeyboardTimePicker
-                                    margin="normal"
-                                    id="time-picker"
-                                    label="Time picker"
-                                    value={this.setSelectedDate(null)}
-                                    onChange={(e) => this.handleDateChange(null)}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change time',
-                                    }}
-                                />
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    {/* <KeyboardTimePicker
+                                        margin="normal"
+                                        id="time-picker"
+                                        label="Time picker"
+                                        value={this.state.selectedDateValue}
+                                        onChange={(e) => console.log(e)}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change time',
+                                        }}
+                                    /> */}
+                                </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
                                     <TextField
@@ -182,6 +186,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setSelectedDate(date);
     }
 
+    componentDidMount() {
+        this.setButton()
+    }
+
+    private setButton(roomName: string = this.state.roomNameValue): void {
+        if (roomName) {
+            this.setState({isButtonDisabled: false})
+        } else {
+            this.setState({isButtonDisabled: true})
+        }
+    }
+
     private handleClickOpenButton() {
         this.setState({ isModalOpen: true })
     }
@@ -205,10 +221,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private roomNameValidate(roomName: string): boolean {
         let reg = new RegExp("^[a-zA-Z0-9]{5,16}$")
         if (!roomName.match(reg)) {
-            // TODO: set error (state) to true
+            this.setState({roomNameError: true})
             return true
         } else {
-            // TODO: set error (state) to false
+            this.setState({roomNameError: false})
             return false
         }
     }
