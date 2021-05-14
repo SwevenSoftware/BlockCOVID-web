@@ -7,11 +7,10 @@ export class accountAPI {
         this.axios = axios;
     }
 
-    login(username: string, password: string): Promise<AxiosResponse<any>> {
+    login(username: string, password: string): Promise<AxiosResponse> {
         const config = {
             headers: { "Content-Type": "application/json" }
         }
-        /*console.log(this.axios.defaults.baseURL);*/
         return this.axios.post("/api/account/login", JSON.stringify({ username, password }), config);
     }
 
@@ -35,8 +34,7 @@ export class accountAPI {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": tokenID,
-                "username": username
+                "Authorization": tokenID
             }
         }
 
@@ -51,7 +49,6 @@ export class accountAPI {
 
     getAccounts(tokenID: string): Promise<AxiosResponse> {
         let config = {
-            data: {}, /* data must be set or else headers.Content-Type will be ignored */
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
@@ -65,7 +62,6 @@ export class accountAPI {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
-                "username": username
             }
         }
         return this.axios.delete(link + username, config);
@@ -74,7 +70,8 @@ export class accountAPI {
     logout(tokenID: string): Promise<AxiosResponse> {
         const config = {
             headers: {
-                "Authorization": tokenID
+                "Authorization": tokenID,
+                "Content-Type": "application/json"
             }
         }
         return this.axios.delete("/api/account/logout", config);
