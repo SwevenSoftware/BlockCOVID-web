@@ -1,5 +1,5 @@
-import { roomTypes } from "../types";
-import roomApi, { roomAPI } from '../Api/roomAPI';
+import { roomTypes } from "../types"
+import roomApi, { roomAPI } from '../Api/roomAPI'
 
 export interface roomInformation {
     name: string,
@@ -10,24 +10,11 @@ export interface roomInformation {
     height: number
 }
 
-export class roomActions {
-    roomApi: roomAPI;
+class roomActions {
+    roomApi: roomAPI
 
     constructor(roomApi: roomAPI) {
-        this.roomApi = roomApi;
-    }
-
-    getRooms(fromTimestamp: string, toTimestamp: string) {
-        return (dispatch, getState) => {
-            let tokenID = getState().login.token?.id
-            this.roomApi.getRooms(tokenID, fromTimestamp, toTimestamp)
-                .then(res => {
-                    dispatch(this.successGetRooms(res.data))
-                })
-                .catch(err => {
-                    dispatch(this.failureGetRooms(err))
-                })
-        }
+        this.roomApi = roomApi
     }
 
     createRoom(data: roomInformation) {
@@ -43,10 +30,10 @@ export class roomActions {
         }
     }
 
-    modifyRoom(roomName: string, link: string, data: roomInformation) {
+    modifyRoom(url: string, roomName: string, data: roomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            roomApi.modifyRoom(tokenID, roomName, link, data)
+            roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName})
                 .then((res) => {
                     dispatch(this.successModifyRoom(res.data))
                 })
@@ -56,16 +43,29 @@ export class roomActions {
         }
     }
 
-    deleteRoom(roomName: string, link: string) {
+    deleteRoom(url: string, data: { roomName: string }) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            roomApi.deleteRoom(tokenID, roomName, link)
+            roomApi.deleteRoom(tokenID, url, data)
                 .then((res) => {
                     dispatch(this.successDeleteRoom(res.data))
                 })
                 .catch(err => {
                     dispatch(this.failureDeleteRoom(err))
                 })
+        }
+    }
+
+    getRooms(data: { fromTimestamp: string, toTimestamp: string }) {
+        return (dispatch, getState) => {
+            let tokenID = getState().login.token?.id
+            this.roomApi.getRooms(tokenID, data)
+              .then(res => {
+                  dispatch(this.successGetRooms(res.data))
+              })
+              .catch(err => {
+                  dispatch(this.failureGetRooms(err))
+              })
         }
     }
 
@@ -126,4 +126,4 @@ export class roomActions {
     })
 }
 
-export default new roomActions(roomApi);
+export default new roomActions(roomApi)
