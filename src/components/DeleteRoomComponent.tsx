@@ -63,15 +63,26 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     <DialogContent className="central">
                         <div className="alignCentralPencil">
                             <DotGrid
-                                mode="delete"
-                                sizeH={3 || 0}
-                                sizeW={15 || 0}
+                                mode="deleteGrid"
+                                sizeH={25 || 0}
+                                sizeW={78 || 0}
                                 openingTime="8:00"
                                 closingTime="18:00"
                                 weekDays="lun - mar - mer - gio - ven"
                             />
                         </div>
-                        {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
+                    </DialogContent>
+                    <DialogContent>
+                        <div>
+                            <DotGrid 
+                                mode="deleteInformation"
+                                sizeH={25 || 0}
+                                sizeW={78 || 0}
+                                openingTime="8:00"
+                                closingTime="18:00"
+                                weekDays="lun - mar - mer - gio - ven"
+                            />
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button
