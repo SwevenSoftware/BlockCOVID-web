@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import roomActionResolver from '../actions/roomsActions'
+import roomActionResolver, { roomInformation } from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
