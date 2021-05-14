@@ -2,7 +2,7 @@
 import { Component } from "react";
 /* redux */
 import { connect } from 'react-redux';
-import { login } from '../actions/loginActions'
+import loginActionResolver from '../actions/loginActions';
 /* material-ui */
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -58,7 +58,7 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                                     type="email"
                                     label="Username"
                                     margin="normal"
-                                    error={this.props.state.login.error ? true : false}
+                                    error={!!this.props.state.login.error}
                                     onChange={(e) => this.handleChangeUsername(e.target.value)}
                                     onKeyPress={(e) => this.handleKeyPress(e.key)}
                                 />
@@ -68,7 +68,7 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                                     type="password"
                                     label="Password"
                                     margin="normal"
-                                    error={this.props.state.login.error ? true : false}
+                                    error={!!this.props.state.login.error}
                                     helperText={this.props.state.login.error ? this.props.state.login.error : ""}
                                     onChange={(e) => this.handleChangePassword(e.target.value)}
                                     onKeyPress={(e) => this.handleKeyPress(e.key)}
@@ -169,8 +169,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            login: (data) => {
-                dispatch(login(data));
+            login: (data: { username: string; password: string; }) => {
+                dispatch(loginActionResolver.login(data.username, data.password));
             }
         }
     }

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { getRooms } from '../actions/roomsActions'
+import roomActionsResolver from '../actions/roomsActions'
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -144,7 +144,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             getRooms: (fromTimestamp: string, toTimestamp: string) => {
-                dispatch(getRooms(fromTimestamp, toTimestamp))
+                dispatch(roomActionsResolver.getRooms(fromTimestamp, toTimestamp))
             }
         }
     }

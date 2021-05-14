@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { createRoom } from '../actions/roomsActions'
+import roomActionResolver, { roomInformation } from '../actions/roomsActions';
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -145,8 +145,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            createRoom: (data: any) => {
-                dispatch(createRoom(data))
+            createRoom: (data: roomInformation) => {
+                dispatch(roomActionResolver.createRoom(data))
             }
         }
     }

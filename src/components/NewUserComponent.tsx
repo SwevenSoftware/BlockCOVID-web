@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { createAccount as newUserConfirm } from '../actions/accountsActions'
+import accountActionsResolver from '../actions/accountsActions';
 /* types */
 import {
     ERROR_WRONG_CONFIRM_PASSWORD,
@@ -27,8 +27,6 @@ import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
-/* others */
-import { VariantType, useSnackbar } from 'notistack'
 
 const GreenCheckbox = withStyles({
     root: {
@@ -358,11 +356,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
     }
 }
 
-
-
-
-
-
 const mapStateToProps = (state) => {
     return {
         state: {
@@ -375,8 +368,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            newUser: (data) => {
-                dispatch(newUserConfirm(data))
+            newUser: (data: { tokenID: any; username: any; password: any; auth: any; }) => {
+                dispatch(accountActionsResolver.createAccount(data))
             }
         }
     }
