@@ -83,7 +83,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
                         <DeleteRoom data={{
                             room: {
-                                name: 'static room'
+                                name: 'static room',
+                                width: 450,
+                                height: 450
                             }
                         }} />
                     </ListItem>
