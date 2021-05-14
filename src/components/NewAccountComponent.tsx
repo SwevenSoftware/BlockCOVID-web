@@ -348,7 +348,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
             if (auth[0]) aux.push("ADMIN");
             if (auth[1]) aux.push("USER");
             if (auth[2]) aux.push("CLEANER");
-            this.props.dispatch.newUser({ tokenID: this.props.state.tokenID, username: this.state.usernameValue, password: this.state.passwordValue, auth: aux })
+            this.props.dispatch.createAccount({ username: this.state.usernameValue, password: this.state.passwordValue, authorities: aux })
             this.handleCloseButton()
         } else {
             //message: si è verificato un errore
@@ -368,7 +368,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            newUser: (data: { tokenID: any; username: any; password: any; auth: any; }) => {
+            createAccount: (data: accountInformation) => {
                 dispatch(accountActionsResolver.createAccount(data))
             }
         }

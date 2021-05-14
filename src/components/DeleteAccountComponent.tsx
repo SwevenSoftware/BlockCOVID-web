@@ -179,7 +179,7 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
     */
     private handleConfirm(): void {
         if (!this.isUserDeletingHimself()) {
-            this.props.dispatch.deleteAccount(this.props.data.user.username, this.props.data.user.link, this.props.state.token.id)
+            this.props.dispatch.deleteAccount(this.props.data.user.link, { username: this.props.data.user.username })
             this.handleClose()
             //window.setTimeout(function() { location.reload() }, 1500)
         }
@@ -198,8 +198,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            deleteAccount: (username: string, link: string, tokenID: string) => {
-                dispatch(accountActionsResolver.deleteAccount(username, link, tokenID))
+            deleteAccount: (url: string, data: { username: string }) => {
+                dispatch(accountActionsResolver.deleteAccount(url, data))
             }
         }
     }

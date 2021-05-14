@@ -144,8 +144,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            deleteRoom: (roomName: string, link: string) => {
-                dispatch(roomActionResolver.deleteRoom(roomName, link))
+            deleteRoom: (url: string, data: { roomName: string }) => {
+                dispatch(roomActionResolver.deleteRoom(url, data))
             }
         }
     }

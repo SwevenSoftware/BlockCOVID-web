@@ -39,7 +39,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
     }
 
     componentDidMount() {
-        this.props.dispatch.getAccounts(this.props.state.login.token.id)
+        this.props.dispatch.getAccounts()
     }
 
     render() {
@@ -154,8 +154,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            getAccounts: (tokenID: string) => {
-                dispatch(accountActionsResolver.getAccounts(tokenID))
+            getAccounts: () => {
+                dispatch(accountActionsResolver.getAccounts())
             }
         }
     }

@@ -317,11 +317,11 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         flagErr = (this.authInputControl(auth) ? true : flagErr);
 
         if (!flagErr) {
-            const aux = new Array();
-            if (auth[0]) aux.push("ADMIN");
-            if (auth[1]) aux.push("USER");
-            if (auth[2]) aux.push("CLEANER");
-            this.props.dispatch.pencil({ tokenID: this.props.state.tokenID, link: this.props.data.user.link, username: this.props.data.user.username, password: this.state.passwordValue, auth: aux })
+            const aux = new Array()
+            if (auth[0]) aux.push("ADMIN")
+            if (auth[1]) aux.push("USER")
+            if (auth[2]) aux.push("CLEANER")
+            this.props.dispatch.modifyAccount(this.props.data.user.link, { username: this.props.data.user.username, password: this.state.passwordValue, authorities: aux })
             this.handleCloseButton(true)
         } else {
             //message: si è verificato un errore
@@ -341,8 +341,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            pencil: (data: { tokenID: string; link: string; username: string; password: string; auth: string[]; }) => {
-                dispatch(accountActionResolver.modifyAccount(data))
+            modifyAccount: (url: string, data: accountInformation) => {
+                dispatch(accountActionResolver.modifyAccount(url, data))
             }
         }
     }

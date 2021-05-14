@@ -141,8 +141,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (roomName: string, link: string, data) => {
-                dispatch(roomActionResolver.modifyRoom(roomName, link, data))
+            modifyRoom: (url: string, roomName: string, data: roomInformation) => {
+                dispatch(roomActionResolver.modifyRoom(url, roomName, data))
             }
         }
     }
