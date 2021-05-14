@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import accountActionsResolver from '../actions/accountsActions';
+import accountActionsResolver, {accountInformation} from '../actions/accountsActions';
 /* types */
 import {
     ERROR_WRONG_CONFIRM_PASSWORD,
@@ -38,12 +38,12 @@ const GreenCheckbox = withStyles({
     checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-interface NewUserProps {
+interface NewAccountProps {
     state: any,
     dispatch: any
 }
 
-interface NewUserStates {
+interface NewAccountStates {
     usernameValue: string,
     passwordValue: string,
     confirmPasswordValue: string,
@@ -57,7 +57,7 @@ interface NewUserStates {
     lengthPasswordError: boolean
 }
 
-class NewUserComponent extends Component<NewUserProps, NewUserStates> {
+class NewAccountComponent extends Component<NewAccountProps, NewAccountStates> {
     constructor(props) {
         super(props);
         this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
@@ -377,4 +377,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(NewUserComponent)
+)(NewAccountComponent)
