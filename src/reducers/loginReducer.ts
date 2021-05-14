@@ -1,5 +1,5 @@
-import { reducerFactory } from "./reducerFactory";
-import loginHandlers from "./handlers/loginHandlers";
+import { reducerFactory } from "./reducerFactory"
+import loginHandlers from "./handlers/loginHandlers"
 
 interface loginState {
     token: any,
@@ -11,4 +11,4 @@ const initialState: loginState = {
     error: ""
 }
 
-export default reducerFactory(initialState, loginHandlers);
+export default reducerFactory(initialState, loginHandlers)
