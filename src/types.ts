@@ -45,6 +45,10 @@ export const ERROR_USERNAME_NOT_AVAILABLE = "Min 5 caratteri, max 16"
 export const ERROR_AUTHORITIES_NOT_SELECTED = "Seleziona almeno un'opzione"
 export const ERROR_LENGTH_PASSWORD = "Lunghezza password necessaria da 8 a 16 caratteri"
 
+/* rooms */
+export const ERROR_ROOM_NAME_NOT_AVAILABLE = "Min 5 caratteri, max 16"
+export const ERROR_ROOM_NAME_ALREADY_USED = "Nome stanza già esistente"
+
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"
 export const ERROR_GENERIC_ERROR = "Si è verificato un errore"
