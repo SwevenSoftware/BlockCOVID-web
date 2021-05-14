@@ -20,20 +20,20 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 /* others */
 import { ERROR_USER_CANNOT_BE_DELETED } from '../types'
 
-interface TrashProps {
+interface DeleteAccountProps {
     state: any,
     dispatch: any,
     mode: string,
     data: any
 }
 
-interface TrashStates {
+interface DeleteAccountStates {
     isOpen: boolean,
     isButtonDisabled: boolean
     error: string
 }
 
-class TrashComponent extends Component<TrashProps, TrashStates> {
+class DeleteAccountComponent extends Component<DeleteAccountProps, DeleteAccountStates> {
     constructor(props) {
         super(props)
         this.state = {
@@ -181,7 +181,6 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
         if (!this.isUserDeletingHimself()) {
             this.props.dispatch.deleteAccount(this.props.data.user.link, { username: this.props.data.user.username })
             this.handleClose()
-            //window.setTimeout(function() { location.reload() }, 1500)
         }
     }
 }
@@ -208,4 +207,4 @@ const mapDispatchToProps = (dispatch: Function) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TrashComponent)
+)(DeleteAccountComponent)
