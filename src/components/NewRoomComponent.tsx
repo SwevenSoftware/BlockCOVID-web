@@ -61,16 +61,14 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                         fullWidth maxWidth="xs">
                         <DialogTitle
                             id="form-dialog-title"
-                            className="pencilTitle">
+                            className="modalTitle">
                             Crea una nuova stanza
                </DialogTitle>
                         <DialogContent>
-                            <div className="centralPencil">
+                            <div className="centralModal">
                                 <DialogContentText>
                                     Compila i seguenti campi
-                   </DialogContentText>
-                            </div>
-                            <div className="alignCentralPencil">
+                                </DialogContentText>
                                 <div className="addField">
                                     {/* TODO: add grid of the room */}
                                     <TextField
@@ -80,10 +78,55 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         variant="outlined"
                                     // TODO: implement error, helperText, value, onChange
                                     />
+                                </div>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Orario di apertura"
+                                        variant="outlined"
+                                    // TODO: implement error, helperText, value, onChange
+                                    />
+                                </div>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Orario di chiusura"
+                                        variant="outlined"
+                                    // TODO: implement error, helperText, value, onChange
+                                    />
+                                </div>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Giorni della settimana"
+                                        variant="outlined"
+                                    // TODO: implement error, helperText, value, onChange
+                                    />
+                                </div>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Altezza"
+                                        variant="outlined"
+                                    // TODO: implement error, helperText, value, onChange
+                                    />
+                                </div>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Larghezza"
+                                        variant="outlined"
+                                    // TODO: implement error, helperText, value, onChange
+                                    />
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
                             </div>
-                            <div className="centralPencil">
+                            <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
