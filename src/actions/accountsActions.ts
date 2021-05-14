@@ -9,7 +9,7 @@ class accountsActions {
         this.accountApi = accountApi;
     }
 
-    getAccounts (tokenID: string) {
+    getAccounts(tokenID: string) {
         return (dispatch, getState) => {
             this.accountApi.getAccounts(tokenID)
                 .then(res => {
@@ -21,7 +21,7 @@ class accountsActions {
         }
     }
 
-    createAccount ({ tokenID, username, password, auth }) {
+    createAccount({ tokenID, username, password, auth }) {
         return (dispatch, getState) => {
             this.accountApi.createAccount(tokenID, username, password, auth)
                 .then((res) => {
@@ -34,7 +34,7 @@ class accountsActions {
         }
     }
 
-    modifyAccount ({ tokenID, link, username, password, auth }) {
+    modifyAccount({ tokenID, link, username, password, auth }) {
         return (dispatch, getState) => {
             this.accountApi.modifyAccount(tokenID, link, username, password, auth)
                 .then((res) => {
@@ -47,7 +47,7 @@ class accountsActions {
         }
     }
 
-    deleteAccount (username: string, link: string, tokenID: string) {
+    deleteAccount(username: string, link: string, tokenID: string) {
         return (dispatch, getState) => {
             this.accountApi.deleteAccount(username, link, tokenID)
                 .then((res) => {

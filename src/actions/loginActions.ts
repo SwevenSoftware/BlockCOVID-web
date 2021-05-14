@@ -8,7 +8,7 @@ export class accountActions {
         this.accountApi = accountApi;
     }
 
-    login (username: string, password: string) {
+    login(username: string, password: string) {
         return (dispatch, getState) => {
             this.accountApi.login(username, password)
                 .then(res => {
@@ -19,7 +19,7 @@ export class accountActions {
                 })
         }
     }
-    logout (tokenID: string) {
+    logout(tokenID: string) {
         return (dispatch, getState) => {
             this.accountApi.logout(getState().login.token?.id)
                 .then(res => {

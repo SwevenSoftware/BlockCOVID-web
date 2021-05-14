@@ -17,7 +17,7 @@ export class roomActions {
         this.roomApi = roomApi;
     }
 
-    getRooms (fromTimestamp: string, toTimestamp: string) {
+    getRooms(fromTimestamp: string, toTimestamp: string) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.getRooms(tokenID, fromTimestamp, toTimestamp)
@@ -30,7 +30,7 @@ export class roomActions {
         }
     }
 
-    createRoom (data: roomInformation) {
+    createRoom(data: roomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.createRoom(tokenID, data)
@@ -43,7 +43,7 @@ export class roomActions {
         }
     }
 
-    modifyRoom (roomName: string, link: string, data: roomInformation) {
+    modifyRoom(roomName: string, link: string, data: roomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             roomApi.modifyRoom(tokenID, roomName, link, data)
@@ -56,7 +56,7 @@ export class roomActions {
         }
     }
 
-    deleteRoom (roomName: string, link: string) {
+    deleteRoom(roomName: string, link: string) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             roomApi.deleteRoom(tokenID, roomName, link)

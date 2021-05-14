@@ -1,4 +1,4 @@
-import axios, {AxiosResponse, AxiosStatic} from 'axios';
+import axios, { AxiosResponse, AxiosStatic } from 'axios';
 
 export class accountAPI {
     private axios: AxiosStatic;
@@ -60,7 +60,7 @@ export class accountAPI {
         return this.axios.get("/api/users", config);
     }
 
-    deleteAccount (username: string, link: string, tokenID: string): Promise<AxiosResponse> {
+    deleteAccount(username: string, link: string, tokenID: string): Promise<AxiosResponse> {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export class accountAPI {
         return this.axios.delete(link + username, config);
     }
 
-    logout (tokenID: string): Promise<AxiosResponse> {
+    logout(tokenID: string): Promise<AxiosResponse> {
         const config = {
             headers: {
                 "Authorization": tokenID

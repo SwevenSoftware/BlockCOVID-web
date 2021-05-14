@@ -1,4 +1,4 @@
-import axios, {AxiosStatic} from "axios";
+import axios, { AxiosStatic } from "axios";
 
 export class roomAPI {
     private axios: AxiosStatic;
@@ -6,7 +6,7 @@ export class roomAPI {
     constructor(axios: AxiosStatic) {
         this.axios = axios;
     }
-    createRoom (tokenID: string, {name, openingAt, closingAt, openingDays, width, height}) {
+    createRoom(tokenID: string, { name, openingAt, closingAt, openingDays, width, height }) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export class roomAPI {
         return this.axios.post("/api/rooms", data, config);
     }
 
-    modifyRoom (tokenID: string, roomName: string, link: string, {
+    modifyRoom(tokenID: string, roomName: string, link: string, {
         name,
         openingAt,
         closingAt,
@@ -50,7 +50,7 @@ export class roomAPI {
         return this.axios.put(link + roomName, data, config);
     }
 
-    deleteRoom (tokenID: string, roomName: string, link: string) {
+    deleteRoom(tokenID: string, roomName: string, link: string) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export class roomAPI {
         return this.axios.delete(link + roomName, config);
     }
 
-    getRooms (tokenID: string, fromTimestamp: string, toTimestamp: string) {
+    getRooms(tokenID: string, fromTimestamp: string, toTimestamp: string) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
