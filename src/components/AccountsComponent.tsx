@@ -20,9 +20,9 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
 /* others */
-import Pencil from './PencilComponent'
-import NewUser from './NewUserComponent'
-import Trash from './TrashComponent'
+import ModifyAccount from './ModifyAccountComponent'
+import NewAccount from './NewAccountComponent'
+import DeleteAccount from './DeleteAccountComponent'
 
 
 interface AccountProps {
@@ -39,7 +39,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
     }
 
     componentDidMount() {
-        this.props.dispatch.getAccounts(this.props.state.login.token.id)
+        this.props.dispatch.getAccounts()
     }
 
     render() {
@@ -47,7 +47,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
             <div className="marginAccounts">
                 <ThemeProvider theme={theme}>
                     <div className="addAccountButton">
-                        <NewUser />
+                        <NewAccount />
                     </div>
                     <div className="counter">
                         <ListItem>
@@ -113,7 +113,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                                         <PersonIcon fontSize="large" />
                                     </ListItemIcon>
                                     <ListItemText primary={user.username} className="usernameLayout" />
-                                    <Pencil
+                                    <ModifyAccount
                                         data={{
                                             user: {
                                                 username: user.username,
@@ -122,7 +122,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
                                             }
                                         }}
                                     />
-                                    <Trash
+                                    <DeleteAccount
                                         mode="accounts"
                                         data={{
                                             user: {
@@ -145,7 +145,6 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 const mapStateToProps = (state: any) => {
     return {
         state: {
-            login: state.login,
             accounts: state.accounts
         }
     }
@@ -154,8 +153,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            getAccounts: (tokenID: string) => {
-                dispatch(accountActionsResolver.getAccounts(tokenID))
+            getAccounts: () => {
+                dispatch(accountActionsResolver.getAccounts())
             }
         }
     }

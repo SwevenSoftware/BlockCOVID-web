@@ -1,70 +1,17 @@
-import axios, { AxiosResponse, AxiosStatic } from 'axios';
+import axios, { AxiosResponse, AxiosStatic } from 'axios'
 
 export class accountAPI {
-    private axios: AxiosStatic;
+    private axios: AxiosStatic
 
     constructor(axios: AxiosStatic) {
-        this.axios = axios;
+        this.axios = axios
     }
 
-    login(username: string, password: string): Promise<AxiosResponse> {
+    login(data: { username: string, password: string }): Promise<AxiosResponse> {
         const config = {
             headers: { "Content-Type": "application/json" }
         }
-        return this.axios.post("/api/account/login", JSON.stringify({ username, password }), config);
-    }
-
-
-    createAccount(tokenID: string, username: string, password: string, authorities: string[]): Promise<AxiosResponse> {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID
-            }
-        }
-        const data = {
-            username: username,
-            password: password,
-            authorities: authorities
-        }
-        return this.axios.post("/api/users", data, config);
-    }
-
-    modifyAccount(tokenID: string, link: string, username: string, password: string, authorities: string[]): Promise<AxiosResponse> {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID
-            }
-        }
-
-        const data = {
-            username: username,
-            password: password,
-            authorities: authorities
-        }
-
-        return this.axios.put(link, data, config);
-    }
-
-    getAccounts(tokenID: string): Promise<AxiosResponse> {
-        let config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID
-            }
-        }
-        return this.axios.get("/api/users", config);
-    }
-
-    deleteAccount(username: string, link: string, tokenID: string): Promise<AxiosResponse> {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID,
-            }
-        }
-        return this.axios.delete(link + username, config);
+        return this.axios.post("/api/account/login", data, config)
     }
 
     logout(tokenID: string): Promise<AxiosResponse> {
@@ -74,8 +21,50 @@ export class accountAPI {
                 "Content-Type": "application/json"
             }
         }
-        return this.axios.delete("/api/account/logout", config);
+        return this.axios.delete("/api/account/logout", config)
+    }
+
+    createAccount(tokenID: string,
+        data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.post("/api/users", data, config)
+    }
+
+    modifyAccount(tokenID: string, url: string,
+        data: { username: string, password: string, authorities: string[] }): Promise<AxiosResponse> {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.put(url, data, config)
+    }
+
+    deleteAccount(tokenID: string, url: string, data: { username: string }): Promise<AxiosResponse> {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID,
+            }
+        }
+        return this.axios.delete(url + data.username, config)
+    }
+
+    getAccounts(tokenID: string): Promise<AxiosResponse> {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.get("/api/users", config)
     }
 }
 
-export default new accountAPI(axios);
+export default new accountAPI(axios)

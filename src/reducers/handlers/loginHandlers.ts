@@ -1,19 +1,23 @@
-import { ERROR_UNKNOWN, ERROR_USER_NO_AUTH, ERROR_USER_OR_PASS, loginTypes } from "../../types";
+import {
+    loginTypes,
+    ERROR_UNKNOWN,
+    ERROR_USER_NO_AUTH,
+    ERROR_USER_OR_PASS
+} from "../../types"
 
-
-const loginHandlers = {};
+const loginHandlers = {}
 
 loginHandlers[loginTypes.LOGIN_SUCCESS] = function(state, action) {
     console.log(loginTypes.LOGIN_SUCCESS) // WARNING: testing purposes
     let isAdmin = action.payload.authorities.includes("ADMIN")
-    if (isAdmin) { /* user has admin authorities, authorized login attempt */
+    if (isAdmin) { /** user has admin authorities, authorized login attempt */
         location.href = "/accounts"
         return {
             token: action.payload.token,
             error: ""
         }
     }
-    else {  /* unauthorized login attempt */
+    else {  /** unauthorized login attempt */
         return {
             token: null,
             error: ERROR_USER_NO_AUTH
@@ -25,8 +29,10 @@ loginHandlers[loginTypes.LOGIN_FAILURE] = function(state, action) {
     console.log(loginTypes.LOGIN_FAILURE) // WARNING: testing purposes
     switch (action.payload.error) {
         case 400: case 500:
-            /* 400: incorrect
-            500: incorrect username or user does not exists */
+            /**
+             * 400: incorrect password
+             * 500: incorrect username or user does not exist
+            */
             return {
                 token: null,
                 error: ERROR_USER_OR_PASS
@@ -39,7 +45,8 @@ loginHandlers[loginTypes.LOGIN_FAILURE] = function(state, action) {
     }
 }
 
-loginHandlers[loginTypes.LOGOUT_SUCCESS] = function(state, action) {
+loginHandlers[loginTypes.LOGOUT] = function(state, action) {
+    console.log(loginTypes.LOGOUT) // WARNING: testing purposes
     location.href = "/login"
     return {
         token: null,
@@ -47,15 +54,4 @@ loginHandlers[loginTypes.LOGOUT_SUCCESS] = function(state, action) {
     }
 }
 
-loginHandlers[loginTypes.LOGOUT_FAILURE] = function(state, action) {
-    console.log(loginTypes.LOGOUT_FAILURE) // WARNING: testing purposes
-    switch (action.payload.error) {
-        default:
-            return {
-                ...state,
-                error: ERROR_UNKNOWN
-            }
-    }
-}
-
-export default loginHandlers;
+export default loginHandlers

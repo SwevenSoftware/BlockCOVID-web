@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import accountActionsResolver from '../actions/accountsActions';
+import accountActionsResolver, { accountInformation } from '../actions/accountsActions';
 /* types */
 import {
     ERROR_WRONG_CONFIRM_PASSWORD,
@@ -38,12 +38,12 @@ const GreenCheckbox = withStyles({
     checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-interface NewUserProps {
+interface NewAccountProps {
     state: any,
     dispatch: any
 }
 
-interface NewUserStates {
+interface NewAccountStates {
     usernameValue: string,
     passwordValue: string,
     confirmPasswordValue: string,
@@ -57,7 +57,7 @@ interface NewUserStates {
     lengthPasswordError: boolean
 }
 
-class NewUserComponent extends Component<NewUserProps, NewUserStates> {
+class NewAccountComponent extends Component<NewAccountProps, NewAccountStates> {
     constructor(props) {
         super(props);
         this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
@@ -348,7 +348,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
             if (auth[0]) aux.push("ADMIN");
             if (auth[1]) aux.push("USER");
             if (auth[2]) aux.push("CLEANER");
-            this.props.dispatch.newUser({ tokenID: this.props.state.tokenID, username: this.state.usernameValue, password: this.state.passwordValue, auth: aux })
+            this.props.dispatch.createAccount({ username: this.state.usernameValue, password: this.state.passwordValue, authorities: aux })
             this.handleCloseButton()
         } else {
             //message: si è verificato un errore
@@ -359,8 +359,7 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            newUser: state.newUser,
-            tokenID: state.login.token?.id
+            error: state.accounts.error
         }
     }
 }
@@ -368,7 +367,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            newUser: (data: { tokenID: any; username: any; password: any; auth: any; }) => {
+            createAccount: (data: accountInformation) => {
                 dispatch(accountActionsResolver.createAccount(data))
             }
         }
@@ -378,4 +377,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(NewUserComponent)
+)(NewAccountComponent)

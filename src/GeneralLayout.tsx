@@ -92,7 +92,7 @@ export default function GeneralLayout() {
 
     const dispatch = useDispatch()
     const logout = () => {
-        dispatch(loginActionsResolver.logout(token))
+        dispatch(loginActionsResolver.logout())
     }
 
     return (
@@ -140,9 +140,7 @@ export default function GeneralLayout() {
                     </IconButton>
                 </div>
                 <Divider />
-
                 <List>
-
                     <ListItem
                         button key="Reservations"
                         component={Link}
