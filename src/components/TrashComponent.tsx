@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { deleteAccount } from '../actions/accountsActions'
+import accountActionsResolver from '../actions/accountsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -17,9 +17,6 @@ import SecurityIcon from '@material-ui/icons/Security'
 import WorkIcon from '@material-ui/icons/Work'
 import BathtubIcon from '@material-ui/icons/Bathtub'
 import { FormLabel, FormHelperText } from '@material-ui/core'
-/* styles */
-// import { ThemeProvider } from '@material-ui/core/styles'
-// import { theme } from '../theme'
 /* others */
 import { ERROR_USER_CANNOT_BE_DELETED } from '../types'
 
@@ -202,7 +199,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             deleteAccount: (username: string, link: string, tokenID: string) => {
-                dispatch(deleteAccount(username, link, tokenID))
+                dispatch(accountActionsResolver.deleteAccount(username, link, tokenID))
             }
         }
     }

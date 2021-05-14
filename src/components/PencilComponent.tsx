@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { modifyAccount as pencilConfirm } from '../actions/accountsActions'
+import accountActionResolver from '../actions/accountsActions'
 /* types */
 import {
     ERROR_LENGTH_PASSWORD,
@@ -341,8 +341,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            pencil: (data) => {
-                dispatch(pencilConfirm(data))
+            pencil: (data: { tokenID: string; link: string; username: string; password: string; auth: string[]; }) => {
+                dispatch(accountActionResolver.modifyAccount(data))
             }
         }
     }

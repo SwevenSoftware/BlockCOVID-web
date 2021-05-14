@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { deleteRoom } from '../actions/roomsActions'
+import roomActionResolver from '../actions/roomsActions';
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             deleteRoom: (roomName: string, link: string) => {
-                dispatch(deleteRoom(roomName, link))
+                dispatch(roomActionResolver.deleteRoom(roomName, link))
             }
         }
     }

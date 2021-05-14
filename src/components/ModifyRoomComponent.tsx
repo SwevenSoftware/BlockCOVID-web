@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { modifyRoom } from '../actions/roomsActions'
+import roomActionResolver from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -65,7 +65,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             <div className="centralPencil">
                                 <DialogContentText>
                                     Puoi modificare i seguenti campi
-               </DialogContentText>
+                                </DialogContentText>
                             </div>
                             <div className="alignCentralPencil">
                                 <div className="addField">
@@ -90,14 +90,14 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         <DialogActions>
                             <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
                                 Annulla
-               </Button>
+                            </Button>
                             <Button onClick={() => {
                                 this.handleConfirm()
                             }}
                                 id="confirm"
                                 variant="outlined">
                                 Conferma
-               </Button>
+                            </Button>
                         </DialogActions>
                     </Dialog>
                 </div>
@@ -141,8 +141,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (roomName: string, link: string, data: any) => {
-                dispatch(modifyRoom(roomName, link, data))
+            modifyRoom: (roomName: string, link: string, data) => {
+                dispatch(roomActionResolver.modifyRoom(roomName, link, data))
             }
         }
     }

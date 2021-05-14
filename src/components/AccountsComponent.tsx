@@ -2,7 +2,7 @@
 import React, { Component } from "react"
 /* redux */
 import { connect } from 'react-redux'
-import { getAccounts } from '../actions/accountsActions'
+import accountActionsResolver from '../actions/accountsActions';
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -155,7 +155,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
             getAccounts: (tokenID: string) => {
-                dispatch(getAccounts(tokenID))
+                dispatch(accountActionsResolver.getAccounts(tokenID))
             }
         }
     }
