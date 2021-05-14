@@ -13,6 +13,8 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import AddBoxIcon from '@material-ui/icons/AddBox'
+import Grid from '@material-ui/core/Grid'
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
@@ -20,6 +22,9 @@ import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
+/* others */
+import 'date-fns'
+import DateFnsUtils from '@date-io/date-fns'
 
 interface NewRoomProps {
     state: any,
@@ -28,7 +33,7 @@ interface NewRoomProps {
 
 interface NewRoomStates {
     isButtonDisabled: boolean,
-    isModalOpen: boolean
+    isModalOpen: boolean,
 }
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
@@ -37,11 +42,20 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
             this.handleCloseButton = this.handleCloseButton.bind(this),
             this.handleConfirm = this.handleConfirm.bind(this),
+            this.handleDateChange = this.handleDateChange.bind(this),
 
             this.state = {
                 isButtonDisabled: true,
                 isModalOpen: false,
             }
+    }
+
+    setSelectedDate(date: Date | null): Date {
+        return new Date('2014-08-18T21:11:54')
+    }
+
+    handleDateChange(date: Date | null) {
+        this.setSelectedDate(date);
     }
 
     render() {
@@ -80,13 +94,16 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     />
                                 </div>
                                 <div className="addField">
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Orario di apertura"
-                                        variant="outlined"
-                                    // TODO: implement error, helperText, value, onChange
-                                    />
+                                <KeyboardTimePicker
+                                    margin="normal"
+                                    id="time-picker"
+                                    label="Time picker"
+                                    value={this.setSelectedDate(null)}
+                                    onChange={(e) => this.handleDateChange(null)}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change time',
+                                    }}
+                                />
                                 </div>
                                 <div className="addField">
                                     <TextField
