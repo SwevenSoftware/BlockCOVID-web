@@ -57,8 +57,8 @@ class DotGrid extends Component<DotGridProps> {
         };
         this.gridSettings = {
             radius: 2,
-            width: props.sizeW * 30,
-            height: props.sizeH * 30,
+            width: (props.sizeW + 1) * 30,
+            height: (props.sizeH + 1) * 30,
             mode: props.mode,
             dim: 30
         };
@@ -70,7 +70,7 @@ class DotGrid extends Component<DotGridProps> {
             dim = this.props.sizeW
         } */
 
-        this.grid = new Grid(2, 10);
+        this.grid = new Grid(2, 10);                //DEBUG
     }
 
     public setSize(width: number, height: number) {
@@ -157,8 +157,8 @@ class DotGrid extends Component<DotGridProps> {
 
         const radius: number = this.gridSettings.radius;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var x: number = radius; x < canvas.width - radius; x += dim) {
-            for (var y: number = radius; y < canvas.height - radius; y += dim) {
+        for (var x: number = radius; x <= canvas.width - radius; x += dim) {
+            for (var y: number = radius; y <= canvas.height - radius; y += dim) {
                 ctx.beginPath();
                 ctx.arc(x, y, radius, 0, 2 * Math.PI);
                 ctx.fillStyle = "grey";
@@ -195,7 +195,8 @@ class DotGrid extends Component<DotGridProps> {
 
     render() {
         switch (this.props.mode) {
-            case 'new':
+            case 'newGrid':
+                console.log('new grid')
                 return (
                     <canvas
                         ref={this.canvasRef}
@@ -206,27 +207,78 @@ class DotGrid extends Component<DotGridProps> {
                     />
                 );
                 break;
-            case 'delete':
-                console.log('delete mode')
+            case 'newInformation':
+                console.log('delete info')
+                return(
+                    <div>
+                        <DialogContentText color="primary">
+                            Dimensioni stanza:
+                        </DialogContentText>
+                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+    
+                        <DialogContentText color="primary">
+                            Orario di apertura:
+                        </DialogContentText>
+                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+    
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
+                        </DialogContentText>
+                        <FormLabel>{this.props.weekDays}</FormLabel>
+                    </div>
+                );
+            case 'deleteGrid':
+                console.log('delete grid')
                 return (
                     <div>
                         <canvas
                             ref={this.canvasRef}
-                            /* onMouseMove={this.handleMouseMove}
-                            onClick={this.checkBox} */
                             width={this.gridSettings.width}
                             height={this.gridSettings.height}
                         />
-
+                    </div>
+                );
+                break;
+            case 'deleteInformation':
+                console.log('delete info')
+                return(
+                    <div>
                         <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
                         <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
 
                         <DialogContentText color="primary">
-                            Renderizzata in:
+                            Orario di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.gridSettings.width}x{this.gridSettings.height}</FormLabel>
+                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
+                        </DialogContentText>
+                        <FormLabel>{this.props.weekDays}</FormLabel>
+                    </div>
+                ); 
+            case 'modifyGrid':
+                return (
+                    <div>
+                        <canvas
+                            ref={this.canvasRef}
+                            onMouseMove={this.handleMouseMove}
+                            onClick={this.checkBox}
+                            width={this.gridSettings.width}
+                            height={this.gridSettings.height}
+                        />
+                    </div>
+                );
+                break;
+            case 'modifyInformation':
+                return (
+                    <div>
+                        <DialogContentText color="primary">
+                            Dimensioni stanza:
+                        </DialogContentText>
+                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
 
                         <DialogContentText color="primary">
                             Orario di apertura:
@@ -239,27 +291,17 @@ class DotGrid extends Component<DotGridProps> {
                         <FormLabel>{this.props.weekDays}</FormLabel>
                     </div>
                 );
-                break;
-            case 'modify':
-                return (
-                    <canvas
-                        ref={this.canvasRef}
-                        onMouseMove={this.handleMouseMove}
-                        onClick={this.checkBox}
-                        width={this.gridSettings.width}
-                        height={this.gridSettings.height}
-                    />
-                );
-                break;
             default:
                 return (
-                    <canvas
-                        ref={this.canvasRef}
-                        onMouseMove={this.handleMouseMove}
-                        onClick={this.checkBox}
-                        width={this.gridSettings.width}
-                        height={this.gridSettings.height}
-                    />
+                    <div>
+                        <canvas
+                            ref={this.canvasRef}
+                            onMouseMove={this.handleMouseMove}
+                            onClick={this.checkBox}
+                            width={this.gridSettings.width}
+                            height={this.gridSettings.height}
+                        />
+                    </div>
                 );
         }
     }
