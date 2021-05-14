@@ -27,7 +27,7 @@ describe('accountApi', () => {
         expect(accountApi.login('user', 'password')).resolves.toEqual(axiosResponse);
         expect(mockedAxios.post).lastCalledWith(
             "/api/account/login",
-            JSON.stringify({username: 'user', password: 'password'}),
+            JSON.stringify({ username: 'user', password: 'password' }),
             requestConfig
         );
     });
