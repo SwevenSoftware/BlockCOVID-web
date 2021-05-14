@@ -27,7 +27,7 @@ describe('accountApi', () => {
         expect(accountApi.login({ username: 'user', password: 'password' })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.post).lastCalledWith(
             "/api/account/login",
-            JSON.stringify({ username: 'user', password: 'password' }),
+            { username: 'user', password: 'password' },
             requestConfig
         );
     });
@@ -143,7 +143,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.delete.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.deleteAccount('user', '/api/account/', { username: 'adminToken' })).resolves.toEqual(axiosResponse);
+        expect(accountApi.deleteAccount('adminToken', '/api/account/', { username: 'user' })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.delete).lastCalledWith(
             "/api/account/user",
             config
