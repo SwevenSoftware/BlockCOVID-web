@@ -24,7 +24,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.login('user', 'password')).resolves.toEqual(axiosResponse);
+        expect(accountApi.login({username: 'user', password: 'password'})).resolves.toEqual(axiosResponse);
         expect(mockedAxios.post).lastCalledWith(
             "/api/account/login",
             JSON.stringify({ username: 'user', password: 'password' }),
@@ -83,7 +83,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.put.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.modifyAccount('adminToken', "/api/account", "user", "newPassword", ["USER"])).resolves.toEqual(axiosResponse);
+        expect(accountApi.modifyAccount('adminToken', "/api/account", { username: "user", password: "newPassword", authorities: ["USER"] })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.put).lastCalledWith(
             "/api/account",
             { ...axiosResponse.data, password: "newPassword" },
@@ -113,7 +113,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.createAccount('adminToken', "user", "password", ["USER"])).resolves.toEqual(axiosResponse);
+        expect(accountApi.createAccount('adminToken', { username: "user", password: "password", authorities: ["USER"] })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.post).lastCalledWith(
             "/api/users",
             { ...axiosResponse.data, password: "password" },
@@ -143,7 +143,7 @@ describe('accountApi', () => {
         }
 
         mockedAxios.delete.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(accountApi.deleteAccount('user', '/api/account/', 'adminToken')).resolves.toEqual(axiosResponse);
+        expect(accountApi.deleteAccount('user', '/api/account/', { username: 'adminToken' })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.delete).lastCalledWith(
             "/api/account/user",
             config
