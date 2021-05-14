@@ -3,6 +3,11 @@ import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
 import roomActionResolver, { roomInformation } from '../actions/roomsActions';
+/* types */
+import {
+    ERROR_ROOM_NAME_ALREADY_USED,
+    ERROR_ROOM_NAME_NOT_AVAILABLE
+} from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -34,6 +39,8 @@ interface NewRoomProps {
 interface NewRoomStates {
     isButtonDisabled: boolean,
     isModalOpen: boolean,
+    roomNameValue: string,
+    roomNameError: boolean,
 }
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
@@ -47,15 +54,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             this.state = {
                 isButtonDisabled: true,
                 isModalOpen: false,
+                roomNameError: false,
+                roomNameValue: ""
             }
-    }
-
-    setSelectedDate(date: Date | null): Date {
-        return new Date('2014-08-18T21:11:54')
-    }
-
-    handleDateChange(date: Date | null) {
-        this.setSelectedDate(date);
     }
 
     render() {
@@ -90,6 +91,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         id="outlined-search"
                                         label="Nome stanza"
                                         variant="outlined"
+                                        error={this.state.roomNameError}
+                                        helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
+                                        value={this.state.roomNameValue}
+                                        onChange={(e) => {
+                                            this.handleChangeRoomName(e.target.value);
+                                            this.roomNameValidate(e.target.value);
+                                        }}
                                     // TODO: implement error, helperText, value, onChange
                                     />
                                 </div>
@@ -166,6 +174,14 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         )
     }
 
+    setSelectedDate(date: Date | null): Date {
+        return new Date('2014-08-18T21:11:54')
+    }
+
+    handleDateChange(date: Date | null) {
+        this.setSelectedDate(date);
+    }
+
     private handleClickOpenButton() {
         this.setState({ isModalOpen: true })
     }
@@ -177,6 +193,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         })
     }
 
+    private handleChangeRoomName(roomName: string): void {
+        this.setState({ roomNameValue: roomName})
+        this.setButton(roomName)
+    }
 
     private handleConfirm(): void {
         // TODO: implement confirmation
