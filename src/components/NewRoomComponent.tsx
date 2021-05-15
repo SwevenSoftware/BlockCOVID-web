@@ -39,7 +39,8 @@ interface NewRoomProps {
 interface NewRoomStates {
     isButtonDisabled: boolean,
     isModalOpen: boolean,
-    selectedDateValue: Date,
+    selectedOpeningTimeValue: Date,
+    selectedClosingTimeValue: Date,
     roomNameValue: string,
     roomNameError: boolean,
 }
@@ -50,14 +51,16 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
             this.handleCloseButton = this.handleCloseButton.bind(this),
             this.handleConfirm = this.handleConfirm.bind(this),
-            this.handleDateChange = this.handleDateChange.bind(this),
+            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
+            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
 
             this.state = {
                 isButtonDisabled: true,
                 isModalOpen: false,
                 roomNameError: false,
                 roomNameValue: "",
-                selectedDateValue: new Date('2014-08-18T21:11:54'),
+                selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
+                selectedClosingTimeValue: new Date('2021-01-01T08:00')
             }
     }
 
@@ -105,35 +108,33 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                 </div>
                                 <div className="addField">
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        {/* <KeyboardTimePicker
-                                        margin="normal"
-                                        id="time-picker"
-                                        label="Time picker"
-                                        value={this.state.selectedDateValue}
-                                        onChange={(e) => console.log(e)}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change time',
-                                        }}
-                                    /> */}
+                                        <KeyboardTimePicker
+                                            margin="normal"
+                                            id="time-picker"
+                                            label="Orario di apertura"
+                                            ampm={false}
+                                            value={this.state.selectedOpeningTimeValue}
+                                            onChange={this.handleOpeningTimeChange}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change time',
+                                            }}
+                                        />  
                                     </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Orario di chiusura"
-                                        variant="outlined"
-                                    // TODO: implement error, helperText, value, onChange
-                                    />
-                                </div>
-                                <div className="addField">
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Giorni della settimana"
-                                        variant="outlined"
-                                    // TODO: implement error, helperText, value, onChange
-                                    />
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardTimePicker
+                                            margin="normal"
+                                            id="time-picker"
+                                            label="Orario di chiusura"
+                                            ampm={false}
+                                            value={this.state.selectedClosingTimeValue}
+                                            onChange={this.handleClosingTimeChange}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change time',
+                                            }}
+                                        />  
+                                    </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
                                     <TextField
@@ -178,12 +179,16 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         )
     }
 
-    setSelectedDate(date: Date | null): Date {
-        return new Date('2014-08-18T21:11:54')
+    handleOpeningTimeChange(date: Date | null) {
+        if (date){
+            this.setState({selectedOpeningTimeValue: date })
+        } 
     }
 
-    handleDateChange(date: Date | null) {
-        this.setSelectedDate(date);
+    handleClosingTimeChange(date: Date | null) {
+        if (date){
+            this.setState({selectedClosingTimeValue: date })
+        } 
     }
 
     componentDidMount() {
