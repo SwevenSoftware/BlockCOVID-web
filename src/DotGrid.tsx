@@ -3,6 +3,10 @@ import React, { Component, createRef, RefObject } from "react";
 /* materia ui */
 import DialogContentText from '@material-ui/core/DialogContentText'
 import FormLabel from '@material-ui/core/DialogContentText'
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import DialogContent from '@material-ui/core/DialogContent'
 /* style */
 import "./styles.css";
 
@@ -94,8 +98,7 @@ class DotGrid extends Component<DotGridProps> {
 
     checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
         const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect();
-        if (!boundRect || (e.clientX - boundRect.x) / boundRect.width >= 1 - 1 / this.grid.cells.x ||
-            (e.clientY - boundRect.y) / boundRect.height >= 1 - 1 / this.grid.cells.y) return;
+        if (!boundRect) return;
         const pointPos: Pos2d = {
             x:
                 Math.floor((e.clientX - boundRect.x) / this.gridSettings.dim) *
@@ -108,6 +111,7 @@ class DotGrid extends Component<DotGridProps> {
                 this.gridSettings.dim / 2 +
                 this.gridSettings.radius
         };
+        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return;
         const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y);
         //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
         this.updateCanvas();
@@ -243,25 +247,37 @@ class DotGrid extends Component<DotGridProps> {
                 console.log('delete info')
                 return (
                     <div>
-                        <DialogContentText color="primary">
-                            Dimensioni stanza:
+                        <DialogContent>
+                            <DialogContentText color="primary">
+                                Dimensioni stanza:
                         </DialogContentText>
-                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                            <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
 
-                        <DialogContentText color="primary">
-                            Orario di apertura:
+                            <DialogContentText color="primary">
+                                Orario di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+                            <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
 
-                        <DialogContentText color="primary">
-                            Giorni di apertura:
+
+                            <DialogContentText color="primary">
+                                Giorni di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.weekDays}</FormLabel>
+                            <FormLabel>{this.props.weekDays}</FormLabel>
+                        </DialogContent>
                     </div>
                 );
             case 'modifyGrid':
                 return (
                     <div>
+                        <Button
+                            id="cleanGrid"
+                            variant="outlined"
+                            size="medium"
+                            onClick={() => {
+                                this.resetView()
+                            }}>
+                            Svuota stanza
+                            </Button>
                         <canvas
                             ref={this.canvasRef}
                             onMouseMove={this.handleMouseMove}
@@ -275,15 +291,57 @@ class DotGrid extends Component<DotGridProps> {
             case 'modifyInformation':
                 return (
                     <div>
+                        {/* <div className="switchInline">
+                            <div className="switchMarginDx">
+                                <Typography>Chiusa</Typography>
+                            </div>
+                        </div>
+                        <div className="switchInline">
+                            <label className="switch">
+                                <input type="checkbox"></input>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                        <div className="switchInline">
+                            <div className="switchMarginSx">
+                                <Typography>Aperta</Typography>
+                            </div>
+                        </div> */}
                         <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
                         <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                        {/* <TextField
+                        required
+                        id="outlined-search"
+                        label={this.props.sizeH}
+                        variant="outlined"
+                        />
+                        x
+                        <TextField
+                        required
+                        id="outlined-search"
+                        label={this.props.sizeW}
+                        variant="outlined"
+                        /> */}
 
                         <DialogContentText color="primary">
-                            Orario di apertura:
+                            Orario:
                         </DialogContentText>
                         <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+                        {/* <TextField
+                        required
+                        id="outlined-search"
+                        label="Apertura"
+                        variant="outlined"
+                        />
+                        -
+                        <TextField
+                        required
+                        id="outlined-search"
+                        label="Chiusura"
+                        variant="outlined"
+                        /> */}
 
                         <DialogContentText color="primary">
                             Giorni di apertura:
