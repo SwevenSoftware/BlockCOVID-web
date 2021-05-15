@@ -118,7 +118,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
                                             }}
-                                        />  
+                                        />
                                     </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
@@ -133,7 +133,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
                                             }}
-                                        />  
+                                        />
                                     </MuiPickersUtilsProvider>
                                 </div>
                                 <div className="addField">
@@ -180,15 +180,15 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     handleOpeningTimeChange(date: Date | null) {
-        if (date){
-            this.setState({selectedOpeningTimeValue: date })
-        } 
+        if (date) {
+            this.setState({ selectedOpeningTimeValue: date })
+        }
     }
 
     handleClosingTimeChange(date: Date | null) {
-        if (date){
-            this.setState({selectedClosingTimeValue: date })
-        } 
+        if (date) {
+            this.setState({ selectedClosingTimeValue: date })
+        }
     }
 
     componentDidMount() {
