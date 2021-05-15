@@ -111,7 +111,7 @@ class DotGrid extends Component<DotGridProps> {
                 this.gridSettings.dim / 2 +
                 this.gridSettings.radius
         };
-        if(pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return;
+        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return;
         const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y);
         //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
         this.updateCanvas();
@@ -248,35 +248,35 @@ class DotGrid extends Component<DotGridProps> {
                 return (
                     <div>
                         <DialogContent>
-                        <DialogContentText color="primary">
-                            Dimensioni stanza:
+                            <DialogContentText color="primary">
+                                Dimensioni stanza:
                         </DialogContentText>
-                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                            <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
 
-                        <DialogContentText color="primary">
-                            Orario di apertura:
+                            <DialogContentText color="primary">
+                                Orario di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
-                        
+                            <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
 
-                        <DialogContentText color="primary">
-                            Giorni di apertura:
+
+                            <DialogContentText color="primary">
+                                Giorni di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.weekDays}</FormLabel>
+                            <FormLabel>{this.props.weekDays}</FormLabel>
                         </DialogContent>
                     </div>
                 );
             case 'modifyGrid':
                 return (
                     <div>
-                            <Button
+                        <Button
                             id="cleanGrid"
                             variant="outlined"
                             size="medium"
                             onClick={() => {
                                 this.resetView()
                             }}>
-                                Svuota stanza
+                            Svuota stanza
                             </Button>
                         <canvas
                             ref={this.canvasRef}

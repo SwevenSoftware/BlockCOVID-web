@@ -90,12 +90,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             <DialogContent className="central">
                                 <div className="alignCentralPencil">
                                     <DotGrid
-                                    mode="modifyGrid"
-                                    sizeH={25 || 0}
-                                    sizeW={78 || 0}
-                                    openingTime="8:00"
-                                    closingTime="18:00"
-                                    weekDays="lun - mar - mer - gio - ven"
+                                        mode="modifyGrid"
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays="lun - mar - mer - gio - ven"
                                     />
                                 </div>
                                 {/* <div className="buttonGrid">
@@ -107,13 +107,13 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             <DialogContent>
                                 <div>
                                     <DotGrid
-                                    mode="modifyInformation"
-                                    sizeH={25 || 0}
-                                    sizeW={78 || 0}
-                                    openingTime="8:00"
-                                    closingTime="18:00"
-                                    weekDays="lun - mar - mer - gio - ven"
-                                />
+                                        mode="modifyInformation"
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays="lun - mar - mer - gio - ven"
+                                    />
                                 </div>
                             </DialogContent>
                         </DialogContent>
