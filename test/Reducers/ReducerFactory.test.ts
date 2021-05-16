@@ -1,4 +1,4 @@
-import {reducerFactory} from "../../reducers/reducerFactory";
+import {reducerFactory} from "../../src/reducers/reducerFactory";
 import {red} from "@material-ui/core/colors";
 
 describe('reducerFactory', () =>{
@@ -16,6 +16,7 @@ describe('reducerFactory', () =>{
     it('non existent action returns state', () => {
         expect(reducer(initialState,'wow')).toEqual(initialState)
     })
+
     it('existing action returns right state', () => {
        expect(reducer(initialState,action)).toEqual({value:'value'})
     })
