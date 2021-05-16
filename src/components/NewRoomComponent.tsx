@@ -12,6 +12,7 @@ import {
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -66,14 +67,12 @@ interface NewRoomStates {
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     constructor(props) {
-        super(props),
-            this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-            this.handleCloseButton = this.handleCloseButton.bind(this),
-            this.handleConfirm = this.handleConfirm.bind(this),
-            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
-            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
-            this.handleChangeWeekDays = this.handleChangeWeekDays.bind(this),
-
+        super(props)
+            this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
+            this.handleCloseButton = this.handleCloseButton.bind(this)
+            this.handleConfirm = this.handleConfirm.bind(this)
+            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this)
+            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this)
             this.state = {
                 isButtonDisabled: true,
                 isModalOpen: false,
@@ -191,47 +190,36 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         variant="outlined"
                                     // TODO: implement error, helperText, value, onChange
                                     />
-                                    {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
                             </div>
                             <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
-                                <FormLabel>Giorno:</FormLabel>
-                                <FormControl>
-                                    <FormGroup>
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.monday} onChange={(e) => this.handleChangeWeekDays(e)} name="monday" />}
-                                            label="Monday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.tuesday} onChange={(e) => this.handleChangeWeekDays(e)} name="tuesday" />}
-                                            label="Tuesday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.wednesday} onChange={(e) => this.handleChangeWeekDays(e)} name="wednesday" />}
-                                            label="Wednesday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.thursday} onChange={(e) => this.handleChangeWeekDays(e)} name="thursday" />}
-                                            label="Thursday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.friday} onChange={(e) => this.handleChangeWeekDays(e)} name="friday" />}
-                                            label="Friday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.saturday} onChange={(e) => this.handleChangeWeekDays(e)} name="saturday" />}
-                                            label="Saturday"
-                                        />
-                                        <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.sunday} onChange={(e) => this.handleChangeWeekDays(e)} name="sunday" />}
-                                            label="Sunday"
-                                        />
-                                    </FormGroup>
-                                    <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
-                                </FormControl>
+                                <FormLabel>Giorni della settimana:</FormLabel>
+                                    <ButtonGroup
+                                      color="primary"
+                                      orientation="vertical"
+                                      size="small"
+                                      aria-label="giorni della settimana in cui la stanza risulta aperta"
+                                      onClick={(e) => {
+                                          let obj: any = e.target
+                                          let day: string = obj?.parentElement?.id || obj?.value
+                                          if(day) {
+                                              this.weekDaysInputControl({...this.state.weekDays, [day]: !this.state.weekDays[day]})
+                                              this.setState({weekDays: {...this.state.weekDays, [day]: !this.state.weekDays[day]}})
+                                          }
+                                      }}
+                                    >
+                                        <Button id="monday" value="monday" variant={this.state.weekDays.monday? "contained" : "outlined"}>Lunedì</Button>
+                                        <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday? "contained" : "outlined"}>Martedì</Button>
+                                        <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday? "contained" : "outlined"}>Mercoledì</Button>
+                                        <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday? "contained" : "outlined"}>Giovedì</Button>
+                                        <Button id="friday" value="friday" variant={this.state.weekDays.friday? "contained" : "outlined"}>Venerdì</Button>
+                                        <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday? "contained" : "outlined"}>Sabato</Button>
+                                        <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday? "contained" : "outlined"}>Domenica</Button>
+                                    </ButtonGroup>
+                                <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
                             </div>
                         </DialogContent>
                         <DialogActions>
@@ -263,52 +251,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private handleChangeWeekDays(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ weekDays: { ...this.state.weekDays, [event.target.name]: event.target.checked } });
-        switch (event.target.name) {
-            case "Monday":
-                this.weekDaysInputControl([event.target.checked, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
-                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
-                break;
-            case "Tuesday":
-                this.weekDaysInputControl([this.state.weekDays.monday, event.target.checked, this.state.weekDays.wednesday,
-                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
-                break;
-            case "Wednesday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, event.target.checked,
-                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
-                break;
-            case "Thursday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
-                event.target.checked, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
-                break;
-            case "Friday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
-                this.state.weekDays.thursday, event.target.checked, this.state.weekDays.saturday, this.state.weekDays.sunday]);
-                break;
-            case "Saturday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
-                this.state.weekDays.thursday, this.state.weekDays.friday, event.target.checked, this.state.weekDays.sunday]);
-                break;
-            case "Sunday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
-                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, event.target.checked]);
-                break;
-        }
-    }
-
-    private weekDaysInputControl(weekD: boolean[]): boolean {
+    private weekDaysInputControl(weekDays: boolean[]): boolean {
         let notChecked = true
-        for (let i in weekD) {
-            if (weekD[i]) notChecked = false
+        for (let i in weekDays) {
+            if (weekDays[i]) notChecked = false
         }
-        if (notChecked) {
-            this.setState({ weekDaysError: true })
-            return true;
-        } else {
-            this.setState({ weekDays: false })
-            return false;
-        }
+        this.setState({ weekDaysError: notChecked })
+        return notChecked
     }
 
     private timeInputControl(timeOpen: Date, timeClose: Date): boolean {

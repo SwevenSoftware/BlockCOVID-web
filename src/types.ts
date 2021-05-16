@@ -48,7 +48,7 @@ export const ERROR_LENGTH_PASSWORD = "Lunghezza password necessaria da 8 a 16 ca
 /* rooms */
 export const ERROR_ROOM_NAME_NOT_AVAILABLE = "Min 5 caratteri, max 16"
 export const ERROR_ROOM_NAME_ALREADY_USED = "Nome stanza già esistente"
-export const ERROR_WEEKDAYS_NOT_SELECTED = "Seleziona almeno un'opzione"
+export const ERROR_WEEKDAYS_NOT_SELECTED = "Seleziona almeno un giorno"
 export const ERROR_TIME_NOT_AVAILABLE = "Seleziona uno spazio temporale esistente"
 
 /* others */
