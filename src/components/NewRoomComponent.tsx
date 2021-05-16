@@ -74,8 +74,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.handleConfirm = this.handleConfirm.bind(this)
         this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this)
         this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this)
-        this.handleChangeHeight = this.handleChangeHeight.bind(this)
-        this.handleChangeWidth = this.handleChangeWidth.bind(this)
 
         this.state = {
             isButtonDisabled: true,
@@ -190,10 +188,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimHeight}
                                         onChange={(e) => {
-                                            //this.handleChangeHeight(e);
-                                            console.log(e);
+                                            let height: number = e.target.value ? parseInt(e.target.value) : 0
+                                            this.setState({dimHeight: height})
+                                            this.heightInputControl(height)
                                         }}
-                                    // TODO: implement error, helperText, value, onChange
                                     />
                                 </div>
                                 <div className="addField">
@@ -205,7 +203,11 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         error={this.state.widthError}
                                         helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimWidth}
-                                    // TODO: implement error, helperText, value, onChange
+                                        onChange={(e) => {
+                                            let width: number = e.target.value ? parseInt(e.target.value) : 0
+                                            this.setState({dimWidth: width})
+                                            this.widthInputControl(width)
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -291,18 +293,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private handleChangeHeight(height: number): void {
-        this.setState({ dimHeight: height })
-        this.setButton(this.state.roomNameValue, this.state.weekDays, height)
-    }
-
-    private handleChangeWidth(width: number): void {
-        this.setState({ dimWidth: width })
-        this.setButton(this.state.roomNameValue, this.state.weekDays, this.state.dimHeight, width)
-    }
-
-    private heightInputControl(dimHeight: number): boolean {
-        if (dimHeight === 0 || dimHeight <= 100) {
+    private heightInputControl(height: number): boolean {
+        if (height === 0 || height > 20) {
             this.setState({ heightError: true })
             return true
         } else {
@@ -311,8 +303,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private widthInputControl(dimWidth: number): boolean {
-        if (dimWidth === 0 || dimWidth <= 100) {
+    private widthInputControl(width: number): boolean {
+        if (width === 0 || width > 20) {
             this.setState({ widthError: true })
             return true
         } else {
