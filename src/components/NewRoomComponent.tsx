@@ -158,7 +158,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             value={this.state.selectedClosingTimeValue}
                                             onChange={(e) => {
                                                 this.handleClosingTimeChange,
-                                                this.timeInputControl
+                                                    this.timeInputControl
                                             }}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
@@ -303,12 +303,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private timeInputControl(timeOpen: Date, timeClose: Date): boolean{
+    private timeInputControl(timeOpen: Date, timeClose: Date): boolean {
         if (timeOpen <= timeClose) {
-            this.setState({ timeError: true})
+            this.setState({ timeError: true })
             return true
         } else {
-            this.setState({timeError: false})
+            this.setState({ timeError: false })
             return false
         }
 
