@@ -178,7 +178,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
                             </div>
-                            <div /* className="centralModal" */>
+                            <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
@@ -250,31 +250,31 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private handleChangeWeekDays(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({ weekDays: { ...this.state.weekDays, [event.target.name]: event.target.checked } });
         switch (event.target.name) {
-            case "monday":
+            case "Monday":
                 this.weekDaysInputControl([event.target.checked, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
                 this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "tuesday":
+            case "Tuesday":
                 this.weekDaysInputControl([this.state.weekDays.monday, event.target.checked, this.state.weekDays.wednesday,
                 this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "wednesday":
+            case "Wednesday":
                 this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, event.target.checked,
                 this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "thursday":
+            case "Thursday":
                 this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
                 event.target.checked, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "friday":
+            case "Friday":
                 this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
                 this.state.weekDays.thursday, event.target.checked, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "saturday":
+            case "Saturday":
                 this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
                 this.state.weekDays.thursday, this.state.weekDays.friday, event.target.checked, this.state.weekDays.sunday]);
                 break;
-            case "sunday":
+            case "Sunday":
                 this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
                 this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, event.target.checked]);
                 break;
@@ -327,6 +327,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
             selectedClosingTimeValue: new Date('2021-01-01T08:00'),
             weekDaysError: false,
+            roomNameValue: "",
         })
     }
 
