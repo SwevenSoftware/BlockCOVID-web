@@ -413,7 +413,28 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private handleConfirm(): void {
-        // TODO: implement confirmation
+        let flagErr = false;
+        let weekD = [this.state.weekDays.monday, this.state.weekDays.tuesday,
+            this.state.weekDays.wednesday, this.state.weekDays.thursday,
+            this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
+        let roomName = this.state.roomNameValue;
+        flagErr = (this.roomNameValidate(roomName) ? true : flagErr);
+        flagErr = (this.weekDaysInputControl(weekD) ? true : flagErr);
+
+        if (!flagErr) {
+            const days = new Array();
+            if (weekD[0]) days.push("MONDAY");
+            if (weekD[1]) days.push("TUESDAY");
+            if (weekD[2]) days.push("WEDNESDAY");
+            if (weekD[3]) days.push("THURSDAY");
+            if (weekD[4]) days.push("FRIDAY");
+            if (weekD[5]) days.push("SATURDAY");
+            if (weekD[6]) days.push("SUNDAY");
+            //dispatchAction
+            this.handleCloseButton()
+        } else {
+            //message errore
+        }
     }
 
     private roomNameValidate(roomName: string): boolean {
