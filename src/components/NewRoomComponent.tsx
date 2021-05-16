@@ -9,6 +9,7 @@ import {
     ERROR_ROOM_NAME_NOT_AVAILABLE,
     ERROR_WEEKDAYS_NOT_SELECTED,
     ERROR_TIME_NOT_AVAILABLE,
+    ERROR_INSERTION_NUMBER
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
@@ -68,34 +69,37 @@ interface NewRoomStates {
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     constructor(props) {
         super(props)
-            this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
-            this.handleCloseButton = this.handleCloseButton.bind(this)
-            this.handleConfirm = this.handleConfirm.bind(this)
-            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this)
-            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this)
-            this.state = {
-                isButtonDisabled: true,
-                isModalOpen: false,
-                roomNameError: false,
-                roomNameValue: "",
-                selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-                selectedClosingTimeValue: new Date('2021-01-01T08:00'),
-                weekDays: {
-                    monday: false,
-                    tuesday: false,
-                    wednesday: false,
-                    thursday: false,
-                    friday: false,
-                    saturday: false,
-                    sunday: false
-                },
-                weekDaysError: false,
-                timeError: false,
-                dimHeight: 0,
-                dimWidth: 0,
-                heightError: false,
-                widthError: false
-            }
+        this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
+        this.handleCloseButton = this.handleCloseButton.bind(this)
+        this.handleConfirm = this.handleConfirm.bind(this)
+        this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this)
+        this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this)
+        this.handleChangeHeight = this.handleChangeHeight.bind(this)
+        this.handleChangeWidth = this.handleChangeWidth.bind(this)
+
+        this.state = {
+            isButtonDisabled: true,
+            isModalOpen: false,
+            roomNameError: false,
+            roomNameValue: "",
+            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
+            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+            weekDays: {
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false
+            },
+            weekDaysError: false,
+            timeError: false,
+            dimHeight: 0,
+            dimWidth: 0,
+            heightError: false,
+            widthError: false
+        }
     }
 
     render() {
@@ -173,12 +177,22 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         />
                                     </MuiPickersUtilsProvider>
                                 </div>
+                                <DialogContentText>
+                                    Dimensione stanza
+                                </DialogContentText>
                                 <div className="addField">
                                     <TextField
                                         required
                                         id="outlined-search"
                                         label="Altezza"
                                         variant="outlined"
+                                        error={this.state.heightError}
+                                        helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
+                                        value={this.state.dimHeight}
+                                        onChange={(e) => {
+                                            //this.handleChangeHeight(e);
+                                            console.log(e);
+                                        }}
                                     // TODO: implement error, helperText, value, onChange
                                     />
                                 </div>
@@ -188,6 +202,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         id="outlined-search"
                                         label="Larghezza"
                                         variant="outlined"
+                                        error={this.state.widthError}
+                                        helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
+                                        value={this.state.dimWidth}
                                     // TODO: implement error, helperText, value, onChange
                                     />
                                 </div>
@@ -243,8 +260,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setButton()
     }
 
-    private setButton(roomName: string = this.state.roomNameValue, weekD: boolean[] = this.state.weekDays): void {
-        if (roomName && weekD) {
+    private setButton(
+        roomName: string = this.state.roomNameValue,
+        weekD: boolean[] = this.state.weekDays,
+        height: number = this.state.dimHeight,
+        width: number = this.state.dimWidth): void {
+        if (roomName && weekD && (height != 0 && height <= 100) && (width != 0 && width <= 100)) {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
@@ -270,8 +291,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
+    private handleChangeHeight(height: number): void {
+        this.setState({ dimHeight: height })
+        this.setButton(this.state.roomNameValue, this.state.weekDays, height)
+    }
+
+    private handleChangeWidth(width: number): void {
+        this.setState({ dimWidth: width })
+        this.setButton(this.state.roomNameValue, this.state.weekDays, this.state.dimHeight, width)
+    }
+
     private heightInputControl(dimHeight: number): boolean {
-        if (dimHeight === 0 || dimHeight > 100) {
+        if (dimHeight === 0 || dimHeight <= 100) {
             this.setState({ heightError: true })
             return true
         } else {
@@ -281,7 +312,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private widthInputControl(dimWidth: number): boolean {
-        if (dimWidth === 0 || dimWidth > 100) {
+        if (dimWidth === 0 || dimWidth <= 100) {
             this.setState({ widthError: true })
             return true
         } else {
@@ -332,7 +363,28 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private handleConfirm(): void {
-        // TODO: implement confirmation
+        let flagErr = false;
+        let weekD = [this.state.weekDays.monday, this.state.weekDays.tuesday,
+        this.state.weekDays.wednesday, this.state.weekDays.thursday,
+        this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
+        let roomName = this.state.roomNameValue;
+        flagErr = (this.roomNameValidate(roomName) ? true : flagErr);
+        flagErr = (this.weekDaysInputControl(weekD) ? true : flagErr);
+
+        if (!flagErr) {
+            const days = new Array();
+            if (weekD[0]) days.push("MONDAY");
+            if (weekD[1]) days.push("TUESDAY");
+            if (weekD[2]) days.push("WEDNESDAY");
+            if (weekD[3]) days.push("THURSDAY");
+            if (weekD[4]) days.push("FRIDAY");
+            if (weekD[5]) days.push("SATURDAY");
+            if (weekD[6]) days.push("SUNDAY");
+            //dispatchAction
+            this.handleCloseButton()
+        } else {
+            //message errore
+        }
     }
 
     private roomNameValidate(roomName: string): boolean {
