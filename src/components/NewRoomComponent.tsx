@@ -240,8 +240,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setButton()
     }
 
-    private setButton(roomName: string = this.state.roomNameValue): void {
-        if (roomName) {
+    private setButton(roomName: string = this.state.roomNameValue, weekD: boolean[] = this.state.weekDays): void {
+        if (roomName && weekD) {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
