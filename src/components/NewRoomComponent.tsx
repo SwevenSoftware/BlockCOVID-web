@@ -53,6 +53,8 @@ interface NewRoomStates {
     isModalOpen: boolean,
     selectedOpeningTimeValue: Date,
     selectedClosingTimeValue: Date,
+    dimHeight: number,
+    dimWidth: number,
     roomNameValue: string,
     roomNameError: boolean,
     weekDays: any,
@@ -88,6 +90,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 },
                 weekDaysError: false,
                 timeError: false,
+                dimHeight: 0,
+                dimWidth: 0,
             }
     }
 
@@ -311,8 +315,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             this.setState({ timeError: false })
             return false
         }
-
     }
+
+    /* private dimInputControl(usernameValue: string): boolean {
+        let reg = new RegExp("^[0-9]{5,16}$");
+        if (!usernameValue.match(reg)) {
+            this.setState({ usernameError: true })
+            return true
+        } else {
+            this.setState({ usernameError: false })
+            return false
+        }
+    } */
 
     handleOpeningTimeChange(date: Date | null) {
         if (date) {
