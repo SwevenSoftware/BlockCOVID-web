@@ -372,6 +372,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             closingTimeDateValue: new Date('2021-01-01T08:00'),
             weekDaysError: false,
             roomNameValue: "",
+            timeError: false
         })
     }
 
