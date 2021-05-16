@@ -272,7 +272,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private setButton(
-        roomName: string = this.state.roomNameValue, 
+        roomName: string = this.state.roomNameValue,
         weekD: boolean[] = this.state.weekDays,
         height: number = this.state.dimHeight,
         width: number = this.state.dimWidth): void {
@@ -346,7 +346,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setButton(this.state.roomNameValue, this.state.weekDays, height)
     }
 
-    private handleChangeWidth(width: number) : void {
+    private handleChangeWidth(width: number): void {
         this.setState({ dimWidth: width })
         this.setButton(this.state.roomNameValue, this.state.weekDays, this.state.dimHeight, width)
     }
@@ -415,8 +415,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private handleConfirm(): void {
         let flagErr = false;
         let weekD = [this.state.weekDays.monday, this.state.weekDays.tuesday,
-            this.state.weekDays.wednesday, this.state.weekDays.thursday,
-            this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
+        this.state.weekDays.wednesday, this.state.weekDays.thursday,
+        this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
         let roomName = this.state.roomNameValue;
         flagErr = (this.roomNameValidate(roomName) ? true : flagErr);
         flagErr = (this.weekDaysInputControl(weekD) ? true : flagErr);
