@@ -62,29 +62,30 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     constructor(props) {
         super(props)
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-            this.handleCloseButton = this.handleCloseButton.bind(this),
-            this.handleConfirm = this.handleConfirm.bind(this),
-            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
-            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
+        this.handleCloseButton = this.handleCloseButton.bind(this),
+        this.handleConfirm = this.handleConfirm.bind(this),
+        this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
+        this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
+        this.handleChangeWeekDays = this.handleChangeWeekDays.bind(this),
 
-            this.state = {
-                isButtonDisabled: true,
-                isModalOpen: false,
-                roomNameError: false,
-                roomNameValue: "",
-                selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-                selectedClosingTimeValue: new Date('2021-01-01T08:00'),
-                weekDays: {
-                    monday: false,
-                    tuesday: false,
-                    wednesday: false,
-                    thursday: false,
-                    friday: false,
-                    saturday: false,
-                    sunday: false
-                },
-                weekDaysError: false
-            }
+        this.state = {
+            isButtonDisabled: true,
+            isModalOpen: false,
+            roomNameError: false,
+            roomNameValue: "",
+            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
+            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+            weekDays: {
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false
+            },
+            weekDaysError: false
+        }
     }
 
     render() {
@@ -186,31 +187,31 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                 <FormControl>
                                     <FormGroup>
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.monday} onChange={(e) => this.handleChangeAuthorities(e)} name="monday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.monday} onChange={(e) => this.handleChangeWeekDays(e)} name="monday" />}
                                             label="Monday"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.tuesday} onChange={(e) => this.handleChangeAuthorities(e)} name="tuesday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.tuesday} onChange={(e) => this.handleChangeWeekDays(e)} name="tuesday" />}
                                             label="Tuesday"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.wednesay} onChange={(e) => this.handleChangeAuthorities(e)} name="wednesay" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.wednesay} onChange={(e) => this.handleChangeWeekDays(e)} name="wednesay" />}
                                             label="Wednesay"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.thursday} onChange={(e) => this.handleChangeAuthorities(e)} name="thursday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.thursday} onChange={(e) => this.handleChangeWeekDays(e)} name="thursday" />}
                                             label="Thursday"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.friday} onChange={(e) => this.handleChangeAuthorities(e)} name="friday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.friday} onChange={(e) => this.handleChangeWeekDays(e)} name="friday" />}
                                             label="Friday"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.saturday} onChange={(e) => this.handleChangeAuthorities(e)} name="saturday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.saturday} onChange={(e) => this.handleChangeWeekDays(e)} name="saturday" />}
                                             label="Saturday"
                                         />
                                         <FormControlLabel
-                                            control={<GreenCheckbox checked={this.state.weekDays.sunday} onChange={(e) => this.handleChangeAuthorities(e)} name="sunday" />}
+                                            control={<GreenCheckbox checked={this.state.weekDays.sunday} onChange={(e) => this.handleChangeWeekDays(e)} name="sunday" />}
                                             label="Sunday"
                                         />
                                     </FormGroup>
@@ -247,20 +248,41 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
+    private handleChangeWeekDays(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ weekDays: { ...this.state.weekDays, [event.target.name]: event.target.checked } });
         switch (event.target.name) {
-            case "checkedAdmin":
-                this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
+            case "monday":
+                this.weekDaysInputControl([event.target.checked, this.state.weekDays.tuesday, this.state.weekDays.wednesay, 
+                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "checkedUser":
-                this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
+            case "tuesday":
+                this.weekDaysInputControl([this.state.weekDays.monday, event.target.checked, this.state.weekDays.wednesay, 
+                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
-            case "checkedCleaner":
-                this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
+            case "wednesay":
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, event.target.checked, 
+                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                break;
+            case "thursday":
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesay, 
+                    event.target.checked, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                break;
+            case "friday":
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesay, 
+                    this.state.weekDays.thursday, event.target.checked, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                break;
+            case "saturday":
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesay, 
+                    this.state.weekDays.thursday, this.state.weekDays.friday, event.target.checked, this.state.weekDays.sunday]);
+                break;
+            case "sunday":
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesay, 
+                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, event.target.checked]);
                 break;
         }
     }
+
+    
 
     handleOpeningTimeChange(date: Date | null) {
         if (date) {
