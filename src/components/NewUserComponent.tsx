@@ -60,31 +60,31 @@ interface NewUserStates {
 class NewUserComponent extends Component<NewUserProps, NewUserStates> {
     constructor(props) {
         super(props),
-        this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
-        this.handleChangeUsername = this.handleChangeUsername.bind(this),
-        this.handleChangePassword = this.handleChangePassword.bind(this),
-        this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this),
-        this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-        this.handleCloseButton = this.handleCloseButton.bind(this),
-        this.handleConfirm = this.handleConfirm.bind(this),
+            this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
+            this.handleChangeUsername = this.handleChangeUsername.bind(this),
+            this.handleChangePassword = this.handleChangePassword.bind(this),
+            this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this),
+            this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
+            this.handleCloseButton = this.handleCloseButton.bind(this),
+            this.handleConfirm = this.handleConfirm.bind(this),
 
-        this.state = {
-            usernameValue: "",
-            passwordValue: "",
-            confirmPasswordValue: "",
-            isButtonDisabled: true,
-            isNewUserOpen: false,
-            authorities: {
-                checkedAdmin: false,
-                checkedUser: false,
-                checkedCleaner: false
-            },
-            usernameError: false,
-            passwordError: false,
-            confirmPasswordError: false,
-            authoritiesError: false,
-            lengthPasswordError: false,
-        }
+            this.state = {
+                usernameValue: "",
+                passwordValue: "",
+                confirmPasswordValue: "",
+                isButtonDisabled: true,
+                isNewUserOpen: false,
+                authorities: {
+                    checkedAdmin: false,
+                    checkedUser: false,
+                    checkedCleaner: false
+                },
+                usernameError: false,
+                passwordError: false,
+                confirmPasswordError: false,
+                authoritiesError: false,
+                lengthPasswordError: false,
+            }
     }
 
     render() {

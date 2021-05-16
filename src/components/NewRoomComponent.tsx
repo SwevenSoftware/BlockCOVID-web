@@ -61,31 +61,31 @@ interface NewRoomStates {
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     constructor(props) {
         super(props),
-        this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-        this.handleCloseButton = this.handleCloseButton.bind(this),
-        this.handleConfirm = this.handleConfirm.bind(this),
-        this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
-        this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
-        this.handleChangeWeekDays = this.handleChangeWeekDays.bind(this),
+            this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
+            this.handleCloseButton = this.handleCloseButton.bind(this),
+            this.handleConfirm = this.handleConfirm.bind(this),
+            this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this),
+            this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this),
+            this.handleChangeWeekDays = this.handleChangeWeekDays.bind(this),
 
-        this.state = {
-            isButtonDisabled: true,
-            isModalOpen: false,
-            roomNameError: false,
-            roomNameValue: "",
-            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
-            weekDays: {
-                monday: false,
-                tuesday: false,
-                wednesday: false,
-                thursday: false,
-                friday: false,
-                saturday: false,
-                sunday: false
-            },
-            weekDaysError: false
-        }
+            this.state = {
+                isButtonDisabled: true,
+                isModalOpen: false,
+                roomNameError: false,
+                roomNameValue: "",
+                selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
+                selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+                weekDays: {
+                    monday: false,
+                    tuesday: false,
+                    wednesday: false,
+                    thursday: false,
+                    friday: false,
+                    saturday: false,
+                    sunday: false
+                },
+                weekDaysError: false
+            }
     }
 
     render() {
@@ -182,7 +182,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
-                                 <FormLabel>Giorno:</FormLabel>
+                                <FormLabel>Giorno:</FormLabel>
                                 <FormControl>
                                     <FormGroup>
                                         <FormControlLabel
@@ -251,32 +251,32 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setState({ weekDays: { ...this.state.weekDays, [event.target.name]: event.target.checked } });
         switch (event.target.name) {
             case "monday":
-                this.weekDaysInputControl([event.target.checked, this.state.weekDays.tuesday, this.state.weekDays.wednesday, 
-                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([event.target.checked, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
+                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
             case "tuesday":
-                this.weekDaysInputControl([this.state.weekDays.monday, event.target.checked, this.state.weekDays.wednesday, 
-                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([this.state.weekDays.monday, event.target.checked, this.state.weekDays.wednesday,
+                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
             case "wednesday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, event.target.checked, 
-                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, event.target.checked,
+                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
             case "thursday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday, 
-                    event.target.checked, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
+                event.target.checked, this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
             case "friday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday, 
-                    this.state.weekDays.thursday, event.target.checked, this.state.weekDays.saturday, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
+                this.state.weekDays.thursday, event.target.checked, this.state.weekDays.saturday, this.state.weekDays.sunday]);
                 break;
             case "saturday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday, 
-                    this.state.weekDays.thursday, this.state.weekDays.friday, event.target.checked, this.state.weekDays.sunday]);
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
+                this.state.weekDays.thursday, this.state.weekDays.friday, event.target.checked, this.state.weekDays.sunday]);
                 break;
             case "sunday":
-                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday, 
-                    this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, event.target.checked]);
+                this.weekDaysInputControl([this.state.weekDays.monday, this.state.weekDays.tuesday, this.state.weekDays.wednesday,
+                this.state.weekDays.thursday, this.state.weekDays.friday, this.state.weekDays.saturday, event.target.checked]);
                 break;
         }
     }
