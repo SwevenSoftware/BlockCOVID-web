@@ -85,6 +85,80 @@ describe('accuonts reducer test', function() {
 
     });
 
+    it('should correctly handle fetch error even if no proper errors', function() {
+
+        const action = {
+            type: accountTypes.FETCH_FAILURE,
+            payload: fakePayload
+        }
+
+        expect(accountsreducer(initialState, action)).toEqual(initialState)
+
+    });
+
+    it('should correctly handle modify error', function() {
+        const otherPayload = {
+            ...fakePayload,
+            error: 400
+        }
+
+        const action = {
+            type: accountTypes.MODIFY_FAILURE,
+            payload: otherPayload
+        }
+
+        const state = {
+            ...initialState,
+            error: ERROR_UNKNOWN
+        }
+        expect(accountsreducer(initialState, action)).toEqual(state)
+
+    });
+
+    it('should correctly handle creation error even if no proper errors', function() {
+
+        const action = {
+            type: accountTypes.CREATE_FAILURE,
+            payload: fakePayload
+        }
+
+        expect(accountsreducer(initialState, action)).toEqual({
+            ...initialState,
+            error: ERROR_UNKNOWN
+        })
+
+    });
+
+    it('should correctly handle creation error', function() {
+        const otherPayload = {
+            ...fakePayload,
+            error: 409
+        }
+
+        const action = {
+            type: accountTypes.CREATE_FAILURE,
+            payload: otherPayload
+        }
+
+        const state = {
+            ...initialState,
+            error: ERROR_USERNAME_NOT_AVAILABLE
+        }
+        expect(accountsreducer(initialState, action)).toEqual(state)
+
+    });
+
+    it('should correctly handle modify error even if no proper errors', function() {
+
+        const action = {
+            type: accountTypes.MODIFY_FAILURE,
+            payload: fakePayload
+        }
+
+        expect(accountsreducer(initialState, action)).toEqual(initialState)
+
+    });
+
     it('should correcly handle user fetch', function() {
         const action = {
             type: accountTypes.FETCH_SUCCESS,
@@ -104,7 +178,7 @@ describe('accuonts reducer test', function() {
         expect(accountsreducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle creation error', function() {
+    it('should correcly handle deletion error', function() {
         const otherPayload = {
             ...fakePayload,
             error: 409
@@ -122,22 +196,13 @@ describe('accuonts reducer test', function() {
         expect(accountsreducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle unknown creation error', function() {
-        const otherPayload = {
-            ...fakePayload,
-            error: 400
-        }
+    it('should correcly handle unknown deletion error', function() {
 
         const action = {
             type: accountTypes.DELETE_FAILURE,
-            payload: otherPayload
+            payload: fakePayload
         }
-
-        const state = {
-            ...initialState,
-            error: ERROR_UNKNOWN
-        }
-        expect(accountsreducer(initialState, action)).toEqual(state)
+        expect(accountsreducer(initialState, action)).toEqual(initialState)
     });
 
     it('should modify a user', function() {
@@ -200,5 +265,18 @@ describe('accuonts reducer test', function() {
         expect(accountsreducer(initialState, action)).toEqual(state)
     });
 
+    it('should correctly create a new user', function() {
 
+        const action = {
+            type: accountTypes.CREATE_SUCCESS,
+            payload: fakePayload
+        }
+
+        const state = {
+            ...initialState,
+            error: ""
+        }
+
+        expect(accountsreducer(initialState, action)).toEqual(state)
+    });
 });
