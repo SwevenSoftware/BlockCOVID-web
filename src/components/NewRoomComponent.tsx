@@ -1,8 +1,8 @@
 /* react */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 /* redux */
-import {connect} from 'react-redux'
-import roomActionResolver, {roomInformation} from '../actions/roomsActions';
+import { connect } from 'react-redux'
+import roomActionResolver, { roomInformation } from '../actions/roomsActions';
 /* types */
 import {
     ERROR_INSERTION_NUMBER,
@@ -21,12 +21,12 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import AddBoxIcon from '@material-ui/icons/AddBox'
-import {KeyboardTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
-import Checkbox, {CheckboxProps} from '@material-ui/core/Checkbox'
-import {FormHelperText, FormLabel, withStyles} from '@material-ui/core'
+import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
+import { FormHelperText, FormLabel, withStyles } from '@material-ui/core'
 /* styles */
-import {ThemeProvider} from '@material-ui/core/styles'
-import {theme} from '../theme'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { theme } from '../theme'
 import '../styles.css'
 /* others */
 import 'date-fns'
@@ -149,12 +149,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             error={this.state.timeError}
                                             helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
                                             value={this.state.openingTimeDateValue}
-                                            onChange={ (e) => {
+                                            onChange={(e) => {
                                                 let openingTimeMilliseconds: number | undefined = e?.getTime()
-                                                if(openingTimeMilliseconds) {
-                                                    let openingTime : { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
-                                                    this.setState({openingTimeDateValue: openingTime.time})
-                                                    this.setState({openingTimeStringValue: openingTime.timeString})
+                                                if (openingTimeMilliseconds) {
+                                                    let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
+                                                    this.setState({ openingTimeDateValue: openingTime.time })
+                                                    this.setState({ openingTimeStringValue: openingTime.timeString })
                                                     this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
                                                 }
                                             }}
@@ -174,12 +174,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             error={this.state.timeError}
                                             helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
                                             value={this.state.closingTimeDateValue}
-                                            onChange={ (e) => {
+                                            onChange={(e) => {
                                                 let closingTimeMilliseconds: number | undefined = e?.getTime()
-                                                if(closingTimeMilliseconds) {
-                                                    let closingTime : { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
-                                                    this.setState({closingTimeDateValue: closingTime.time})
-                                                    this.setState({closingTimeStringValue: closingTime.timeString})
+                                                if (closingTimeMilliseconds) {
+                                                    let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
+                                                    this.setState({ closingTimeDateValue: closingTime.time })
+                                                    this.setState({ closingTimeStringValue: closingTime.timeString })
                                                     this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
                                                 }
                                             }}
@@ -331,13 +331,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         /** converting MaterialUI object to Date object */
         let time: Date = new Date(milliseconds)
         let timeString: string
-        if(time.getHours() < 10) {
+        if (time.getHours() < 10) {
             timeString = "0" + time.getHours().toString()
         }
         else {
             timeString = time.getHours().toString()
         }
-        if(time.getMinutes() < 10) {
+        if (time.getMinutes() < 10) {
             timeString += ":0" + time.getMinutes().toString()
         }
         else {
