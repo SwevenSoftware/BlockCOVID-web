@@ -316,6 +316,17 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.setState({
             isButtonDisabled: true,
             isModalOpen: false,
+            weekDays: {
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false
+            },
+            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
+            selectedClosingTimeValue: new Date('2021-01-01T08:00')
         })
     }
 
