@@ -6,7 +6,8 @@ import roomActionResolver, { roomInformation } from '../actions/roomsActions';
 /* types */
 import {
     ERROR_ROOM_NAME_ALREADY_USED,
-    ERROR_ROOM_NAME_NOT_AVAILABLE
+    ERROR_ROOM_NAME_NOT_AVAILABLE,
+    ERROR_WEEKDAYS_NOT_SELECTED
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
@@ -31,6 +32,16 @@ import '../styles.css'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
 
+const GreenCheckbox = withStyles({
+    root: {
+        color: "#689f38",
+        '&$checked': {
+            color: "#689f38",
+        },
+    },
+    checked: {},
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
 interface NewRoomProps {
     state: any,
     dispatch: any
@@ -43,6 +54,8 @@ interface NewRoomStates {
     selectedClosingTimeValue: Date,
     roomNameValue: string,
     roomNameError: boolean,
+    weekDays: any,
+    weekDaysError: boolean
 }
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
@@ -60,7 +73,17 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 roomNameError: false,
                 roomNameValue: "",
                 selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-                selectedClosingTimeValue: new Date('2021-01-01T08:00')
+                selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+                weekDays: {
+                    monday: false,
+                    tuesday: false,
+                    wednesday: false,
+                    thursday: false,
+                    friday: false,
+                    saturday: false,
+                    sunday: false
+                },
+                weekDaysError: false
             }
     }
 
@@ -90,7 +113,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     Compila i seguenti campi
                                 </DialogContentText>
                                 <div className="addField">
-                                    {/* TODO: add grid of the room */}
                                     <TextField
                                         required
                                         id="outlined-search"
@@ -160,6 +182,40 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
+                                 <FormLabel>Ruolo:</FormLabel>
+                                <FormControl>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.monday} onChange={(e) => this.handleChangeAuthorities(e)} name="monday" />}
+                                            label="Monday"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.tuesday} onChange={(e) => this.handleChangeAuthorities(e)} name="tuesday" />}
+                                            label="Tuesday"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.wednesay} onChange={(e) => this.handleChangeAuthorities(e)} name="wednesay" />}
+                                            label="Wednesay"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.thursday} onChange={(e) => this.handleChangeAuthorities(e)} name="thursday" />}
+                                            label="Thursday"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.friday} onChange={(e) => this.handleChangeAuthorities(e)} name="friday" />}
+                                            label="Friday"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.saturday} onChange={(e) => this.handleChangeAuthorities(e)} name="saturday" />}
+                                            label="Saturday"
+                                        />
+                                        <FormControlLabel
+                                            control={<GreenCheckbox checked={this.state.weekDays.sunday} onChange={(e) => this.handleChangeAuthorities(e)} name="sunday" />}
+                                            label="Sunday"
+                                        />
+                                    </FormGroup>
+                                    <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </FormControl>
                             </div>
                         </DialogContent>
                         <DialogActions>
@@ -179,18 +235,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         )
     }
 
-    handleOpeningTimeChange(date: Date | null) {
-        if (date) {
-            this.setState({ selectedOpeningTimeValue: date })
-        }
-    }
-
-    handleClosingTimeChange(date: Date | null) {
-        if (date) {
-            this.setState({ selectedClosingTimeValue: date })
-        }
-    }
-
     componentDidMount() {
         this.setButton()
     }
@@ -200,6 +244,33 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
+        }
+    }
+
+    private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
+        switch (event.target.name) {
+            case "checkedAdmin":
+                this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
+                break;
+            case "checkedUser":
+                this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
+                break;
+            case "checkedCleaner":
+                this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
+                break;
+        }
+    }
+
+    handleOpeningTimeChange(date: Date | null) {
+        if (date) {
+            this.setState({ selectedOpeningTimeValue: date })
+        }
+    }
+
+    handleClosingTimeChange(date: Date | null) {
+        if (date) {
+            this.setState({ selectedClosingTimeValue: date })
         }
     }
 
