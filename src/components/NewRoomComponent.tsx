@@ -267,7 +267,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         weekD: boolean[] = this.state.weekDays,
         height: number = this.state.dimHeight,
         width: number = this.state.dimWidth): void {
-        if (roomName && weekD && (height != 0 && height <= 20) && (width != 0 && width <= 20)) {
+        if (roomName && weekD && height != 0 && width != 0) {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
