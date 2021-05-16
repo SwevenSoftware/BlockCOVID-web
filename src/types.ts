@@ -50,6 +50,7 @@ export const ERROR_ROOM_NAME_NOT_AVAILABLE = "Min 5 caratteri, max 16"
 export const ERROR_ROOM_NAME_ALREADY_USED = "Nome stanza già esistente"
 export const ERROR_WEEKDAYS_NOT_SELECTED = "Seleziona almeno un'opzione"
 export const ERROR_TIME_NOT_AVAILABLE = "Seleziona uno spazio temporale esistente"
+export const ERROR_INSERTION_NUMBER = "Caratteri invalidi. Inserisci solo numeri"
 
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"
