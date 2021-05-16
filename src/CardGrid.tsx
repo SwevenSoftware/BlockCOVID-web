@@ -89,7 +89,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
                     <div className="buttonGrid">
                         <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
                             Annulla
-            </Button>
+                        </Button>
                     </div>
                 </div>
             </div>

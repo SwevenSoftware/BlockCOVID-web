@@ -337,3 +337,12 @@
         padding-left: 1em;
     }
 }
+
+#cleanGrid {
+    margin-bottom: 2em;
+}
+
+#cleanGrid:hover {
+    color: white;
+    background-color:rgb(201, 33, 33);
+}
