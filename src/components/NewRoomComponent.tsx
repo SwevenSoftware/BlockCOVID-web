@@ -189,7 +189,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         value={this.state.dimHeight}
                                         onChange={(e) => {
                                             let height: number = e.target.value ? parseInt(e.target.value) : 0
-                                            this.setState({dimHeight: height})
+                                            this.setState({ dimHeight: height })
                                             this.heightInputControl(height)
                                         }}
                                     />
@@ -205,7 +205,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         value={this.state.dimWidth}
                                         onChange={(e) => {
                                             let width: number = e.target.value ? parseInt(e.target.value) : 0
-                                            this.setState({dimWidth: width})
+                                            this.setState({ dimWidth: width })
                                             this.widthInputControl(width)
                                         }}
                                     />
