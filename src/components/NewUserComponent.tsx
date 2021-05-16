@@ -234,7 +234,6 @@ class NewUserComponent extends Component<NewUserProps, NewUserStates> {
                 this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
                 break;
         }
-
     }
 
     private handleChangeUsername(username: string): void {
