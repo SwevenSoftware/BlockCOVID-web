@@ -107,7 +107,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                             id="form-dialog-title"
                             className="modalTitle">
                             Crea una nuova stanza
-               </DialogTitle>
+                        </DialogTitle>
                         <DialogContent>
                             <div className="centralModal">
                                 <DialogContentText>
@@ -126,7 +126,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             this.handleChangeRoomName(e.target.value);
                                             this.roomNameValidate(e.target.value);
                                         }}
-                                    // TODO: implement error, helperText, value, onChange
                                     />
                                 </div>
                                 <div className="addField">
@@ -179,11 +178,11 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
                                 </div>
                             </div>
-                            <div className="centralModal">
+                            <div /* className="centralModal" */>
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                  </DialogContentText>
-                                 <FormLabel>Ruolo:</FormLabel>
+                                 <FormLabel>Giorno:</FormLabel>
                                 <FormControl>
                                     <FormGroup>
                                         <FormControlLabel
@@ -326,7 +325,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 sunday: false,
             },
             selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-            selectedClosingTimeValue: new Date('2021-01-01T08:00')
+            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+            weekDaysError: false,
         })
     }
 
