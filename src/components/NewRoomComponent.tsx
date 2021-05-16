@@ -1,15 +1,14 @@
 /* react */
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 /* redux */
-import { connect } from 'react-redux'
-import roomActionResolver, { roomInformation } from '../actions/roomsActions';
+import {connect} from 'react-redux'
+import roomActionResolver, {roomInformation} from '../actions/roomsActions';
 /* types */
 import {
-    ERROR_ROOM_NAME_ALREADY_USED,
+    ERROR_INSERTION_NUMBER,
     ERROR_ROOM_NAME_NOT_AVAILABLE,
-    ERROR_WEEKDAYS_NOT_SELECTED,
     ERROR_TIME_NOT_AVAILABLE,
-    ERROR_INSERTION_NUMBER
+    ERROR_WEEKDAYS_NOT_SELECTED
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
@@ -22,14 +21,12 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import AddBoxIcon from '@material-ui/icons/AddBox'
-import Grid from '@material-ui/core/Grid'
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
+import {KeyboardTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
+import Checkbox, {CheckboxProps} from '@material-ui/core/Checkbox'
+import {FormHelperText, FormLabel, withStyles} from '@material-ui/core'
 /* styles */
-import { ThemeProvider } from '@material-ui/core/styles'
-import { theme } from '../theme'
+import {ThemeProvider} from '@material-ui/core/styles'
+import {theme} from '../theme'
 import '../styles.css'
 /* others */
 import 'date-fns'
@@ -53,8 +50,10 @@ interface NewRoomProps {
 interface NewRoomStates {
     isButtonDisabled: boolean,
     isModalOpen: boolean,
-    selectedOpeningTimeValue: Date,
-    selectedClosingTimeValue: Date,
+    openingTimeDateValue: Date,
+    openingTimeStringValue: string,
+    closingTimeDateValue: Date,
+    closingTimeStringValue: string,
     dimHeight: number,
     dimWidth: number,
     heightError: boolean,
@@ -72,16 +71,16 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
         this.handleCloseButton = this.handleCloseButton.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
-        this.handleOpeningTimeChange = this.handleOpeningTimeChange.bind(this)
-        this.handleClosingTimeChange = this.handleClosingTimeChange.bind(this)
 
         this.state = {
             isButtonDisabled: true,
             isModalOpen: false,
             roomNameError: false,
             roomNameValue: "",
-            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+            openingTimeDateValue: new Date('2021-01-01T08:00'),
+            openingTimeStringValue: "",
+            closingTimeDateValue: new Date('2021-01-01T08:00'),
+            closingTimeStringValue: "",
             weekDays: {
                 monday: false,
                 tuesday: false,
@@ -147,8 +146,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             id="time-picker"
                                             label="Orario di apertura"
                                             ampm={false}
-                                            value={this.state.selectedOpeningTimeValue}
-                                            onChange={this.handleOpeningTimeChange}
+                                            error={this.state.timeError}
+                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
+                                            value={this.state.openingTimeDateValue}
+                                            onChange={ (e) => {
+                                                let openingTimeMilliseconds: number | undefined = e?.getTime()
+                                                if(openingTimeMilliseconds) {
+                                                    let openingTime : { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
+                                                    this.setState({openingTimeDateValue: openingTime.time})
+                                                    this.setState({openingTimeStringValue: openingTime.timeString})
+                                                    this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
+                                                }
+                                            }}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
                                             }}
@@ -164,10 +173,15 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             ampm={false}
                                             error={this.state.timeError}
                                             helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
-                                            value={this.state.selectedClosingTimeValue}
-                                            onChange={(e) => {
-                                                this.handleClosingTimeChange,
-                                                    this.timeInputControl
+                                            value={this.state.closingTimeDateValue}
+                                            onChange={ (e) => {
+                                                let closingTimeMilliseconds: number | undefined = e?.getTime()
+                                                if(closingTimeMilliseconds) {
+                                                    let closingTime : { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
+                                                    this.setState({closingTimeDateValue: closingTime.time})
+                                                    this.setState({closingTimeStringValue: closingTime.timeString})
+                                                    this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
+                                                }
                                             }}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
@@ -284,7 +298,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private timeInputControl(timeOpen: Date, timeClose: Date): boolean {
-        if (timeOpen <= timeClose) {
+        if (timeOpen >= timeClose) {
             this.setState({ timeError: true })
             return true
         } else {
@@ -313,17 +327,25 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    handleOpeningTimeChange(date: Date | null) {
-        if (date) {
-            this.setState({ selectedOpeningTimeValue: date })
+    handleTimeChange(milliseconds: number): { time: Date, timeString: string } {
+        /** converting MaterialUI object to Date object */
+        let time: Date = new Date(milliseconds)
+        let timeString: string
+        if(time.getHours() < 10) {
+            timeString = "0" + time.getHours().toString()
         }
+        else {
+            timeString = time.getHours().toString()
+        }
+        if(time.getMinutes() < 10) {
+            timeString += ":0" + time.getMinutes().toString()
+        }
+        else {
+            timeString += ":" + time.getMinutes().toString()
+        }
+        return { time, timeString }
     }
 
-    handleClosingTimeChange(date: Date | null) {
-        if (date) {
-            this.setState({ selectedClosingTimeValue: date })
-        }
-    }
 
     private handleClickOpenButton() {
         this.setState({ isModalOpen: true })
@@ -346,8 +368,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 saturday: false,
                 sunday: false,
             },
-            selectedOpeningTimeValue: new Date('2021-01-01T08:00'),
-            selectedClosingTimeValue: new Date('2021-01-01T08:00'),
+            openingTimeDateValue: new Date('2021-01-01T08:00'),
+            closingTimeDateValue: new Date('2021-01-01T08:00'),
             weekDaysError: false,
             roomNameValue: "",
         })
