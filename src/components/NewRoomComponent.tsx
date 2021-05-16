@@ -7,7 +7,8 @@ import roomActionResolver, { roomInformation } from '../actions/roomsActions';
 import {
     ERROR_ROOM_NAME_ALREADY_USED,
     ERROR_ROOM_NAME_NOT_AVAILABLE,
-    ERROR_WEEKDAYS_NOT_SELECTED
+    ERROR_WEEKDAYS_NOT_SELECTED,
+    ERROR_TIME_NOT_AVAILABLE,
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
@@ -55,7 +56,8 @@ interface NewRoomStates {
     roomNameValue: string,
     roomNameError: boolean,
     weekDays: any,
-    weekDaysError: boolean
+    weekDaysError: boolean,
+    timeError: boolean,
 }
 
 class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
@@ -84,7 +86,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                     saturday: false,
                     sunday: false
                 },
-                weekDaysError: false
+                weekDaysError: false,
+                timeError: false,
             }
     }
 
@@ -150,8 +153,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                             id="time-picker"
                                             label="Orario di chiusura"
                                             ampm={false}
+                                            error={this.state.timeError}
+                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
                                             value={this.state.selectedClosingTimeValue}
-                                            onChange={this.handleClosingTimeChange}
+                                            onChange={(e) => {
+                                                this.handleClosingTimeChange,
+                                                this.timeInputControl
+                                            }}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change time',
                                             }}
@@ -293,6 +301,17 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             this.setState({ weekDays: false })
             return false;
         }
+    }
+
+    private timeInputControl(timeOpen: Date, timeClose: Date): boolean{
+        if (timeOpen <= timeClose) {
+            this.setState({ timeError: true})
+            return true
+        } else {
+            this.setState({timeError: false})
+            return false
+        }
+
     }
 
     handleOpeningTimeChange(date: Date | null) {
