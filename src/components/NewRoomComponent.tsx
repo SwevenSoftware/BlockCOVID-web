@@ -237,7 +237,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                     <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
                                     <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
                                     <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
-                                </ButtonGroup>f
+                                </ButtonGroup>
                                 <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
                             </div>
                         </DialogContent>
