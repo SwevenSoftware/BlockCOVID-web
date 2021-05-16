@@ -282,7 +282,19 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    
+    private weekDaysInputControl(weekD: boolean[]): boolean {
+        let notChecked = true
+        for (let i in weekD) {
+            if (weekD[i]) notChecked = false
+        }
+        if (notChecked) {
+            this.setState({ weekDaysError: true })
+            return true;
+        } else {
+            this.setState({ weekDays: false })
+            return false;
+        }
+    }
 
     handleOpeningTimeChange(date: Date | null) {
         if (date) {
