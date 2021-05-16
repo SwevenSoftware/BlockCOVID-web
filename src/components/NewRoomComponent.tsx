@@ -55,6 +55,8 @@ interface NewRoomStates {
     selectedClosingTimeValue: Date,
     dimHeight: number,
     dimWidth: number,
+    heightError: boolean,
+    widthError: boolean,
     roomNameValue: string,
     roomNameError: boolean,
     weekDays: any,
@@ -92,6 +94,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 timeError: false,
                 dimHeight: 0,
                 dimWidth: 0,
+                heightError: false,
+                widthError: false
             }
     }
 
@@ -317,16 +321,25 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    /* private dimInputControl(usernameValue: string): boolean {
-        let reg = new RegExp("^[0-9]{5,16}$");
-        if (!usernameValue.match(reg)) {
-            this.setState({ usernameError: true })
+    private heightInputControl(dimHeight: number): boolean {
+        if (dimHeight === 0 || dimHeight > 100) {
+            this.setState({ heightError: true })
             return true
         } else {
-            this.setState({ usernameError: false })
+            this.setState({ heightError: false })
             return false
         }
-    } */
+    }
+
+    private widthInputControl(dimWidth: number): boolean {
+        if (dimWidth === 0 || dimWidth > 100) {
+            this.setState({ widthError: true })
+            return true
+        } else {
+            this.setState({ widthError: false })
+            return false
+        }
+    }
 
     handleOpeningTimeChange(date: Date | null) {
         if (date) {
