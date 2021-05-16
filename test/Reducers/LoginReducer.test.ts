@@ -1,20 +1,8 @@
 import loginReducer from '../../src/reducers/loginReducer'
-import {ERROR_UNKNOWN, ERROR_USER_NO_AUTH, ERROR_USER_OR_PASS, loginTypes } from '../../src/types';
+import { ERROR_UNKNOWN, ERROR_USER_NO_AUTH, ERROR_USER_OR_PASS, loginTypes } from '../../src/types';
 import { JSDOM } from 'jsdom'
 
-
-declare global {
-    namespace NodeJS {
-        interface Global {
-            document: Document;
-            window: Window;
-            navigator: Navigator;
-            location: Location;
-        }
-    }
-}
-
-describe('login reducer', function () {
+describe('login reducer', function() {
     const initialState = {
         token: null,
         error: ""
@@ -33,7 +21,7 @@ describe('login reducer', function () {
         ]
     }
 
-    it('should have correct initial state', function () {
+    it('should have correct initial state', function() {
         const state = {
             token: null,
             error: ""
@@ -44,21 +32,7 @@ describe('login reducer', function () {
         expect(loginReducer(state, action)).toEqual(state)
     });
 
-    it('should let admins login', function () {
-        const state = {
-            token: fakeAdmin.token,
-            error: ""
-        }
-        const action = {
-            type: loginTypes.LOGIN_SUCCESS,
-            payload: fakeAdmin
-        }
-
-        expect(loginReducer(initialState, action)).toEqual(state)
-        /*expect(location.href).toEqual('/accounts')*/
-    });
-
-    it('should not let non admins login', function () {
+    it('should not let non admins login', function() {
         const state = {
             token: null,
             error: ERROR_USER_NO_AUTH
@@ -70,7 +44,7 @@ describe('login reducer', function () {
         expect(loginReducer(initialState, action)).toEqual(state)
     });
 
-    it('should return correct login error', function () {
+    it('should return correct login error', function() {
         let state = {
             token: null,
             error: ERROR_USER_OR_PASS
@@ -87,18 +61,5 @@ describe('login reducer', function () {
         action.payload.error = 300
         state.error = ERROR_UNKNOWN
         expect(loginReducer(initialState, action)).toEqual(state)
-    });
-
-    it('should let user logout no matter what', function () {
-        let state = {
-            token: null,
-            error: ""
-        }
-        let action = {
-            type: loginTypes.LOGOUT,
-            payload: {}
-        }
-        expect(loginReducer(initialState, action)).toEqual(state)
-        /*expect(location.href).toEqual('/login')*/
     });
 });
