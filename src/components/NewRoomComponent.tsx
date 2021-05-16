@@ -177,6 +177,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         />
                                     </MuiPickersUtilsProvider>
                                 </div>
+                                <DialogContentText>
+                                    Dimensione stanza
+                                </DialogContentText>
                                 <div className="addField">
                                     <TextField
                                         required
@@ -187,7 +190,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimHeight}
                                         onChange={(e) => {
-                                            this.handle
+                                            //this.handleChangeHeight(e);
+                                            console.log(e);
                                         }}
                                     // TODO: implement error, helperText, value, onChange
                                     />
@@ -198,6 +202,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         id="outlined-search"
                                         label="Larghezza"
                                         variant="outlined"
+                                        error={this.state.widthError}
+                                        helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
+                                        value={this.state.dimWidth}
                                     // TODO: implement error, helperText, value, onChange
                                     />
                                     {/* TODO: add fields such as opening times, closing time, week days and sizes */}
@@ -267,8 +274,9 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private setButton(
         roomName: string = this.state.roomNameValue, 
         weekD: boolean[] = this.state.weekDays,
-        height: number = this.state.dimHeight): void {
-        if (roomName && weekD && (height != 0 && height <= 100)) {
+        height: number = this.state.dimHeight,
+        width: number = this.state.dimWidth): void {
+        if (roomName && weekD && (height != 0 && height <= 100) && (width != 0 && width <= 100)) {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
@@ -334,13 +342,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     }
 
     private handleChangeHeight(height: number): void {
-        this.setState({ dimHeight: height.trim() })
-        this.setButton(height)
+        this.setState({ dimHeight: height })
+        this.setButton(this.state.roomNameValue, this.state.weekDays, height)
     }
 
     private handleChangeWidth(width: number) : void {
-        this.setState({ passwordValue: password.trim() })
-        this.setButton(this.state.usernameValue, password)
+        this.setState({ dimWidth: width })
+        this.setButton(this.state.roomNameValue, this.state.weekDays, this.state.dimHeight, width)
     }
 
     private heightInputControl(dimHeight: number): boolean {
