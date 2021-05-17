@@ -44,7 +44,6 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
     }
 
     render() {
-        console.log(this.props.mode)
         switch (this.props.mode) {
             case 'mod':
                 return (
@@ -60,7 +59,6 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
                         </div>
                     </div>
                 );
-                break;
             case 'del':
                 return (
                     <div>
@@ -75,7 +73,6 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
                         </div>
                     </div>
                 );
-                break;
             default:
                 return (
                     <div>
