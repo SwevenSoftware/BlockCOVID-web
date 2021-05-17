@@ -202,6 +202,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimHeight}
                                         onChange={(e) => {
+                                            let dim = e.target.value
+                                            this.numberHeightControl(dim)
                                             let height: number = e.target.value ? parseInt(e.target.value) : 1
                                             this.setState({ dimHeight: height })
                                             this.heightInputControl(height)
@@ -281,7 +283,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         weekD: boolean[] = this.state.weekDays,
         height: number = this.state.dimHeight,
         width: number = this.state.dimWidth): void {
-        if (roomName && weekD && height != 0 && width != 0) {
+        if (roomName && weekD && height != 0 && width != 0 && height != NaN && width != NaN) {
             this.setState({ isButtonDisabled: false })
         } else {
             this.setState({ isButtonDisabled: true })
@@ -303,6 +305,17 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             return true
         } else {
             this.setState({ timeError: false })
+            return false
+        }
+    }
+
+    private numberHeightControl(number: string): boolean {
+        let reg = new RegExp("^[1-9]{1,2}$")
+        if (!number.match(reg)) {
+            this.setState({ heightError : true })
+            return true
+        } else {
+            this.setState({ heightError: false })
             return false
         }
     }
@@ -389,9 +402,15 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.state.weekDays.wednesday, this.state.weekDays.thursday,
         this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
 
+        let openT = this.state.openingTimeStringValue;
+        let closeT = this.state.closingTimeStringValue;
+        let height = this.state.dimHeight;
+        let width = this.state.dimWidth;
         let roomName = this.state.roomNameValue;
         flagErr = (this.roomNameValidate(roomName) ? true : flagErr);
         flagErr = (this.weekDaysInputControl(weekDays) ? true : flagErr);
+        flagErr = ((this.heightInputControl(height) && height != NaN) ? true : flagErr);
+        flagErr = ((this.widthInputControl(width) && width != NaN) ? true : flagErr);
 
         if (!flagErr) {
             const days = new Array();
