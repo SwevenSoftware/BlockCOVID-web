@@ -158,7 +158,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.setState({ openingTimeStringValue: openingTime.timeString })
                                                     this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
                                                 } else {
-                                                    this.setState({timeError: true})
+                                                    this.setState({ timeError: true })
                                                 }
                                             }}
                                             KeyboardButtonProps={{
@@ -185,7 +185,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.setState({ closingTimeStringValue: closingTime.timeString })
                                                     this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
                                                 } else {
-                                                    this.setState({timeError: true})
+                                                    this.setState({ timeError: true })
                                                 }
                                             }}
                                             KeyboardButtonProps={{
