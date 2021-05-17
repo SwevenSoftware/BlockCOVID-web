@@ -7,8 +7,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import DialogContent from '@material-ui/core/DialogContent'
-/* style */
-import "./styles.css";
 
 /* other files */
 import Grid from "./Grid";

@@ -8,7 +8,6 @@ import {
 const loginHandlers = {}
 
 loginHandlers[loginTypes.LOGIN_SUCCESS] = function(state, action) {
-    console.log(loginTypes.LOGIN_SUCCESS) // WARNING: testing purposes
     let isAdmin = action.payload.authorities.includes("ADMIN")
     if (isAdmin) { /** user has admin authorities, authorized login attempt */
         location.href = "/accounts"
@@ -26,7 +25,6 @@ loginHandlers[loginTypes.LOGIN_SUCCESS] = function(state, action) {
 }
 
 loginHandlers[loginTypes.LOGIN_FAILURE] = function(state, action) {
-    console.log(loginTypes.LOGIN_FAILURE) // WARNING: testing purposes
     switch (action.payload.error) {
         case 400: case 500:
             /**

@@ -16,7 +16,6 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import '../styles.css'
 /* others */
 import NewRoom from './NewRoomComponent'
 import ModifyRoom from './ModifyRoomComponent'

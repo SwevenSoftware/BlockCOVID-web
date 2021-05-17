@@ -18,7 +18,6 @@ import BathtubIcon from '@material-ui/icons/Bathtub'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import '../styles.css'
 /* others */
 import ModifyAccount from './ModifyAccountComponent'
 import NewAccount from './NewAccountComponent'

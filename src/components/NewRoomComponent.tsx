@@ -27,20 +27,9 @@ import { FormHelperText, FormLabel, withStyles } from '@material-ui/core'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import '../styles.css'
 /* others */
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-
-const GreenCheckbox = withStyles({
-    root: {
-        color: "#689f38",
-        '&$checked': {
-            color: "#689f38",
-        },
-    },
-    checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
 interface NewRoomProps {
     state: any,
@@ -426,11 +415,17 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             if (weekDays[5]) days.push("SATURDAY");
             if (weekDays[6]) days.push("SUNDAY");
             console.log(this.state.dimHeight, this.state.dimWidth, 'HxW')
+            console.log(this.state.roomNameValue)
+            console.log(days)
             console.log(this.state.openingTimeStringValue, 'opening time string')
             console.log(this.state.closingTimeStringValue, 'closing time string')
             this.props.dispatch.createRoom({
-                roomName: this.state.roomNameValue, openingTime: this.state.openingTimeStringValue,
-                closingTime: this.state.closingTimeStringValue, weekDays: days, height: this.state.dimHeight, width: this.state.dimWidth
+                name: this.state.roomNameValue,
+                openingAt: this.state.openingTimeStringValue,
+                closingAt: this.state.closingTimeStringValue,
+                openingDays: days,
+                height: this.state.dimHeight,
+                width: this.state.dimWidth
             })
             this.handleCloseButton()
         } else {
