@@ -1,19 +1,19 @@
 /* react */
-import { Component } from "react";
+import { Component } from "react"
 /* redux */
-import { connect } from 'react-redux';
-import { login } from '../actions/loginActions'
+import { connect } from 'react-redux'
+import loginActionResolver from '../actions/loginActions'
 /* material-ui */
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
+import Button from '@material-ui/core/Button'
 /* styles */
-import { ThemeProvider } from '@material-ui/core/styles';
-import { theme } from '../theme';
-import "../styles.css";
+import { ThemeProvider } from '@material-ui/core/styles'
+import { theme } from '../theme'
+import "../styles.css"
 
 interface LoginProps {
     state: any,
@@ -28,7 +28,7 @@ interface LoginStates {
 
 class LoginComponent extends Component<LoginProps, LoginStates> {
     constructor(props) {
-        super(props);
+        super(props)
         this.handleChangeUsername = this.handleChangeUsername.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
@@ -58,7 +58,7 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                                     type="email"
                                     label="Username"
                                     margin="normal"
-                                    error={this.props.state.login.error ? true : false}
+                                    error={!!this.props.state.error}
                                     onChange={(e) => this.handleChangeUsername(e.target.value)}
                                     onKeyPress={(e) => this.handleKeyPress(e.key)}
                                 />
@@ -68,8 +68,8 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
                                     type="password"
                                     label="Password"
                                     margin="normal"
-                                    error={this.props.state.login.error ? true : false}
-                                    helperText={this.props.state.login.error ? this.props.state.login.error : ""}
+                                    error={!!this.props.state.error}
+                                    helperText={this.props.state.error ? this.props.state.error : ""}
                                     onChange={(e) => this.handleChangePassword(e.target.value)}
                                     onKeyPress={(e) => this.handleKeyPress(e.key)}
                                 />
@@ -161,7 +161,7 @@ class LoginComponent extends Component<LoginProps, LoginStates> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            login: state.login
+            error: state.login.error
         }
     }
 }
@@ -169,8 +169,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            login: (data) => {
-                dispatch(login(data));
+            login: (data: { username: string, password: string }) => {
+                dispatch(loginActionResolver.login(data))
             }
         }
     }

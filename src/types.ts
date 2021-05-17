@@ -1,8 +1,7 @@
 export const loginTypes = {
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGIN_FAILURE: "LOGIN_FAILURE",
-    LOGOUT_SUCCESS: "LOGIN_LOGOUT_SUCCESS",
-    LOGOUT_FAILURE: "LOGIN_LOGOUT_FAILURE"
+    LOGOUT: "LOGIN_LOGOUT"
 }
 
 export const accountTypes = {

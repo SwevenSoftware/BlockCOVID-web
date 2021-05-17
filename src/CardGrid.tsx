@@ -62,8 +62,8 @@ class CardGridApp extends Component<{}, StateApp, any> {
                         <Card>
                             {/* <CardHeader className="headerCard" title="New room"/> */}
                             <CardContent ref={this.dispGrid} className="dispGrid">
-                                <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
-                            </CardContent>
+                                {/*                                 <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+ */}                            </CardContent>
                             {/* <CardActions>
                 <Button size="medium" color="primary">
                   Save room
@@ -89,7 +89,7 @@ class CardGridApp extends Component<{}, StateApp, any> {
                     <div className="buttonGrid">
                         <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
                             Annulla
-            </Button>
+                        </Button>
                     </div>
                 </div>
             </div>

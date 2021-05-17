@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { deleteAccount } from '../actions/accountsActions'
+import accountActionsResolver from '../actions/accountsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -17,26 +17,23 @@ import SecurityIcon from '@material-ui/icons/Security'
 import WorkIcon from '@material-ui/icons/Work'
 import BathtubIcon from '@material-ui/icons/Bathtub'
 import { FormLabel, FormHelperText } from '@material-ui/core'
-/* styles */
-// import { ThemeProvider } from '@material-ui/core/styles'
-// import { theme } from '../theme'
 /* others */
 import { ERROR_USER_CANNOT_BE_DELETED } from '../types'
 
-interface TrashProps {
+interface DeleteAccountProps {
     state: any,
     dispatch: any,
     mode: string,
     data: any
 }
 
-interface TrashStates {
+interface DeleteAccountStates {
     isOpen: boolean,
     isButtonDisabled: boolean
     error: string
 }
 
-class TrashComponent extends Component<TrashProps, TrashStates> {
+class DeleteAccountComponent extends Component<DeleteAccountProps, DeleteAccountStates> {
     constructor(props) {
         super(props)
         this.state = {
@@ -182,9 +179,8 @@ class TrashComponent extends Component<TrashProps, TrashStates> {
     */
     private handleConfirm(): void {
         if (!this.isUserDeletingHimself()) {
-            this.props.dispatch.deleteAccount(this.props.data.user.username, this.props.data.user.link, this.props.state.token.id)
+            this.props.dispatch.deleteAccount(this.props.data.user.link, { username: this.props.data.user.username })
             this.handleClose()
-            //window.setTimeout(function() { location.reload() }, 1500)
         }
     }
 }
@@ -193,7 +189,7 @@ const mapStateToProps = (state: any) => {
     return {
         state: {
             token: state.login.token,
-            trash: state.trash
+            error: state.accounts.error
         }
     }
 }
@@ -201,8 +197,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            deleteAccount: (username: string, link: string, tokenID: string) => {
-                dispatch(deleteAccount(username, link, tokenID))
+            deleteAccount: (url: string, data: { username: string }) => {
+                dispatch(accountActionsResolver.deleteAccount(url, data))
             }
         }
     }
@@ -211,4 +207,4 @@ const mapDispatchToProps = (dispatch: Function) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TrashComponent)
+)(DeleteAccountComponent)

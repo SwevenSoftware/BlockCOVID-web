@@ -18,7 +18,9 @@ import { theme } from '../theme';
 
 interface CardGridProps {
     state: any,
-    dispatch: any
+    dispatch: any,
+    mode: string,
+    data: any
 }
 
 interface CardGridState {
@@ -42,37 +44,54 @@ class CardGridComponent extends Component<CardGridProps, CardGridState> {
     }
 
     render() {
-        return (
-            <div>
-                <div className="gridInline">
-                    <ThemeProvider theme={theme}>
-                        <Card>
-                            {/* <CardHeader className="headerCard" title="New room"/> */}
-                            <CardContent ref={this.dispGrid} className="dispGrid">
-                                <DotGrid ref={this.dotGrid} width={this.setGrid.width || 0} />
-                            </CardContent>
-                        </Card>
-                    </ThemeProvider>
-                </div>
-                <div className="buttonInline">
-                    <DialogContentText>
-                        <Typography>Seleziona un posto</Typography>
-                        <Typography>Premi su "Salva" per prenotarlo</Typography>
-                        <Typography>Premi su "Annulla" per rimuovere la selezione</Typography>
-                    </DialogContentText>
-                    <div className="buttonGrid">
-                        <Button id="confirm" variant="outlined" size="medium">
-                            Salva
-          </Button>
+        console.log(this.props.mode)
+        switch (this.props.mode) {
+            case 'mod':
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+ */}                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
                     </div>
-                    <div className="buttonGrid">
-                        <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
-                            Annulla
-          </Button>
+                );
+                break;
+            case 'del':
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+ */}                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
                     </div>
-                </div>
-            </div>
-        );
+                );
+                break;
+            default:
+                return (
+                    <div>
+                        <div className="gridInline">
+                            <ThemeProvider theme={theme}>
+                                <Card>
+                                    <CardContent ref={this.dispGrid} className="dispGrid">
+                                        {/*                                         <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
+ */}                                    </CardContent>
+                                </Card>
+                            </ThemeProvider>
+                        </div>
+                    </div>
+                );
+        }
+
     }
 
     componentDidMount() {

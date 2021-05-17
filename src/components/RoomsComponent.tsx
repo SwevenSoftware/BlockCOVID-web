@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { getRooms } from '../actions/roomsActions'
+import roomActionsResolver from '../actions/roomsActions'
 /* material-ui */
 import PersonIcon from '@material-ui/icons/Person'
 import Paper from '@material-ui/core/Paper'
@@ -83,7 +83,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
                         <DeleteRoom data={{
                             room: {
-                                name: 'static room'
+                                name: 'static room',
+                                width: 450,
+                                height: 450
                             }
                         }} />
                     </ListItem>
@@ -143,8 +145,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            getRooms: (fromTimestamp: string, toTimestamp: string) => {
-                dispatch(getRooms(fromTimestamp, toTimestamp))
+            getRooms: (data: { fromTimestamp: string, toTimestamp: string }) => {
+                dispatch(roomActionsResolver.getRooms(data))
             }
         }
     }

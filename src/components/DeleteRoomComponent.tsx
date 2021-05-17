@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { deleteRoom } from '../actions/roomsActions'
+import roomActionResolver from '../actions/roomsActions';
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -20,6 +20,9 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 /* styles */
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import { theme } from '../theme'
+/* others */
+import CardGridComponent from './CardGridComponent'
+import DotGrid from '../DotGrid'
 
 interface DeleteRoomProps {
     state: any,
@@ -44,6 +47,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
+
             <div >
                 <IconButton
                     className="trash"
@@ -58,9 +62,27 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     <DialogTitle id="form-dialog-title">Sei sicuro di eliminare '{this.props.data.room.name}'?</DialogTitle>
                     <DialogContent className="central">
                         <div className="alignCentralPencil">
-                            {/* TODO: add grid of the room */}
+                            <DotGrid
+                                mode="deleteGrid"
+                                sizeH={25 || 0}
+                                sizeW={78 || 0}
+                                openingTime="8:00"
+                                closingTime="18:00"
+                                weekDays="lun - mar - mer - gio - ven"
+                            />
                         </div>
-                        {/*<FormHelperText id="trashMessage"></FormHelperText>*/}
+                    </DialogContent>
+                    <DialogContent>
+                        <div>
+                            <DotGrid
+                                mode="deleteInformation"
+                                sizeH={25 || 0}
+                                sizeW={78 || 0}
+                                openingTime="8:00"
+                                closingTime="18:00"
+                                weekDays="lun - mar - mer - gio - ven"
+                            />
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button
@@ -114,7 +136,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 const mapStateToProps = (state: any) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }
@@ -122,8 +144,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            deleteRoom: (roomName: string, link: string) => {
-                dispatch(deleteRoom(roomName, link))
+            deleteRoom: (url: string, data: { roomName: string }) => {
+                dispatch(roomActionResolver.deleteRoom(url, data))
             }
         }
     }

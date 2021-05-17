@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import { modifyAccount as pencilConfirm } from '../actions/accountsActions'
+import accountActionResolver, { accountInformation } from '../actions/accountsActions'
 /* types */
 import {
     ERROR_LENGTH_PASSWORD,
@@ -10,26 +10,26 @@ import {
     ERROR_AUTHORITIES_NOT_SELECTED
 } from '../types'
 /* material-ui */
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog, { DialogProps } from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
-import IconButton from '@material-ui/core/IconButton';
-import CreateIcon from '@material-ui/icons/Create';
-import PersonIcon from '@material-ui/icons/Person';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton'
+import CreateIcon from '@material-ui/icons/Create'
+import PersonIcon from '@material-ui/icons/Person'
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
 /* styles */
-import { ThemeProvider } from '@material-ui/core/styles';
-import { theme } from '../theme';
+import { ThemeProvider } from '@material-ui/core/styles'
+import { theme } from '../theme'
 import '../styles.css'
 /* others */
-import { VariantType, useSnackbar } from 'notistack';
+import { VariantType, useSnackbar } from 'notistack'
 
 const GreenCheckbox = withStyles({
     root: {
@@ -39,15 +39,15 @@ const GreenCheckbox = withStyles({
         },
     },
     checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />)
 
-interface PencilProps {
+interface ModifyAccountProps {
     state: any,
     dispatch: any,
     data: any
 }
 
-interface PencilState {
+interface ModifyAccountStates {
     passwordValue: string,
     confirmPasswordValue: string,
     isButtonDisabled: boolean,
@@ -59,9 +59,9 @@ interface PencilState {
     lengthPasswordError: boolean
 }
 
-class PencilComponent extends Component<PencilProps, PencilState> {
+class ModifyAccountComponent extends Component<ModifyAccountProps, ModifyAccountStates> {
     constructor(props) {
-        super(props);
+        super(props)
         this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
             this.handleChangePassword = this.handleChangePassword.bind(this),
             this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this),
@@ -123,10 +123,10 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                                         helperText={this.state.lengthPasswordError ? ERROR_LENGTH_PASSWORD : ""}
                                         value={this.state.passwordValue}
                                         onChange={(e) => {
-                                            this.handleChangePassword(e.target.value);
-                                            this.passInputControl(e.target.value);
+                                            this.handleChangePassword(e.target.value)
+                                            this.passInputControl(e.target.value)
                                             if (this.state.confirmPasswordValue != "") {
-                                                this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue);
+                                                this.confirmPassInputControl(e.target.value, this.state.confirmPasswordValue)
                                             }
                                         }}
                                     />
@@ -143,8 +143,8 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                                         helperText={this.state.confirmPasswordError ? ERROR_WRONG_CONFIRM_PASSWORD : ""}
                                         value={this.state.confirmPasswordValue}
                                         onChange={(e) => {
-                                            this.handleChangeConfirmPassword(e.target.value);
-                                            this.confirmPassInputControl(this.state.passwordValue, e.target.value);
+                                            this.handleChangeConfirmPassword(e.target.value)
+                                            this.confirmPassInputControl(this.state.passwordValue, e.target.value)
                                         }}
                                     />
                                 </div>
@@ -178,7 +178,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
                                 Annulla
                </Button>
                             <Button onClick={() => {
-                                this.handleConfirm();
+                                this.handleConfirm()
                             }}
                                 id="confirm"
                                 variant="outlined">
@@ -218,17 +218,17 @@ class PencilComponent extends Component<PencilProps, PencilState> {
     }
 
     private handleChangeAuthorities(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } });
+        this.setState({ authorities: { ...this.state.authorities, [event.target.name]: event.target.checked } })
         switch (event.target.name) {
             case "checkedAdmin":
-                this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]);
-                break;
+                this.authInputControl([event.target.checked, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner])
+                break
             case "checkedUser":
-                this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner]);
-                break;
+                this.authInputControl([this.state.authorities.checkedAdmin, event.target.checked, this.state.authorities.checkedCleaner])
+                break
             case "checkedCleaner":
-                this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
-                break;
+                this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked])
+                break
         }
     }
 
@@ -263,7 +263,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
     }
 
     private passInputControl(passwordValue: string = this.state.passwordValue): boolean {
-        let reg = new RegExp("^[a-zA-Z0-9]{8,16}$");
+        let reg = new RegExp("^[a-zA-Z0-9]{8,16}$")
         if (passwordValue.match(reg)) {
             if (passwordValue === "") {
                 this.setState({ passwordError: true })
@@ -300,31 +300,29 @@ class PencilComponent extends Component<PencilProps, PencilState> {
         }
         if (notChecked) {
             this.setState({ authoritiesError: true })
-            return true;
+            return true
         } else {
             this.setState({ authoritiesError: false })
-            return false;
+            return false
         }
     }
 
     private handleConfirm(): void {
-        let flagErr = false;
-        let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner];
-        let pass = this.state.passwordValue;
-        let confPass = this.state.confirmPasswordValue;
-        flagErr = (this.passInputControl(pass) ? true : flagErr);
-        flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr);
-        flagErr = (this.authInputControl(auth) ? true : flagErr);
+        let flagErr = false
+        let auth = [this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, this.state.authorities.checkedCleaner]
+        let pass = this.state.passwordValue
+        let confPass = this.state.confirmPasswordValue
+        flagErr = (this.passInputControl(pass) ? true : flagErr)
+        flagErr = (this.confirmPassInputControl(pass, confPass) ? true : flagErr)
+        flagErr = (this.authInputControl(auth) ? true : flagErr)
 
         if (!flagErr) {
-            const aux = new Array();
-            if (auth[0]) aux.push("ADMIN");
-            if (auth[1]) aux.push("USER");
-            if (auth[2]) aux.push("CLEANER");
-            this.props.dispatch.pencil({ tokenID: this.props.state.tokenID, link: this.props.data.user.link, username: this.props.data.user.username, password: this.state.passwordValue, auth: aux })
+            const aux = new Array()
+            if (auth[0]) aux.push("ADMIN")
+            if (auth[1]) aux.push("USER")
+            if (auth[2]) aux.push("CLEANER")
+            this.props.dispatch.modifyAccount(this.props.data.user.link, { username: this.props.data.user.username, password: this.state.passwordValue, authorities: aux })
             this.handleCloseButton(true)
-        } else {
-            //message: si è verificato un errore
         }
     }
 }
@@ -332,8 +330,7 @@ class PencilComponent extends Component<PencilProps, PencilState> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            pencil: state.pencil,
-            tokenID: state.login.token.id
+            error: state.accounts.error
         }
     }
 }
@@ -341,8 +338,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            pencil: (data) => {
-                dispatch(pencilConfirm(data))
+            modifyAccount: (url: string, data: accountInformation) => {
+                dispatch(accountActionResolver.modifyAccount(url, data))
             }
         }
     }
@@ -351,5 +348,5 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PencilComponent)
+)(ModifyAccountComponent)
 

@@ -1,8 +1,8 @@
 /* react */
-import React, { Component } from 'react'
+import React, { Component, createRef, RefObject } from "react";
 /* redux */
 import { connect } from 'react-redux'
-import { modifyRoom } from '../actions/roomsActions'
+import roomActionResolver, { roomInformation } from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -21,6 +21,8 @@ import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
 import '../styles.css'
+
+import DotGrid from '../DotGrid'
 
 interface ModifyRoomProps {
     state: any,
@@ -55,7 +57,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         open={this.state.isModalOpen}
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
-                        fullWidth maxWidth="xs">
+                        fullWidth maxWidth="md">
                         <DialogTitle
                             id="form-dialog-title"
                             className="pencilTitle">
@@ -65,7 +67,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             <div className="centralPencil">
                                 <DialogContentText>
                                     Puoi modificare i seguenti campi
-               </DialogContentText>
+                                </DialogContentText>
                             </div>
                             <div className="alignCentralPencil">
                                 <div className="addField">
@@ -85,19 +87,47 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     * indica i campi obbligatori
                                  </DialogContentText>
                             </div>
-
+                            <DialogContent className="central">
+                                <div className="alignCentralPencil">
+                                    <DotGrid
+                                        mode="modifyGrid"
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays="lun - mar - mer - gio - ven"
+                                    />
+                                </div>
+                                {/* <div className="buttonGrid">
+                                    <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
+                                        Annulla
+                                    </Button>
+                                </div> */}
+                            </DialogContent>
+                            <DialogContent>
+                                <div>
+                                    <DotGrid
+                                        mode="modifyInformation"
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays="lun - mar - mer - gio - ven"
+                                    />
+                                </div>
+                            </DialogContent>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
                                 Annulla
-               </Button>
+                            </Button>
                             <Button onClick={() => {
                                 this.handleConfirm()
                             }}
                                 id="confirm"
                                 variant="outlined">
                                 Conferma
-               </Button>
+                            </Button>
                         </DialogActions>
                     </Dialog>
                 </div>
@@ -133,7 +163,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }
@@ -141,8 +171,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (roomName: string, link: string, data: any) => {
-                dispatch(modifyRoom(roomName, link, data))
+            modifyRoom: (url: string, roomName: string, data: roomInformation) => {
+                dispatch(roomActionResolver.modifyRoom(url, roomName, data))
             }
         }
     }

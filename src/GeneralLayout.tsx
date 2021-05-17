@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 /* redux */
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from './reducers/rootReducer'
-import { logout as logoutAction } from './actions/loginActions'
+import loginActionsResolver from './actions/loginActions';
 /* material-ui */
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -92,7 +92,7 @@ export default function GeneralLayout() {
 
     const dispatch = useDispatch()
     const logout = () => {
-        dispatch(logoutAction(token))
+        dispatch(loginActionsResolver.logout())
     }
 
     return (
@@ -140,9 +140,7 @@ export default function GeneralLayout() {
                     </IconButton>
                 </div>
                 <Divider />
-
                 <List>
-
                     <ListItem
                         button key="Reservations"
                         component={Link}
