@@ -58,8 +58,8 @@ interface NewAccountStates {
 
 class NewAccountComponent extends Component<NewAccountProps, NewAccountStates> {
     constructor(props) {
-        super(props);
-        this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
+        super(props),
+            this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this),
             this.handleChangeUsername = this.handleChangeUsername.bind(this),
             this.handleChangePassword = this.handleChangePassword.bind(this),
             this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this),
@@ -233,7 +233,6 @@ class NewAccountComponent extends Component<NewAccountProps, NewAccountStates> {
                 this.authInputControl([this.state.authorities.checkedAdmin, this.state.authorities.checkedUser, event.target.checked]);
                 break;
         }
-
     }
 
     private handleChangeUsername(username: string): void {
