@@ -148,6 +148,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
                                                 } else {
                                                     this.setState({ timeError: true })
+                                                    this.setState({openingTimeStringValue: ""})
                                                 }
                                             }}
                                             KeyboardButtonProps={{
@@ -175,6 +176,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
                                                 } else {
                                                     this.setState({ timeError: true })
+                                                    this.setState({closingTimeStringValue: ""})
                                                 }
                                             }}
                                             KeyboardButtonProps={{
@@ -404,6 +406,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         flagErr = (this.weekDaysInputControl(weekDays) ? true : flagErr);
         flagErr = ((this.heightInputControl(height) && height != NaN) ? true : flagErr);
         flagErr = ((this.widthInputControl(width) && width != NaN) ? true : flagErr);
+        flagErr = (!openT ? true : flagErr);
+        flagErr = (!closeT ? true : flagErr);
 
         if (!flagErr) {
             const days = new Array();
@@ -414,11 +418,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             if (weekDays[4]) days.push("FRIDAY");
             if (weekDays[5]) days.push("SATURDAY");
             if (weekDays[6]) days.push("SUNDAY");
-            console.log(this.state.dimHeight, this.state.dimWidth, 'HxW')
-            console.log(this.state.roomNameValue)
-            console.log(days)
-            console.log(this.state.openingTimeStringValue, 'opening time string')
-            console.log(this.state.closingTimeStringValue, 'closing time string')
             this.props.dispatch.createRoom({
                 name: this.state.roomNameValue,
                 openingAt: this.state.openingTimeStringValue,
