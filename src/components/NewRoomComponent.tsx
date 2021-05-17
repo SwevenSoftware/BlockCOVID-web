@@ -421,7 +421,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 const mapStateToProps = (state) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }

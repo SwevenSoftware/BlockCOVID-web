@@ -1,16 +1,16 @@
-import accountApi, { accountAPI } from "../Api/accountAPI";
-import { loginTypes } from "../types";
+import accountApi, { accountAPI } from "../Api/accountAPI"
+import { loginTypes } from "../types"
 
-export class accountActions {
-    accountApi: accountAPI;
+class loginActions {
+    accountApi: accountAPI
 
     constructor(accountApi: accountAPI) {
-        this.accountApi = accountApi;
+        this.accountApi = accountApi
     }
 
-    login(username: string, password: string) {
-        return (dispatch, getState) => {
-            this.accountApi.login(username, password)
+    login(data: { username: string, password: string }) {
+        return (dispatch) => {
+            this.accountApi.login(data)
                 .then(res => {
                     dispatch(this.successLogin(res.data))
                 })
@@ -19,15 +19,12 @@ export class accountActions {
                 })
         }
     }
-    logout(tokenID: string) {
+
+    logout() {
         return (dispatch, getState) => {
-            this.accountApi.logout(getState().login.token?.id)
-                .then(res => {
-                    dispatch(this.successLogout(res.data))
-                })
-                .catch(err => {
-                    dispatch(this.failureLogout(err.response.status))
-                })
+            let tokenID = getState().login.token?.id
+            this.accountApi.logout(tokenID)
+                .finally(dispatch(this.successLogout()))
         }
     }
 
@@ -38,11 +35,8 @@ export class accountActions {
         }
     })
 
-    successLogout = (data) => ({
-        type: loginTypes.LOGOUT_SUCCESS,
-        payload: {
-            ...data
-        }
+    successLogout = () => ({
+        type: loginTypes.LOGOUT,
     })
 
     failureLogin = (error) => ({
@@ -51,13 +45,6 @@ export class accountActions {
             error
         }
     })
-
-    failureLogout = (error) => ({
-        type: loginTypes.LOGOUT_FAILURE,
-        payload: {
-            error
-        }
-    })
 }
 
-export default new accountActions(accountApi);
+export default new loginActions(accountApi)

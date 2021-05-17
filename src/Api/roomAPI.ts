@@ -1,76 +1,83 @@
-import axios, { AxiosStatic } from "axios";
+import axios, { AxiosStatic } from "axios"
 
 export class roomAPI {
-    private axios: AxiosStatic;
+    private axios: AxiosStatic
 
     constructor(axios: AxiosStatic) {
-        this.axios = axios;
+        this.axios = axios
     }
-    createRoom(tokenID: string, { name, openingAt, closingAt, openingDays, width, height }) {
+
+    createRoom(tokenID: string,
+        data: {
+            name: string,
+            openingAt: string,
+            closingAt: string,
+            openingDays: string[],
+            width: number,
+            height: number
+        }
+    ) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
             }
         }
-        const data = {
-            name: name,
-            openingAt: openingAt,
-            closingAt: closingAt,
-            openingDays: openingDays,
-            width: width,
-            height: height
-        }
-        return this.axios.post("/api/rooms", data, config);
+        return this.axios.post("/api/rooms", data, config)
     }
 
-    modifyRoom(tokenID: string, roomName: string, link: string, {
-        name,
-        openingAt,
-        closingAt,
-        openingDays,
-        width,
-        height
-    }) {
+    modifyRoom(tokenID: string, url: string,
+        data: {
+            roomName: string,
+            name: string,
+            openingAt: string,
+            closingAt: string,
+            openingDays: string[],
+            width: number,
+            height: number
+        }
+    ) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
-                "roomName": roomName
+                "roomName": data.roomName
             }
         }
-        const data = {
-            name: name,
-            openingAt: openingAt,
-            closingAt: closingAt,
-            openingDays: openingDays,
-            width: width,
-            height: height
-        }
-        return this.axios.put(link + roomName, data, config);
+        return this.axios.put(url + data.roomName, data, config)
     }
 
-    deleteRoom(tokenID: string, roomName: string, link: string) {
+    deleteRoom(tokenID: string, url: string,
+        data: {
+            roomName: string
+        }
+    ) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
-                "roomName": roomName
+                "roomName": data.roomName
             }
         }
-        return this.axios.delete(link + roomName, config);
+        return this.axios.delete(url + data.roomName, config)
     }
 
-    getRooms(tokenID: string, fromTimestamp: string, toTimestamp: string) {
+    getRooms(tokenID: string,
+        data: {
+            fromTimestamp: string,
+            toTimestamp: string
+        }
+    ) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
             }
         }
-        const url = '/api/rooms' + (fromTimestamp && toTimestamp ? '?from=' + fromTimestamp + "&to=" + toTimestamp : '')
-        return this.axios.get(url, config);
+        const url = '/api/rooms' +
+            (data.fromTimestamp && data.toTimestamp ? '?from=' + data.fromTimestamp + "&to=" + data.toTimestamp : '')
+        return this.axios.get(url, config)
     }
 }
 
-export default new roomAPI(axios);
+export default new roomAPI(axios)

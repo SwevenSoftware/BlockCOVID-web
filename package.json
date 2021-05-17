@@ -13,8 +13,10 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "axios": "^0.21.1",
+    "babel-loader": "8.1.0",
     "date-fns": "^2.19.0",
     "file-saver": "^2.0.5",
+    "jest": "26.6.0",
     "node-fetch": "^2.6.1",
     "notistack": "^1.0.5",
     "react": "^17.0.1",
@@ -24,7 +26,9 @@
     "react-scripts": "4.0.2",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "typescript-formatter": "^7.2.2"
+    "typescript-formatter": "^7.2.2",
+    "webpack": "4.44.2",
+    "webpack-dev-server": "3.11.0"
   },
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",

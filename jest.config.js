@@ -1,6 +1,17 @@
 module.exports = {
-    transform: { '^.+\\.ts?$': 'ts-jest' },
+    transform: { '^.+\\.tsx?$': 'ts-jest' },
     testEnvironment: 'node',
-    testRegex: '/src/test/.*\\.(test|spec)?\\.(ts|tsx)$',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
+    testRegex: 'test/.*\\.(test|spec)?\\.(ts|tsx)$',
+    moduleFileExtensions: [
+        'ts',
+        'tsx',
+        'js',
+        'jsx',
+        'json',
+        'node'
+    ],
+    collectCoverageFrom: [
+        "src/**/*.tsx",
+        "src/**/*.ts"
+    ]
 };

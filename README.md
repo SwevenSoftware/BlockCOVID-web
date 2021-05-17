@@ -1,4 +1,5 @@
 ![Build status](https://github.com/SwevenSoftware/BlockCOVID-web/actions/workflows/build-bundle.yml/badge.svg)
+[![codecov](https://codecov.io/gh/SwevenSoftware/BlockCOVID-web/branch/develop/graph/badge.svg)](https://codecov.io/gh/SwevenSoftware/BlockCOVID-web)
 # BlockCOVID-web
 ## Description
 Web module for the project BlockCOVID.

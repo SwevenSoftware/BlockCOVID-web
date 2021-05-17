@@ -145,8 +145,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            getRooms: (fromTimestamp: string, toTimestamp: string) => {
-                dispatch(roomActionsResolver.getRooms(fromTimestamp, toTimestamp))
+            getRooms: (data: { fromTimestamp: string, toTimestamp: string }) => {
+                dispatch(roomActionsResolver.getRooms(data))
             }
         }
     }

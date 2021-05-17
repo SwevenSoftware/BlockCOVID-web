@@ -7,7 +7,6 @@ import {
 export const accountsHandlers = {}
 
 accountsHandlers[accountTypes.FETCH_SUCCESS] = function(state, action) {
-    console.log(accountTypes.FETCH_SUCCESS)
     return {
         users: action.payload._embedded.userList,
         error: "",
@@ -21,7 +20,6 @@ accountsHandlers[accountTypes.FETCH_SUCCESS] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.CREATE_SUCCESS] = function(state, action) {
-    console.log(accountTypes.CREATE_SUCCESS)
     return {
         ...state,
         error: ""
@@ -29,7 +27,6 @@ accountsHandlers[accountTypes.CREATE_SUCCESS] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.MODIFY_SUCCESS] = function(state, action) {
-    console.log(accountTypes.MODIFY_SUCCESS)
     return {
         ...state,
         error: ""
@@ -37,7 +34,6 @@ accountsHandlers[accountTypes.MODIFY_SUCCESS] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.DELETE_SUCCESS] = function(state, action) {
-    console.log(accountTypes.DELETE_SUCCESS)
     if (action.payload.error) {
         return {
             ...state,
@@ -50,7 +46,6 @@ accountsHandlers[accountTypes.DELETE_SUCCESS] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.FETCH_FAILURE] = function(state, action) {
-    console.log(accountTypes.FETCH_FAILURE)
     if (action.payload.error) {
         return {
             users: null,
@@ -64,7 +59,6 @@ accountsHandlers[accountTypes.FETCH_FAILURE] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.CREATE_FAILURE] = function(state, action) {
-    console.log(accountTypes.CREATE_FAILURE)
     switch (action.payload.error) {
         case 409: /* user exists, username already taken */
             return {
@@ -80,7 +74,6 @@ accountsHandlers[accountTypes.CREATE_FAILURE] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.MODIFY_FAILURE] = function(state, action) {
-    console.log(accountTypes.MODIFY_FAILURE)
     if (action.payload.error) {
         return {
             ...state,
@@ -93,7 +86,6 @@ accountsHandlers[accountTypes.MODIFY_FAILURE] = function(state, action) {
 }
 
 accountsHandlers[accountTypes.DELETE_FAILURE] = function(state, action) {
-    console.log(accountTypes.DELETE_FAILURE)
     if (action.payload.error) {
         return {
             ...state,

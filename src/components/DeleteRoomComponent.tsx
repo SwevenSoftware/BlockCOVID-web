@@ -136,7 +136,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 const mapStateToProps = (state: any) => {
     return {
         state: {
-            rooms: state.rooms
+            error: state.rooms.error
         }
     }
 }
@@ -144,8 +144,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         dispatch: {
-            deleteRoom: (roomName: string, link: string) => {
-                dispatch(roomActionResolver.deleteRoom(roomName, link))
+            deleteRoom: (url: string, data: { roomName: string }) => {
+                dispatch(roomActionResolver.deleteRoom(url, data))
             }
         }
     }
