@@ -71,6 +71,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
         this.handleCloseButton = this.handleCloseButton.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
+        this.handleChangeSize = this.handleChangeSize.bind(this)
 
         this.state = {
             isButtonDisabled: true,
@@ -201,13 +202,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         error={this.state.heightError}
                                         helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimHeight}
-                                        onChange={(e) => {
-                                            let dim = e.target.value
-                                            this.numberHeightControl(dim)
-                                            let height: number = e.target.value ? parseInt(e.target.value) : 1
-                                            this.setState({ dimHeight: height })
-                                            this.heightInputControl(height)
-                                        }}
+                                        onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
                                     />
                                 </div>
                                 <div className="addField">
@@ -219,11 +214,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                         error={this.state.widthError}
                                         helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
                                         value={this.state.dimWidth}
-                                        onChange={(e) => {
-                                            let width: number = e.target.value ? parseInt(e.target.value) : 1
-                                            this.setState({ dimWidth: width })
-                                            this.widthInputControl(width)
-                                        }}
+                                        onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
                                     />
                                 </div>
                             </div>
@@ -309,14 +300,23 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private numberHeightControl(number: string): boolean {
-        let reg = new RegExp("^[1-9]{1,2}$")
-        if (!number.match(reg)) {
-            this.setState({ heightError: true })
-            return true
-        } else {
-            this.setState({ heightError: false })
-            return false
+    private handleChangeSize(sizeNumber: string, size: string): void {
+        let reg = new RegExp("^[0-9]{1,8}$");
+        if (!sizeNumber) {
+            this.setState({ ...this.state, [size]: 1 })
+            if (size === "dimHeight") {
+                this.heightInputControl(1)
+            } else {
+                this.widthInputControl(1)
+            }
+        } else if (sizeNumber.match(reg)) {
+            let dim: number = parseInt(sizeNumber)
+            this.setState({ ...this.state, [size]: dim })
+            if (size === "dimHeight") {
+                this.heightInputControl(dim)
+            } else {
+                this.widthInputControl(dim)
+            }
         }
     }
 
