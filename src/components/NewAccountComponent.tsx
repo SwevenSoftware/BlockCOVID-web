@@ -26,7 +26,6 @@ import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import '../styles.css'
 
 const GreenCheckbox = withStyles({
     root: {
