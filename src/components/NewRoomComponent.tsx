@@ -80,7 +80,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             roomNameValue: "",
             openingTimeDateValue: new Date('2021-01-01T08:00'),
             openingTimeStringValue: "08:00",
-            closingTimeDateValue: new Date('2021-01-01T18:00'),
+            closingTimeDateValue: new Date('2031-01-01T18:00'),
             closingTimeStringValue: "18:00",
             weekDays: {
                 monday: false,
@@ -157,6 +157,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.setState({ openingTimeDateValue: openingTime.time })
                                                     this.setState({ openingTimeStringValue: openingTime.timeString })
                                                     this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
+                                                } else {
+                                                    this.setState({timeError: true})
                                                 }
                                             }}
                                             KeyboardButtonProps={{
@@ -182,6 +184,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                                                     this.setState({ closingTimeDateValue: closingTime.time })
                                                     this.setState({ closingTimeStringValue: closingTime.timeString })
                                                     this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
+                                                } else {
+                                                    this.setState({timeError: true})
                                                 }
                                             }}
                                             KeyboardButtonProps={{
@@ -382,7 +386,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 sunday: false,
             },
             openingTimeDateValue: new Date('2021-01-01T08:00'),
-            closingTimeDateValue: new Date('2021-01-01T18:00'),
+            closingTimeDateValue: new Date('2031-01-01T18:00'),
             weekDaysError: false,
             roomNameValue: "",
             timeError: false,
