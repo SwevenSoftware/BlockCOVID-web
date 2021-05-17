@@ -27,20 +27,9 @@ import { FormHelperText, FormLabel, withStyles } from '@material-ui/core'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import '../styles.css'
 /* others */
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-
-const GreenCheckbox = withStyles({
-    root: {
-        color: "#689f38",
-        '&$checked': {
-            color: "#689f38",
-        },
-    },
-    checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
 interface NewRoomProps {
     state: any,
