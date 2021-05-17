@@ -1,6 +1,5 @@
 import accountsreducer from '../../src/reducers/accountsReducer'
 import { accountTypes, ERROR_UNKNOWN, ERROR_USERNAME_NOT_AVAILABLE } from '../../src/types';
-import { JSDOM } from 'jsdom'
 
 describe('accuonts reducer test', function() {
     const initialState = {

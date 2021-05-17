@@ -1,10 +1,28 @@
 import accountsActions from "../../src/actions/accountsActions";
 import accountApi from '../../src/Api/accountAPI'
 
-// jest.mock('accountApi')
-
 describe('Account Action', () => {
-    it('should ', function() {
+    const accountInformation = {
+        username: "user",
+        password: "password",
+        authorities: [
+            "USER"
+        ]
+    }
+    const dispatch = () => {
 
+    }
+    const getState = () => ({
+        login: {
+            token: {
+                id: "tokenID"
+            }
+        }
+    })
+
+    it('should correctly handle account creation', function() {
+        accountsActions.createAccount(accountInformation)(dispatch, getState);
+        expect(getState).toBeCalled();
+        expect(dispatch).toBeCalled();
     });
 })
