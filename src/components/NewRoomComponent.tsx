@@ -312,7 +312,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private numberHeightControl(number: string): boolean {
         let reg = new RegExp("^[1-9]{1,2}$")
         if (!number.match(reg)) {
-            this.setState({ heightError : true })
+            this.setState({ heightError: true })
             return true
         } else {
             this.setState({ heightError: false })
@@ -424,8 +424,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
             console.log(this.state.dimHeight, this.state.dimWidth, 'HxW')
             console.log(this.state.openingTimeStringValue, 'opening time string')
             console.log(this.state.closingTimeStringValue, 'closing time string')
-            this.props.dispatch.createRoom({roomName: this.state.roomNameValue, openingTime: this.state.openingTimeStringValue,
-                closingTime: this.state.closingTimeStringValue, weekDays: days, height: this.state.dimHeight, width: this.state.dimWidth})
+            this.props.dispatch.createRoom({
+                roomName: this.state.roomNameValue, openingTime: this.state.openingTimeStringValue,
+                closingTime: this.state.closingTimeStringValue, weekDays: days, height: this.state.dimHeight, width: this.state.dimWidth
+            })
             this.handleCloseButton()
         } else {
             //message errore
