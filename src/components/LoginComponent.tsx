@@ -13,7 +13,6 @@ import Button from '@material-ui/core/Button'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
-import "../styles.css"
 
 interface LoginProps {
     state: any,

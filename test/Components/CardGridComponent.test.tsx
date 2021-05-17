@@ -26,7 +26,7 @@ global.window = global.document.defaultView;
 
 const mockStore = configureMockStore([thunk])
 
-describe('Account Component', function() {
+describe('Card Grid Component', function() {
     const defaultState = {
         cardGrid: {
             state: {
