@@ -1,7 +1,7 @@
 import accountApi, { accountAPI } from "../Api/accountAPI"
 import { loginTypes } from "../types"
 
-class loginActions {
+export class loginActions {
     accountApi: accountAPI
 
     constructor(accountApi: accountAPI) {

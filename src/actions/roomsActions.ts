@@ -10,7 +10,7 @@ export interface roomInformation {
     height: number
 }
 
-class roomActions {
+export class roomActions {
     roomApi: roomAPI
 
     constructor(roomApi: roomAPI) {
@@ -33,7 +33,7 @@ class roomActions {
     modifyRoom(url: string, roomName: string, data: roomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
+            this.roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
                 .then((res) => {
                     dispatch(this.successModifyRoom(res.data))
                 })
@@ -46,7 +46,7 @@ class roomActions {
     deleteRoom(url: string, data: { roomName: string }) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            roomApi.deleteRoom(tokenID, url, data)
+            this.roomApi.deleteRoom(tokenID, url, data)
                 .then((res) => {
                     dispatch(this.successDeleteRoom(res.data))
                 })

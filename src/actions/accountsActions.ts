@@ -7,7 +7,7 @@ export interface accountInformation {
     authorities: string[]
 }
 
-class accountsActions {
+export class accountsActions {
     accountApi: accountAPI
 
     constructor(accountApi: accountAPI) {
