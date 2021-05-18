@@ -64,11 +64,11 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="deleteGrid"
-                                sizeH={10 || 0}
-                                sizeW={5 || 0}
-                                openingTime="8:00"
-                                closingTime="18:00"
-                                weekDays="lun - mar - mer - gio - ven"
+                                sizeH={this.props.data.room.height}
+                                sizeW={this.props.data.room.width}
+                                openingTime={this.props.data.room.openingTime}
+                                closingTime={this.props.data.room.closingTime}
+                                weekDays={this.props.data.room.openingDays}
                             />
                         </div>
                     </DialogContent>
@@ -76,11 +76,11 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div>
                             <DotGrid
                                 mode="deleteInformation"
-                                sizeH={10 || 0}
-                                sizeW={7 || 0}
-                                openingTime="8:00"
-                                closingTime="18:00"
-                                weekDays="lun - mar - mer - gio - ven"
+                                sizeH={this.props.data.room.height}
+                                sizeW={this.props.data.room.width}
+                                openingTime={this.props.data.room.openingTime}
+                                closingTime={this.props.data.room.closingTime}
+                                weekDays={this.props.data.room.openingDays}
                             />
                         </div>
                     </DialogContent>
