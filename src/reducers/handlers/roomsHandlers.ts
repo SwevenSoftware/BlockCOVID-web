@@ -7,7 +7,6 @@ export const roomsHandlers = {}
 
 roomsHandlers[roomTypes.FETCH_SUCCESS] = function(state, action) {
     return {
-        // TODO: return proper 'rooms' property
         rooms: action.payload,
         error: ""
     }
