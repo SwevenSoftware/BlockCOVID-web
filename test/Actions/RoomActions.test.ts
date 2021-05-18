@@ -107,7 +107,7 @@ describe('Account Action', () => {
                 type: roomTypes.FETCH_SUCCESS
             }
         ]
-        store.dispatch(roomActionsResolver.getRooms())
+        store.dispatch(roomActionsResolver.getRooms({ fromTimeStamp: '', toTimeStamp: '' }))
         // expect(store.getActions()).toContain(expectedAction)
     });
 
@@ -173,7 +173,7 @@ describe('Account Action', () => {
                 type: roomTypes.FETCH_FAILURE
             }
         ]
-        store.dispatch(roomActionsResolver.getRooms())
+        store.dispatch(roomActionsResolver.getRooms({ fromTimestamp: '', toTimeStamp: '' }))
         // expect(store.getActions()).toContain(expectedAction)
     });
 })
