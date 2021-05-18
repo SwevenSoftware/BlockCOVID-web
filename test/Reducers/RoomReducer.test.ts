@@ -8,14 +8,18 @@ describe('accuonts reducer test', function() {
         error: null
     }
 
-    const fakeRooms = [
-        {
-            name: 'room1'
-        },
-        {
-            name: 'room2'
+    const fakeRooms = {
+        _embedded: {
+            roomWithDesksList: [
+                {
+                    name: 'room1'
+                },
+                {
+                    name: 'room2'
+                }
+            ]
         }
-    ]
+    }
 
     it('should have correct initial state', function() {
         const action = {
@@ -32,7 +36,7 @@ describe('accuonts reducer test', function() {
         }
 
         const state = {
-            rooms: fakeRooms,
+            rooms: fakeRooms._embedded.roomWithDesksList,
             error: ""
         }
         expect(roomReducer(initialState, action)).toEqual(state)
@@ -41,7 +45,7 @@ describe('accuonts reducer test', function() {
 
     it('should correctly handle fetch error', function() {
         const otherPayload = {
-            ...fakeRooms,
+            ...fakeRooms._embedded.roomWithDesksList,
             error: 400
         }
 
@@ -76,7 +80,7 @@ describe('accuonts reducer test', function() {
 
         const state = {
             error: "",
-            rooms: fakeRooms
+            rooms: fakeRooms._embedded.roomWithDesksList
         }
 
         expect(roomReducer(initialState, action)).toEqual(state)

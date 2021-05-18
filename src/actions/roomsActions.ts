@@ -23,6 +23,7 @@ export class roomActions {
             this.roomApi.createRoom(tokenID, data)
                 .then((res) => {
                     dispatch(this.successCreateRoom(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
                     dispatch(this.failureCreateRoom(err))
@@ -36,6 +37,7 @@ export class roomActions {
             this.roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
                 .then((res) => {
                     dispatch(this.successModifyRoom(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
                     dispatch(this.failureModifyRoom(err))
@@ -49,6 +51,7 @@ export class roomActions {
             this.roomApi.deleteRoom(tokenID, url, data)
                 .then((res) => {
                     dispatch(this.successDeleteRoom(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
                     dispatch(this.failureDeleteRoom(err))
@@ -59,7 +62,19 @@ export class roomActions {
     getRooms(data: { fromTimestamp: string, toTimestamp: string }) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            this.roomApi.getRooms(tokenID, data)
+            let dataToDispatch = data
+            if (!(data.fromTimestamp && data.toTimestamp)) {
+                let today: Date = new Date()
+                let todayDate: string = today.getFullYear() + '-' +
+                    (today.getMonth() < 10 ? '0' + today.getMonth() : today.getMonth()) + '-' +
+                    (today.getDate() < 10 ? '0' + today.getDate() : today.getDate())
+                let todayTime: string =
+                    (today.getHours() < 10 ? "0" + today.getHours().toString() : today.getHours().toString()) +
+                    ":" + (today.getMinutes() < 10 ? "0" + today.getMinutes().toString() : today.getMinutes().toString())
+                let todayString: string = todayDate + 'T' + todayTime
+                dataToDispatch = { fromTimestamp: todayString, toTimestamp: todayString }
+            }
+            this.roomApi.getRooms(tokenID, dataToDispatch)
                 .then(res => {
                     dispatch(this.successGetRooms(res.data))
                 })
