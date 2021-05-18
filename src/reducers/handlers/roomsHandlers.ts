@@ -6,13 +6,15 @@ import {
 export const roomsHandlers = {}
 
 roomsHandlers[roomTypes.FETCH_SUCCESS] = function(state, action) {
+    console.log(roomTypes.FETCH_SUCCESS)
     return {
-        rooms: action.payload,
+        rooms: action.payload?._embedded.roomWithDesksList,
         error: ""
     }
 }
 
 roomsHandlers[roomTypes.CREATE_SUCCESS] = function(state, action) {
+    console.log(roomTypes.CREATE_SUCCESS)
     return {
         ...state,
         error: ""
@@ -20,6 +22,7 @@ roomsHandlers[roomTypes.CREATE_SUCCESS] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.MODIFY_SUCCESS] = function(state, action) {
+    console.log(roomTypes.MODIFY_SUCCESS)
     return {
         ...state,
         error: ""
@@ -27,6 +30,7 @@ roomsHandlers[roomTypes.MODIFY_SUCCESS] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.DELETE_SUCCESS] = function(state, action) {
+    console.log(roomTypes.DELETE_SUCCESS)
     if (action.payload.error) {
         return {
             ...state,
@@ -39,6 +43,7 @@ roomsHandlers[roomTypes.DELETE_SUCCESS] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.FETCH_FAILURE] = function(state, action) {
+    console.log(roomTypes.FETCH_FAILURE)
     if (action.payload.error) {
         return {
             rooms: null,
@@ -51,6 +56,7 @@ roomsHandlers[roomTypes.FETCH_FAILURE] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
+    console.log(roomTypes.CREATE_FAILURE)
     switch (action.payload.error) {
         default:
             return {
@@ -61,6 +67,7 @@ roomsHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
+    console.log(roomTypes.MODIFY_FAILURE)
     if (action.payload.error) {
         return {
             ...state,
@@ -73,6 +80,7 @@ roomsHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
 }
 
 roomsHandlers[roomTypes.DELETE_FAILURE] = function(state, action) {
+    console.log(roomTypes.DELETE_FAILURE)
     if (action.payload.error) {
         return {
             ...state,
