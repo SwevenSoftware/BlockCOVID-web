@@ -129,24 +129,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     * @returns
     */
     private handleConfirm(): void {
-        let weekDays = [this.props.data.room.weekDays.monday, this.props.data.room.weekDays.tuesday,
-            this.props.data.room.weekDays.wednesday, this.props.data.room.weekDays.thursday,
-            this.props.data.room.weekDays.friday, this.props.data.room.weekDays.saturday, this.props.data.room.weekDays.sunday];
-        const days = new Array();
-        if (weekDays[0]) days.push("MONDAY");
-        if (weekDays[1]) days.push("TUESDAY");
-        if (weekDays[2]) days.push("WEDNESDAY");
-        if (weekDays[3]) days.push("THURSDAY");
-        if (weekDays[4]) days.push("FRIDAY");
-        if (weekDays[5]) days.push("SATURDAY");
-        if (weekDays[6]) days.push("SUNDAY");
         this.props.dispatch.deleteRoom({
-            name: this.props.data.room.roomNameValue,
-            openingAt: this.props.data.room.openingTimeStringValue,
-            closingAt: this.props.data.room.closingTimeStringValue,
-            openingDays: days,
-            height: this.props.data.room.dimHeight,
-            width: this.props.data.room.dimWidth
+            name: this.props.data.room.name,
         })
         this.handleClose()
     }
