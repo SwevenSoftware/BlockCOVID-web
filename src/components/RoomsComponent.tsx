@@ -35,7 +35,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     componentDidMount() {
-        this.props.dispatch.getRooms({ fromTimestamp: '', toTimestamp: ''})
+        this.props.dispatch.getRooms({ fromTimestamp: '', toTimestamp: '' })
     }
 
     render() {
@@ -48,7 +48,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     </div>
                     <div>
                         {this.props.state.rooms.error ?
-                          this.props.state.rooms.error : ""}
+                            this.props.state.rooms.error : ""}
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
@@ -67,48 +67,48 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
         let rows: Array<JSX.Element> = []
         if (this.props.state.rooms.rooms) {
             this.props.state.rooms.rooms
-              .sort((a, b) => (a.room.name > b.room.name) ? 1 : ((b.room.name > a.room.name) ? -1 : 0))
-              .map((roomList) => {
-                rows.push(
-                      <Grid key={roomList.room.name} className="grid">
-                          <Paper className="paper"> {/* TODO: change style, might change className as well */}
-                              <ListItem className="listItem">
-                                  <ListItemIcon>
-                                      <MeetingRoomIcon
-                                        fontSize="large"
-                                        style={{ color: roomList.room.closed ? 'red' : 'green' }}
-                                      />
-                                  </ListItemIcon>
-                                  <ListItemText className="usernameLayout">
-                                      <ModifyRoom data={{
-                                          room: {
-                                              name: roomList.room.name,
-                                              closed: roomList.room.closed,
-                                              openingTime: roomList.room.openingTime,
-                                              closingTime: roomList.room.closingTime,
-                                              openingDays: roomList.room.openingDays,
-                                              height: roomList.room.height,
-                                              width: roomList.room.width
-                                          },
-                                          desks: roomList.desks
-                                      }} />
-                                  </ListItemText>
-                                  <DeleteRoom data={{
-                                      room: {
-                                          name: roomList.room.name,
-                                          openingTime: roomList.room.openingTime,
-                                          closingTime: roomList.room.closingTime,
-                                          openingDays: roomList.room.openingDays,
-                                          height: roomList.room.height,
-                                          width: roomList.room.width,
-                                      },
-                                      desks: roomList.desks
-                                  }} />
-                              </ListItem>
-                          </Paper>
-                      </Grid>
-                )
-              })
+                .sort((a, b) => (a.room.name > b.room.name) ? 1 : ((b.room.name > a.room.name) ? -1 : 0))
+                .map((roomList) => {
+                    rows.push(
+                        <Grid key={roomList.room.name} className="grid">
+                            <Paper className="paper"> {/* TODO: change style, might change className as well */}
+                                <ListItem className="listItem">
+                                    <ListItemIcon>
+                                        <MeetingRoomIcon
+                                            fontSize="large"
+                                            style={{ color: roomList.room.closed ? 'red' : 'green' }}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText className="usernameLayout">
+                                        <ModifyRoom data={{
+                                            room: {
+                                                name: roomList.room.name,
+                                                closed: roomList.room.closed,
+                                                openingTime: roomList.room.openingTime,
+                                                closingTime: roomList.room.closingTime,
+                                                openingDays: roomList.room.openingDays,
+                                                height: roomList.room.height,
+                                                width: roomList.room.width
+                                            },
+                                            desks: roomList.desks
+                                        }} />
+                                    </ListItemText>
+                                    <DeleteRoom data={{
+                                        room: {
+                                            name: roomList.room.name,
+                                            openingTime: roomList.room.openingTime,
+                                            closingTime: roomList.room.closingTime,
+                                            openingDays: roomList.room.openingDays,
+                                            height: roomList.room.height,
+                                            width: roomList.room.width,
+                                        },
+                                        desks: roomList.desks
+                                    }} />
+                                </ListItem>
+                            </Paper>
+                        </Grid>
+                    )
+                })
         }
         return rows
     }
