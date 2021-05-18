@@ -127,9 +127,11 @@ describe('Account Action', () => {
         // expect(store.getActions()).toContain(expectedAction)
     });
 
+    /* ERRORS */
+
     it('should correctly handle account creation errors', function() {
         accountApi.createAccount = jest.fn(async () => {
-            return { ...axiosResponse, status: 400 };
+            throw new Error()
         })
         const expectedAction = [
             {
@@ -149,7 +151,7 @@ describe('Account Action', () => {
 
     it('should correctly handle account deletion errors', function() {
         accountApi.createAccount = jest.fn(async () => {
-            return { ...axiosResponse, status: 400 };
+            throw new Error()
         })
         const expectedAction = [
             {
@@ -169,7 +171,7 @@ describe('Account Action', () => {
 
     it('should correctly handle account modification errors', function() {
         accountApi.createAccount = jest.fn(async () => {
-            return { ...axiosResponse, status: 400 };
+            throw new Error()
         })
         const expectedAction = [
             {
@@ -189,7 +191,7 @@ describe('Account Action', () => {
 
     it('should correctly handle account fetch errors', function() {
         accountApi.createAccount = jest.fn(async () => {
-            return { ...axiosResponse, status: 400 };
+            throw new Error()
         })
         const expectedAction = [
             {

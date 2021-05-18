@@ -77,7 +77,7 @@ describe('Account Action', () => {
 
     it('should correctly handle login failure', function() {
         accountApi.login = jest.fn(async () => {
-            return { ...axiosResponse, status: 400 }
+            throw new Error()
         })
         const expectedAction = [
             {
