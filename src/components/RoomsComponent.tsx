@@ -49,7 +49,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     <div>
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
-                        <Button onClick={ () => {
+                        <Button onClick={() => {
                             console.log("create desks")
                             let data = {
                                 roomName: "stanzamod3",
@@ -65,7 +65,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         >
                             Create desks
                         </Button>
-                        <Button onClick={ () => {
+                        <Button onClick={() => {
                             let data = {
                                 roomName: "stanzamod3",
                                 desk: {
@@ -86,7 +86,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         >
                             Modify desk
                         </Button>
-                        <Button onClick={ () => {
+                        <Button onClick={() => {
                             let data = {
                                 roomName: "stanzamod3",
                                 desk: {

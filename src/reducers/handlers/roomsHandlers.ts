@@ -99,7 +99,7 @@ roomsHandlers[roomTypes.CREATE_FAILURE] = function(state, action) {
 
 roomsHandlers[roomTypes.CREATE_DESKS_FAILURE] = function(state, action) {
     console.log(roomTypes.CREATE_DESKS_FAILURE)
-    if(action.payload.error) {
+    if (action.payload.error) {
         switch (action.payload.error) {
             case 400: /** bad desk position - may exceed room size */
                 return {

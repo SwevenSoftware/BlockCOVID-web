@@ -79,13 +79,13 @@ export class roomActions {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.createDesks(tokenID, data)
-              .then((res) => {
-                  dispatch(this.successCreateDesks(res.data))
-                  dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
-              })
-              .catch(err => {
-                  dispatch(this.failureCreateDesks(err.response.status))
-              })
+                .then((res) => {
+                    dispatch(this.successCreateDesks(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureCreateDesks(err.response.status))
+                })
         }
     }
 
@@ -93,13 +93,13 @@ export class roomActions {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.modifyDesk(tokenID, data)
-              .then((res) => {
-                  dispatch(this.successModifyDesk(res.data))
-                  dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
-              })
-              .catch(err => {
-                  dispatch(this.failureModifyDesk(err.response.status))
-              })
+                .then((res) => {
+                    dispatch(this.successModifyDesk(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureModifyDesk(err.response.status))
+                })
         }
     }
 
@@ -107,13 +107,13 @@ export class roomActions {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.deleteDesk(tokenID, data)
-              .then((res) => {
-                  dispatch(this.successDeleteDesk(res.data))
-                  dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
-              })
-              .catch(err => {
-                  dispatch(this.failureDeleteDesk(err.response.status))
-              })
+                .then((res) => {
+                    dispatch(this.successDeleteDesk(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureDeleteDesk(err.response.status))
+                })
         }
     }
 

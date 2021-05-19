@@ -1,18 +1,18 @@
 import axios, { AxiosStatic } from "axios"
 
 export interface RoomInformation {
-  name: string,
-  openingAt: string,
-  closingAt: string,
-  openingDays: string[],
-  width: number,
-  height: number
+    name: string,
+    openingAt: string,
+    closingAt: string,
+    openingDays: string[],
+    width: number,
+    height: number
 }
 
 export interface DeskInformation {
-  id: string,
-  x: number,
-  y: number
+    id: string,
+    x: number,
+    y: number
 }
 
 export class roomAPI {
@@ -91,10 +91,10 @@ export class roomAPI {
         data: {
             roomName: string,
             desks: [
-              {
-                x: number,
-                y: number
-              }
+                {
+                    x: number,
+                    y: number
+                }
             ]
         }
     ) {
@@ -104,7 +104,7 @@ export class roomAPI {
                 "Authorization": tokenID
             },
             params: {
-              nameRoom: data.roomName
+                nameRoom: data.roomName
             }
         }
         return this.axios.post("api/rooms/" + data.roomName + "/desks", data.desks, config)
@@ -114,8 +114,8 @@ export class roomAPI {
         data: {
             roomName: string,
             desk: {
-              oldInfo: DeskInformation,
-              newInfo: DeskInformation
+                oldInfo: DeskInformation,
+                newInfo: DeskInformation
             }
         }
     ) {
@@ -125,10 +125,10 @@ export class roomAPI {
                 "Authorization": tokenID
             },
             params: {
-              roomName: data.roomName
+                roomName: data.roomName
             }
         }
-        return this.axios.put("api/rooms/" + data.roomName + "/desks", { ...data.desk.oldInfo, ...data.desk.newInfo}, config)
+        return this.axios.put("api/rooms/" + data.roomName + "/desks", { ...data.desk.oldInfo, ...data.desk.newInfo }, config)
     }
 
     deleteDesk(tokenID: string,
@@ -143,10 +143,10 @@ export class roomAPI {
                 "Authorization": tokenID
             },
             params: {
-              roomName: data.roomName
+                roomName: data.roomName
             },
             data: {
-              ...data.desk
+                ...data.desk
             }
         }
         return this.axios.delete("api/rooms/" + data.roomName + "/desks", config)
