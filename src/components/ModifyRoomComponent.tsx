@@ -66,30 +66,30 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             this.handleConfirm = this.handleConfirm.bind(this),
 
             this.state = {
-            isButtonDisabled: true,
-            isModalOpen: false,
-            roomNameError: false,
-            roomNameValue: "",
-            openingTimeDateValue: new Date('2021-01-01T08:00'),
-            openingTimeStringValue: "08:00",
-            closingTimeDateValue: new Date('2031-01-01T18:00'),
-            closingTimeStringValue: "18:00",
-            weekDays: {
-                monday: false,
-                tuesday: false,
-                wednesday: false,
-                thursday: false,
-                friday: false,
-                saturday: false,
-                sunday: false
-            },
-            weekDaysError: false,
-            timeError: false,
-            dimHeight: 1,
-            dimWidth: 1,
-            heightError: false,
-            widthError: false
-        }
+                isButtonDisabled: true,
+                isModalOpen: false,
+                roomNameError: false,
+                roomNameValue: "",
+                openingTimeDateValue: new Date('2021-01-01T08:00'),
+                openingTimeStringValue: "08:00",
+                closingTimeDateValue: new Date('2031-01-01T18:00'),
+                closingTimeStringValue: "18:00",
+                weekDays: {
+                    monday: false,
+                    tuesday: false,
+                    wednesday: false,
+                    thursday: false,
+                    friday: false,
+                    saturday: false,
+                    sunday: false
+                },
+                weekDaysError: false,
+                timeError: false,
+                dimHeight: 1,
+                dimWidth: 1,
+                heightError: false,
+                widthError: false
+            }
     }
 
     render() {
@@ -170,88 +170,88 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 </div>
                             </DialogContent>
                             <div className="addField">
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardTimePicker
-                                            margin="normal"
-                                            id="time-picker"
-                                            label="Orario di apertura"
-                                            ampm={false}
-                                            error={this.state.timeError}
-                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
-                                            value={this.state.openingTimeDateValue}
-                                            onChange={(e) => {
-                                                let openingTimeMilliseconds: number | undefined = e?.getTime()
-                                                if (openingTimeMilliseconds) {
-                                                    let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
-                                                    this.setState({ openingTimeDateValue: openingTime.time })
-                                                    this.setState({ openingTimeStringValue: openingTime.timeString })
-                                                    this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
-                                                } else {
-                                                    this.setState({ timeError: true })
-                                                    this.setState({ openingTimeStringValue: "" })
-                                                }
-                                            }}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change time',
-                                            }}
-                                        />
-                                    </MuiPickersUtilsProvider>
-                                </div>
-                                <div className="addField">
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardTimePicker
-                                            margin="normal"
-                                            id="time-picker"
-                                            label="Orario di chiusura"
-                                            ampm={false}
-                                            error={this.state.timeError}
-                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
-                                            value={this.state.closingTimeDateValue}
-                                            onChange={(e) => {
-                                                let closingTimeMilliseconds: number | undefined = e?.getTime()
-                                                if (closingTimeMilliseconds) {
-                                                    let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
-                                                    this.setState({ closingTimeDateValue: closingTime.time })
-                                                    this.setState({ closingTimeStringValue: closingTime.timeString })
-                                                    this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
-                                                } else {
-                                                    this.setState({ timeError: true })
-                                                    this.setState({ closingTimeStringValue: "" })
-                                                }
-                                            }}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change time',
-                                            }}
-                                        />
-                                    </MuiPickersUtilsProvider>
-                                </div>
-                                <DialogContentText>
-                                    Dimensione stanza
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardTimePicker
+                                        margin="normal"
+                                        id="time-picker"
+                                        label="Orario di apertura"
+                                        ampm={false}
+                                        error={this.state.timeError}
+                                        helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
+                                        value={this.state.openingTimeDateValue}
+                                        onChange={(e) => {
+                                            let openingTimeMilliseconds: number | undefined = e?.getTime()
+                                            if (openingTimeMilliseconds) {
+                                                let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
+                                                this.setState({ openingTimeDateValue: openingTime.time })
+                                                this.setState({ openingTimeStringValue: openingTime.timeString })
+                                                this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
+                                            } else {
+                                                this.setState({ timeError: true })
+                                                this.setState({ openingTimeStringValue: "" })
+                                            }
+                                        }}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change time',
+                                        }}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </div>
+                            <div className="addField">
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardTimePicker
+                                        margin="normal"
+                                        id="time-picker"
+                                        label="Orario di chiusura"
+                                        ampm={false}
+                                        error={this.state.timeError}
+                                        helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
+                                        value={this.state.closingTimeDateValue}
+                                        onChange={(e) => {
+                                            let closingTimeMilliseconds: number | undefined = e?.getTime()
+                                            if (closingTimeMilliseconds) {
+                                                let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
+                                                this.setState({ closingTimeDateValue: closingTime.time })
+                                                this.setState({ closingTimeStringValue: closingTime.timeString })
+                                                this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
+                                            } else {
+                                                this.setState({ timeError: true })
+                                                this.setState({ closingTimeStringValue: "" })
+                                            }
+                                        }}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change time',
+                                        }}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </div>
+                            <DialogContentText>
+                                Dimensione stanza
                                 </DialogContentText>
-                                <div className="addField">
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Altezza"
-                                        variant="outlined"
-                                        error={this.state.heightError}
-                                        helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
-                                        value={this.state.dimHeight}
-                                        onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
-                                    />
-                                </div>
-                                <div className="addField">
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Larghezza"
-                                        variant="outlined"
-                                        error={this.state.widthError}
-                                        helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
-                                        value={this.state.dimWidth}
-                                        onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
-                                    />
-                                </div>
+                            <div className="addField">
+                                <TextField
+                                    required
+                                    id="outlined-search"
+                                    label="Altezza"
+                                    variant="outlined"
+                                    error={this.state.heightError}
+                                    helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
+                                    value={this.state.dimHeight}
+                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
+                                />
+                            </div>
+                            <div className="addField">
+                                <TextField
+                                    required
+                                    id="outlined-search"
+                                    label="Larghezza"
+                                    variant="outlined"
+                                    error={this.state.widthError}
+                                    helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
+                                    value={this.state.dimWidth}
+                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
+                                />
+                            </div>
                             <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
