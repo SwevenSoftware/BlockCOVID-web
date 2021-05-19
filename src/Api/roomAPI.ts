@@ -70,10 +70,14 @@ export class roomAPI {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
+            },
+            params: {
+                from: data.fromTimestamp,
+                to: data.toTimestamp
             }
         }
-        const url = '/api/rooms' +
-            (data.fromTimestamp && data.toTimestamp ? '?from=' + data.fromTimestamp + "&to=" + data.toTimestamp : '')
+
+        const url = '/api/rooms'
         return this.axios.get(url, config)
     }
 }

@@ -79,7 +79,13 @@ describe('roomApi', () => {
         expect(roomApi.getRooms(adminToken, { fromTimestamp: "", toTimestamp: "" })).resolves.toEqual(axiosResponse);
         expect(mockedAxios.get).lastCalledWith(
             "/api/rooms",
-            requestConfig
+            {
+                ...requestConfig,
+                params: {
+                    from: "",
+                    to: ""
+                }
+            },
         );
     });
 });
