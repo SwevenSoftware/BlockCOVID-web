@@ -130,7 +130,7 @@ export class roomAPI {
             },
         }
         return this.axios.delete(url + data.roomName, config)
-    } 
+    }
 }
 
 export default new roomAPI(axios)
