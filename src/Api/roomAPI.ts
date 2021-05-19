@@ -81,7 +81,21 @@ export class roomAPI {
         return this.axios.get(url, config)
     }
 
-    
+    modifyDesk(tokenID: string, url: string,
+        data: {
+            roomName: string,
+            width: number,
+            height: number
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.put(url + data.roomName, data, config)
+    }
 
     deleteDesk(tokenID: string, url: string,
         data: {
