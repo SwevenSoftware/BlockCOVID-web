@@ -41,7 +41,6 @@ export class roomAPI {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
-                "roomName": data.roomName
             }
         }
         return this.axios.put(url + data.roomName, data, config)

@@ -305,10 +305,10 @@ class DotGrid extends Component<DotGridProps> {
                                 <Typography>Aperta</Typography>
                             </div>
                         </div> */}
-                        <DialogContentText color="primary">
+                        {/* <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
-                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel> */}
                         {/* <TextField
                         required
                         id="outlined-search"
@@ -323,10 +323,10 @@ class DotGrid extends Component<DotGridProps> {
                         variant="outlined"
                         /> */}
 
-                        <DialogContentText color="primary">
+                        {/* <DialogContentText color="primary">
                             Orario:
                         </DialogContentText>
-                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel> */}
                         {/* <TextField
                         required
                         id="outlined-search"
@@ -341,10 +341,10 @@ class DotGrid extends Component<DotGridProps> {
                         variant="outlined"
                         /> */}
 
-                        <DialogContentText color="primary">
+                        {/* <DialogContentText color="primary">
                             Giorni di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.weekDays}</FormLabel>
+                        <FormLabel>{this.props.weekDays}</FormLabel> */}
                     </div>
                 );
             default:
