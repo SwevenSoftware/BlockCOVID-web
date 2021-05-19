@@ -2,7 +2,7 @@ import roomReducer from '../../src/reducers/roomsReducer'
 import { roomTypes, ERROR_UNKNOWN, ERROR_USERNAME_NOT_AVAILABLE } from '../../src/types';
 import { JSDOM } from 'jsdom'
 
-describe('accuonts reducer test', function() {
+describe('accounts reducer test', function() {
     const initialState = {
         rooms: null,
         error: null
@@ -72,7 +72,7 @@ describe('accuonts reducer test', function() {
 
     });
 
-    it('should correcly handle user fetch error with no proper message', function() {
+    it('should correctly handle user fetch error with no proper message', function() {
         const action = {
             type: roomTypes.FETCH_SUCCESS,
             payload: fakeRooms
@@ -86,7 +86,7 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle deletion error', function() {
+    it('should correctly handle deletion error', function() {
         const otherPayload = {
             ...fakeRooms,
             error: 409
@@ -104,7 +104,7 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle unknown creation error', function() {
+    it('should correctly handle unknown creation error', function() {
         const action = {
             type: roomTypes.DELETE_FAILURE,
             payload: fakeRooms
@@ -156,7 +156,7 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle deletion error', function() {
+    it('should correctly handle deletion error', function() {
         const otherPayload = {
             ...fakeRooms,
             error: 400
@@ -174,7 +174,7 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle modify error', function() {
+    it('should correctly handle modify error', function() {
         const otherPayload = {
             ...fakeRooms,
             error: 400
@@ -192,17 +192,22 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle modify error even if no proper code', function() {
+    it('should correctly handle modify error even if no proper code', function() {
 
         const action = {
             type: roomTypes.MODIFY_FAILURE,
             payload: fakeRooms
         }
 
-        expect(roomReducer(initialState, action)).toEqual(initialState)
+        const state = {
+            ...initialState,
+            error: ERROR_UNKNOWN
+        }
+
+        expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle creation error', function() {
+    it('should correctly handle creation error', function() {
         const otherPayload = {
             ...fakeRooms,
             error: 400
@@ -220,7 +225,7 @@ describe('accuonts reducer test', function() {
         expect(roomReducer(initialState, action)).toEqual(state)
     });
 
-    it('should correcly handle creation success', function() {
+    it('should correctly handle creation success', function() {
 
         const action = {
             type: roomTypes.CREATE_SUCCESS,
