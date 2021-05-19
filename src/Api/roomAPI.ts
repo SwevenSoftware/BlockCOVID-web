@@ -29,7 +29,7 @@ export class roomAPI {
     modifyRoom(tokenID: string, url: string,
         data: {
             roomName: string,
-            name: string,
+            name: string
             openingAt: string,
             closingAt: string,
             openingDays: string[],
@@ -54,8 +54,7 @@ export class roomAPI {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": tokenID,
-                "roomName": data.roomName
+                "Authorization": tokenID
             }
         }
         return this.axios.delete(url + data.roomName, config)
@@ -71,10 +70,14 @@ export class roomAPI {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID,
+            },
+            params: {
+                from: data.fromTimestamp,
+                to: data.toTimestamp
             }
         }
-        const url = '/api/rooms' +
-            (data.fromTimestamp && data.toTimestamp ? '?from=' + data.fromTimestamp + "&to=" + data.toTimestamp : '')
+
+        const url = '/api/rooms'
         return this.axios.get(url, config)
     }
 }

@@ -35,11 +35,11 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     componentDidMount() {
-        // this.props.dispatch.getRooms('2020-01-01T01:00', '2021-01-01T01:00')
+        this.props.dispatch.getRooms({ fromTimestamp: '', toTimestamp: '' })
     }
 
     render() {
-        console.log(this.props.state)
+        console.log(this.props.state.rooms)
         return (
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
@@ -47,6 +47,8 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         <NewRoom />
                     </div>
                     <div>
+                        {this.props.state.rooms.error ?
+                            this.props.state.rooms.error : ""}
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
@@ -62,73 +64,52 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     * @returns An array of HTML code to display each room
     */
     private popolate(): Array<JSX.Element> {
-        let rows: Array<JSX.Element> = new Array()
-        // TODO: remove 'rows.push()' once dynamic code is functional
-        rows.push(
-            <Grid key={"staticRoom"} className="grid">
-                <Paper className="paper"> {/* TODO: change style, might change className as well */}
-                    <ListItem className="listItem">
-                        <ListItemIcon>
-                            <MeetingRoomIcon fontSize="large" />
-                        </ListItemIcon>
-
-                        <ListItemText className="usernameLayout">
-                            <ModifyRoom data={{
-                                room: {
-                                    name: 'static room'
-                                }
-                            }} />
-                        </ListItemText>
-                        {/* TODO: add static room information such as opening times, closing time, week days and sizes */}
-                        <DeleteRoom data={{
-                            room: {
-                                name: 'static room',
-                                width: 450,
-                                height: 450
-                            }
-                        }} />
-                    </ListItem>
-                </Paper>
-            </Grid>
-        )
-        // TODO: dynamic code, correctly fetch rooms information
-        /* if (this.props.state.accounts.users) {
-            this.props.state.accounts.users
-                .sort((a, b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0))
-                .map((user) => {
+        let rows: Array<JSX.Element> = []
+        if (this.props.state.rooms.rooms) {
+            this.props.state.rooms.rooms
+                .sort((a, b) => (a.room.name > b.room.name) ? 1 : ((b.room.name > a.room.name) ? -1 : 0))
+                .map((roomList) => {
                     rows.push(
-                        <Grid key={user.username} className="grid">
-                            <Paper className="paper">
+                        <Grid key={roomList.room.name} className="grid">
+                            <Paper className="paper"> {/* TODO: change style, might change className as well */}
                                 <ListItem className="listItem">
                                     <ListItemIcon>
-                                        <PersonIcon fontSize="large" />
+                                        <MeetingRoomIcon
+                                            fontSize="large"
+                                            style={{ color: roomList.room.closed ? 'red' : 'green' }}
+                                        />
                                     </ListItemIcon>
-                                    <ListItemText primary={user.username} className="usernameLayout" />
-                                    <Pencil
-                                        data={{
-                                            user: {
-                                                username: user.username,
-                                                authorities: user.authorities,
-                                                link: user._links.modify_user.href
-                                            }
-                                        }}
-                                    />
-                                    <Trash
-                                        mode="accounts"
-                                        data={{
-                                            user: {
-                                                username: user.username,
-                                                authorities: user.authorities,
-                                                link: user._links.delete_user.href
-                                            }
-                                        }}
-                                    />
+                                    <ListItemText className="usernameLayout">
+                                        <ModifyRoom data={{
+                                            room: {
+                                                name: roomList.room.name,
+                                                closed: roomList.room.closed,
+                                                openingTime: roomList.room.openingTime,
+                                                closingTime: roomList.room.closingTime,
+                                                openingDays: roomList.room.openingDays,
+                                                height: roomList.room.height,
+                                                width: roomList.room.width
+                                            },
+                                            desks: roomList.desks
+                                        }} />
+                                    </ListItemText>
+                                    <DeleteRoom data={{
+                                        room: {
+                                            name: roomList.room.name,
+                                            openingTime: roomList.room.openingTime,
+                                            closingTime: roomList.room.closingTime,
+                                            openingDays: roomList.room.openingDays,
+                                            height: roomList.room.height,
+                                            width: roomList.room.width,
+                                        },
+                                        desks: roomList.desks
+                                    }} />
                                 </ListItem>
                             </Paper>
                         </Grid>
                     )
                 })
-        } */
+        }
         return rows
     }
 }
