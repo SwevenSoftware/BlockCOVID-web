@@ -81,7 +81,7 @@ export class roomAPI {
         return this.axios.get(url, config)
     }
 
-    createDesk(tokenID: string, url: string,
+    createDesk(tokenID: string,
         data: {
             name: string,
             openingAt: string,
@@ -97,10 +97,10 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        return this.axios.get(url + data, config)
+        return this.axios.get(data.name, config)
     }
 
-    modifyDesk(tokenID: string, url: string,
+    modifyDesk(tokenID: string,
         data: {
             roomName: string,
             width: number,
@@ -113,10 +113,10 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        return this.axios.put(url + data.roomName, data, config)
+        return this.axios.put(data.roomName, data, config)
     }
 
-    deleteDesk(tokenID: string, url: string,
+    deleteDesk(tokenID: string,
         data: {
             roomName: string,
             width: number,
@@ -129,7 +129,7 @@ export class roomAPI {
                 "Authorization": tokenID
             },
         }
-        return this.axios.delete(url + data.roomName, config)
+        return this.axios.delete(data.roomName, config)
     }
 }
 
