@@ -8,7 +8,7 @@ export const roomsHandlers = {}
 roomsHandlers[roomTypes.FETCH_SUCCESS] = function(state, action) {
     console.log(roomTypes.FETCH_SUCCESS)
     return {
-        rooms: action.payload?._embedded.roomWithDesksList,
+        rooms: action.payload?._embedded?.roomWithDesksList,
         error: ""
     }
 }
