@@ -80,6 +80,24 @@ export class roomAPI {
         const url = '/api/rooms'
         return this.axios.get(url, config)
     }
+
+    
+
+    deleteDesk(tokenID: string, url: string,
+        data: {
+            roomName: string,
+            width: number,
+            height: number
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            },
+        }
+        return this.axios.delete(url + data.roomName, config)
+    } 
 }
 
 export default new roomAPI(axios)
