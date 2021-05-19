@@ -71,9 +71,9 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 roomNameError: false,
                 roomNameValue: "",
                 openingTimeDateValue: new Date('2021-01-01T08:00'),
-                openingTimeStringValue: "08:00",
+                openingTimeStringValue: '8:00',
                 closingTimeDateValue: new Date('2031-01-01T18:00'),
-                closingTimeStringValue: "18:00",
+                closingTimeStringValue: '18:00',
                 weekDays: {
                     monday: false,
                     tuesday: false,
@@ -121,11 +121,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     <TextField
                                         required
                                         id="outlined-search"
-                                        label={this.props.data.room.name}
+                                        label="Nome stanza"
                                         variant="outlined"
                                         error={this.state.roomNameError}
                                         helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                        value={this.state.roomNameValue}
+                                        value={this.props.data.room.name}
                                         onChange={(e) => {
                                             this.handleChangeRoomName(e.target.value);
                                             this.roomNameValidate(e.target.value);
@@ -144,44 +144,23 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div className="alignCentralPencil">
                                     <DotGrid
                                         mode="modifyGrid"
-<<<<<<< HEAD
-                                        sizeH={this.state.dimHeight}
-                                        sizeW={this.state.dimWidth}
-                                        openingTime={this.state.openingTimeStringValue}
-                                        closingTime={this.state.closingTimeStringValue}
-                                        weekDays={this.state.weekDays}
-=======
-                                        sizeH={25 || 0}
-                                        sizeW={78 || 0}
-                                        openingTime="8:00"
-                                        closingTime="18:00"
-                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
->>>>>>> develop
+                                        sizeH={this.props.data.room.height}
+                                        sizeW={this.props.data.room.width}
+                                        openingTime={this.props.data.room.openingTime}
+                                        closingTime={this.props.data.room.closingTime}
+                                        weekDays={this.props.data.room.openingDays}
                                     />
                                 </div>
-                                {/* <div className="buttonGrid">
-                                    <Button id="decline" variant="outlined" size="medium" onClick={this.resetGrid}>
-                                        Annulla
-                                    </Button>
-                                </div> */}
                             </DialogContent>
                             <DialogContent>
                                 <div>
                                     <DotGrid
                                         mode="modifyInformation"
-<<<<<<< HEAD
-                                        sizeH={this.state.dimHeight}
-                                        sizeW={this.state.dimWidth}
-                                        openingTime={this.state.openingTimeStringValue}
-                                        closingTime={this.state.closingTimeStringValue}
-                                        weekDays={this.state.weekDays}
-=======
-                                        sizeH={25 || 0}
-                                        sizeW={78 || 0}
-                                        openingTime="8:00"
-                                        closingTime="18:00"
-                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
->>>>>>> develop
+                                        sizeH={this.props.data.room.height}
+                                        sizeW={this.props.data.room.width}
+                                        openingTime={this.props.data.room.openingTime}
+                                        closingTime={this.props.data.room.closingTime}
+                                        weekDays={this.props.data.room.openingDays}
                                     />
                                 </div>
                             </DialogContent>
@@ -252,7 +231,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     variant="outlined"
                                     error={this.state.heightError}
                                     helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.state.dimHeight}
+                                    value={this.props.data.room.height}
                                     onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
                                 />
                             </div>
@@ -264,7 +243,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     variant="outlined"
                                     error={this.state.widthError}
                                     helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.state.dimWidth}
+                                    value={this.props.data.room.width}
                                     onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
                                 />
                             </div>
@@ -318,6 +297,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 
     componentDidMount() {
         this.setButton()
+        this.setDays()
     }
 
     private setButton(
@@ -330,6 +310,20 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         } else {
             this.setState({ isButtonDisabled: true })
         }
+    }
+
+    private setDays() {
+        this.setState({
+            weekDays: {
+                monday: this.props.data.room.openingDays.includes("MONDAY"),
+                tuesday: this.props.data.room.openingDays.includes("TUESDAY"),
+                wednesday: this.props.data.room.openingDays.includes("WEDNESDAY"),
+                thurday: this.props.data.room.openingDays.includes("THURSDAY"),
+                friday: this.props.data.room.openingDays.includes("FRIDAY"),
+                saturday: this.props.data.room.openingDays.includes("SATURDAY"),
+                sunday: this.props.data.room.openingDays.includes("SUNDAY"),
+            },
+        })
     }
 
     private weekDaysInputControl(weekDays: boolean[]): boolean {
@@ -437,9 +431,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             weekDaysError: false,
             roomNameValue: "",
             timeError: false,
-            openingTimeStringValue: "08:00",
-            closingTimeStringValue: "18:00",
+            openingTimeStringValue: '8:00',
+            closingTimeStringValue: '18:00',
         })
+        // if (!confirm) {
+        //     this.setDays()
+        // }
     }
 
     private handleChangeRoomName(roomName: string): void {
