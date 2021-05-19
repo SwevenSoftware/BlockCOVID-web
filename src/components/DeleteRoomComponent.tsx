@@ -47,7 +47,6 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
-
             <div >
                 <IconButton
                     className="trash"
@@ -129,8 +128,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     * @returns
     */
     private handleConfirm(): void {
-        this.props.dispatch.deleteRoom({
-            name: this.props.data.room.name,
+        this.props.dispatch.deleteRoom("api/rooms/", {
+            roomName: this.props.data.room.name,
         })
         this.handleClose()
     }

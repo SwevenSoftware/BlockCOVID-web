@@ -30,7 +30,7 @@ interface DotGridProps {
     sizeW: number;
     openingTime: string;
     closingTime: string;
-    weekDays: string;
+    weekDays: string[];
 }
 
 class DotGrid extends Component<DotGridProps> {
@@ -230,7 +230,6 @@ class DotGrid extends Component<DotGridProps> {
                     </div>
                 );
             case 'deleteGrid':
-                console.log('delete grid')
                 return (
                     <div>
                         <canvas
@@ -242,7 +241,6 @@ class DotGrid extends Component<DotGridProps> {
                 );
                 break;
             case 'deleteInformation':
-                console.log('delete info')
                 return (
                     <div>
                         <DialogContent>
@@ -256,11 +254,12 @@ class DotGrid extends Component<DotGridProps> {
                         </DialogContentText>
                             <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
 
-
                             <DialogContentText color="primary">
                                 Giorni di apertura:
                         </DialogContentText>
-                            <FormLabel>{this.props.weekDays}</FormLabel>
+                            <FormLabel>
+                                {this.props.weekDays.map(day => day + " ")}
+                            </FormLabel>
                         </DialogContent>
                     </div>
                 );
