@@ -94,7 +94,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         sizeW={78 || 0}
                                         openingTime="8:00"
                                         closingTime="18:00"
-                                        weekDays="lun - mar - mer - gio - ven"
+                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
                                     />
                                 </div>
                                 {/* <div className="buttonGrid">
@@ -111,7 +111,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         sizeW={78 || 0}
                                         openingTime="8:00"
                                         closingTime="18:00"
-                                        weekDays="lun - mar - mer - gio - ven"
+                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
                                     />
                                 </div>
                             </DialogContent>
