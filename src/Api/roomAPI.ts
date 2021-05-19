@@ -81,6 +81,25 @@ export class roomAPI {
         return this.axios.get(url, config)
     }
 
+    createDesk(tokenID: string, url: string,
+        data: {
+            name: string,
+            openingAt: string,
+            closingAt: string,
+            openingDays: string[],
+            width: number,
+            height: number
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.get(url + data, config)
+    }
+
     modifyDesk(tokenID: string, url: string,
         data: {
             roomName: string,
