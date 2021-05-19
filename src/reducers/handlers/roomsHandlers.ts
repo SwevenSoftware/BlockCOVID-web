@@ -1,6 +1,8 @@
 import {
     roomTypes,
-    ERROR_UNKNOWN
+    ERROR_UNKNOWN,
+    ERROR_DESK_ALREADY_EXISTS,
+    ERROR_BAD_DESK_POSITION, ERROR_DESK_DOES_NOT_EXIST
 } from "../../types"
 
 export const roomsHandlers = {}
