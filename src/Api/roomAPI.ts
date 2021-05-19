@@ -22,16 +22,7 @@ export class roomAPI {
         this.axios = axios
     }
 
-    createRoom(tokenID: string,
-        data: {
-            name: string,
-            openingAt: string,
-            closingAt: string,
-            openingDays: string[],
-            width: number,
-            height: number
-        }
-    ) {
+    createRoom(tokenID: string, data: RoomInformation) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -96,46 +87,15 @@ export class roomAPI {
         return this.axios.get(url, config)
     }
 
-    createDesk(tokenID: string,
-        data: {
-            name: string,
-            openingAt: string,
-            closingAt: string,
-            openingDays: string[],
-            width: number,
-            height: number
-        }
-    ) {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID
-            }
-        }
-        return this.axios.get(data.name, config)
-    }
-
-    modifyDesk(tokenID: string,
+    createDesks(tokenID: string,
         data: {
             roomName: string,
-            width: number,
-            height: number
-        }
-    ) {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": tokenID
-            }
-        }
-        return this.axios.put(data.roomName, data, config)
-    }
-
-    deleteDesk(tokenID: string,
-        data: {
-            roomName: string,
-            width: number,
-            height: number
+            desks: [
+              {
+                x: number,
+                y: number
+              }
+            ]
         }
     ) {
         const config = {
@@ -143,8 +103,53 @@ export class roomAPI {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
             },
+            params: {
+              nameRoom: data.roomName
+            }
         }
-        return this.axios.delete(data.roomName, config)
+        return this.axios.post("api/rooms/" + data.roomName + "/desks", data.desks, config)
+    }
+
+    modifyDesk(tokenID: string,
+        data: {
+            roomName: string,
+            desk: {
+              oldInfo: DeskInformation,
+              newInfo: DeskInformation
+            }
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            },
+            params: {
+              roomName: data.roomName
+            }
+        }
+        return this.axios.put("api/rooms/" + data.roomName + "/desks", { ...data.desk.oldInfo, ...data.desk.newInfo}, config)
+    }
+
+    deleteDesk(tokenID: string,
+        data: {
+            roomName: string,
+            desk: DeskInformation
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            },
+            params: {
+              roomName: data.roomName
+            },
+            data: {
+              ...data.desk
+            }
+        }
+        return this.axios.delete("api/rooms/" + data.roomName + "/desks", config)
     }
 }
 
