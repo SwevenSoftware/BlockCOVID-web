@@ -1,14 +1,5 @@
 import { roomTypes } from "../types"
-import roomApi, { roomAPI } from '../Api/roomAPI'
-
-export interface roomInformation {
-    name: string,
-    openingAt: string,
-    closingAt: string,
-    openingDays: string[],
-    width: number,
-    height: number
-}
+import roomApi, { roomAPI, RoomInformation, DeskInformation } from "../Api/roomAPI"
 
 export class roomActions {
     roomApi: roomAPI
@@ -17,7 +8,7 @@ export class roomActions {
         this.roomApi = roomApi
     }
 
-    createRoom(data: roomInformation) {
+    createRoom(data: RoomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.createRoom(tokenID, data)
@@ -31,7 +22,7 @@ export class roomActions {
         }
     }
 
-    modifyRoom(url: string, roomName: string, data: roomInformation) {
+    modifyRoom(url: string, roomName: string, data: RoomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })

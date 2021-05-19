@@ -1,5 +1,20 @@
 import axios, { AxiosStatic } from "axios"
 
+export interface RoomInformation {
+  name: string,
+  openingAt: string,
+  closingAt: string,
+  openingDays: string[],
+  width: number,
+  height: number
+}
+
+export interface DeskInformation {
+  id: string,
+  x: number,
+  y: number
+}
+
 export class roomAPI {
     private axios: AxiosStatic
 
