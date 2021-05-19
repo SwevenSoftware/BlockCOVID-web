@@ -128,7 +128,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     * @returns
     */
     private handleConfirm(): void {
-        this.props.dispatch.deleteRoom( "api/rooms/", {
+        this.props.dispatch.deleteRoom("api/rooms/", {
             roomName: this.props.data.room.name,
         })
         this.handleClose()

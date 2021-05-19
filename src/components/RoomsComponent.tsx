@@ -71,17 +71,17 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                 .sort((a, b) => (a.room.name > b.room.name) ? 1 : ((b.room.name > a.room.name) ? -1 : 0))
                 .map((roomList) => {
                     let openingDays: string[] =
-                      roomList.room.openingDays.map((day) =>  {
-                          switch(day) {
-                              case "MONDAY": return weekDays[0]
-                              case "TUESDAY": return weekDays[1]
-                              case "WEDNESDAY": return weekDays[2]
-                              case "THURSDAY": return weekDays[3]
-                              case "FRIDAY": return weekDays[4]
-                              case "SATURDAY": return weekDays[5]
-                              case "SUNDAY": return weekDays[6]
-                          }
-                      }).sort((a, b) => weekDays.indexOf(a) > weekDays.indexOf(b) ? 1 : ((weekDays.indexOf(b) > weekDays.indexOf(a) ? -1 : 0)))
+                        roomList.room.openingDays.map((day) => {
+                            switch (day) {
+                                case "MONDAY": return weekDays[0]
+                                case "TUESDAY": return weekDays[1]
+                                case "WEDNESDAY": return weekDays[2]
+                                case "THURSDAY": return weekDays[3]
+                                case "FRIDAY": return weekDays[4]
+                                case "SATURDAY": return weekDays[5]
+                                case "SUNDAY": return weekDays[6]
+                            }
+                        }).sort((a, b) => weekDays.indexOf(a) > weekDays.indexOf(b) ? 1 : ((weekDays.indexOf(b) > weekDays.indexOf(a) ? -1 : 0)))
                     rows.push(
                         <Grid key={roomList.room.name} className="grid">
                             <Paper className="paper"> {/* TODO: change style, might change className as well */}
