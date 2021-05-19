@@ -81,15 +81,6 @@ roomsHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
                 error: ERROR_UNKNOWN
             }
     }
-    if (action.payload.error) {
-        return {
-            ...state,
-            error: ERROR_UNKNOWN,
-        }
-    }
-    else {
-        return state
-    }
 }
 
 roomsHandlers[roomTypes.DELETE_FAILURE] = function(state, action) {
