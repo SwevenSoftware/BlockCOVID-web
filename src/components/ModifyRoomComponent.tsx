@@ -144,11 +144,19 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div className="alignCentralPencil">
                                     <DotGrid
                                         mode="modifyGrid"
+<<<<<<< HEAD
                                         sizeH={this.state.dimHeight}
                                         sizeW={this.state.dimWidth}
                                         openingTime={this.state.openingTimeStringValue}
                                         closingTime={this.state.closingTimeStringValue}
                                         weekDays={this.state.weekDays}
+=======
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
+>>>>>>> develop
                                     />
                                 </div>
                                 {/* <div className="buttonGrid">
@@ -161,11 +169,19 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div>
                                     <DotGrid
                                         mode="modifyInformation"
+<<<<<<< HEAD
                                         sizeH={this.state.dimHeight}
                                         sizeW={this.state.dimWidth}
                                         openingTime={this.state.openingTimeStringValue}
                                         closingTime={this.state.closingTimeStringValue}
                                         weekDays={this.state.weekDays}
+=======
+                                        sizeH={25 || 0}
+                                        sizeW={78 || 0}
+                                        openingTime="8:00"
+                                        closingTime="18:00"
+                                        weekDays={["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]}
+>>>>>>> develop
                                     />
                                 </div>
                             </DialogContent>
