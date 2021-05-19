@@ -2,7 +2,8 @@
 import React, { Component, createRef, RefObject } from "react";
 /* redux */
 import { connect } from 'react-redux'
-import roomActionResolver, { roomInformation } from '../actions/roomsActions'
+import roomActionResolver from '../actions/roomsActions';
+import { RoomInformation } from "../Api/roomAPI";
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -170,7 +171,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (url: string, roomName: string, data: roomInformation) => {
+            modifyRoom: (url: string, roomName: string, data: RoomInformation) => {
                 dispatch(roomActionResolver.modifyRoom(url, roomName, data))
             }
         }
