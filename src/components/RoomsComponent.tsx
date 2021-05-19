@@ -117,9 +117,22 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     private popolate(): Array<JSX.Element> {
         let rows: Array<JSX.Element> = []
         if (this.props.state.rooms.rooms) {
+            let weekDays: string[] = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]
             this.props.state.rooms.rooms
                 .sort((a, b) => (a.room.name > b.room.name) ? 1 : ((b.room.name > a.room.name) ? -1 : 0))
                 .map((roomList) => {
+                    let openingDays: string[] =
+                        roomList.room.openingDays.map((day) => {
+                            switch (day) {
+                                case "MONDAY": return weekDays[0]
+                                case "TUESDAY": return weekDays[1]
+                                case "WEDNESDAY": return weekDays[2]
+                                case "THURSDAY": return weekDays[3]
+                                case "FRIDAY": return weekDays[4]
+                                case "SATURDAY": return weekDays[5]
+                                case "SUNDAY": return weekDays[6]
+                            }
+                        }).sort((a, b) => weekDays.indexOf(a) > weekDays.indexOf(b) ? 1 : ((weekDays.indexOf(b) > weekDays.indexOf(a) ? -1 : 0)))
                     rows.push(
                         <Grid key={roomList.room.name} className="grid">
                             <Paper className="paper"> {/* TODO: change style, might change className as well */}
@@ -135,9 +148,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                             room: {
                                                 name: roomList.room.name,
                                                 closed: roomList.room.closed,
-                                                openingTime: roomList.room.openingTime,
-                                                closingTime: roomList.room.closingTime,
-                                                openingDays: roomList.room.openingDays,
+                                                openingTime: roomList.room.openingTime.split(":")[0] + ":" + roomList.room.openingTime.split(":")[1],
+                                                closingTime: roomList.room.closingTime.split(":")[0] + ":" + roomList.room.closingTime.split(":")[1],
+                                                openingDays: openingDays,
                                                 height: roomList.room.height,
                                                 width: roomList.room.width
                                             },
@@ -147,9 +160,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                     <DeleteRoom data={{
                                         room: {
                                             name: roomList.room.name,
-                                            openingTime: roomList.room.openingTime,
-                                            closingTime: roomList.room.closingTime,
-                                            openingDays: roomList.room.openingDays,
+                                            openingTime: roomList.room.openingTime.split(":")[0] + ":" + roomList.room.openingTime.split(":")[1],
+                                            closingTime: roomList.room.closingTime.split(":")[0] + ":" + roomList.room.closingTime.split(":")[1],
+                                            openingDays: openingDays,
                                             height: roomList.room.height,
                                             width: roomList.room.width,
                                         },

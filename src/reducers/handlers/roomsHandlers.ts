@@ -1,8 +1,10 @@
 import {
     roomTypes,
     ERROR_UNKNOWN,
+    ERROR_ROOM_DOES_NOT_EXIST,
     ERROR_DESK_ALREADY_EXISTS,
-    ERROR_BAD_DESK_POSITION, ERROR_DESK_DOES_NOT_EXIST
+    ERROR_BAD_DESK_POSITION,
+    ERROR_DESK_DOES_NOT_EXIST
 } from "../../types"
 
 export const roomsHandlers = {}
@@ -126,14 +128,17 @@ roomsHandlers[roomTypes.CREATE_DESKS_FAILURE] = function(state, action) {
 
 roomsHandlers[roomTypes.MODIFY_FAILURE] = function(state, action) {
     console.log(roomTypes.MODIFY_FAILURE)
-    if (action.payload.error) {
-        return {
-            ...state,
-            error: ERROR_UNKNOWN,
-        }
-    }
-    else {
-        return state
+    switch (action.payload.error) {
+        case 404: /** room does not exist */
+            return {
+                ...state,
+                error: ERROR_ROOM_DOES_NOT_EXIST
+            }
+        default:
+            return {
+                ...state,
+                error: ERROR_UNKNOWN
+            }
     }
 }
 

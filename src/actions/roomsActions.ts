@@ -17,7 +17,7 @@ export class roomActions {
                     dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
-                    dispatch(this.failureCreateRoom(err))
+                    dispatch(this.failureCreateRoom(err.response.status))
                 })
         }
     }
@@ -31,7 +31,7 @@ export class roomActions {
                     dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
-                    dispatch(this.failureModifyRoom(err))
+                    dispatch(this.failureModifyRoom(err.response.status))
                 })
         }
     }
@@ -45,7 +45,7 @@ export class roomActions {
                     dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
                 })
                 .catch(err => {
-                    dispatch(this.failureDeleteRoom(err))
+                    dispatch(this.failureDeleteRoom(err.response.status))
                 })
         }
     }
@@ -70,7 +70,7 @@ export class roomActions {
                     dispatch(this.successGetRooms(res.data))
                 })
                 .catch(err => {
-                    dispatch(this.failureGetRooms(err))
+                    dispatch(this.failureGetRooms(err.response.status))
                 })
         }
     }
