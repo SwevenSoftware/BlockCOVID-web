@@ -1,14 +1,5 @@
 import { roomTypes } from "../types"
-import roomApi, { roomAPI } from '../Api/roomAPI'
-
-export interface roomInformation {
-    name: string,
-    openingAt: string,
-    closingAt: string,
-    openingDays: string[],
-    width: number,
-    height: number
-}
+import roomApi, { roomAPI, RoomInformation, DeskInformation } from "../Api/roomAPI"
 
 export class roomActions {
     roomApi: roomAPI
@@ -17,7 +8,7 @@ export class roomActions {
         this.roomApi = roomApi
     }
 
-    createRoom(data: roomInformation) {
+    createRoom(data: RoomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.createRoom(tokenID, data)
@@ -31,7 +22,7 @@ export class roomActions {
         }
     }
 
-    modifyRoom(url: string, roomName: string, data: roomInformation) {
+    modifyRoom(url: string, roomName: string, data: RoomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
@@ -84,15 +75,57 @@ export class roomActions {
         }
     }
 
-    successGetRooms = (data) => ({
-        type: roomTypes.FETCH_SUCCESS,
+    createDesks(data: { roomName: string, desks: [{ x: number, y: number }] }) {
+        return (dispatch, getState) => {
+            let tokenID = getState().login.token?.id
+            this.roomApi.createDesks(tokenID, data)
+                .then((res) => {
+                    dispatch(this.successCreateDesks(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureCreateDesks(err.response.status))
+                })
+        }
+    }
+
+    modifyDesk(data: { roomName: string, desk: { oldInfo: DeskInformation, newInfo: DeskInformation } }) {
+        return (dispatch, getState) => {
+            let tokenID = getState().login.token?.id
+            this.roomApi.modifyDesk(tokenID, data)
+                .then((res) => {
+                    dispatch(this.successModifyDesk(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureModifyDesk(err.response.status))
+                })
+        }
+    }
+
+    deleteDesk(data: { roomName: string, desk: DeskInformation }) {
+        return (dispatch, getState) => {
+            let tokenID = getState().login.token?.id
+            this.roomApi.deleteDesk(tokenID, data)
+                .then((res) => {
+                    dispatch(this.successDeleteDesk(res.data))
+                    dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
+                })
+                .catch(err => {
+                    dispatch(this.failureDeleteDesk(err.response.status))
+                })
+        }
+    }
+
+    successCreateRoom = (data) => ({
+        type: roomTypes.CREATE_SUCCESS,
         payload: {
             ...data
         }
     })
 
-    successCreateRoom = (data) => ({
-        type: roomTypes.CREATE_SUCCESS,
+    successCreateDesks = (data) => ({
+        type: roomTypes.CREATE_DESKS_SUCCESS,
         payload: {
             ...data
         }
@@ -105,6 +138,13 @@ export class roomActions {
         }
     })
 
+    successModifyDesk = (data) => ({
+        type: roomTypes.MODIFY_DESK_SUCCESS,
+        payload: {
+            ...data
+        }
+    })
+
     successDeleteRoom = (data) => ({
         type: roomTypes.DELETE_SUCCESS,
         payload: {
@@ -112,15 +152,29 @@ export class roomActions {
         }
     })
 
-    failureGetRooms = (error) => ({
-        type: roomTypes.FETCH_FAILURE,
+    successDeleteDesk = (data) => ({
+        type: roomTypes.DELETE_DESK_SUCCESS,
         payload: {
-            error
+            ...data
+        }
+    })
+
+    successGetRooms = (data) => ({
+        type: roomTypes.FETCH_SUCCESS,
+        payload: {
+            ...data
         }
     })
 
     failureCreateRoom = (error) => ({
         type: roomTypes.CREATE_FAILURE,
+        payload: {
+            error
+        }
+    })
+
+    failureCreateDesks = (error) => ({
+        type: roomTypes.CREATE_DESKS_FAILURE,
         payload: {
             error
         }
@@ -133,8 +187,29 @@ export class roomActions {
         }
     })
 
+    failureModifyDesk = (error) => ({
+        type: roomTypes.MODIFY_DESK_FAILURE,
+        payload: {
+            error
+        }
+    })
+
     failureDeleteRoom = (error) => ({
         type: roomTypes.DELETE_FAILURE,
+        payload: {
+            error
+        }
+    })
+
+    failureDeleteDesk = (error) => ({
+        type: roomTypes.DELETE_DESK_FAILURE,
+        payload: {
+            error
+        }
+    })
+
+    failureGetRooms = (error) => ({
+        type: roomTypes.FETCH_FAILURE,
         payload: {
             error
         }

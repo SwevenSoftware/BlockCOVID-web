@@ -20,10 +20,16 @@ export const roomTypes = {
     FETCH_FAILURE: "ROOM_FETCH_FAILURE",
     CREATE_SUCCESS: "ROOM_CREATE_SUCCESS",
     CREATE_FAILURE: "ROOM_CREATE_FAILURE",
+    CREATE_DESKS_SUCCESS: "ROOM_CREATE_DESKS_SUCCESS",
+    CREATE_DESKS_FAILURE: "ROOM_CREATE_DESKS_FAILURE",
     MODIFY_SUCCESS: "ROOM_MODIFY_SUCCESS",
     MODIFY_FAILURE: "ROOM_MODIFY_FAILURE",
+    MODIFY_DESK_SUCCESS: "ROOM_MODIFY_DESK_SUCCESS",
+    MODIFY_DESK_FAILURE: "ROOM_MODIFY_DESK_FAILURE",
     DELETE_SUCCESS: "ROOM_DELETE_SUCCESS",
-    DELETE_FAILURE: "ROOM_DELETE_FAILURE"
+    DELETE_FAILURE: "ROOM_DELETE_FAILURE",
+    DELETE_DESK_SUCCESS: "ROOM_DELETE_DESK_SUCCESS",
+    DELETE_DESK_FAILURE: "ROOM_DELETE_DESK_FAILURE"
 }
 
 /* login */
@@ -51,6 +57,9 @@ export const ERROR_ROOM_DOES_NOT_EXIST = "La stanza non esiste. Si prega di aggi
 export const ERROR_WEEKDAYS_NOT_SELECTED = "Seleziona almeno un giorno"
 export const ERROR_TIME_NOT_AVAILABLE = "Seleziona uno spazio temporale esistente"
 export const ERROR_INSERTION_NUMBER = "Inserisci una dimensione (min 1, max 20)"
+export const ERROR_BAD_DESK_POSITION = "La postazione inserita non ha posizione valida"
+export const ERROR_DESK_ALREADY_EXISTS = "La postazione risulta già presente"
+export const ERROR_DESK_DOES_NOT_EXIST = "La postazione non esiste"
 
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"
