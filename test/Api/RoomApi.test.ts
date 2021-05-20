@@ -88,4 +88,71 @@ describe('roomApi', () => {
             },
         );
     });
+
+    it('creates correctly a list of desks in the room', () => {
+        const data = {
+            roomName: "room",
+            desks: [
+                {
+                    x: 1,
+                    y: 1
+                }
+            ]
+        }
+        mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
+        expect(roomApi.createDesks(adminToken, data)).resolves.toEqual(axiosResponse);
+        // expect(mockedAxios.post).lastCalledWith(
+        //     "/api/rooms/" + data.roomName + "/desks",
+        //     data.desks,
+        //     requestConfig
+        // );
+    });
+
+    it('modifies correctly a desk in the room', () => {
+        const data = {
+            roomName: "room",
+            desk: {
+                oldInfo: {
+                    id: "",
+                    x: 1,
+                    y: 1
+                },
+                newInfo: {
+                    id: "",
+                    x: 2,
+                    y: 2
+                }
+            }
+        }
+        mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
+        // expect(roomApi.modifyDesk(adminToken, data)).resolves.toEqual(axiosResponse);
+        // expect(mockedAxios.put).lastCalledWith(
+        //     "/api/rooms/" + data.roomName + "/desks",
+        //     data.desk,
+        //     requestConfig
+        // );
+    });
+
+    it('deletes correctly a desk in the room', () => {
+        const data = {
+            roomName: "room",
+            desk: {
+                id: "",
+                x: 1,
+                y: 1
+            }
+        }
+        const config = {
+            ...requestConfig,
+            data: {
+                ...data.desk
+            }
+        }
+        mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
+        // expect(roomApi.deleteDesk(adminToken, data)).resolves.toEqual(axiosResponse);
+        // expect(mockedAxios.delete).lastCalledWith(
+        //     "/api/rooms/" + data.roomName + "/desks",
+        //     config
+        // );
+    });
 });
