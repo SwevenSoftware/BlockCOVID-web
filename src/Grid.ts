@@ -53,7 +53,7 @@ class Room {
         if (this.desks.has(id)) return this.desks.get(id)?.pos;
         return null;
     }
-    
+
     //aggiunge una postazione
     public addDesk(x: number, y: number): number | null {
         if (this.searchByPos(x, y) === null) {

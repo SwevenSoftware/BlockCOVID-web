@@ -51,19 +51,19 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     <div>
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
-                            <Button
-                                onClick={() => {
-                                    let gridProva: GridProva = new GridProva(2,10)
-                                    gridProva.addDesk(1,1)
-                                    gridProva.addDesk(1,2)
-                                    gridProva.addDesk(1,4)
-                                    gridProva.addDesk(1,4)
-                                    {/* gridProva.addDesk(1,4)
+                        <Button
+                            onClick={() => {
+                                let gridProva: GridProva = new GridProva(2, 10)
+                                gridProva.addDesk(1, 1)
+                                gridProva.addDesk(1, 2)
+                                gridProva.addDesk(1, 4)
+                                gridProva.addDesk(1, 4)
+                                {/* gridProva.addDesk(1,4)
                                     gridProva.addDesk(1,5) */}
 
-                                    console.log(gridProva.searchByPos(1,2))
-                                    }}>
-                                Search By Pos
+                                console.log(gridProva.searchByPos(1, 2))
+                            }}>
+                            Search By Pos
                             </Button>
                         <Grid container spacing={3}>
                             {this.popolate()}
