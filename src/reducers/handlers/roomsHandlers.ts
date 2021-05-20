@@ -147,6 +147,11 @@ roomsHandlers[roomTypes.MODIFY_DESK_FAILURE] = function(state, action) {
     if (action.payload.error) {
         console.log(action.payload.error)
         switch (action.payload.error) {
+            case 404: /** room or desk does not exist */
+                return {
+                    ...state,
+                    error: ERROR_DESK_DOES_NOT_EXIST + " o " + ERROR_ROOM_DOES_NOT_EXIST.toLowerCase()
+                }
             default:
                 return {
                     ...state,
