@@ -26,10 +26,24 @@ class Room {
     }
 
     //da unire con getPosition
-    public searchByPos(x: number, y: number): number | null {
+    /* public searchByPos(x: number, y: number): number | null {
         for (let id of this.getIds()) {
             if (this.getPosition(id)?.x === x && this.getPosition(id)?.y === y)
                 return id;
+        }
+        return null;
+    } */
+
+    public searchByPos(x: number, y: number): number | null {
+        this.cells.x
+        this.cells.y
+        for (let id of this.getIds()) {
+            let desk = this.desks.has(id) ? this.desks.get(id)?.pos : null
+            if (desk) {
+                if (desk.x === x && desk.y === y) {
+                    return id;
+                }
+            }
         }
         return null;
     }
