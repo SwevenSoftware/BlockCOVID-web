@@ -180,7 +180,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                                 let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
                                                 this.setState({ openingTimeDateValue: openingTime.time })
                                                 this.setState({ openingTimeStringValue: openingTime.timeString })
-                                                this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
+                                                this.timeInputControl()
                                             } else {
                                                 this.setState({ timeError: true })
                                                 this.setState({ openingTimeStringValue: "" })
@@ -208,7 +208,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                                 let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
                                                 this.setState({ closingTimeDateValue: closingTime.time })
                                                 this.setState({ closingTimeStringValue: closingTime.timeString })
-                                                this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
+                                                this.timeInputControl()
                                             } else {
                                                 this.setState({ timeError: true })
                                                 this.setState({ closingTimeStringValue: "" })
@@ -335,8 +335,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         return notChecked
     }
 
-    private timeInputControl(timeOpen: Date, timeClose: Date): boolean {
-        if (timeOpen >= timeClose) {
+    private timeInputControl(): boolean {
+        if (this.state.openingTimeDateValue >= this.state.openingTimeDateValue) {
             this.setState({ timeError: true })
             return true
         } else {
