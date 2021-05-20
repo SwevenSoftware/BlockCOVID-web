@@ -128,7 +128,7 @@ export class roomAPI {
                 roomName: data.roomName
             }
         }
-        return this.axios.put("api/rooms/" + data.roomName + "/desks", { ...data.desk.oldInfo, ...data.desk.newInfo }, config)
+        return this.axios.put("api/rooms/" + data.roomName + "/desks", { oldInfo: { ...data.desk.oldInfo }, newInfo: { ...data.desk.newInfo } }, config)
     }
 
     deleteDesk(tokenID: string,
