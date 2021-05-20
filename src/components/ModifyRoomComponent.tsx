@@ -70,10 +70,10 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 isModalOpen: false,
                 roomNameError: false,
                 roomNameValue: this.props.data.room.name,
-                openingTimeDateValue: new Date('2021-01-01T08:00'),
-                openingTimeStringValue: '8:00',
-                closingTimeDateValue: new Date('2031-01-01T18:00'),
-                closingTimeStringValue: '18:00',
+                openingTimeDateValue: new Date('2021-01-01T' + this.props.data.room.openingTime),
+                openingTimeStringValue: this.props.data.room.openingTime,
+                closingTimeDateValue: new Date('2031-01-01T' + this.props.data.room.closingTime),
+                closingTimeStringValue: this.props.data.room.closingTime,
                 weekDays: {
                     monday: false,
                     tuesday: false,
@@ -315,13 +315,13 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
     private setDays() {
         this.setState({
             weekDays: {
-                monday: this.props.data.room.openingDays.includes("MONDAY"),
-                tuesday: this.props.data.room.openingDays.includes("TUESDAY"),
-                wednesday: this.props.data.room.openingDays.includes("WEDNESDAY"),
-                thurday: this.props.data.room.openingDays.includes("THURSDAY"),
-                friday: this.props.data.room.openingDays.includes("FRIDAY"),
-                saturday: this.props.data.room.openingDays.includes("SATURDAY"),
-                sunday: this.props.data.room.openingDays.includes("SUNDAY"),
+                monday: this.props.data.room.openingDays.includes("Lunedì"),
+                tuesday: this.props.data.room.openingDays.includes("Martedì"),
+                wednesday: this.props.data.room.openingDays.includes("Mercoledì"),
+                thurday: this.props.data.room.openingDays.includes("Giovedì"),
+                friday: this.props.data.room.openingDays.includes("Venerdì"),
+                saturday: this.props.data.room.openingDays.includes("Sabato"),
+                sunday: this.props.data.room.openingDays.includes("Domanica"),
             },
         })
     }
@@ -413,30 +413,19 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         this.setState({
             isButtonDisabled: true,
             isModalOpen: false,
-            dimHeight: 1,
             heightError: false,
-            dimWidth: 1,
+            dimHeight: this.props.data.room.height,
+            dimWidth: this.props.data.room.width,
             widthError: false,
-            weekDays: {
-                monday: false,
-                tuesday: false,
-                wednesday: false,
-                thursday: false,
-                friday: false,
-                saturday: false,
-                sunday: false,
-            },
-            openingTimeDateValue: new Date('2021-01-01T08:00'),
-            closingTimeDateValue: new Date('2031-01-01T18:00'),
+            openingTimeDateValue: new Date('2021-01-01T' + this.props.data.room.openingTime),
+            closingTimeDateValue: new Date('2031-01-01T' + this.props.data.room.closingTime),
             weekDaysError: false,
-            roomNameValue: "",
+            roomNameValue: this.props.data.room.name,
             timeError: false,
-            openingTimeStringValue: '8:00',
-            closingTimeStringValue: '18:00',
+            openingTimeStringValue: this.props.data.room.openingTime,
+            closingTimeStringValue: this.props.data.room.closingTime,
         })
-        // if (!confirm) {
-        //     this.setDays()
-        // }
+        this.setDays()
     }
 
     private handleChangeRoomName(roomName: string): void {
