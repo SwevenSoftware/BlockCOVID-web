@@ -94,6 +94,7 @@ class DotGrid extends Component<DotGridProps> {
         }
     }
 
+    //singolo quadratino della postazione, da premere per selezionare una postazione
     checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
         const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect();
         if (!boundRect) return;

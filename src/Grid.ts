@@ -25,6 +25,7 @@ class Room {
         this.cells = { x: cellsX, y: cellsY };
     }
 
+    //da unire con getPosition
     public searchByPos(x: number, y: number): number | null {
         for (let id of this.getIds()) {
             if (this.getPosition(id)?.x === x && this.getPosition(id)?.y === y)
@@ -33,11 +34,13 @@ class Room {
         return null;
     }
 
+    //da unire con searchByPos
     public getPosition(id: number): Pos2d | null | undefined {
         if (this.desks.has(id)) return this.desks.get(id)?.pos;
         return null;
     }
-
+    
+    //aggiunge una postazione
     public addDesk(x: number, y: number): number | null {
         if (this.searchByPos(x, y) === null) {
             const nextId: number =
@@ -48,6 +51,7 @@ class Room {
         return null;
     }
 
+    //elimina la singola postazione
     public removeDesk(id: number): void {
         delete this.desks[id];
     }
@@ -57,6 +61,7 @@ class Room {
         if (getter) getter.inUse = inUse;
     }
 
+    //dice se una postazione è in uso
     public isInUse(id: number): boolean | null | undefined {
         if (this.desks.has(id)) return this.desks.get(id)?.inUse;
         return null;
@@ -66,6 +71,7 @@ class Room {
         return Array.from(this.desks.keys());
     }
 
+    //pulisce la griglia
     public clearDesks() {
         this.desks.clear();
     }
