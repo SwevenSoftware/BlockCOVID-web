@@ -90,21 +90,16 @@ export class roomAPI {
     createDesks(tokenID: string,
         data: {
             roomName: string,
-            desks: [
-                {
-                    x: number,
-                    y: number
-                }
-            ]
+            desks: {
+                x: number,
+                y: number
+            }[]
         }
     ) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
-            },
-            params: {
-                nameRoom: data.roomName
             }
         }
         return this.axios.post("api/rooms/" + data.roomName + "/desks", data.desks, config)
@@ -124,9 +119,6 @@ export class roomAPI {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
             },
-            params: {
-                roomName: data.roomName
-            }
         }
         return this.axios.put("api/rooms/" + data.roomName + "/desks", { oldInfo: { ...data.desk.oldInfo }, newInfo: { ...data.desk.newInfo } }, config)
     }
@@ -141,9 +133,6 @@ export class roomAPI {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
-            },
-            params: {
-                roomName: data.roomName
             },
             data: {
                 ...data.desk
