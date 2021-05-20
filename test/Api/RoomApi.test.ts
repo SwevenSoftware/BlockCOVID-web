@@ -23,6 +23,10 @@ describe('roomApi', () => {
         }
     }
 
+    afterEach(() => {
+        jest.clearAllMocks()
+    })
+
     it('correct create room', () => {
         const data = {
             name: "",
@@ -101,11 +105,11 @@ describe('roomApi', () => {
         }
         mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
         expect(roomApi.createDesks(adminToken, data)).resolves.toEqual(axiosResponse);
-        // expect(mockedAxios.post).lastCalledWith(
-        //     "/api/rooms/" + data.roomName + "/desks",
-        //     data.desks,
-        //     requestConfig
-        // );
+        expect(mockedAxios.post).lastCalledWith(
+            "/api/rooms/" + data.roomName + "/desks",
+            data.desks,
+            requestConfig
+        );
     });
 
     it('modifies correctly a desk in the room', () => {
@@ -124,13 +128,13 @@ describe('roomApi', () => {
                 }
             }
         }
-        mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        // expect(roomApi.modifyDesk(adminToken, data)).resolves.toEqual(axiosResponse);
-        // expect(mockedAxios.put).lastCalledWith(
-        //     "/api/rooms/" + data.roomName + "/desks",
-        //     data.desk,
-        //     requestConfig
-        // );
+        mockedAxios.put.mockImplementationOnce(() => Promise.resolve(axiosResponse));
+        expect(roomApi.modifyDesk(adminToken, data)).resolves.toEqual(axiosResponse);
+        expect(mockedAxios.put).lastCalledWith(
+            "/api/rooms/" + data.roomName + "/desks",
+            data.desk,
+            requestConfig
+        );
     });
 
     it('deletes correctly a desk in the room', () => {
@@ -148,11 +152,11 @@ describe('roomApi', () => {
                 ...data.desk
             }
         }
-        mockedAxios.post.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        // expect(roomApi.deleteDesk(adminToken, data)).resolves.toEqual(axiosResponse);
-        // expect(mockedAxios.delete).lastCalledWith(
-        //     "/api/rooms/" + data.roomName + "/desks",
-        //     config
-        // );
+        mockedAxios.delete.mockImplementationOnce(() => Promise.resolve(axiosResponse));
+        expect(roomApi.deleteDesk(adminToken, data)).resolves.toEqual(axiosResponse);
+        expect(mockedAxios.delete).lastCalledWith(
+            "/api/rooms/" + data.roomName + "/desks",
+            config
+        );
     });
 });

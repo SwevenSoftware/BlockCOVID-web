@@ -102,7 +102,7 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        return this.axios.post("api/rooms/" + data.roomName + "/desks", data.desks, config)
+        return this.axios.post("/api/rooms/" + data.roomName + "/desks", data.desks, config)
     }
 
     modifyDesk(tokenID: string,
@@ -120,7 +120,7 @@ export class roomAPI {
                 "Authorization": tokenID
             },
         }
-        return this.axios.put("api/rooms/" + data.roomName + "/desks", { oldInfo: { ...data.desk.oldInfo }, newInfo: { ...data.desk.newInfo } }, config)
+        return this.axios.put("/api/rooms/" + data.roomName + "/desks", { oldInfo: { ...data.desk.oldInfo }, newInfo: { ...data.desk.newInfo } }, config)
     }
 
     deleteDesk(tokenID: string,
@@ -138,7 +138,7 @@ export class roomAPI {
                 ...data.desk
             }
         }
-        return this.axios.delete("api/rooms/" + data.roomName + "/desks", config)
+        return this.axios.delete("/api/rooms/" + data.roomName + "/desks", config)
     }
 }
 
