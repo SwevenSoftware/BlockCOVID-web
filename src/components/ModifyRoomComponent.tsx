@@ -417,6 +417,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             dimHeight: this.props.data.room.height,
             dimWidth: this.props.data.room.width,
             widthError: false,
+            roomNameError: false,
             openingTimeDateValue: new Date('2021-01-01T' + this.props.data.room.openingTime),
             closingTimeDateValue: new Date('2031-01-01T' + this.props.data.room.closingTime),
             weekDaysError: false,
