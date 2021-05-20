@@ -69,7 +69,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 isButtonDisabled: true,
                 isModalOpen: false,
                 roomNameError: false,
-                roomNameValue: "",
+                roomNameValue: this.props.data.room.name,
                 openingTimeDateValue: new Date('2021-01-01T08:00'),
                 openingTimeStringValue: '8:00',
                 closingTimeDateValue: new Date('2031-01-01T18:00'),
@@ -85,8 +85,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 },
                 weekDaysError: false,
                 timeError: false,
-                dimHeight: 1,
-                dimWidth: 1,
+                dimHeight: this.props.data.room.height,
+                dimWidth: this.props.data.room.width,
                 heightError: false,
                 widthError: false
             }
@@ -125,7 +125,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         variant="outlined"
                                         error={this.state.roomNameError}
                                         helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                        value={this.props.data.room.name}
+                                        value={this.state.roomNameValue}
                                         onChange={(e) => {
                                             this.handleChangeRoomName(e.target.value);
                                             this.roomNameValidate(e.target.value);
@@ -222,16 +222,16 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             </div>
                             <DialogContentText>
                                 Dimensione stanza
-                                </DialogContentText>
+                            </DialogContentText>
                             <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
-                                    label="Altezza"
+                                    label={"Altezza attuale: "}
                                     variant="outlined"
                                     error={this.state.heightError}
                                     helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.props.data.room.height}
+                                    value={this.state.dimHeight}
                                     onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
                                 />
                             </div>
@@ -243,7 +243,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     variant="outlined"
                                     error={this.state.widthError}
                                     helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.props.data.room.width}
+                                    value={this.state.dimWidth}
                                     onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
                                 />
                             </div>
