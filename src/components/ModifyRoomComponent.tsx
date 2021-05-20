@@ -321,7 +321,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 thurday: this.props.data.room.openingDays.includes("Giovedì"),
                 friday: this.props.data.room.openingDays.includes("Venerdì"),
                 saturday: this.props.data.room.openingDays.includes("Sabato"),
-                sunday: this.props.data.room.openingDays.includes("Domanica"),
+                sunday: this.props.data.room.openingDays.includes("Domenica"),
             },
         })
     }
