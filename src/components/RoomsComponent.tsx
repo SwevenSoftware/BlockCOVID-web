@@ -49,57 +49,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     <div>
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
-                        <Button onClick={() => {
-                            console.log("create desks")
-                            let data = {
-                                roomName: "stanzamod3",
-                                desks: [
-                                    {
-                                        x: 1,
-                                        y: 1
-                                    }
-                                ]
-                            }
-                            this.props.dispatch.createDesks(data)
-                        }}
-                        >
-                            Create desks
-                        </Button>
-                        <Button onClick={() => {
-                            let data = {
-                                roomName: "stanzamod3",
-                                desk: {
-                                    oldInfo: {
-                                        id: this.props.state.rooms.rooms[4]?.desks[0]?.deskId,
-                                        x: this.props.state.rooms.rooms[4]?.desks[0]?.x,
-                                        y: this.props.state.rooms.rooms[4]?.desks[0]?.y
-                                    },
-                                    newInfo: {
-                                        id: "",
-                                        x: 2,
-                                        y: 2
-                                    }
-                                }
-                            }
-                            this.props.dispatch.modifyDesk(data)
-                        }}
-                        >
-                            Modify desk
-                        </Button>
-                        <Button onClick={() => {
-                            let data = {
-                                roomName: "stanzamod3",
-                                desk: {
-                                    id: this.props.state.rooms.rooms[4]?.desks[0]?.deskId,
-                                    x: this.props.state.rooms.rooms[4]?.desks[0]?.x,
-                                    y: this.props.state.rooms.rooms[4]?.desks[0]?.y
-                                }
-                            }
-                            this.props.dispatch.deleteDesk(data)
-                        }}
-                        >
-                            Delete desk
-                        </Button>
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
@@ -191,15 +140,6 @@ const mapDispatchToProps = (dispatch: Function) => {
         dispatch: {
             getRooms: (data: { fromTimestamp: string, toTimestamp: string }) => {
                 dispatch(roomActionsResolver.getRooms(data))
-            },
-            createDesks: (data: { roomName: string, desks: [{ x: number, y: number }] }) => {
-                dispatch(roomActionsResolver.createDesks(data))
-            },
-            modifyDesk: (data: { roomName: string, desk: { oldInfo: { id: string, x: number, y: number }, newInfo: { id: string, x: number, y: number } } }) => {
-                dispatch(roomActionsResolver.modifyDesk(data))
-            },
-            deleteDesk: (data: { roomName: string, desk: { id: string, x: number, y: number } }) => {
-                dispatch(roomActionsResolver.deleteDesk(data))
             }
         }
     }
