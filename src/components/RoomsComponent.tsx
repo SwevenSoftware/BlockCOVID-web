@@ -52,7 +52,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
                         <Button onClick={() => {
-                            console.log("create desks")
                             let data = {
                                 roomName: "stanzamod3",
                                 desks: [
@@ -65,7 +64,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                             this.props.dispatch.createDesks(data)
                         }}
                         >
-                            Create desks
+                            Create desks in 'stanzamod3'
                         </Button>
                         <Button onClick={() => {
                             let data = {
@@ -79,7 +78,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                             this.props.dispatch.deleteDesk(data)
                         }}
                         >
-                            Delete desk
+                            Delete desk in 'stanzamod3'
                         </Button>
                         <Grid container spacing={3}>
                             {this.popolate()}

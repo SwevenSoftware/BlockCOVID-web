@@ -22,10 +22,10 @@ export class roomActions {
         }
     }
 
-    modifyRoom(url: string, roomName: string, data: RoomInformation) {
+    modifyRoom(roomName: string, data: RoomInformation) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
-            this.roomApi.modifyRoom(tokenID, url, { ...data, roomName: roomName })
+            this.roomApi.modifyRoom(tokenID, { ...data, roomName: roomName })
                 .then((res) => {
                     dispatch(this.successModifyRoom(res.data))
                     dispatch(this.getRooms({ fromTimestamp: '', toTimestamp: '' }))
