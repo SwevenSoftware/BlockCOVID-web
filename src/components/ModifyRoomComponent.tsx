@@ -1,9 +1,9 @@
 /* react */
-import React, { Component, createRef, RefObject } from "react";
+import React, { Component, createRef, RefObject } from "react"
 /* redux */
 import { connect } from 'react-redux'
 import roomActionResolver from '../actions/roomsActions'
-import { RoomInformation } from "../Api/roomAPI";
+import {RoomInformation} from "../Api/roomAPI"
 /* types */
 import {
     ERROR_INSERTION_NUMBER,
@@ -26,7 +26,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
-import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../theme'
@@ -128,8 +128,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
                                         value={this.state.roomNameValue}
                                         onChange={(e) => {
-                                            this.handleChangeRoomName(e.target.value);
-                                            this.roomNameValidate(e.target.value);
+                                            this.handleChangeRoomName(e.target.value)
+                                            this.roomNameValidate(e.target.value)
                                         }}
                                     // TODO: implement error, helperText, value, onChange
                                     />
@@ -353,7 +353,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
     }
 
     private handleChangeSize(sizeNumber: string, size: string): void {
-        let reg = new RegExp("^[0-9]{1,8}$");
+        let reg = new RegExp("^[0-9]{1,8}$")
         if (!sizeNumber) {
             this.setState({ ...this.state, [size]: "" })
             if (size === "dimHeight") {
@@ -442,33 +442,35 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
     }
 
     private handleConfirm(): void {
-        let flagErr = false;
+        let flagErr = false
         let weekDays = [this.state.weekDays.monday, this.state.weekDays.tuesday,
         this.state.weekDays.wednesday, this.state.weekDays.thursday,
-        this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday];
+        this.state.weekDays.friday, this.state.weekDays.saturday, this.state.weekDays.sunday]
 
-        let openT = this.state.openingTimeStringValue;
-        let closeT = this.state.closingTimeStringValue;
-        let height = this.state.dimHeight;
-        let width = this.state.dimWidth;
-        let roomName = this.state.roomNameValue;
-        flagErr = (this.roomNameValidate(roomName) ? true : flagErr);
-        flagErr = (this.weekDaysInputControl(weekDays) ? true : flagErr);
-        flagErr = ((this.heightInputControl(height) && height != NaN) ? true : flagErr);
-        flagErr = ((this.widthInputControl(width) && width != NaN) ? true : flagErr);
-        flagErr = (!openT ? true : flagErr);
-        flagErr = (!closeT ? true : flagErr);
+        let openT = this.state.openingTimeStringValue
+        let closeT = this.state.closingTimeStringValue
+        let height = this.state.dimHeight
+        let width = this.state.dimWidth
+        let roomName = this.state.roomNameValue
+        flagErr = (this.roomNameValidate(roomName) ? true : flagErr)
+        flagErr = (this.weekDaysInputControl(weekDays) ? true : flagErr)
+        flagErr = (this.heightInputControl(height) ? true : flagErr)
+        flagErr = (this.widthInputControl(width) ? true : flagErr)
+        flagErr = (!openT ? true : flagErr)
+        flagErr = (!closeT ? true : flagErr)
 
         if (!flagErr) {
-            const days = new Array();
-            if (weekDays[0]) days.push("MONDAY");
-            if (weekDays[1]) days.push("TUESDAY");
-            if (weekDays[2]) days.push("WEDNESDAY");
-            if (weekDays[3]) days.push("THURSDAY");
-            if (weekDays[4]) days.push("FRIDAY");
-            if (weekDays[5]) days.push("SATURDAY");
-            if (weekDays[6]) days.push("SUNDAY");
-            this.props.dispatch.modifyRoom({
+            const days = new Array()
+            if (weekDays[0]) days.push("MONDAY")
+            if (weekDays[1]) days.push("TUESDAY")
+            if (weekDays[2]) days.push("WEDNESDAY")
+            if (weekDays[3]) days.push("THURSDAY")
+            if (weekDays[4]) days.push("FRIDAY")
+            if (weekDays[5]) days.push("SATURDAY")
+            if (weekDays[6]) days.push("SUNDAY")
+            this.props.dispatch.modifyRoom(
+              this.props.data.room.name,
+              {
                 name: this.state.roomNameValue,
                 openingAt: this.state.openingTimeStringValue,
                 closingAt: this.state.closingTimeStringValue,
@@ -477,8 +479,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 width: this.state.dimWidth
             })
             this.handleCloseButton()
-        } else {
-            //message errore
         }
     }
 
@@ -505,8 +505,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (url: string, roomName: string, data: RoomInformation) => {
-                dispatch(roomActionResolver.modifyRoom(url, roomName, data))
+            modifyRoom: (roomName: string, data: RoomInformation) => {
+                dispatch(roomActionResolver.modifyRoom(roomName, data))
             }
         }
     }
