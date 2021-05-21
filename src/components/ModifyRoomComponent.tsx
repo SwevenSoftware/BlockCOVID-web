@@ -2,7 +2,8 @@
 import React, { Component, createRef, RefObject } from "react";
 /* redux */
 import { connect } from 'react-redux'
-import roomActionResolver, { roomInformation } from '../actions/roomsActions'
+import roomActionResolver from '../actions/roomsActions'
+import { RoomInformation } from "../Api/roomAPI";
 /* types */
 import {
     ERROR_INSERTION_NUMBER,
@@ -498,7 +499,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: {
-            modifyRoom: (url: string, roomName: string, data: roomInformation) => {
+            modifyRoom: (url: string, roomName: string, data: RoomInformation) => {
                 dispatch(roomActionResolver.modifyRoom(url, roomName, data))
             }
         }

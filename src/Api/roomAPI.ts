@@ -1,5 +1,20 @@
 import axios, { AxiosStatic } from "axios"
 
+export interface RoomInformation {
+    name: string,
+    openingAt: string,
+    closingAt: string,
+    openingDays: string[],
+    width: number,
+    height: number
+}
+
+export interface DeskInformation {
+    id: string,
+    x: number,
+    y: number
+}
+
 export class roomAPI {
     private axios: AxiosStatic
 
@@ -7,16 +22,7 @@ export class roomAPI {
         this.axios = axios
     }
 
-    createRoom(tokenID: string,
-        data: {
-            name: string,
-            openingAt: string,
-            closingAt: string,
-            openingDays: string[],
-            width: number,
-            height: number
-        }
-    ) {
+    createRoom(tokenID: string, data: RoomInformation) {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -79,6 +85,60 @@ export class roomAPI {
 
         const url = '/api/rooms'
         return this.axios.get(url, config)
+    }
+
+    createDesks(tokenID: string,
+        data: {
+            roomName: string,
+            desks: {
+                x: number,
+                y: number
+            }[]
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            }
+        }
+        return this.axios.post("/api/rooms/" + data.roomName + "/desks", data.desks, config)
+    }
+
+    modifyDesk(tokenID: string,
+        data: {
+            roomName: string,
+            desk: {
+                oldInfo: DeskInformation,
+                newInfo: DeskInformation
+            }
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            },
+        }
+        return this.axios.put("/api/rooms/" + data.roomName + "/desks", { oldInfo: { ...data.desk.oldInfo }, newInfo: { ...data.desk.newInfo } }, config)
+    }
+
+    deleteDesk(tokenID: string,
+        data: {
+            roomName: string,
+            desk: DeskInformation
+        }
+    ) {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenID
+            },
+            data: {
+                ...data.desk
+            }
+        }
+        return this.axios.delete("/api/rooms/" + data.roomName + "/desks", config)
     }
 }
 

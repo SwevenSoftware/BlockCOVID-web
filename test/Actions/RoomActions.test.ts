@@ -4,15 +4,16 @@ import fetchMock from 'fetch-mock'
 import thunk from "redux-thunk";
 import { AxiosResponse } from "axios";
 import { roomActions } from "../../src/actions/roomsActions";
+import { RoomInformation, DeskInformation } from "../../src/Api/roomAPI";
 
 const mockStore = configureMockStore([thunk])
 
-describe('Account Action', () => {
+describe('Room actions', () => {
     afterEach(() => {
         fetchMock.restore()
     })
 
-    const roomInformation = {
+    const roomInformation: RoomInformation = {
         name: "room",
         openingAt: "08:00",
         closingAt: "18:00",
@@ -47,7 +48,7 @@ describe('Account Action', () => {
         headers: {}
     }
 
-    it('should correctly handle account creation', function() {
+    it('should correctly handle room creation', function() {
         roomsApi.createRoom = jest.fn(async () => {
             return axiosResponse
         })
@@ -64,7 +65,7 @@ describe('Account Action', () => {
         // expect(store.getActions()).toContain(expectedAction)
     });
 
-    it('should correctly handle account modification', function() {
+    it('should correctly handle room modification', function() {
         roomsApi.modifyRoom = jest.fn(async () => {
             return axiosResponse
         })
@@ -113,7 +114,7 @@ describe('Account Action', () => {
 
     /* ERRORS */
 
-    it('should correctly handle account creation error', function() {
+    it('should correctly handle room creation error', function() {
         roomsApi.createRoom = jest.fn(async () => {
             throw new Error()
         })
@@ -130,7 +131,7 @@ describe('Account Action', () => {
         // expect(store.getActions()).toContain(expectedAction)
     });
 
-    it('should correctly handle account modification error', function() {
+    it('should correctly handle room modification error', function() {
         roomsApi.modifyRoom = jest.fn(async () => {
             throw new Error()
         })
