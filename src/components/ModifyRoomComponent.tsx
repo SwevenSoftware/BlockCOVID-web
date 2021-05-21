@@ -3,7 +3,7 @@ import React, { Component, createRef, RefObject } from "react"
 /* redux */
 import { connect } from 'react-redux'
 import roomActionResolver from '../actions/roomsActions'
-import {RoomInformation} from "../Api/roomAPI"
+import { RoomInformation } from "../Api/roomAPI"
 /* types */
 import {
     ERROR_INSERTION_NUMBER,
@@ -469,15 +469,15 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             if (weekDays[5]) days.push("SATURDAY")
             if (weekDays[6]) days.push("SUNDAY")
             this.props.dispatch.modifyRoom(
-              this.props.data.room.name,
-              {
-                name: this.state.roomNameValue,
-                openingAt: this.state.openingTimeStringValue,
-                closingAt: this.state.closingTimeStringValue,
-                openingDays: days,
-                height: this.state.dimHeight,
-                width: this.state.dimWidth
-            })
+                this.props.data.room.name,
+                {
+                    name: this.state.roomNameValue,
+                    openingAt: this.state.openingTimeStringValue,
+                    closingAt: this.state.closingTimeStringValue,
+                    openingDays: days,
+                    height: this.state.dimHeight,
+                    width: this.state.dimWidth
+                })
             this.handleCloseButton()
         }
     }
