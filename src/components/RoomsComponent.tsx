@@ -51,6 +51,36 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     <div>
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
+                        <Button onClick={() => {
+                            console.log("create desks")
+                            let data = {
+                                roomName: "stanzamod3",
+                                desks: [
+                                    {
+                                        x: 1,
+                                        y: 1
+                                    }
+                                ]
+                            }
+                            this.props.dispatch.createDesks(data)
+                        }}
+                        >
+                            Create desks
+                        </Button>
+                        <Button onClick={() => {
+                            let data = {
+                                roomName: "stanzamod3",
+                                desk: {
+                                    id: this.props.state.rooms.rooms[3]?.desks[0]?.deskId,
+                                    x: this.props.state.rooms.rooms[3]?.desks[0]?.x,
+                                    y: this.props.state.rooms.rooms[3]?.desks[0]?.y
+                                }
+                            }
+                            this.props.dispatch.deleteDesk(data)
+                        }}
+                        >
+                            Delete desk
+                        </Button>
                         <Button
                             onClick={() => {
                                 let gridProva: GridProva = new GridProva(2, 10)
@@ -58,9 +88,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                 gridProva.addDesk(1, 2)
                                 gridProva.addDesk(1, 4)
                                 gridProva.addDesk(1, 4)
-                                {/* gridProva.addDesk(1,4)
-                                    gridProva.addDesk(1,5) */}
-
                                 console.log(gridProva.searchByPos(1, 2))
                             }}>
                             Search By Pos
@@ -156,6 +183,12 @@ const mapDispatchToProps = (dispatch: Function) => {
         dispatch: {
             getRooms: (data: { fromTimestamp: string, toTimestamp: string }) => {
                 dispatch(roomActionsResolver.getRooms(data))
+            },
+            createDesks: (data: { roomName: string, desks: [{ x: number, y: number }] }) => {
+                dispatch(roomActionsResolver.createDesks(data))
+            },
+            deleteDesk: (data: { roomName: string, desk: { id: string, x: number, y: number } }) => {
+                dispatch(roomActionsResolver.deleteDesk(data))
             }
         }
     }
