@@ -145,7 +145,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div className="alignCentralPencil">
                                     <DotGrid
                                         mode="modifyGrid"
-                                        data = {{
+                                        data={{
                                             width: this.props.data.room.width,
                                             height: this.props.data.room.height,
                                             openingTime: null,
@@ -160,7 +160,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div>
                                     <DotGrid
                                         mode="modifyInformation"
-                                        data = {{
+                                        data={{
                                             width: this.props.data.room.width,
                                             height: this.props.data.room.height,
                                             openingTime: this.props.data.room.openingTime,

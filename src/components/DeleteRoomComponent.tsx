@@ -63,7 +63,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="deleteGrid"
-                                data = {{
+                                data={{
                                     width: this.props.data.room.width,
                                     height: this.props.data.room.height,
                                     openingTime: null,
@@ -78,7 +78,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div>
                             <DotGrid
                                 mode="deleteInformation"
-                                data = {{
+                                data={{
                                     width: this.props.data.room.width,
                                     height: this.props.data.room.height,
                                     openingTime: this.props.data.room.openingTime,
