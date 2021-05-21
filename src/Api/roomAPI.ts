@@ -32,7 +32,7 @@ export class roomAPI {
         return this.axios.post("/api/rooms", data, config)
     }
 
-    modifyRoom(tokenID: string, url: string,
+    modifyRoom(tokenID: string,
         data: {
             roomName: string,
             name: string
@@ -49,7 +49,7 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        return this.axios.put(url + data.roomName, data, config)
+        return this.axios.put("/api/rooms/" + data.roomName, data, config)
     }
 
     deleteRoom(tokenID: string, url: string,

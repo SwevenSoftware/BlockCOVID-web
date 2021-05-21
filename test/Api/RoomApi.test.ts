@@ -57,7 +57,7 @@ describe('roomApi', () => {
         }
 
         mockedAxios.put.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(roomApi.modifyRoom(adminToken, "/api/rooms/", data)).resolves.toEqual(axiosResponse);
+        expect(roomApi.modifyRoom(adminToken, data)).resolves.toEqual(axiosResponse);
         expect(mockedAxios.put).lastCalledWith(
             "/api/rooms/" + data.roomName,
             data,
