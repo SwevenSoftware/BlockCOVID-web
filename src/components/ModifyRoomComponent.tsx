@@ -274,7 +274,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
                                     <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
                                 </ButtonGroup>
-                                <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
                             </div>
                         </DialogContent>
                         <DialogActions>
@@ -336,7 +336,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
     }
 
     private timeInputControl(): boolean {
-        if (this.state.openingTimeDateValue >= this.state.openingTimeDateValue) {
+        if (this.state.openingTimeDateValue < this.state.closingTimeDateValue) {
             this.setState({ timeError: true })
             return true
         } else {
