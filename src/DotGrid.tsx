@@ -44,46 +44,43 @@ class DotGrid extends Component<DotGridProps> {
         posEnd: Pos2d
     }
     grid: Grid
+
     constructor(props) {
         super(props)
         this.canvasRef = createRef<HTMLCanvasElement>()
-        this.handleMouseMove = this.handleMouseMove.bind(this)
-        this.checkBox = this.checkBox.bind(this)
-
-        this.mousePos = { x: -10, y: -10 }
-        this.selection = {
-            started: false,
-            ended: false,
-            posStart: { x: 0, y: 0 },
-            posEnd: { x: 0, y: 0 }
-        }
         this.gridSettings = {
             radius: 2,
             width: (props.data.width + 1) * 30,
             height: (props.data.height + 1) * 30,
             dim: 30
         }
-
-        /* let dim
-        if (this.props.data.width < this.props.data.height) {
-            dim = this.props.data.height
-        } else {
-            dim = this.props.data.width
-        } */
-
-        this.grid = new Grid(2, 10)                //DEBUG
+        this.mousePos = {
+            x: -10,
+            y: -10
+        }
+        this.selection = {
+            started: false,
+            ended: false,
+            posStart: {
+                x: 0,
+                y: 0
+            },
+            posEnd: {
+                x: 0,
+                y: 0
+            }
+        }
+        this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
+        this.handleMouseMove = this.handleMouseMove.bind(this)
+        this.checkBox = this.checkBox.bind(this)
     }
 
-    public setSize(width: number, height: number) {
+    public setSize(width: number, height: number): void {
         this.canvasRef.current?.setAttribute("width", width.toString())
         this.canvasRef.current?.setAttribute("height", height.toString())
     }
 
-    componentDidMount() {
-        setTimeout(() => this.updateCanvas(), 100)
-    }
-
-    handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
+    handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void {
         if (this.mousePos.x !== e.clientX || this.mousePos.y !== e.clientY) {
             this.mousePos = {
                 x: e.clientX,
@@ -93,8 +90,11 @@ class DotGrid extends Component<DotGridProps> {
         }
     }
 
-    // singolo quadratino della postazione, da premere per selezionare una postazione
-    checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
+    /**
+     * Adds a desk in the position where the mouse clicked
+     * @param e - mouse event which provides the position
+     */
+    checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void {
         const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect()
         if (!boundRect) return
         const pointPos: Pos2d = {
@@ -135,18 +135,22 @@ class DotGrid extends Component<DotGridProps> {
         ctx.closePath()
         ctx.beginPath()
         ctx.arc(x, y, radius, 0, Math.PI * 2)
-        if (inUse) ctx.fillStyle = "orange"
-        else ctx.fillStyle = "green"
+        if (inUse) {
+            ctx.fillStyle = "orange"
+        }
+        else {
+            ctx.fillStyle = "green"
+        }
         ctx.fill()
         ctx.closePath()
     }
 
-    public resetView() {
+    public resetView(): void{
         this.grid.clearDesks()
         this.updateCanvas()
     }
 
-    updateCanvas() {
+    updateCanvas(): void {
         const canvas: HTMLCanvasElement | null = this.canvasRef.current
         if (!canvas) return
         const canvasRect: DOMRect = canvas.getBoundingClientRect()
@@ -184,7 +188,7 @@ class DotGrid extends Component<DotGridProps> {
         for (var i in ids) {
             const pos: Pos2d | null | undefined = this.grid.getPosition(ids[i])
             const inUse: boolean | null | undefined = this.grid.isInUse(ids[i])
-            if (pos && inUse != undefined && inUse != null)
+            if (pos && inUse != undefined)
                 DotGrid.drawDesk(
                     ctx,
                     pos.x,
@@ -193,6 +197,10 @@ class DotGrid extends Component<DotGridProps> {
                     inUse,
                 )
         }
+    }
+
+    componentDidMount() {
+        setTimeout(() => this.updateCanvas(), 100)
     }
 
     render() {
