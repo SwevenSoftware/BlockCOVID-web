@@ -63,11 +63,14 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="deleteGrid"
-                                sizeH={this.props.data.room.height}
-                                sizeW={this.props.data.room.width}
-                                openingTime={this.props.data.room.openingTime}
-                                closingTime={this.props.data.room.closingTime}
-                                weekDays={this.props.data.room.openingDays}
+                                data = {{
+                                    width: this.props.data.room.width,
+                                    height: this.props.data.room.height,
+                                    openingTime: null,
+                                    closingTime: null,
+                                    weekDays: null,
+                                    desks: this.props.data.room.desks
+                                }}
                             />
                         </div>
                     </DialogContent>
@@ -75,11 +78,14 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div>
                             <DotGrid
                                 mode="deleteInformation"
-                                sizeH={this.props.data.room.height}
-                                sizeW={this.props.data.room.width}
-                                openingTime={this.props.data.room.openingTime}
-                                closingTime={this.props.data.room.closingTime}
-                                weekDays={this.props.data.room.openingDays}
+                                data = {{
+                                    width: this.props.data.room.width,
+                                    height: this.props.data.room.height,
+                                    openingTime: this.props.data.room.openingTime,
+                                    closingTime: this.props.data.room.closingTime,
+                                    weekDays: this.props.data.room.openingDays,
+                                    desks: null
+                                }}
                             />
                         </div>
                     </DialogContent>

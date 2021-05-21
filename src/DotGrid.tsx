@@ -1,87 +1,86 @@
 /* react */
-import React, { Component, createRef, RefObject } from "react";
-/* materia ui */
+import React, { Component, createRef, RefObject } from "react"
+/* material-ui */
 import DialogContentText from '@material-ui/core/DialogContentText'
 import FormLabel from '@material-ui/core/DialogContentText'
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button"
 import DialogContent from '@material-ui/core/DialogContent'
-
-/* other files */
-import Grid from "./Grid";
+/* others */
+import Grid from "./Grid"
+import { DeskInformation } from "./Api/roomAPI"
 
 interface Pos2d {
-    x: number;
-    y: number;
+    x: number,
+    y: number
 }
 
 interface Settings {
-    radius: number;
-    width: number;
-    height: number;
-    mode: string;
-    dim: number;
+    radius: number,
+    width: number,
+    height: number,
+    dim: number
 }
 
 interface DotGridProps {
-    mode: string;
-    sizeH: number;
-    sizeW: number;
-    openingTime: string;
-    closingTime: string;
-    weekDays: string[];
+    mode: string,
+    data: {
+        width: number,
+        height: number,
+        openingTime: string | null,
+        closingTime: string | null,
+        weekDays: string[] | null,
+        desks: DeskInformation[] | null
+    }
 }
 
 class DotGrid extends Component<DotGridProps> {
-    canvasRef: RefObject<HTMLCanvasElement>;
-    gridSettings: Settings;
-    mousePos: Pos2d;
+    canvasRef: RefObject<HTMLCanvasElement>
+    gridSettings: Settings
+    mousePos: Pos2d
     selection: {
-        started: boolean;
-        ended: boolean;
-        posStart: Pos2d;
-        posEnd: Pos2d;
-    };
-    grid: Grid;
+        started: boolean
+        ended: boolean
+        posStart: Pos2d
+        posEnd: Pos2d
+    }
+    grid: Grid
     constructor(props) {
-        super(props);
-        this.canvasRef = createRef<HTMLCanvasElement>();
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.checkBox = this.checkBox.bind(this);
+        super(props)
+        this.canvasRef = createRef<HTMLCanvasElement>()
+        this.handleMouseMove = this.handleMouseMove.bind(this)
+        this.checkBox = this.checkBox.bind(this)
 
-        this.mousePos = { x: -10, y: -10 };
+        this.mousePos = { x: -10, y: -10 }
         this.selection = {
             started: false,
             ended: false,
             posStart: { x: 0, y: 0 },
             posEnd: { x: 0, y: 0 }
-        };
+        }
         this.gridSettings = {
             radius: 2,
-            width: (props.sizeW + 1) * 30,
-            height: (props.sizeH + 1) * 30,
-            mode: props.mode,
+            width: (props.data.width + 1) * 30,
+            height: (props.data.height + 1) * 30,
             dim: 30
-        };
+        }
 
         /* let dim
-        if (this.props.sizeW < this.props.sizeH) {
-            dim = this.props.sizeH
+        if (this.props.data.width < this.props.data.height) {
+            dim = this.props.data.height
         } else {
-            dim = this.props.sizeW
+            dim = this.props.data.width
         } */
 
-        this.grid = new Grid(2, 10);                //DEBUG
+        this.grid = new Grid(2, 10)                //DEBUG
     }
 
     public setSize(width: number, height: number) {
-        this.canvasRef.current?.setAttribute("width", width.toString());
-        this.canvasRef.current?.setAttribute("height", width.toString());
+        this.canvasRef.current?.setAttribute("width", width.toString())
+        this.canvasRef.current?.setAttribute("height", height.toString())
     }
 
     componentDidMount() {
-        setTimeout(() => this.updateCanvas(), 100);
+        setTimeout(() => this.updateCanvas(), 100)
     }
 
     handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
@@ -89,15 +88,15 @@ class DotGrid extends Component<DotGridProps> {
             this.mousePos = {
                 x: e.clientX,
                 y: e.clientY
-            };
-            this.updateCanvas();
+            }
+            this.updateCanvas()
         }
     }
 
-    //singolo quadratino della postazione, da premere per selezionare una postazione
+    // singolo quadratino della postazione, da premere per selezionare una postazione
     checkBox(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
-        const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect();
-        if (!boundRect) return;
+        const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect()
+        if (!boundRect) return
         const pointPos: Pos2d = {
             x:
                 Math.floor((e.clientX - boundRect.x) / this.gridSettings.dim) *
@@ -109,17 +108,17 @@ class DotGrid extends Component<DotGridProps> {
                 this.gridSettings.dim +
                 this.gridSettings.dim / 2 +
                 this.gridSettings.radius
-        };
-        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return;
-        const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y);
-        //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true); // debug
-        this.updateCanvas();
+        }
+        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return
+        const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y)
+        //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true) // debug
+        this.updateCanvas()
     }
 
     checkDistance(mouse: number, point: number, step: number, dim: number): boolean {
         if (mouse / dim >= 1 - step / dim || mouse < point)
-            return false;
-        return mouse - point < step;
+            return false
+        return mouse - point < step
     }
 
     private static drawDesk(
@@ -129,62 +128,62 @@ class DotGrid extends Component<DotGridProps> {
         radius: number,
         inUse: boolean
     ) {
-        ctx.beginPath();
-        ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = "lightgrey";
-        ctx.fill();
-        ctx.closePath();
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        if (inUse) ctx.fillStyle = "orange";
-        else ctx.fillStyle = "green";
-        ctx.fill();
-        ctx.closePath();
+        ctx.beginPath()
+        ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2)
+        ctx.fillStyle = "lightgrey"
+        ctx.fill()
+        ctx.closePath()
+        ctx.beginPath()
+        ctx.arc(x, y, radius, 0, Math.PI * 2)
+        if (inUse) ctx.fillStyle = "orange"
+        else ctx.fillStyle = "green"
+        ctx.fill()
+        ctx.closePath()
     }
 
     public resetView() {
-        this.grid.clearDesks();
-        this.updateCanvas();
+        this.grid.clearDesks()
+        this.updateCanvas()
     }
 
     updateCanvas() {
-        const canvas: HTMLCanvasElement | null = this.canvasRef.current;
-        if (!canvas) return;
-        const canvasRect: DOMRect = canvas.getBoundingClientRect();
+        const canvas: HTMLCanvasElement | null = this.canvasRef.current
+        if (!canvas) return
+        const canvasRect: DOMRect = canvas.getBoundingClientRect()
         const ctx: CanvasRenderingContext2D | undefined | null = this.canvasRef.current?.getContext(
             "2d"
-        );
-        if (!ctx) return;
+        )
+        if (!ctx) return
 
-        const dim: number = this.gridSettings.dim;
+        const dim: number = this.gridSettings.dim
 
-        const radius: number = this.gridSettings.radius;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const radius: number = this.gridSettings.radius
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         for (var x: number = radius; x <= canvas.width - radius; x += dim) {
             for (var y: number = radius; y <= canvas.height - radius; y += dim) {
-                ctx.beginPath();
-                ctx.arc(x, y, radius, 0, 2 * Math.PI);
-                ctx.fillStyle = "grey";
-                ctx.fill();
-                ctx.closePath();
+                ctx.beginPath()
+                ctx.arc(x, y, radius, 0, 2 * Math.PI)
+                ctx.fillStyle = "grey"
+                ctx.fill()
+                ctx.closePath()
 
                 if (
                     this.checkDistance(this.mousePos.x - canvasRect.x, x, dim, canvasRect.width) &&
                     this.checkDistance(this.mousePos.y - canvasRect.y, y, dim, canvasRect.height)
                 ) {
-                    ctx.beginPath();
-                    ctx.fillStyle = "#f005";
-                    ctx.fillRect(x, y, dim, dim);
-                    ctx.closePath();
+                    ctx.beginPath()
+                    ctx.fillStyle = "#f005"
+                    ctx.fillRect(x, y, dim, dim)
+                    ctx.closePath()
                 }
             }
         }
 
         // desks
-        const ids: Array<number> = this.grid.getIds();
+        const ids: Array<number> = this.grid.getIds()
         for (var i in ids) {
-            const pos: Pos2d | null | undefined = this.grid.getPosition(ids[i]);
-            const inUse: boolean | null | undefined = this.grid.isInUse(ids[i]);
+            const pos: Pos2d | null | undefined = this.grid.getPosition(ids[i])
+            const inUse: boolean | null | undefined = this.grid.isInUse(ids[i])
             if (pos && inUse != undefined && inUse != null)
                 DotGrid.drawDesk(
                     ctx,
@@ -192,7 +191,7 @@ class DotGrid extends Component<DotGridProps> {
                     pos.y,
                     radius * 4,
                     inUse,
-                );
+                )
         }
     }
 
@@ -208,8 +207,8 @@ class DotGrid extends Component<DotGridProps> {
                         width={this.gridSettings.width}
                         height={this.gridSettings.height}
                     />
-                );
-                break;
+                )
+                break
             case 'newInformation':
                 console.log('delete info')
                 return (
@@ -217,19 +216,19 @@ class DotGrid extends Component<DotGridProps> {
                         <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
-                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                        <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel>
 
                         <DialogContentText color="primary">
                             Orario di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+                        <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel>
 
                         <DialogContentText color="primary">
                             Giorni di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.weekDays}</FormLabel>
+                        <FormLabel>{this.props.data.weekDays}</FormLabel>
                     </div>
-                );
+                )
             case 'deleteGrid':
                 return (
                     <div>
@@ -239,8 +238,8 @@ class DotGrid extends Component<DotGridProps> {
                             height={this.gridSettings.height}
                         />
                     </div>
-                );
-                break;
+                )
+                break
             case 'deleteInformation':
                 return (
                     <div>
@@ -248,22 +247,22 @@ class DotGrid extends Component<DotGridProps> {
                             <DialogContentText color="primary">
                                 Dimensioni stanza:
                         </DialogContentText>
-                            <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel>
+                            <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel>
 
                             <DialogContentText color="primary">
                                 Orario di apertura:
                         </DialogContentText>
-                            <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel>
+                            <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel>
 
                             <DialogContentText color="primary">
                                 Giorni di apertura:
                         </DialogContentText>
                             <FormLabel>
-                                {this.props.weekDays.map(day => day + " ")}
+                                {this.props.data.weekDays?.map(day => day + " ")}
                             </FormLabel>
                         </DialogContent>
                     </div>
-                );
+                )
             case 'modifyGrid':
                 return (
                     <div>
@@ -284,8 +283,8 @@ class DotGrid extends Component<DotGridProps> {
                             height={this.gridSettings.height}
                         />
                     </div>
-                );
-                break;
+                )
+                break
             case 'modifyInformation':
                 return (
                     <div>
@@ -308,25 +307,25 @@ class DotGrid extends Component<DotGridProps> {
                         {/* <DialogContentText color="primary">
                             Dimensioni stanza:
                         </DialogContentText>
-                        <FormLabel>{this.props.sizeH}x{this.props.sizeW}</FormLabel> */}
+                        <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel> */}
                         {/* <TextField
                         required
                         id="outlined-search"
-                        label={this.props.sizeH}
+                        label={this.props.data.height}
                         variant="outlined"
                         />
                         x
                         <TextField
                         required
                         id="outlined-search"
-                        label={this.props.sizeW}
+                        label={this.props.data.width}
                         variant="outlined"
                         /> */}
 
                         {/* <DialogContentText color="primary">
                             Orario:
                         </DialogContentText>
-                        <FormLabel>{this.props.openingTime} - {this.props.closingTime}</FormLabel> */}
+                        <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel> */}
                         {/* <TextField
                         required
                         id="outlined-search"
@@ -344,9 +343,9 @@ class DotGrid extends Component<DotGridProps> {
                         {/* <DialogContentText color="primary">
                             Giorni di apertura:
                         </DialogContentText>
-                        <FormLabel>{this.props.weekDays}</FormLabel> */}
+                        <FormLabel>{this.props.data.weekDays}</FormLabel> */}
                     </div>
-                );
+                )
             default:
                 return (
                     <div>
@@ -358,9 +357,9 @@ class DotGrid extends Component<DotGridProps> {
                             height={this.gridSettings.height}
                         />
                     </div>
-                );
+                )
         }
     }
 }
 
-export default DotGrid;
+export default DotGrid
