@@ -28,8 +28,12 @@ class Room {
      * @param x - x position of the desk
      * @param y - y position of the desk
      */
-    public isFree(x: number, y: number): boolean {
-        return !this.desks.has({x, y})
+    public isFree(position : Pos2d): boolean {
+        for (const pos of this.getOccupiedPositions()) {
+            if(pos.x === position.x && pos.y === position.y)
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -38,9 +42,9 @@ class Room {
      * @param x - x position of the desk
      * @param y - y position of the desk
      */
-    public addDesk(x: number, y: number): void {
-        if(this.isFree(x, y))
-            this.desks.set({x, y}, new Desk(x, y))
+    public addDesk(position : Pos2d): void {
+        if(this.isFree(position))
+            this.desks.set(position, new Desk(position.x, position.y))
     }
 
     /**
@@ -49,7 +53,10 @@ class Room {
      * @param position - desk position
      */
     public removeDesk(position: Pos2d): void {
-        this.desks.delete(position);
+        for (const pos of this.getOccupiedPositions()) {
+            if(pos.x === position.x && pos.y === position.y)
+                this.desks.delete(pos);
+        }
     }
 
     /**
@@ -65,22 +72,19 @@ class Room {
         }
     }
 
-    /**
-     * Provides information on the use state of the desk
-     * @param position - desk position
-     */
-    public isInUse(position: Pos2d): boolean | undefined {
-        /*if (this.desks.has(id)) {
-            return this.desks.get(id)?.inUse
-        }
-        else {
-            return null
-        }*/
-        return this.desks.get(position)?.inUse;
-    }
-
     public getOccupiedPositions(): Array<Pos2d> {
         return Array.from(this.desks.keys())
+    }
+
+    public getDesk(position: Pos2d) : Desk | undefined {
+        for (const pos of this.getOccupiedPositions()) {
+            if(pos.x === position.x && pos.y === position.y)
+                return this.desks.get(pos);
+        }
+    }
+
+    public getAllDesks() : Array<Desk> {
+        return Array.from(this.desks.values());
     }
 
     /**

@@ -6,8 +6,9 @@ import FormLabel from '@material-ui/core/DialogContentText'
 import Button from "@material-ui/core/Button"
 import DialogContent from '@material-ui/core/DialogContent'
 /* others */
-import Grid from "./Grid"
+import Grid, {Desk} from "./Grid"
 import { DeskInformation } from "./Api/roomAPI"
+import { posix } from "path"
 
 interface Pos2d {
     x: number,
@@ -37,38 +38,21 @@ class DotGrid extends Component<DotGridProps> {
     canvasRef: RefObject<HTMLCanvasElement>
     gridSettings: Settings
     mousePos: Pos2d
-    selection: {
-        started: boolean
-        ended: boolean
-        posStart: Pos2d
-        posEnd: Pos2d
-    }
     grid: Grid
 
     constructor(props) {
         super(props)
         this.canvasRef = createRef<HTMLCanvasElement>()
+        const _dim : number = 30
         this.gridSettings = {
             radius: 2,
-            width: (props.data.width + 1) * 30,
-            height: (props.data.height + 1) * 30,
-            dim: 30
+            width: (props.data.width + 1) * _dim,
+            height: (props.data.height + 1) * _dim,
+            dim: _dim
         }
         this.mousePos = {
             x: -10,
             y: -10
-        }
-        this.selection = {
-            started: false,
-            ended: false,
-            posStart: {
-                x: 0,
-                y: 0
-            },
-            posEnd: {
-                x: 0,
-                y: 0
-            }
         }
         this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
         this.handleMouseMove = this.handleMouseMove.bind(this)
@@ -98,20 +82,22 @@ class DotGrid extends Component<DotGridProps> {
         const boundRect: DOMRect | undefined = this.canvasRef.current?.getBoundingClientRect()
         if (!boundRect) return
         const pointPos: Pos2d = {
-            x:
-                Math.floor((e.clientX - boundRect.x) / this.gridSettings.dim) *
-                this.gridSettings.dim +
-                this.gridSettings.dim / 2 +
-                this.gridSettings.radius,
-            y:
-                Math.floor((e.clientY - boundRect.y) / this.gridSettings.dim) *
-                this.gridSettings.dim +
-                this.gridSettings.dim / 2 +
-                this.gridSettings.radius
+            x: Math.floor((e.clientX - boundRect.x) / this.gridSettings.dim),
+            y: Math.floor((e.clientY - boundRect.y) / this.gridSettings.dim)
         }
-        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim || pointPos.y > this.gridSettings.height - this.gridSettings.dim) return
-        const id: number | null = this.grid.addDesk(pointPos.x, pointPos.y)
-        //if (id && pointPos.x < 100 && pointPos.y < 100) this.grid.setInUse(id, true) // debug
+
+        if (pointPos.x > this.gridSettings.width - this.gridSettings.dim
+            || pointPos.y > this.gridSettings.height - this.gridSettings.dim) 
+            return;
+        
+        if(this.grid.isFree(pointPos))
+            this.grid.addDesk(pointPos);
+        else {
+            console.log(this.grid.getDesk(pointPos));
+            if(this.grid.getDesk(pointPos)?.inUse !== true)  // either false or undefined
+                this.grid.removeDesk(pointPos);
+        }
+
         this.updateCanvas()
     }
 
@@ -121,13 +107,14 @@ class DotGrid extends Component<DotGridProps> {
         return mouse - point < step
     }
 
-    private static drawDesk(
+    private drawDesk(
         ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number,
-        radius: number,
-        inUse: boolean
+        desk : Desk,
+        radius: number
     ) {
+        const dim : number = this.gridSettings.dim
+        const x : number = desk.pos.x * dim + dim/2 + this.gridSettings.radius
+        const y : number = desk.pos.y * dim + dim/2 + this.gridSettings.radius
         ctx.beginPath()
         ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2)
         ctx.fillStyle = "lightgrey"
@@ -135,7 +122,7 @@ class DotGrid extends Component<DotGridProps> {
         ctx.closePath()
         ctx.beginPath()
         ctx.arc(x, y, radius, 0, Math.PI * 2)
-        if (inUse) {
+        if (desk.inUse) {
             ctx.fillStyle = "orange"
         }
         else {
@@ -184,17 +171,14 @@ class DotGrid extends Component<DotGridProps> {
         }
 
         // desks
-        const ids: Array<number> = this.grid.getIds()
-        for (var i in ids) {
-            const pos: Pos2d | null | undefined = this.grid.getPosition(ids[i])
-            const inUse: boolean | null | undefined = this.grid.isInUse(ids[i])
-            if (pos && inUse != undefined)
-                DotGrid.drawDesk(
+        const positions: Array<Pos2d> = this.grid.getOccupiedPositions()
+        for (var pos of positions) {
+            const desk: Desk | undefined = this.grid.getDesk(pos)
+            if (desk != undefined)
+                this.drawDesk(
                     ctx,
-                    pos.x,
-                    pos.y,
-                    radius * 4,
-                    inUse,
+                    desk,
+                    radius * 4
                 )
         }
     }

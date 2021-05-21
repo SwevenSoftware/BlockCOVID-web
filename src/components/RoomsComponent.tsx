@@ -81,17 +81,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                         >
                             Delete desk
                         </Button>
-                        <Button
-                            onClick={() => {
-                                let gridProva: GridProva = new GridProva(2, 10)
-                                gridProva.addDesk(1, 1)
-                                gridProva.addDesk(1, 2)
-                                gridProva.addDesk(1, 4)
-                                gridProva.addDesk(1, 4)
-                                console.log(gridProva.searchByPos(1, 2))
-                            }}>
-                            Search By Pos
-                            </Button>
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
