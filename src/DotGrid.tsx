@@ -266,7 +266,7 @@ class DotGrid extends Component<DotGridProps> {
                                 Giorni di apertura:
                         </DialogContentText>
                             <FormLabel>
-                                {this.props.data.weekDays?.map(day => day + " ")}
+                                {this.props.data.weekDays?.join(", ")}
                             </FormLabel>
                         </DialogContent>
                     </div>
