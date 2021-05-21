@@ -145,7 +145,7 @@ class DotGrid extends Component<DotGridProps> {
         ctx.closePath()
     }
 
-    public resetView(): void{
+    public resetView(): void {
         this.grid.clearDesks()
         this.updateCanvas()
     }
