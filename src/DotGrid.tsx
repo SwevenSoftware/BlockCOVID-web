@@ -6,7 +6,7 @@ import FormLabel from '@material-ui/core/DialogContentText'
 import Button from "@material-ui/core/Button"
 import DialogContent from '@material-ui/core/DialogContent'
 /* others */
-import Grid, {Desk} from "./Grid"
+import Grid, { Desk } from "./Grid"
 import { DeskInformation } from "./Api/roomAPI"
 import { posix } from "path"
 
@@ -43,7 +43,7 @@ class DotGrid extends Component<DotGridProps> {
     constructor(props) {
         super(props)
         this.canvasRef = createRef<HTMLCanvasElement>()
-        const _dim : number = 30
+        const _dim: number = 30
         this.gridSettings = {
             radius: 2,
             width: (props.data.width + 1) * _dim,
@@ -55,6 +55,14 @@ class DotGrid extends Component<DotGridProps> {
             y: -10
         }
         this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
+
+        if (props.data?.desks)
+            for (const desk of props.data.desks) {
+                const pos: Pos2d = { x: desk.x, y: desk.y }
+                this.grid.addDesk(pos);
+                this.grid.setInUse(pos, false) // TODO
+            }
+
         this.handleMouseMove = this.handleMouseMove.bind(this)
         this.checkBox = this.checkBox.bind(this)
     }
@@ -87,14 +95,14 @@ class DotGrid extends Component<DotGridProps> {
         }
 
         if (pointPos.x > this.gridSettings.width - this.gridSettings.dim
-            || pointPos.y > this.gridSettings.height - this.gridSettings.dim) 
+            || pointPos.y > this.gridSettings.height - this.gridSettings.dim)
             return;
-        
-        if(this.grid.isFree(pointPos))
+
+        if (this.grid.isFree(pointPos))
             this.grid.addDesk(pointPos);
         else {
             console.log(this.grid.getDesk(pointPos));
-            if(this.grid.getDesk(pointPos)?.inUse !== true)  // either false or undefined
+            if (this.grid.getDesk(pointPos)?.inUse !== true)  // either false or undefined
                 this.grid.removeDesk(pointPos);
         }
 
@@ -109,12 +117,12 @@ class DotGrid extends Component<DotGridProps> {
 
     private drawDesk(
         ctx: CanvasRenderingContext2D,
-        desk : Desk,
+        desk: Desk,
         radius: number
     ) {
-        const dim : number = this.gridSettings.dim
-        const x : number = desk.pos.x * dim + dim/2 + this.gridSettings.radius
-        const y : number = desk.pos.y * dim + dim/2 + this.gridSettings.radius
+        const dim: number = this.gridSettings.dim
+        const x: number = desk.pos.x * dim + dim / 2 + this.gridSettings.radius
+        const y: number = desk.pos.y * dim + dim / 2 + this.gridSettings.radius
         ctx.beginPath()
         ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2)
         ctx.fillStyle = "lightgrey"
@@ -181,6 +189,10 @@ class DotGrid extends Component<DotGridProps> {
                     radius * 4
                 )
         }
+    }
+
+    public getDesks(): Array<Desk> {
+        return this.grid.getAllDesks();
     }
 
     componentDidMount() {

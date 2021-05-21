@@ -5,12 +5,14 @@ interface Pos2d {
 
 class Desk {
     pos: Pos2d
+    serverId: string | null
     inUse: boolean
     constructor(x: number, y: number) {
         this.pos = {
             x: x,
             y: y
         }
+        this.serverId = null
         this.inUse = false
     }
 }
@@ -28,9 +30,9 @@ class Room {
      * @param x - x position of the desk
      * @param y - y position of the desk
      */
-    public isFree(position : Pos2d): boolean {
+    public isFree(position: Pos2d): boolean {
         for (const pos of this.getOccupiedPositions()) {
-            if(pos.x === position.x && pos.y === position.y)
+            if (pos.x === position.x && pos.y === position.y)
                 return false;
         }
         return true;
@@ -42,8 +44,8 @@ class Room {
      * @param x - x position of the desk
      * @param y - y position of the desk
      */
-    public addDesk(position : Pos2d): void {
-        if(this.isFree(position))
+    public addDesk(position: Pos2d): void {
+        if (this.isFree(position))
             this.desks.set(position, new Desk(position.x, position.y))
     }
 
@@ -54,7 +56,7 @@ class Room {
      */
     public removeDesk(position: Pos2d): void {
         for (const pos of this.getOccupiedPositions()) {
-            if(pos.x === position.x && pos.y === position.y)
+            if (pos.x === position.x && pos.y === position.y)
                 this.desks.delete(pos);
         }
     }
@@ -76,14 +78,14 @@ class Room {
         return Array.from(this.desks.keys())
     }
 
-    public getDesk(position: Pos2d) : Desk | undefined {
+    public getDesk(position: Pos2d): Desk | undefined {
         for (const pos of this.getOccupiedPositions()) {
-            if(pos.x === position.x && pos.y === position.y)
+            if (pos.x === position.x && pos.y === position.y)
                 return this.desks.get(pos);
         }
     }
 
-    public getAllDesks() : Array<Desk> {
+    public getAllDesks(): Array<Desk> {
         return Array.from(this.desks.values());
     }
 

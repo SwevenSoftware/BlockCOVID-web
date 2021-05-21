@@ -1,5 +1,5 @@
 /* react */
-import React, { Component } from 'react'
+import React, { Component, createRef, RefObject } from 'react'
 /* redux */
 import { connect } from 'react-redux'
 import roomActionResolver from '../actions/roomsActions';
@@ -35,11 +35,13 @@ interface DeleteRoomStates {
 }
 
 class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
+    refDotGrid: RefObject<DotGrid>
     constructor(props) {
         super(props)
         this.state = {
             isModalOpen: false
         }
+        this.refDotGrid = createRef<DotGrid>()
         this.handleClickOpen = this.handleClickOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
@@ -63,6 +65,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                         <div className="alignCentralPencil">
                             <DotGrid
                                 mode="deleteGrid"
+                                ref={this.refDotGrid}
                                 data={{
                                     width: this.props.data.room.width,
                                     height: this.props.data.room.height,
@@ -76,17 +79,24 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     </DialogContent>
                     <DialogContent>
                         <div>
-                            <DotGrid
-                                mode="deleteInformation"
-                                data={{
-                                    width: this.props.data.room.width,
-                                    height: this.props.data.room.height,
-                                    openingTime: this.props.data.room.openingTime,
-                                    closingTime: this.props.data.room.closingTime,
-                                    weekDays: this.props.data.room.openingDays,
-                                    desks: null
-                                }}
-                            />
+                            <DialogContent>
+                                <DialogContentText color="primary">
+                                    Dimensioni stanza:
+                            </DialogContentText>
+                                <FormLabel>{this.props.data.room.height}x{this.props.data.room.width}</FormLabel>
+
+                                <DialogContentText color="primary">
+                                    Orario di apertura:
+                            </DialogContentText>
+                                <FormLabel>{this.props.data.room.openingTime} - {this.props.data.room.closingTime}</FormLabel>
+
+                                <DialogContentText color="primary">
+                                    Giorni di apertura:
+                            </DialogContentText>
+                                <FormLabel>
+                                    {this.props.data.room.openingDays.join(", ")}
+                                </FormLabel>
+                            </DialogContent>
                         </div>
                     </DialogContent>
                     <DialogActions>

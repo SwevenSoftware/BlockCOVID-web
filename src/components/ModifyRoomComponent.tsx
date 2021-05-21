@@ -60,37 +60,40 @@ interface ModifyRoomState {
 }
 
 class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
+    refDotGrid: RefObject<DotGrid>
     constructor(props) {
         super(props)
-        this.handleClickOpenButton = this.handleClickOpenButton.bind(this),
-            this.handleCloseButton = this.handleCloseButton.bind(this),
-            this.handleConfirm = this.handleConfirm.bind(this),
+        this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
+        this.handleCloseButton = this.handleCloseButton.bind(this)
+        this.handleConfirm = this.handleConfirm.bind(this)
 
-            this.state = {
-                isButtonDisabled: true,
-                isModalOpen: false,
-                roomNameError: false,
-                roomNameValue: this.props.data.room.name,
-                openingTimeDateValue: new Date('2021-01-01T' + this.props.data.room.openingTime),
-                openingTimeStringValue: this.props.data.room.openingTime,
-                closingTimeDateValue: new Date('2031-01-01T' + this.props.data.room.closingTime),
-                closingTimeStringValue: this.props.data.room.closingTime,
-                weekDays: {
-                    monday: false,
-                    tuesday: false,
-                    wednesday: false,
-                    thursday: false,
-                    friday: false,
-                    saturday: false,
-                    sunday: false
-                },
-                weekDaysError: false,
-                timeError: false,
-                dimHeight: this.props.data.room.height,
-                dimWidth: this.props.data.room.width,
-                heightError: false,
-                widthError: false
-            }
+        this.state = {
+            isButtonDisabled: true,
+            isModalOpen: false,
+            roomNameError: false,
+            roomNameValue: this.props.data.room.name,
+            openingTimeDateValue: new Date('2021-01-01T' + this.props.data.room.openingTime),
+            openingTimeStringValue: this.props.data.room.openingTime,
+            closingTimeDateValue: new Date('2031-01-01T' + this.props.data.room.closingTime),
+            closingTimeStringValue: this.props.data.room.closingTime,
+            weekDays: {
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false
+            },
+            weekDaysError: false,
+            timeError: false,
+            dimHeight: this.props.data.room.height,
+            dimWidth: this.props.data.room.width,
+            heightError: false,
+            widthError: false
+        }
+
+        this.refDotGrid = createRef<DotGrid>()
     }
 
     render() {
@@ -145,6 +148,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <div className="alignCentralPencil">
                                     <DotGrid
                                         mode="modifyGrid"
+                                        ref={this.refDotGrid}
                                         data={{
                                             width: this.props.data.room.width,
                                             height: this.props.data.room.height,
@@ -157,8 +161,9 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 </div>
                             </DialogContent>
                             <DialogContent>
+                                {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
                                 <div>
-                                    <DotGrid
+                                    {/*<DotGrid
                                         mode="modifyInformation"
                                         data={{
                                             width: this.props.data.room.width,
@@ -168,7 +173,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                             weekDays: this.props.data.room.openingDays,
                                             desks: null
                                         }}
-                                    />
+                                    />*/}
                                 </div>
                             </DialogContent>
                             <div className="addField">
@@ -476,6 +481,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                 height: this.state.dimHeight,
                 width: this.state.dimWidth
             })
+            const desks = this.refDotGrid.current?.getDesks().map((desk) => { return { x: desk.pos.x, y: desk.pos.y } })
+            const data = {
+                roomName: this.state.roomNameValue,
+                desks: desks ?? new Array()
+            }
+            //this.props.dispatch.createDesks(data);
             this.handleCloseButton()
         } else {
             //message errore
