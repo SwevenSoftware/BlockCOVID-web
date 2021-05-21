@@ -299,11 +299,11 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private handleChangeSize(sizeNumber: string, size: string): void {
         let reg = new RegExp("^[0-9]{1,8}$");
         if (!sizeNumber) {
-            this.setState({ ...this.state, [size]: 1 })
+            this.setState({ ...this.state, [size]: "" })
             if (size === "dimHeight") {
-                this.heightInputControl(1)
+                this.heightInputControl(null)
             } else {
-                this.widthInputControl(1)
+                this.widthInputControl(null)
             }
         } else if (sizeNumber.match(reg)) {
             let dim: number = parseInt(sizeNumber)
@@ -316,8 +316,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private heightInputControl(height: number): boolean {
-        if (height === 0 || height > 20) {
+    private heightInputControl(height: number | null): boolean {
+        if (!height || height === 0 || height > 20) {
             this.setState({ heightError: true })
             return true
         } else {
@@ -326,8 +326,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private widthInputControl(width: number): boolean {
-        if (width === 0 || width > 20) {
+    private widthInputControl(width: number | null): boolean {
+        if (!width || width === 0 || width > 20) {
             this.setState({ widthError: true })
             return true
         } else {
@@ -428,8 +428,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 width: this.state.dimWidth
             })
             this.handleCloseButton()
-        } else {
-            //message errore
         }
     }
 
