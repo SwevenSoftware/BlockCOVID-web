@@ -474,15 +474,15 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             if (weekDays[5]) days.push("SATURDAY");
             if (weekDays[6]) days.push("SUNDAY");
             this.props.dispatch.modifyRoom(
-		this.props.data.room.name,
-		{
-                name: this.state.roomNameValue,
-                openingAt: this.state.openingTimeStringValue,
-                closingAt: this.state.closingTimeStringValue,
-                openingDays: days,
-                height: this.state.dimHeight,
-                width: this.state.dimWidth
-            })
+                this.props.data.room.name,
+                {
+                    name: this.state.roomNameValue,
+                    openingAt: this.state.openingTimeStringValue,
+                    closingAt: this.state.closingTimeStringValue,
+                    openingDays: days,
+                    height: this.state.dimHeight,
+                    width: this.state.dimWidth
+                })
             const desks = this.refDotGrid.current?.getDesks().map((desk) => { return { x: desk.pos.x, y: desk.pos.y } })
             const data = {
                 roomName: this.state.roomNameValue,
