@@ -65,8 +65,8 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public setSize(width: number, height: number): void {
-        this.canvasRef.current?.setAttribute("width", width.toString())
-        this.canvasRef.current?.setAttribute("height", height.toString())
+        this.canvasRef.current?.setAttribute("width", ((width + 1) * this.gridSettings.dim).toString())
+        this.canvasRef.current?.setAttribute("height", ((height + 1) * this.gridSettings.dim).toString())
     }
 
     handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void {
