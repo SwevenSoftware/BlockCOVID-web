@@ -92,212 +92,212 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 
     render() {
         return (
-            <ThemeProvider theme={theme}>
-                <div>
-                    <Button
-                        className="pencil"
-                        onClick={() => this.handleClickOpenButton()}
-                    >
-                        {this.props.data.room.name}
-                    </Button>
-                    <Dialog
-                        open={this.state.isModalOpen}
-                        onClose={() => this.handleCloseButton()}
-                        aria-labelledby="form-dialog-title"
-                        fullWidth maxWidth="md"
-                        className="centralModal"
-                    >
-                        <DialogTitle
-                            id="form-dialog-title"
-                            className="modalTitle"
+                <ThemeProvider theme={theme}>
+                    <div>
+                        <Button
+                            className="pencil"
+                            onClick={() => this.handleClickOpenButton()}
                         >
-                            Modifica la stanza '{this.props.data.room.name}'
-                        </DialogTitle>
-                        <DialogContent className="centralModal">
-                            <DialogContentText>
-                                Puoi modificare i seguenti campi
-                            </DialogContentText>
-                            <div className="centralModal">
-                                <DotGrid
-                                    mode="modifyGrid"
-                                    ref={this.refDotGrid}
-                                    data={{
-                                        width: this.state.dimWidth,
-                                        height: this.state.dimHeight,
-                                        desks: this.props.data.room.desks
-                                    }}
-                                />
-                            </div>
-                            <div className="centralModal">
-                                <Button
-                                    id="cleanGrid"
-                                    variant="outlined"
-                                    size="medium"
-                                    onClick={() => {
-                                        this.refDotGrid.current?.resetView()
-                                    }}>
-                                    Svuota stanza
-                            </Button>
-                            </div>
-                        </DialogContent>
-                        <DialogContent>
-                            {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
-                            <div className="addField">
-                                <TextField
-                                    required
-                                    id="outlined-search"
-                                    label="Nome stanza"
-                                    variant="outlined"
-                                    error={this.state.roomNameError}
-                                    helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                    value={this.state.roomNameValue}
-                                    onChange={(e) => {
-                                        this.handleChangeRoomName(e.target.value)
-                                        this.roomNameValidate(e.target.value)
-                                    }}
-                                />
-                                <div className="addField"></div>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardTimePicker
-                                        margin="normal"
-                                        id="time-picker"
-                                        label="Orario di apertura"
-                                        ampm={false}
-                                        error={this.state.timeError}
-                                        helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
-                                        value={this.state.openingTimeDateValue}
-                                        onChange={(e) => {
-                                            let openingTimeMilliseconds: number | undefined = e?.getTime()
-                                            if (openingTimeMilliseconds) {
-                                                let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
-                                                this.setState({ openingTimeDateValue: openingTime.time })
-                                                this.setState({ openingTimeStringValue: openingTime.timeString })
-                                                this.timeInputControl()
-                                            } else {
-                                                this.setState({ timeError: true })
-                                                this.setState({ openingTimeStringValue: "" })
-                                            }
-                                        }}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change time',
-                                        }}
-                                    />
-                                </MuiPickersUtilsProvider>
-                            </div>
-                            <div className="addField">
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardTimePicker
-                                        margin="normal"
-                                        id="time-picker"
-                                        label="Orario di chiusura"
-                                        ampm={false}
-                                        error={this.state.timeError}
-                                        helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
-                                        value={this.state.closingTimeDateValue}
-                                        onChange={(e) => {
-                                            let closingTimeMilliseconds: number | undefined = e?.getTime()
-                                            if (closingTimeMilliseconds) {
-                                                let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
-                                                this.setState({ closingTimeDateValue: closingTime.time })
-                                                this.setState({ closingTimeStringValue: closingTime.timeString })
-                                                this.timeInputControl()
-                                            } else {
-                                                this.setState({ timeError: true })
-                                                this.setState({ closingTimeStringValue: "" })
-                                            }
-                                        }}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change time',
-                                        }}
-                                    />
-                                </MuiPickersUtilsProvider>
-                            </div>
-                            <DialogContentText>
-                                Dimensione stanza
-                            </DialogContentText>
-                            <div className="addField">
-                                <TextField
-                                    required
-                                    id="outlined-search"
-                                    label="Altezza"
-                                    variant="outlined"
-                                    error={this.state.heightError}
-                                    helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.state.dimHeight}
-                                    onChange={(e) => {
-                                        if (this.handleChangeSize(e.target.value, "dimHeight")) {
-                                            this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))
-                                            this.refDotGrid.current?.resetView()
-                                        }
-                                    }}
-                                />
-                            </div>
-                            <div className="addField">
-                                <TextField
-                                    required
-                                    id="outlined-search"
-                                    label="Larghezza"
-                                    variant="outlined"
-                                    error={this.state.widthError}
-                                    helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
-                                    value={this.state.dimWidth}
-                                    onChange={(e) => {
-                                        if (this.handleChangeSize(e.target.value, "dimWidth")) {
-                                            this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)
-                                            this.refDotGrid.current?.resetView()
-                                        }
-                                    }}
-                                />
-                            </div>
-                            <div className="centralModal">
-                                <DialogContentText color="primary">
-                                    * indica i campi obbligatori
+                            {this.props.data.room.name}
+                        </Button>
+                        <Dialog
+                            open={this.state.isModalOpen}
+                            onClose={() => this.handleCloseButton()}
+                            aria-labelledby="form-dialog-title"
+                            fullWidth maxWidth="md"
+                            className="centralModal"
+                        >
+                            <DialogTitle
+                                id="form-dialog-title"
+                                className="modalTitle"
+                            >
+                                Modifica la stanza '{this.props.data.room.name}'
+                            </DialogTitle>
+                            <DialogContent className="centralModal">
+                                <DialogContentText>
+                                    Puoi modificare i seguenti campi
                                 </DialogContentText>
                                 <div className="centralModal">
-                                    <FormLabel>Giorni della settimana:</FormLabel>
+                                    <DotGrid
+                                        mode="modifyGrid"
+                                        ref={this.refDotGrid}
+                                        data={{
+                                            width: this.state.dimWidth,
+                                            height: this.state.dimHeight,
+                                            desks: this.props.data.room.desks
+                                        }}
+                                    />
                                 </div>
                                 <div className="centralModal">
-                                    <ButtonGroup
-                                        color="primary"
-                                        orientation="vertical"
-                                        size="small"
-                                        aria-label="giorni della settimana in cui la stanza risulta aperta"
-                                        onClick={(e) => {
-                                            let obj: any = e.target
-                                            let day: string = obj?.parentElement?.id || obj?.value
-                                            if (day) {
-                                                this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
-                                                this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
+                                    <Button
+                                        id="cleanGrid"
+                                        variant="outlined"
+                                        size="medium"
+                                        onClick={() => {
+                                            this.refDotGrid.current?.resetView()
+                                        }}>
+                                        Svuota stanza
+                                </Button>
+                                </div>
+                            </DialogContent>
+                            <DialogContent>
+                                {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Nome stanza"
+                                        variant="outlined"
+                                        error={this.state.roomNameError}
+                                        helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
+                                        value={this.state.roomNameValue}
+                                        onChange={(e) => {
+                                            this.handleChangeRoomName(e.target.value)
+                                            this.roomNameValidate(e.target.value)
+                                        }}
+                                    />
+                                    <div className="addField"></div>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardTimePicker
+                                            margin="normal"
+                                            id="time-picker"
+                                            label="Orario di apertura"
+                                            ampm={false}
+                                            error={this.state.timeError}
+                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
+                                            value={this.state.openingTimeDateValue}
+                                            onChange={(e) => {
+                                                let openingTimeMilliseconds: number | undefined = e?.getTime()
+                                                if (openingTimeMilliseconds) {
+                                                    let openingTime: { time: Date, timeString: string } = this.handleTimeChange(openingTimeMilliseconds)
+                                                    this.setState({ openingTimeDateValue: openingTime.time })
+                                                    this.setState({ openingTimeStringValue: openingTime.timeString })
+                                                    this.timeInputControl()
+                                                } else {
+                                                    this.setState({ timeError: true })
+                                                    this.setState({ openingTimeStringValue: "" })
+                                                }
+                                            }}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change time',
+                                            }}
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </div>
+                                <div className="addField">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardTimePicker
+                                            margin="normal"
+                                            id="time-picker"
+                                            label="Orario di chiusura"
+                                            ampm={false}
+                                            error={this.state.timeError}
+                                            helperText={this.state.timeError ? ERROR_TIME_NOT_AVAILABLE : ""}
+                                            value={this.state.closingTimeDateValue}
+                                            onChange={(e) => {
+                                                let closingTimeMilliseconds: number | undefined = e?.getTime()
+                                                if (closingTimeMilliseconds) {
+                                                    let closingTime: { time: Date, timeString: string } = this.handleTimeChange(closingTimeMilliseconds)
+                                                    this.setState({ closingTimeDateValue: closingTime.time })
+                                                    this.setState({ closingTimeStringValue: closingTime.timeString })
+                                                    this.timeInputControl()
+                                                } else {
+                                                    this.setState({ timeError: true })
+                                                    this.setState({ closingTimeStringValue: "" })
+                                                }
+                                            }}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change time',
+                                            }}
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </div>
+                                <DialogContentText>
+                                    Dimensione stanza
+                                </DialogContentText>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Altezza"
+                                        variant="outlined"
+                                        error={this.state.heightError}
+                                        helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
+                                        value={this.state.dimHeight}
+                                        onChange={(e) => {
+                                            if (this.handleChangeSize(e.target.value, "dimHeight")) {
+                                                this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))
+                                                this.refDotGrid.current?.resetView()
                                             }
                                         }}
-                                    >
-                                        <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
-                                        <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
-                                        <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
-                                        <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
-                                        <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
-                                        <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
-                                        <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
-                                    </ButtonGroup>
-                                    <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                    />
                                 </div>
-                            </div>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
-                                Annulla
-                            </Button>
-                            <Button onClick={() => {
-                                this.handleConfirm()
-                            }}
-                                id="confirm"
-                                variant="outlined">
-                                Conferma
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
-            </ThemeProvider>
+                                <div className="addField">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Larghezza"
+                                        variant="outlined"
+                                        error={this.state.widthError}
+                                        helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
+                                        value={this.state.dimWidth}
+                                        onChange={(e) => {
+                                            if (this.handleChangeSize(e.target.value, "dimWidth")) {
+                                                this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)
+                                                this.refDotGrid.current?.resetView()
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="centralModal">
+                                    <DialogContentText color="primary">
+                                        * indica i campi obbligatori
+                                    </DialogContentText>
+                                    <div className="centralModal">
+                                        <FormLabel>Giorni della settimana:</FormLabel>
+                                    </div>
+                                    <div className="centralModal">
+                                        <ButtonGroup
+                                            color="primary"
+                                            orientation="vertical"
+                                            size="small"
+                                            aria-label="giorni della settimana in cui la stanza risulta aperta"
+                                            onClick={(e) => {
+                                                let obj: any = e.target
+                                                let day: string = obj?.parentElement?.id || obj?.value
+                                                if (day) {
+                                                    this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
+                                                    this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
+                                                }
+                                            }}
+                                        >
+                                            <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
+                                            <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
+                                            <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
+                                            <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
+                                            <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
+                                            <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
+                                            <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
+                                        </ButtonGroup>
+                                        <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                    </div>
+                                </div>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={this.handleCloseButton} id="decline" variant="outlined">
+                                    Annulla
+                                </Button>
+                                <Button onClick={() => {
+                                    this.handleConfirm()
+                                }}
+                                    id="confirm"
+                                    variant="outlined">
+                                    Conferma
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+                </ThemeProvider>
         )
     }
 
