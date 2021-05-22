@@ -102,6 +102,7 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
+        console.log("room api call ", data)
         return this.axios.post("/api/rooms/" + data.roomName + "/desks", data.desks, config)
     }
 
@@ -126,7 +127,7 @@ export class roomAPI {
     deleteDesk(tokenID: string,
         data: {
             roomName: string,
-            desk: DeskInformation
+            desksId: Array<string>
         }
     ) {
         const config = {
@@ -134,11 +135,9 @@ export class roomAPI {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
             },
-            data: {
-                ...data.desk
-            }
+            data: data.desksId
         }
-        return this.axios.delete("/api/rooms/" + data.roomName + "/desks", config)
+        return this.axios.delete("/api/rooms/desks", config)
     }
 }
 

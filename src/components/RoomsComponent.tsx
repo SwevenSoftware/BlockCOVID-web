@@ -132,9 +132,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                                 closingTime: roomList.room.closingTime.split(":")[0] + ":" + roomList.room.closingTime.split(":")[1],
                                                 openingDays: openingDays,
                                                 height: roomList.room.height,
-                                                width: roomList.room.width
-                                            },
-                                            desks: roomList.desks
+                                                width: roomList.room.width,
+                                                desks: roomList.desks
+                                            }
                                         }} />
                                     </ListItemText>
                                     <DeleteRoom data={{
@@ -145,8 +145,8 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                             openingDays: openingDays,
                                             height: roomList.room.height,
                                             width: roomList.room.width,
-                                        },
-                                        desks: roomList.desks
+                                            desks: roomList.desks
+                                        }
                                     }} />
                                 </ListItem>
                             </Paper>
@@ -175,7 +175,7 @@ const mapDispatchToProps = (dispatch: Function) => {
             createDesks: (data: { roomName: string, desks: [{ x: number, y: number }] }) => {
                 dispatch(roomActionsResolver.createDesks(data))
             },
-            deleteDesk: (data: { roomName: string, desk: { id: string, x: number, y: number } }) => {
+            deleteDesk: (data: { roomName: string, desksId: Array<string> }) => {
                 dispatch(roomActionsResolver.deleteDesk(data))
             }
         }

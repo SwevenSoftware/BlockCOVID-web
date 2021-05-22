@@ -7,8 +7,6 @@ import Button from "@material-ui/core/Button"
 import DialogContent from '@material-ui/core/DialogContent'
 /* others */
 import Grid, { Desk } from "./Grid"
-import { DeskInformation } from "./Api/roomAPI"
-import { posix } from "path"
 
 interface Pos2d {
     x: number,
@@ -30,7 +28,12 @@ interface DotGridProps {
         openingTime: string | null,
         closingTime: string | null,
         weekDays: string[] | null,
-        desks: DeskInformation[] | null
+        desks: {
+            x: number,
+            y: number,
+            available: boolean,
+            deskId: string
+        }[] | null
     }
 }
 
@@ -39,8 +42,9 @@ class DotGrid extends Component<DotGridProps> {
     gridSettings: Settings
     mousePos: Pos2d
     grid: Grid
+    removedDesks: Array<Desk>
 
-    constructor(props) {
+    constructor(props: DotGridProps) {
         super(props)
         this.canvasRef = createRef<HTMLCanvasElement>()
         const _dim: number = 30
@@ -55,12 +59,13 @@ class DotGrid extends Component<DotGridProps> {
             y: -10
         }
         this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
+        this.removedDesks = new Array<Desk>()
 
+        console.log("data modify dot grid: ", props.data)
         if (props.data?.desks)
             for (const desk of props.data.desks) {
                 const pos: Pos2d = { x: desk.x, y: desk.y }
-                this.grid.addDesk(pos);
-                this.grid.setInUse(pos, false) // TODO
+                this.grid.addDesk(pos, !desk.available, desk.deskId);
             }
 
         this.handleMouseMove = this.handleMouseMove.bind(this)
@@ -98,12 +103,26 @@ class DotGrid extends Component<DotGridProps> {
             || pointPos.y > this.gridSettings.height - this.gridSettings.dim)
             return;
 
-        if (this.grid.isFree(pointPos))
-            this.grid.addDesk(pointPos);
+        if (this.grid.isFree(pointPos)) {
+            let reinserted: boolean = false
+            for (var i in this.removedDesks) {
+                if (this.removedDesks[i].pos.x == pointPos.x &&
+                    this.removedDesks[i].pos.y == pointPos.y) {
+                    const deskReinsered = this.removedDesks[i]
+                    delete this.removedDesks[i]
+                    reinserted = true
+                    this.grid.insertDesk(deskReinsered)
+                }
+            }
+            if (!reinserted)
+                this.grid.addDesk(pointPos)
+        }
         else {
-            console.log(this.grid.getDesk(pointPos));
-            if (this.grid.getDesk(pointPos)?.inUse !== true)  // either false or undefined
+            const selectedDesk = this.grid.getDesk(pointPos)
+            if (selectedDesk && !selectedDesk.inUse) {  // either false or undefined
                 this.grid.removeDesk(pointPos);
+                this.removedDesks.push(selectedDesk)
+            }
         }
 
         this.updateCanvas()
@@ -141,6 +160,7 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public resetView(): void {
+        this.removedDesks = this.removedDesks.concat(this.grid.getAllDesks())
         this.grid.clearDesks()
         this.updateCanvas()
     }
@@ -192,7 +212,15 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public getDesks(): Array<Desk> {
-        return this.grid.getAllDesks();
+        return this.grid.getAllDesks()
+    }
+
+    public getRemovedDesks(): Array<Desk> {
+        return this.removedDesks.filter((d) => d.serverId !== null)
+    }
+
+    public getNewDesks(): Array<Desk> {
+        return this.getDesks().filter((d) => d.serverId === null)
     }
 
     componentDidMount() {
