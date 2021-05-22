@@ -57,7 +57,7 @@ describe('roomApi', () => {
         }
 
         mockedAxios.put.mockImplementationOnce(() => Promise.resolve(axiosResponse));
-        expect(roomApi.modifyRoom(adminToken, "/api/rooms/", data)).resolves.toEqual(axiosResponse);
+        expect(roomApi.modifyRoom(adminToken, data)).resolves.toEqual(axiosResponse);
         expect(mockedAxios.put).lastCalledWith(
             "/api/rooms/" + data.roomName,
             data,
@@ -140,22 +140,16 @@ describe('roomApi', () => {
     it('deletes correctly a desk in the room', () => {
         const data = {
             roomName: "room",
-            desk: {
-                id: "",
-                x: 1,
-                y: 1
-            }
+            desksId: ["id1", "id2"]
         }
         const config = {
             ...requestConfig,
-            data: {
-                ...data.desk
-            }
+            data: data.desksId
         }
         mockedAxios.delete.mockImplementationOnce(() => Promise.resolve(axiosResponse));
         expect(roomApi.deleteDesk(adminToken, data)).resolves.toEqual(axiosResponse);
         expect(mockedAxios.delete).lastCalledWith(
-            "/api/rooms/" + data.roomName + "/desks",
+            "/api/rooms/desks",
             config
         );
     });

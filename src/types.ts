@@ -60,6 +60,7 @@ export const ERROR_INSERTION_NUMBER = "Inserisci una dimensione (min 1, max 20)"
 export const ERROR_BAD_DESK_POSITION = "La postazione inserita non ha posizione valida"
 export const ERROR_DESK_ALREADY_EXISTS = "La postazione risulta già presente"
 export const ERROR_DESK_DOES_NOT_EXIST = "La postazione non esiste"
+export const ERROR_GRID_RESET_DESK_IS_IN_USE = "Attenzione. Una delle postazioni risulta in uso. Procedere con cautela"
 
 /* others */
 export const ERROR_UNKNOWN = "Errore sconosciuto. Si prega di contattare l'amministratore"

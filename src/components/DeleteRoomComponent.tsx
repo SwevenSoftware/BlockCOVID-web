@@ -1,8 +1,8 @@
 /* react */
-import React, { Component } from 'react'
+import React, { Component, createRef, RefObject } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import roomActionResolver from '../actions/roomsActions';
+import roomActionResolver from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -21,7 +21,6 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import { theme } from '../theme'
 /* others */
-import CardGridComponent from './CardGridComponent'
 import DotGrid from '../DotGrid'
 
 interface DeleteRoomProps {
@@ -35,11 +34,13 @@ interface DeleteRoomStates {
 }
 
 class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
+    refDotGrid: RefObject<DotGrid>
     constructor(props) {
         super(props)
         this.state = {
             isModalOpen: false
         }
+        this.refDotGrid = createRef<DotGrid>()
         this.handleClickOpen = this.handleClickOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
@@ -47,7 +48,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
-            <div >
+            <div>
                 <IconButton
                     className="trash"
                     onClick={(e) => this.handleClickOpen()}>
@@ -59,29 +60,38 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle id="form-dialog-title">Sei sicuro di eliminare '{this.props.data.room.name}'?</DialogTitle>
-                    <DialogContent className="central">
-                        <div className="alignCentralPencil">
+                    <DialogContent className="centralGrid">
+                        <div className="centralGrid">
                             <DotGrid
                                 mode="deleteGrid"
-                                sizeH={this.props.data.room.height}
-                                sizeW={this.props.data.room.width}
-                                openingTime={this.props.data.room.openingTime}
-                                closingTime={this.props.data.room.closingTime}
-                                weekDays={this.props.data.room.openingDays}
+                                ref={this.refDotGrid}
+                                data={{
+                                    width: this.props.data.room.width,
+                                    height: this.props.data.room.height,
+                                    desks: this.props.data.room.desks
+                                }}
                             />
                         </div>
                     </DialogContent>
                     <DialogContent>
-                        <div>
-                            <DotGrid
-                                mode="deleteInformation"
-                                sizeH={this.props.data.room.height}
-                                sizeW={this.props.data.room.width}
-                                openingTime={this.props.data.room.openingTime}
-                                closingTime={this.props.data.room.closingTime}
-                                weekDays={this.props.data.room.openingDays}
-                            />
-                        </div>
+                        <DialogContentText color="primary">
+                            Dimensioni stanza:
+                            </DialogContentText>
+                        <FormLabel>
+                            {this.props.data.room.height}x{this.props.data.room.width}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Orario di apertura:
+                            </DialogContentText>
+                        <FormLabel>
+                            {this.props.data.room.openingTime} - {this.props.data.room.closingTime}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
+                            </DialogContentText>
+                        <FormLabel>
+                            {this.props.data.room.openingDays.join(", ")}
+                        </FormLabel>
                     </DialogContent>
                     <DialogActions>
                         <Button
@@ -90,14 +100,14 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                             id="decline"
                         >
                             Annulla
-              </Button>
+                        </Button>
                         <Button
                             variant="outlined"
                             id="confirm"
                             onClick={this.handleConfirm}
                         >
                             Conferma
-              </Button>
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -106,7 +116,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
 
     /**
-    * Sets the visibility of the window to visible
+    * Sets the window visibility to visible
     * @params
     * @returns
     */
@@ -115,9 +125,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     }
 
     /**
-    * Sets the visibility of the window to not visible
-    * @params
-    * @returns
+    * Sets the window visibility to not visible
     */
     private handleClose(): void {
         this.setState({ isModalOpen: false })

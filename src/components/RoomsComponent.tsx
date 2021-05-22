@@ -39,11 +39,10 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     render() {
-        console.log(this.props.state.rooms)
         return (
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
-                    <div className="addAccountButton"> {/* TODO: change className */}
+                    <div className="addRoomsButton"> {/* TODO: change className */}
                         <NewRoom />
                     </div>
                     <div>
@@ -101,9 +100,9 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                                 closingTime: roomList.room.closingTime.split(":")[0] + ":" + roomList.room.closingTime.split(":")[1],
                                                 openingDays: openingDays,
                                                 height: roomList.room.height,
-                                                width: roomList.room.width
-                                            },
-                                            desks: roomList.desks
+                                                width: roomList.room.width,
+                                                desks: roomList.desks
+                                            }
                                         }} />
                                     </ListItemText>
                                     <DeleteRoom data={{
@@ -114,8 +113,8 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                                             openingDays: openingDays,
                                             height: roomList.room.height,
                                             width: roomList.room.width,
-                                        },
-                                        desks: roomList.desks
+                                            desks: roomList.desks
+                                        }
                                     }} />
                                 </ListItem>
                             </Paper>

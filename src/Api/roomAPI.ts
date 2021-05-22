@@ -32,7 +32,7 @@ export class roomAPI {
         return this.axios.post("/api/rooms", data, config)
     }
 
-    modifyRoom(tokenID: string, url: string,
+    modifyRoom(tokenID: string,
         data: {
             roomName: string,
             name: string
@@ -49,7 +49,7 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        return this.axios.put(url + data.roomName, data, config)
+        return this.axios.put("/api/rooms/" + data.roomName, data, config)
     }
 
     deleteRoom(tokenID: string, url: string,
@@ -126,7 +126,7 @@ export class roomAPI {
     deleteDesk(tokenID: string,
         data: {
             roomName: string,
-            desk: DeskInformation
+            desksId: Array<string>
         }
     ) {
         const config = {
@@ -134,11 +134,9 @@ export class roomAPI {
                 "Content-Type": "application/json",
                 "Authorization": tokenID
             },
-            data: {
-                ...data.desk
-            }
+            data: data.desksId
         }
-        return this.axios.delete("/api/rooms/" + data.roomName + "/desks", config)
+        return this.axios.delete("/api/rooms/desks", config)
     }
 }
 

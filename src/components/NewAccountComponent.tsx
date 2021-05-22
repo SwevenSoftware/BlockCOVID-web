@@ -167,8 +167,8 @@ class NewAccountComponent extends Component<NewAccountProps, NewAccountStates> {
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                 </DialogContentText>
-                                <FormLabel>Ruolo:</FormLabel>
                                 <FormControl>
+                                    <FormLabel>Ruolo:</FormLabel>
                                     <FormGroup>
                                         <FormControlLabel
                                             control={<GreenCheckbox checked={this.state.authorities.checkedAdmin} onChange={(e) => this.handleChangeAuthorities(e)} name="checkedAdmin" />}

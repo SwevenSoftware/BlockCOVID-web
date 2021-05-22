@@ -217,31 +217,35 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                             <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
-                                 </DialogContentText>
-                                <FormLabel>Giorni della settimana:</FormLabel>
-                                <ButtonGroup
-                                    color="primary"
-                                    orientation="vertical"
-                                    size="small"
-                                    aria-label="giorni della settimana in cui la stanza risulta aperta"
-                                    onClick={(e) => {
-                                        let obj: any = e.target
-                                        let day: string = obj?.parentElement?.id || obj?.value
-                                        if (day) {
-                                            this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
-                                            this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
-                                        }
-                                    }}
-                                >
-                                    <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
-                                    <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
-                                    <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
-                                    <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
-                                    <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
-                                    <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
-                                    <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
-                                </ButtonGroup>
-                                <FormHelperText color="red">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </DialogContentText>
+                                <div className="centralModal">
+                                    <FormLabel>Giorni della settimana:</FormLabel>
+                                </div>
+                                <div className="centralModal">
+                                    <ButtonGroup
+                                        color="primary"
+                                        orientation="vertical"
+                                        size="small"
+                                        aria-label="giorni della settimana in cui la stanza risulta aperta"
+                                        onClick={(e) => {
+                                            let obj: any = e.target
+                                            let day: string = obj?.parentElement?.id || obj?.value
+                                            if (day) {
+                                                this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
+                                                this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
+                                            }
+                                        }}
+                                    >
+                                        <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
+                                        <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
+                                        <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
+                                        <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
+                                        <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
+                                        <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
+                                        <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
+                                    </ButtonGroup>
+                                    <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </div>
                             </div>
                         </DialogContent>
                         <DialogActions>
@@ -299,11 +303,11 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
     private handleChangeSize(sizeNumber: string, size: string): void {
         let reg = new RegExp("^[0-9]{1,8}$");
         if (!sizeNumber) {
-            this.setState({ ...this.state, [size]: 1 })
+            this.setState({ ...this.state, [size]: "" })
             if (size === "dimHeight") {
-                this.heightInputControl(1)
+                this.heightInputControl(null)
             } else {
-                this.widthInputControl(1)
+                this.widthInputControl(null)
             }
         } else if (sizeNumber.match(reg)) {
             let dim: number = parseInt(sizeNumber)
@@ -316,8 +320,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private heightInputControl(height: number): boolean {
-        if (height === 0 || height > 20) {
+    private heightInputControl(height: number | null): boolean {
+        if (!height || height === 0 || height > 20) {
             this.setState({ heightError: true })
             return true
         } else {
@@ -326,8 +330,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
         }
     }
 
-    private widthInputControl(width: number): boolean {
-        if (width === 0 || width > 20) {
+    private widthInputControl(width: number | null): boolean {
+        if (!width || width === 0 || width > 20) {
             this.setState({ widthError: true })
             return true
         } else {
@@ -428,8 +432,6 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                 width: this.state.dimWidth
             })
             this.handleCloseButton()
-        } else {
-            //message errore
         }
     }
 
