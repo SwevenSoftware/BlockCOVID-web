@@ -2,7 +2,7 @@
 import React, { Component, createRef, RefObject } from 'react'
 /* redux */
 import { connect } from 'react-redux'
-import roomActionResolver from '../actions/roomsActions';
+import roomActionResolver from '../actions/roomsActions'
 /* material-ui */
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -21,7 +21,6 @@ import { FormLabel, FormHelperText } from '@material-ui/core'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import { theme } from '../theme'
 /* others */
-import CardGridComponent from './CardGridComponent'
 import DotGrid from '../DotGrid'
 
 interface DeleteRoomProps {
@@ -49,7 +48,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
     render() {
         return (
-            <div >
+            <div>
                 <IconButton
                     className="trash"
                     onClick={(e) => this.handleClickOpen()}>
@@ -69,35 +68,30 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                                 data={{
                                     width: this.props.data.room.width,
                                     height: this.props.data.room.height,
-                                    openingTime: null,
-                                    closingTime: null,
-                                    weekDays: null,
                                     desks: this.props.data.room.desks
                                 }}
                             />
                         </div>
                     </DialogContent>
                     <DialogContent>
-                        <div>
-                            <DialogContent>
-                                <DialogContentText color="primary">
-                                    Dimensioni stanza:
+                        <DialogContentText color="primary">
+                            Dimensioni stanza:
                             </DialogContentText>
-                                <FormLabel>{this.props.data.room.height}x{this.props.data.room.width}</FormLabel>
-
-                                <DialogContentText color="primary">
-                                    Orario di apertura:
+                        <FormLabel>
+                            {this.props.data.room.height}x{this.props.data.room.width}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Orario di apertura:
                             </DialogContentText>
-                                <FormLabel>{this.props.data.room.openingTime} - {this.props.data.room.closingTime}</FormLabel>
-
-                                <DialogContentText color="primary">
-                                    Giorni di apertura:
+                        <FormLabel>
+                            {this.props.data.room.openingTime} - {this.props.data.room.closingTime}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
                             </DialogContentText>
-                                <FormLabel>
-                                    {this.props.data.room.openingDays.join(", ")}
-                                </FormLabel>
-                            </DialogContent>
-                        </div>
+                        <FormLabel>
+                            {this.props.data.room.openingDays.join(", ")}
+                        </FormLabel>
                     </DialogContent>
                     <DialogActions>
                         <Button
@@ -106,14 +100,14 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                             id="decline"
                         >
                             Annulla
-              </Button>
+                        </Button>
                         <Button
                             variant="outlined"
                             id="confirm"
                             onClick={this.handleConfirm}
                         >
                             Conferma
-              </Button>
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -122,7 +116,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 
 
     /**
-    * Sets the visibility of the window to visible
+    * Sets the window visibility to visible
     * @params
     * @returns
     */
@@ -131,9 +125,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
     }
 
     /**
-    * Sets the visibility of the window to not visible
-    * @params
-    * @returns
+    * Sets the window visibility to not visible
     */
     private handleClose(): void {
         this.setState({ isModalOpen: false })

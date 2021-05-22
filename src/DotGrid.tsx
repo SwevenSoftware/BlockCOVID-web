@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button"
 import DialogContent from '@material-ui/core/DialogContent'
 /* others */
 import Grid, { Desk } from "./Grid"
+import { DeskInformation } from "./Api/roomAPI"
+import { posix } from "path"
 
 interface Pos2d {
     x: number,
@@ -61,7 +63,6 @@ class DotGrid extends Component<DotGridProps> {
         this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
         this.removedDesks = new Array<Desk>()
 
-        console.log("data modify dot grid: ", props.data)
         if (props.data?.desks)
             for (const desk of props.data.desks) {
                 const pos: Pos2d = { x: desk.x, y: desk.y }
@@ -73,8 +74,8 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public setSize(width: number, height: number): void {
-        this.canvasRef.current?.setAttribute("width", width.toString())
-        this.canvasRef.current?.setAttribute("height", height.toString())
+        this.canvasRef.current?.setAttribute("width", ((width + 1) * this.gridSettings.dim).toString())
+        this.canvasRef.current?.setAttribute("height", ((height + 1) * this.gridSettings.dim).toString())
     }
 
     handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void {

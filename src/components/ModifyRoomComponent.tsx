@@ -13,19 +13,14 @@ import {
 } from '../types'
 /* material-ui */
 import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
-import Dialog, { DialogProps } from '@material-ui/core/Dialog'
+import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
-import IconButton from '@material-ui/core/IconButton'
-import CreateIcon from '@material-ui/icons/Create'
-import PersonIcon from '@material-ui/icons/Person'
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { FormGroup, FormLabel, FormControl, withStyles, FormHelperText } from '@material-ui/core'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import { FormLabel, FormHelperText } from '@material-ui/core'
 import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 /* styles */
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -102,18 +97,23 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         return (
             <ThemeProvider theme={theme}>
                 <div>
-                    <Button className="usernameLayout pencil" onClick={() => this.handleClickOpenButton()}>
+                    <Button
+                        className="usernameLayout pencil"
+                        onClick={() => this.handleClickOpenButton()}
+                    >
                         {this.props.data.room.name}
                     </Button>
                     <Dialog
                         open={this.state.isModalOpen}
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
-                        fullWidth maxWidth="md">
+                        fullWidth maxWidth="md"
+                    >
                         <DialogTitle
                             id="form-dialog-title"
-                            className="pencilTitle">
-                            Modifica la stanza '{this.props.data.room.name}'
+                            className="pencilTitle"
+                        >
+                            Modifica la stanza '{this.props.data.room.name}
                         </DialogTitle>
                         <DialogContent>
                             <div className="centralPencil">
@@ -121,64 +121,34 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     Puoi modificare i seguenti campi
                                 </DialogContentText>
                             </div>
-                            <div className="alignCentralPencil">
-                                <div className="addField">
-                                    {/* TODO: add grid of the room */}
-                                    <TextField
-                                        required
-                                        id="outlined-search"
-                                        label="Nome stanza"
-                                        variant="outlined"
-                                        error={this.state.roomNameError}
-                                        helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                        value={this.state.roomNameValue}
-                                        onChange={(e) => {
-                                            this.handleChangeRoomName(e.target.value)
-                                            this.roomNameValidate(e.target.value)
-                                        }}
-                                    // TODO: implement error, helperText, value, onChange
-                                    />
-                                    {/* TODO: add fields such as opening times, closing time, week days and sizes */}
-                                </div>
+                            <div className="central alignCentralPencil">
+                                <DotGrid
+                                    mode="modifyGrid"
+                                    ref={this.refDotGrid}
+                                    data={{
+                                        width: this.state.dimWidth,
+                                        height: this.state.dimHeight,
+                                        desks: this.props.data.room.desks
+                                    }}
+                                />
                             </div>
-                            {/* <div className="centralPencil">
-                                <DialogContentText color="primary">
-                                    * indica i campi obbligatori
-                                 </DialogContentText>
-                            </div> */}
-                            <DialogContent className="central">
-                                <div className="alignCentralPencil">
-                                    <DotGrid
-                                        mode="modifyGrid"
-                                        ref={this.refDotGrid}
-                                        data={{
-                                            width: this.props.data.room.width,
-                                            height: this.props.data.room.height,
-                                            openingTime: null,
-                                            closingTime: null,
-                                            weekDays: null,
-                                            desks: this.props.data.room.desks
-                                        }}
-                                    />
-                                </div>
-                            </DialogContent>
-                            <DialogContent>
-                                {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
-                                <div>
-                                    {/*<DotGrid
-                                        mode="modifyInformation"
-                                        data={{
-                                            width: this.props.data.room.width,
-                                            height: this.props.data.room.height,
-                                            openingTime: this.props.data.room.openingTime,
-                                            closingTime: this.props.data.room.closingTime,
-                                            weekDays: this.props.data.room.openingDays,
-                                            desks: null
-                                        }}
-                                    />*/}
-                                </div>
-                            </DialogContent>
-                            <div className="addField">
+                        </DialogContent>
+                        <DialogContent>
+                            {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
+                            <div className="alignCentralPencil addField">
+                                <TextField
+                                    required
+                                    id="outlined-search"
+                                    label="Nome stanza"
+                                    variant="outlined"
+                                    error={this.state.roomNameError}
+                                    helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
+                                    value={this.state.roomNameValue}
+                                    onChange={(e) => {
+                                        this.handleChangeRoomName(e.target.value)
+                                        this.roomNameValidate(e.target.value)
+                                    }}
+                                />
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -205,8 +175,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }}
                                     />
                                 </MuiPickersUtilsProvider>
-                            </div>
-                            <div className="addField">
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -233,23 +201,24 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }}
                                     />
                                 </MuiPickersUtilsProvider>
-                            </div>
-                            <DialogContentText>
-                                Dimensione stanza
+                                <DialogContentText>
+                                    Dimensione stanza
                             </DialogContentText>
-                            <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
-                                    label={"Altezza attuale: "}
+                                    label="Altezza"
                                     variant="outlined"
                                     error={this.state.heightError}
                                     helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                     value={this.state.dimHeight}
-                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
+                                    onChange={(e) => {
+                                        if (this.handleChangeSize(e.target.value, "dimHeight")) {
+                                            this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))
+                                            this.refDotGrid.current?.resetView()
+                                        }
+                                    }}
                                 />
-                            </div>
-                            <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
@@ -258,7 +227,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     error={this.state.widthError}
                                     helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
                                     value={this.state.dimWidth}
-                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
+                                    onChange={(e) => {
+                                        if (this.handleChangeSize(e.target.value, "dimWidth")) {
+                                            this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)
+                                            this.refDotGrid.current?.resetView()
+                                        }
+                                    }}
                                 />
                             </div>
                             <div className="centralModal">
@@ -359,23 +333,33 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         }
     }
 
-    private handleChangeSize(sizeNumber: string, size: string): void {
+    /**
+     * Changes size value (width room or height room) and returns true if no error has occurred, false otherwise
+     * @param sizeNumber - the value of the size to change. It comes as a string but must be a number
+     * @param size - the name of the size to change. May be equal to "dimHeight" or "dimWidth"
+     * @private
+     */
+    private handleChangeSize(sizeNumber: string, size: string): boolean {
         let reg = new RegExp("^[0-9]{1,8}$")
         if (!sizeNumber) {
             this.setState({ ...this.state, [size]: "" })
             if (size === "dimHeight") {
-                this.heightInputControl(null)
+                return !this.heightInputControl(null)
             } else {
-                this.widthInputControl(null)
+                return !this.widthInputControl(null)
             }
-        } else if (sizeNumber.match(reg)) {
+        }
+        else if (sizeNumber.match(reg)) {
             let dim: number = parseInt(sizeNumber)
             this.setState({ ...this.state, [size]: dim })
             if (size === "dimHeight") {
-                this.heightInputControl(dim)
+                return !this.heightInputControl(dim)
             } else {
-                this.widthInputControl(dim)
+                return !this.widthInputControl(dim)
             }
+        }
+        else {
+            return false
         }
     }
 
@@ -501,8 +485,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             this.props.dispatch.createDesks(dataAdd)
 
             this.handleCloseButton()
-        } else {
-            //message errore
         }
     }
 
