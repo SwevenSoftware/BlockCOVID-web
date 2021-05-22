@@ -113,7 +113,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         >
                             Modifica la stanza '{this.props.data.room.name}'
                         </DialogTitle>
-                        <DialogContent className = "centralModal">
+                        <DialogContent className="centralModal">
                             <DialogContentText>
                                 Puoi modificare i seguenti campi
                             </DialogContentText>
@@ -129,14 +129,14 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 />
                             </div>
                             <div className="centralModal">
-                            <Button
-                                id="cleanGrid"
-                                variant="outlined"
-                                size="medium"
-                                onClick={() => {
-                                    this.refDotGrid.current?.resetView()
-                                }}>
-                                Svuota stanza
+                                <Button
+                                    id="cleanGrid"
+                                    variant="outlined"
+                                    size="medium"
+                                    onClick={() => {
+                                        this.refDotGrid.current?.resetView()
+                                    }}>
+                                    Svuota stanza
                             </Button>
                             </div>
                         </DialogContent>
@@ -156,7 +156,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         this.roomNameValidate(e.target.value)
                                     }}
                                 />
-                            <div className="addField"></div>
+                                <div className="addField"></div>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -213,7 +213,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <DialogContentText>
-                                    Dimensione stanza
+                                Dimensione stanza
                             </DialogContentText>
                             <div className="addField">
                                 <TextField

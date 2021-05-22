@@ -252,7 +252,7 @@ class DotGrid extends Component<DotGridProps> {
                 break
             case 'modifyGrid':
                 return (
-                    <div className= "centralModal">
+                    <div className="centralModal">
                         {/* <Button
                             id="cleanGrid"
                             variant="outlined"
