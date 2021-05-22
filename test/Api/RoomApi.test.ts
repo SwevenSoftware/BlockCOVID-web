@@ -144,9 +144,7 @@ describe('roomApi', () => {
         }
         const config = {
             ...requestConfig,
-            data: {
-                ...data.desksId
-            }
+            data: data.desksId
         }
         mockedAxios.delete.mockImplementationOnce(() => Promise.resolve(axiosResponse));
         expect(roomApi.deleteDesk(adminToken, data)).resolves.toEqual(axiosResponse);

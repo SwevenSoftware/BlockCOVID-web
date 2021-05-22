@@ -257,8 +257,8 @@ class DotGrid extends Component<DotGridProps> {
                 break
             case 'modifyGrid':
                 return (
-                    <div>
-                        <Button
+                    <div className="centralModal">
+                        {/* <Button
                             id="cleanGrid"
                             variant="outlined"
                             size="medium"
@@ -266,7 +266,7 @@ class DotGrid extends Component<DotGridProps> {
                                 this.resetView()
                             }}>
                             Svuota stanza
-                            </Button>
+                            </Button> */}
                         <canvas
                             ref={this.canvasRef}
                             onMouseMove={this.handleMouseMove}

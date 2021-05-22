@@ -95,7 +95,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             <ThemeProvider theme={theme}>
                 <div>
                     <Button
-                        className="usernameLayout pencil"
+                        className="pencil"
                         onClick={() => this.handleClickOpenButton()}
                     >
                         {this.props.data.room.name}
@@ -105,20 +105,19 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         onClose={() => this.handleCloseButton()}
                         aria-labelledby="form-dialog-title"
                         fullWidth maxWidth="md"
+                        className="centralModal"
                     >
                         <DialogTitle
                             id="form-dialog-title"
-                            className="pencilTitle"
+                            className="modalTitle"
                         >
-                            Modifica la stanza '{this.props.data.room.name}
+                            Modifica la stanza '{this.props.data.room.name}'
                         </DialogTitle>
-                        <DialogContent>
-                            <div className="centralPencil">
-                                <DialogContentText>
-                                    Puoi modificare i seguenti campi
-                                </DialogContentText>
-                            </div>
-                            <div className="central alignCentralPencil">
+                        <DialogContent className="centralModal">
+                            <DialogContentText>
+                                Puoi modificare i seguenti campi
+                            </DialogContentText>
+                            <div className="centralModal">
                                 <DotGrid
                                     mode="modifyGrid"
                                     ref={this.refDotGrid}
@@ -129,10 +128,21 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     }}
                                 />
                             </div>
+                            <div className="centralModal">
+                                <Button
+                                    id="cleanGrid"
+                                    variant="outlined"
+                                    size="medium"
+                                    onClick={() => {
+                                        this.refDotGrid.current?.resetView()
+                                    }}>
+                                    Svuota stanza
+                            </Button>
+                            </div>
                         </DialogContent>
                         <DialogContent>
                             {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
-                            <div className="alignCentralPencil addField">
+                            <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
@@ -146,6 +156,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         this.roomNameValidate(e.target.value)
                                     }}
                                 />
+                                <div className="addField"></div>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -172,6 +183,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }}
                                     />
                                 </MuiPickersUtilsProvider>
+                            </div>
+                            <div className="addField">
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -198,9 +211,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }}
                                     />
                                 </MuiPickersUtilsProvider>
-                                <DialogContentText>
-                                    Dimensione stanza
+                            </div>
+                            <DialogContentText>
+                                Dimensione stanza
                             </DialogContentText>
+                            <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
@@ -216,6 +231,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }
                                     }}
                                 />
+                            </div>
+                            <div className="addField">
                                 <TextField
                                     required
                                     id="outlined-search"
@@ -236,30 +253,34 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
                                 </DialogContentText>
-                                <FormLabel>Giorni della settimana:</FormLabel>
-                                <ButtonGroup
-                                    color="primary"
-                                    orientation="vertical"
-                                    size="small"
-                                    aria-label="giorni della settimana in cui la stanza risulta aperta"
-                                    onClick={(e) => {
-                                        let obj: any = e.target
-                                        let day: string = obj?.parentElement?.id || obj?.value
-                                        if (day) {
-                                            this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
-                                            this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
-                                        }
-                                    }}
-                                >
-                                    <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
-                                    <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
-                                    <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
-                                    <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
-                                    <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
-                                    <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
-                                    <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
-                                </ButtonGroup>
-                                <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                <div className="centralModal">
+                                    <FormLabel>Giorni della settimana:</FormLabel>
+                                </div>
+                                <div className="centralModal">
+                                    <ButtonGroup
+                                        color="primary"
+                                        orientation="vertical"
+                                        size="small"
+                                        aria-label="giorni della settimana in cui la stanza risulta aperta"
+                                        onClick={(e) => {
+                                            let obj: any = e.target
+                                            let day: string = obj?.parentElement?.id || obj?.value
+                                            if (day) {
+                                                this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
+                                                this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
+                                            }
+                                        }}
+                                    >
+                                        <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
+                                        <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
+                                        <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
+                                        <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
+                                        <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
+                                        <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
+                                        <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
+                                    </ButtonGroup>
+                                    <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </div>
                             </div>
                         </DialogContent>
                         <DialogActions>

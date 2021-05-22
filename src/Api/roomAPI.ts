@@ -102,7 +102,6 @@ export class roomAPI {
                 "Authorization": tokenID
             }
         }
-        console.log("room api call ", data)
         return this.axios.post("/api/rooms/" + data.roomName + "/desks", data.desks, config)
     }
 
