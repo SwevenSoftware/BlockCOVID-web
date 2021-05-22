@@ -474,7 +474,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             }
             this.props.dispatch.deleteDesk(dataRemove)
 
-            const newDesks = this.refDotGrid.current?.getNewDesks().map((desk) => { return { x: desk.pos.x, y: desk.pos.y } })
+            const newDesks = this.refDotGrid.current?.getNewDesks().map((desk) => { return { x: desk.pos.x + 1, y: desk.pos.y + 1 } })
             const dataAdd = {
                 roomName: this.state.roomNameValue,
                 desks: newDesks ?? new Array()
