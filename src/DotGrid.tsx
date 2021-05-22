@@ -157,10 +157,15 @@ class DotGrid extends Component<DotGridProps> {
         ctx.closePath()
     }
 
-    public resetView(): void {
+    public resetView(): boolean {
         this.removedDesks = this.removedDesks.concat(this.grid.getAllDesks())
         this.grid.clearDesks()
         this.updateCanvas()
+        for (var desk of this.removedDesks) {
+            if (desk.inUse)
+                return false
+        }
+        return true
     }
 
     updateCanvas(): void {
