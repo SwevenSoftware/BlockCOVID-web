@@ -141,10 +141,10 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     size="medium"
                                     onClick={() => {
                                         if (this.refDotGrid.current?.resetView()) {
-                                            this.setState({gridError: ""})
+                                            this.setState({ gridError: "" })
                                         }
                                         else {
-                                            this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                            this.setState({ gridError: ERROR_GRID_RESET_DESK_IS_IN_USE })
                                         }
                                     }}>
                                     Svuota stanza
@@ -236,11 +236,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     value={this.state.dimHeight}
                                     onChange={(e) => {
                                         if (this.handleChangeSize(e.target.value, "dimHeight")) {
-                                            if(this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))) {
-                                                this.setState({gridError: ""})
+                                            if (this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))) {
+                                                this.setState({ gridError: "" })
                                             }
                                             else {
-                                                this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                                this.setState({ gridError: ERROR_GRID_RESET_DESK_IS_IN_USE })
                                             }
                                         }
                                     }}
@@ -257,11 +257,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     value={this.state.dimWidth}
                                     onChange={(e) => {
                                         if (this.handleChangeSize(e.target.value, "dimWidth")) {
-                                            if(this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)) {
-                                                this.setState({gridError: ""})
+                                            if (this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)) {
+                                                this.setState({ gridError: "" })
                                             }
                                             else {
-                                                this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                                this.setState({ gridError: ERROR_GRID_RESET_DESK_IS_IN_USE })
                                             }
                                         }
                                     }}
