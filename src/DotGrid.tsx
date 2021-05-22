@@ -27,9 +27,6 @@ interface DotGridProps {
     data: {
         width: number,
         height: number,
-        openingTime: string | null,
-        closingTime: string | null,
-        weekDays: string[] | null,
         desks: {
             x: number,
             y: number,
@@ -242,26 +239,6 @@ class DotGrid extends Component<DotGridProps> {
                     />
                 )
                 break
-            case 'newInformation':
-                console.log('delete info')
-                return (
-                    <div>
-                        <DialogContentText color="primary">
-                            Dimensioni stanza:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel>
-
-                        <DialogContentText color="primary">
-                            Orario di apertura:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel>
-
-                        <DialogContentText color="primary">
-                            Giorni di apertura:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.weekDays}</FormLabel>
-                    </div>
-                )
             case 'deleteGrid':
                 return (
                     <div>
@@ -273,29 +250,6 @@ class DotGrid extends Component<DotGridProps> {
                     </div>
                 )
                 break
-            case 'deleteInformation':
-                return (
-                    <div>
-                        <DialogContent>
-                            <DialogContentText color="primary">
-                                Dimensioni stanza:
-                        </DialogContentText>
-                            <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel>
-
-                            <DialogContentText color="primary">
-                                Orario di apertura:
-                        </DialogContentText>
-                            <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel>
-
-                            <DialogContentText color="primary">
-                                Giorni di apertura:
-                        </DialogContentText>
-                            <FormLabel>
-                                {this.props.data.weekDays?.join(", ")}
-                            </FormLabel>
-                        </DialogContent>
-                    </div>
-                )
             case 'modifyGrid':
                 return (
                     <div>
@@ -318,67 +272,6 @@ class DotGrid extends Component<DotGridProps> {
                     </div>
                 )
                 break
-            case 'modifyInformation':
-                return (
-                    <div>
-                        {/* <div className="switchInline">
-                            <div className="switchMarginDx">
-                                <Typography>Chiusa</Typography>
-                            </div>
-                        </div>
-                        <div className="switchInline">
-                            <label className="switch">
-                                <input type="checkbox"></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>
-                        <div className="switchInline">
-                            <div className="switchMarginSx">
-                                <Typography>Aperta</Typography>
-                            </div>
-                        </div> */}
-                        {/* <DialogContentText color="primary">
-                            Dimensioni stanza:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel> */}
-                        {/* <TextField
-                        required
-                        id="outlined-search"
-                        label={this.props.data.height}
-                        variant="outlined"
-                        />
-                        x
-                        <TextField
-                        required
-                        id="outlined-search"
-                        label={this.props.data.width}
-                        variant="outlined"
-                        /> */}
-
-                        {/* <DialogContentText color="primary">
-                            Orario:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel> */}
-                        {/* <TextField
-                        required
-                        id="outlined-search"
-                        label="Apertura"
-                        variant="outlined"
-                        />
-                        -
-                        <TextField
-                        required
-                        id="outlined-search"
-                        label="Chiusura"
-                        variant="outlined"
-                        /> */}
-
-                        {/* <DialogContentText color="primary">
-                            Giorni di apertura:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.weekDays}</FormLabel> */}
-                    </div>
-                )
             default:
                 return (
                     <div>
