@@ -6,7 +6,9 @@ import thunk from 'redux-thunk'
 import { JSDOM } from 'jsdom'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 import RoomsComponent from "../../src/components/RoomsComponent"
-import { Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core"
+import { ERROR_UNKNOWN } from "../../src/types"
+import NewRoomComponent from "../../src/components/NewRoomComponent"
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -114,6 +116,27 @@ describe('Rooms Component', function() {
     it('should render the component', async function() {
         const wrapper = mount(<Provider store={store}><RoomsComponent /></Provider>)
         expect(wrapper.find(RoomsComponent).length).toEqual(1)
+    })
+
+    it('should render the component if error', async function() {
+        const errorState = {
+            rooms: {
+                rooms: null,
+                error: ERROR_UNKNOWN
+            },
+            login: {
+                token: null,
+                error: ERROR_UNKNOWN
+            }
+        }
+        store = mockStore(errorState)
+        const wrapper = mount(<Provider store={store}><RoomsComponent /></Provider>)
+        expect(wrapper.find(RoomsComponent).length).toEqual(1)
+    })
+
+    it('should render the new room component', async function() {
+        const wrapper = mount(<Provider store={store}><RoomsComponent /></Provider>)
+        expect(wrapper.find(RoomsComponent).find(NewRoomComponent).length).toEqual(1)
     })
 
     it('should render the proper number of rooms', async function() {
