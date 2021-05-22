@@ -75,23 +75,23 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     </DialogContent>
                     <DialogContent>
                         <DialogContentText color="primary">
-                                Dimensioni stanza:
+                            Dimensioni stanza:
                             </DialogContentText>
-                            <FormLabel>
-                                {this.props.data.room.height}x{this.props.data.room.width}
-                            </FormLabel>
-                            <DialogContentText color="primary">
-                                Orario di apertura:
+                        <FormLabel>
+                            {this.props.data.room.height}x{this.props.data.room.width}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Orario di apertura:
                             </DialogContentText>
-                            <FormLabel>
-                                {this.props.data.room.openingTime} - {this.props.data.room.closingTime}
-                            </FormLabel>
-                            <DialogContentText color="primary">
-                                Giorni di apertura:
+                        <FormLabel>
+                            {this.props.data.room.openingTime} - {this.props.data.room.closingTime}
+                        </FormLabel>
+                        <DialogContentText color="primary">
+                            Giorni di apertura:
                             </DialogContentText>
-                            <FormLabel>
-                                {this.props.data.room.openingDays.join(", ")}
-                            </FormLabel>
+                        <FormLabel>
+                            {this.props.data.room.openingDays.join(", ")}
+                        </FormLabel>
                     </DialogContent>
                     <DialogActions>
                         <Button

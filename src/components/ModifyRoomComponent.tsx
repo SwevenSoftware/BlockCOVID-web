@@ -96,8 +96,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             <ThemeProvider theme={theme}>
                 <div>
                     <Button
-                      className="usernameLayout pencil"
-                      onClick={() => this.handleClickOpenButton()}
+                        className="usernameLayout pencil"
+                        onClick={() => this.handleClickOpenButton()}
                     >
                         {this.props.data.room.name}
                     </Button>
@@ -121,32 +121,32 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                             </div>
                             <div className="central alignCentralPencil">
                                 <DotGrid
-                                  mode="modifyGrid"
-                                  ref={this.refDotGrid}
-                                  data={{
-                                      width: this.state.dimWidth,
-                                      height: this.state.dimHeight,
-                                      desks: this.props.data.room.desks
-                                  }}
+                                    mode="modifyGrid"
+                                    ref={this.refDotGrid}
+                                    data={{
+                                        width: this.state.dimWidth,
+                                        height: this.state.dimHeight,
+                                        desks: this.props.data.room.desks
+                                    }}
                                 />
                             </div>
                         </DialogContent>
                         <DialogContent>
                             {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
-                                <div className="alignCentralPencil addField">
-                                    <TextField
-                                      required
-                                      id="outlined-search"
-                                      label="Nome stanza"
-                                      variant="outlined"
-                                      error={this.state.roomNameError}
-                                      helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                      value={this.state.roomNameValue}
-                                      onChange={(e) => {
-                                          this.handleChangeRoomName(e.target.value)
-                                          this.roomNameValidate(e.target.value)
-                                      }}
-                                    />
+                            <div className="alignCentralPencil addField">
+                                <TextField
+                                    required
+                                    id="outlined-search"
+                                    label="Nome stanza"
+                                    variant="outlined"
+                                    error={this.state.roomNameError}
+                                    helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
+                                    value={this.state.roomNameValue}
+                                    onChange={(e) => {
+                                        this.handleChangeRoomName(e.target.value)
+                                        this.roomNameValidate(e.target.value)
+                                    }}
+                                />
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker
                                         margin="normal"
@@ -199,8 +199,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                         }}
                                     />
                                 </MuiPickersUtilsProvider>
-                            <DialogContentText>
-                                Dimensione stanza
+                                <DialogContentText>
+                                    Dimensione stanza
                             </DialogContentText>
                                 <TextField
                                     required
