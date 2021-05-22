@@ -230,6 +230,12 @@
     padding: 0;
 }
 
+.addRoomsButton {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 1%;
+}
+
 
 /* (((((((((((((((((((((((((((((( TRASH )))))))))))))))))))))))))))) */
 
