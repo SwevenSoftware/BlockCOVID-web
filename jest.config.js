@@ -13,5 +13,8 @@ module.exports = {
     collectCoverageFrom: [
         "src/**/*.tsx",
         "src/**/*.ts"
-    ]
+    ],
+    moduleNameMapper: {
+        "^.+\\.(css|less)$" : "<rootDir>/CSSStub.js"
+    }
 };
