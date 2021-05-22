@@ -70,9 +70,15 @@ class DotGrid extends Component<DotGridProps> {
         this.checkBox = this.checkBox.bind(this)
     }
 
-    public setSize(width: number, height: number): void {
+    /**
+     * Set room sizes. Calls resetView() and returns true if no error as occurred, false otherwise
+     * @param width - room width size
+     * @param height - room height size
+     */
+    public setSize(width: number, height: number): boolean {
         this.canvasRef.current?.setAttribute("width", ((width + 1) * this.gridSettings.dim).toString())
         this.canvasRef.current?.setAttribute("height", ((height + 1) * this.gridSettings.dim).toString())
+        return this.resetView()
     }
 
     handleMouseMove(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void {
@@ -157,13 +163,17 @@ class DotGrid extends Component<DotGridProps> {
         ctx.closePath()
     }
 
+    /**
+     * Removes all desks and clears the grid. Returns true if no desk is in use, false otherwise
+     */
     public resetView(): boolean {
         this.removedDesks = this.removedDesks.concat(this.grid.getAllDesks())
         this.grid.clearDesks()
         this.updateCanvas()
-        for (var desk of this.removedDesks) {
-            if (desk.inUse)
+        for (let desk of this.removedDesks) {
+            if (desk.inUse) {
                 return false
+            }
         }
         return true
     }
