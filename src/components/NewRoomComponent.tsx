@@ -217,31 +217,35 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
                             <div className="centralModal">
                                 <DialogContentText color="primary">
                                     * indica i campi obbligatori
-                                 </DialogContentText>
-                                <FormLabel>Giorni della settimana:</FormLabel>
-                                <ButtonGroup
-                                    color="primary"
-                                    orientation="vertical"
-                                    size="small"
-                                    aria-label="giorni della settimana in cui la stanza risulta aperta"
-                                    onClick={(e) => {
-                                        let obj: any = e.target
-                                        let day: string = obj?.parentElement?.id || obj?.value
-                                        if (day) {
-                                            this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
-                                            this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
-                                        }
-                                    }}
-                                >
-                                    <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
-                                    <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
-                                    <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
-                                    <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
-                                    <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
-                                    <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
-                                    <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
-                                </ButtonGroup>
-                                <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </DialogContentText>
+                                <div className="centralModal">
+                                    <FormLabel>Giorni della settimana:</FormLabel>
+                                </div>
+                                <div className="centralModal">
+                                    <ButtonGroup
+                                        color="primary"
+                                        orientation="vertical"
+                                        size="small"
+                                        aria-label="giorni della settimana in cui la stanza risulta aperta"
+                                        onClick={(e) => {
+                                            let obj: any = e.target
+                                            let day: string = obj?.parentElement?.id || obj?.value
+                                            if (day) {
+                                                this.weekDaysInputControl({ ...this.state.weekDays, [day]: !this.state.weekDays[day] })
+                                                this.setState({ weekDays: { ...this.state.weekDays, [day]: !this.state.weekDays[day] } })
+                                            }
+                                        }}
+                                    >
+                                        <Button id="monday" value="monday" variant={this.state.weekDays.monday ? "contained" : "outlined"}>Lunedì</Button>
+                                        <Button id="tuesday" value="tuesday" variant={this.state.weekDays.tuesday ? "contained" : "outlined"}>Martedì</Button>
+                                        <Button id="wednesday" value="wednesday" variant={this.state.weekDays.wednesday ? "contained" : "outlined"}>Mercoledì</Button>
+                                        <Button id="thursday" value="thursday" variant={this.state.weekDays.thursday ? "contained" : "outlined"}>Giovedì</Button>
+                                        <Button id="friday" value="friday" variant={this.state.weekDays.friday ? "contained" : "outlined"}>Venerdì</Button>
+                                        <Button id="saturday" value="saturday" variant={this.state.weekDays.saturday ? "contained" : "outlined"}>Sabato</Button>
+                                        <Button id="sunday" value="sunday" variant={this.state.weekDays.sunday ? "contained" : "outlined"}>Domenica</Button>
+                                    </ButtonGroup>
+                                    <FormHelperText id="colorError">{this.state.weekDaysError ? ERROR_WEEKDAYS_NOT_SELECTED : ""}</FormHelperText>
+                                </div>
                             </div>
                         </DialogContent>
                         <DialogActions>
