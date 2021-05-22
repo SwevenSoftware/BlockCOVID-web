@@ -21,8 +21,6 @@ import NewRoom from './NewRoomComponent'
 import ModifyRoom from './ModifyRoomComponent'
 import DeleteRoom from './DeleteRoomComponent'
 
-import GridProva from '../Grid'
-
 interface RoomsProps {
     state: any
     dispatch: any
@@ -41,7 +39,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
     }
 
     render() {
-        console.log(this.props.state.rooms)
         return (
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
@@ -51,35 +48,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
                     <div>
                         {this.props.state.rooms.error ?
                             this.props.state.rooms.error : ""}
-                        <Button onClick={() => {
-                            let data = {
-                                roomName: "stanzamod3",
-                                desks: [
-                                    {
-                                        x: 1,
-                                        y: 1
-                                    }
-                                ]
-                            }
-                            this.props.dispatch.createDesks(data)
-                        }}
-                        >
-                            Create desks in 'stanzamod3'
-                        </Button>
-                        <Button onClick={() => {
-                            let data = {
-                                roomName: "stanzamod3",
-                                desk: {
-                                    id: this.props.state.rooms.rooms[3]?.desks[0]?.deskId,
-                                    x: this.props.state.rooms.rooms[3]?.desks[0]?.x,
-                                    y: this.props.state.rooms.rooms[3]?.desks[0]?.y
-                                }
-                            }
-                            this.props.dispatch.deleteDesk(data)
-                        }}
-                        >
-                            Delete desk in 'stanzamod3'
-                        </Button>
                         <Grid container spacing={3}>
                             {this.popolate()}
                         </Grid>
@@ -171,12 +139,6 @@ const mapDispatchToProps = (dispatch: Function) => {
         dispatch: {
             getRooms: (data: { fromTimestamp: string, toTimestamp: string }) => {
                 dispatch(roomActionsResolver.getRooms(data))
-            },
-            createDesks: (data: { roomName: string, desks: [{ x: number, y: number }] }) => {
-                dispatch(roomActionsResolver.createDesks(data))
-            },
-            deleteDesk: (data: { roomName: string, desksId: Array<string> }) => {
-                dispatch(roomActionsResolver.deleteDesk(data))
             }
         }
     }

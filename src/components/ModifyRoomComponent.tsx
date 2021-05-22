@@ -62,6 +62,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         this.handleCloseButton = this.handleCloseButton.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
 
+        this.refDotGrid = createRef<DotGrid>()
         this.state = {
             isButtonDisabled: true,
             isModalOpen: false,
@@ -87,10 +88,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             heightError: false,
             widthError: false
         }
-
-        console.log(this.props.data.room)
-
-        this.refDotGrid = createRef<DotGrid>()
     }
 
     render() {
