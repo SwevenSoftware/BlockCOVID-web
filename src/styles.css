@@ -31,8 +31,9 @@
 }
 
 .centralModal {
+    margin-left: 15px;
     margin: auto;
-    width: 80%;
+    width: 100%;
     text-align: center;
 }
 
