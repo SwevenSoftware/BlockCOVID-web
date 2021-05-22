@@ -210,7 +210,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     error={this.state.heightError}
                                     helperText={this.state.heightError ? ERROR_INSERTION_NUMBER : ""}
                                     value={this.state.dimHeight}
-                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimHeight")}
+                                    onChange={(e) => {
+                                        if (this.handleChangeSize(e.target.value, "dimHeight")) {
+                                            this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))
+                                            this.refDotGrid.current?.resetView()
+                                        }
+                                    }}
                                 />
                                 <TextField
                                     required
@@ -220,7 +225,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     error={this.state.widthError}
                                     helperText={this.state.widthError ? ERROR_INSERTION_NUMBER : ""}
                                     value={this.state.dimWidth}
-                                    onChange={(e) => this.handleChangeSize(e.target.value, "dimWidth")}
+                                    onChange={(e) => {
+                                        if (this.handleChangeSize(e.target.value, "dimWidth")) {
+                                            this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)
+                                            this.refDotGrid.current?.resetView()
+                                        }
+                                    }}
                                 />
                             </div>
                             <div className="centralModal">
