@@ -116,11 +116,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         >
                             Modifica la stanza '{this.props.data.room.name}'
                             </DialogTitle>
-                        <DialogContent className="centralModal">
+                        <DialogContent className="centralGrid">
                             <DialogContentText>
                                 Puoi modificare i seguenti campi
                                 </DialogContentText>
-                            <div className="centralModal">
+                            <div className="centralGrid">
                                 <DotGrid
                                     mode="modifyGrid"
                                     ref={this.refDotGrid}
@@ -153,19 +153,21 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                         </DialogContent>
                         <DialogContent>
                             <div className="addField">
-                                <TextField
-                                    required
-                                    id="outlined-search"
-                                    label="Nome stanza"
-                                    variant="outlined"
-                                    error={this.state.roomNameError}
-                                    helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
-                                    value={this.state.roomNameValue}
-                                    onChange={(e) => {
-                                        this.handleChangeRoomName(e.target.value)
-                                        this.roomNameValidate(e.target.value)
-                                    }}
-                                />
+                                <div className="marginUnderGrid">
+                                    <TextField
+                                        required
+                                        id="outlined-search"
+                                        label="Nome stanza"
+                                        variant="outlined"
+                                        error={this.state.roomNameError}
+                                        helperText={this.state.roomNameError ? ERROR_ROOM_NAME_NOT_AVAILABLE : ""}
+                                        value={this.state.roomNameValue}
+                                        onChange={(e) => {
+                                            this.handleChangeRoomName(e.target.value)
+                                            this.roomNameValidate(e.target.value)
+                                        }}
+                                    />
+                                </div>
                                 <div className="addField"></div>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardTimePicker

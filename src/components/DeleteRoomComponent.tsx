@@ -60,8 +60,8 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle id="form-dialog-title">Sei sicuro di eliminare '{this.props.data.room.name}'?</DialogTitle>
-                    <DialogContent className="centralModal">
-                        <div className="alignCentralPencil">
+                    <DialogContent className="centralGrid">
+                        <div className="centralGrid">
                             <DotGrid
                                 mode="deleteGrid"
                                 ref={this.refDotGrid}
