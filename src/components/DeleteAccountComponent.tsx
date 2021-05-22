@@ -19,6 +19,8 @@ import BathtubIcon from '@material-ui/icons/Bathtub'
 import { FormLabel, FormHelperText } from '@material-ui/core'
 /* others */
 import { ERROR_USER_CANNOT_BE_DELETED } from '../types'
+import '../styles.css'
+
 
 interface DeleteAccountProps {
     state: any,
@@ -66,7 +68,7 @@ class DeleteAccountComponent extends Component<DeleteAccountProps, DeleteAccount
                 >
                     <DialogTitle id="form-dialog-title">Sei sicuro di eliminare {this.props.data.user.username}?</DialogTitle>
                     <DialogContent className="central">
-                        <div className="alignCentralPencil">
+                        <div className="centralModal">
                             <PersonIcon fontSize="large" />
                             <DialogContentText>
                                 {this.props.data.user.username}
