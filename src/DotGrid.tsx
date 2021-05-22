@@ -27,7 +27,12 @@ interface DotGridProps {
     data: {
         width: number,
         height: number,
-        desks: DeskInformation[] | null
+        desks: {
+            x: number,
+            y: number,
+            available: boolean,
+            deskId: string
+        }[] | null
     }
 }
 
@@ -36,8 +41,9 @@ class DotGrid extends Component<DotGridProps> {
     gridSettings: Settings
     mousePos: Pos2d
     grid: Grid
+    removedDesks: Array<Desk>
 
-    constructor(props) {
+    constructor(props: DotGridProps) {
         super(props)
         this.canvasRef = createRef<HTMLCanvasElement>()
         const _dim: number = 30
@@ -52,12 +58,12 @@ class DotGrid extends Component<DotGridProps> {
             y: -10
         }
         this.grid = new Grid(this.gridSettings.width, this.gridSettings.height) // new Grid(2, 10)
+        this.removedDesks = new Array<Desk>()
 
         if (props.data?.desks)
             for (const desk of props.data.desks) {
                 const pos: Pos2d = { x: desk.x, y: desk.y }
-                this.grid.addDesk(pos);
-                this.grid.setInUse(pos, false) // TODO
+                this.grid.addDesk(pos, !desk.available, desk.deskId);
             }
 
         this.handleMouseMove = this.handleMouseMove.bind(this)
@@ -95,12 +101,26 @@ class DotGrid extends Component<DotGridProps> {
             || pointPos.y > this.gridSettings.height - this.gridSettings.dim)
             return;
 
-        if (this.grid.isFree(pointPos))
-            this.grid.addDesk(pointPos);
+        if (this.grid.isFree(pointPos)) {
+            let reinserted: boolean = false
+            for (var i in this.removedDesks) {
+                if (this.removedDesks[i].pos.x == pointPos.x &&
+                    this.removedDesks[i].pos.y == pointPos.y) {
+                    const deskReinsered = this.removedDesks[i]
+                    delete this.removedDesks[i]
+                    reinserted = true
+                    this.grid.insertDesk(deskReinsered)
+                }
+            }
+            if (!reinserted)
+                this.grid.addDesk(pointPos)
+        }
         else {
-            console.log(this.grid.getDesk(pointPos));
-            if (this.grid.getDesk(pointPos)?.inUse !== true)  // either false or undefined
+            const selectedDesk = this.grid.getDesk(pointPos)
+            if (selectedDesk && !selectedDesk.inUse) {  // either false or undefined
                 this.grid.removeDesk(pointPos);
+                this.removedDesks.push(selectedDesk)
+            }
         }
 
         this.updateCanvas()
@@ -138,6 +158,7 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public resetView(): void {
+        this.removedDesks = this.removedDesks.concat(this.grid.getAllDesks())
         this.grid.clearDesks()
         this.updateCanvas()
     }
@@ -189,7 +210,15 @@ class DotGrid extends Component<DotGridProps> {
     }
 
     public getDesks(): Array<Desk> {
-        return this.grid.getAllDesks();
+        return this.grid.getAllDesks()
+    }
+
+    public getRemovedDesks(): Array<Desk> {
+        return this.removedDesks.filter((d) => d.serverId !== null)
+    }
+
+    public getNewDesks(): Array<Desk> {
+        return this.getDesks().filter((d) => d.serverId === null)
     }
 
     componentDidMount() {
@@ -243,67 +272,6 @@ class DotGrid extends Component<DotGridProps> {
                     </div>
                 )
                 break
-            case 'modifyInformation':
-                return (
-                    <div>
-                        {/* <div className="switchInline">
-                            <div className="switchMarginDx">
-                                <Typography>Chiusa</Typography>
-                            </div>
-                        </div>
-                        <div className="switchInline">
-                            <label className="switch">
-                                <input type="checkbox"></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>
-                        <div className="switchInline">
-                            <div className="switchMarginSx">
-                                <Typography>Aperta</Typography>
-                            </div>
-                        </div> */}
-                        {/* <DialogContentText color="primary">
-                            Dimensioni stanza:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.height}x{this.props.data.width}</FormLabel> */}
-                        {/* <TextField
-                        required
-                        id="outlined-search"
-                        label={this.props.data.height}
-                        variant="outlined"
-                        />
-                        x
-                        <TextField
-                        required
-                        id="outlined-search"
-                        label={this.props.data.width}
-                        variant="outlined"
-                        /> */}
-
-                        {/* <DialogContentText color="primary">
-                            Orario:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.openingTime} - {this.props.data.closingTime}</FormLabel> */}
-                        {/* <TextField
-                        required
-                        id="outlined-search"
-                        label="Apertura"
-                        variant="outlined"
-                        />
-                        -
-                        <TextField
-                        required
-                        id="outlined-search"
-                        label="Chiusura"
-                        variant="outlined"
-                        /> */}
-
-                        {/* <DialogContentText color="primary">
-                            Giorni di apertura:
-                        </DialogContentText>
-                        <FormLabel>{this.props.data.weekDays}</FormLabel> */}
-                    </div>
-                )
             default:
                 return (
                     <div>

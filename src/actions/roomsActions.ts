@@ -103,7 +103,7 @@ export class roomActions {
         }
     }
 
-    deleteDesk(data: { roomName: string, desk: DeskInformation }) {
+    deleteDesk(data: { roomName: string, desksId: Array<string> }) {
         return (dispatch, getState) => {
             let tokenID = getState().login.token?.id
             this.roomApi.deleteDesk(tokenID, data)

@@ -7,13 +7,13 @@ class Desk {
     pos: Pos2d
     serverId: string | null
     inUse: boolean
-    constructor(x: number, y: number) {
+    constructor(x: number, y: number, inUse: boolean, serverId: string | null) {
         this.pos = {
             x: x,
             y: y
         }
-        this.serverId = null
-        this.inUse = false
+        this.serverId = serverId
+        this.inUse = inUse
     }
 }
 
@@ -44,9 +44,13 @@ class Room {
      * @param x - x position of the desk
      * @param y - y position of the desk
      */
-    public addDesk(position: Pos2d): void {
-        if (this.isFree(position))
-            this.desks.set(position, new Desk(position.x, position.y))
+    public addDesk(position: Pos2d, inUse: boolean = false, id: string | null = null): void {
+        this.insertDesk(new Desk(position.x, position.y, inUse, id))
+    }
+
+    public insertDesk(desk: Desk) {
+        if (this.isFree(desk.pos))
+            this.desks.set(desk.pos, desk)
     }
 
     /**

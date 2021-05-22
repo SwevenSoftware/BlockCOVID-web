@@ -62,6 +62,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
         this.handleCloseButton = this.handleCloseButton.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
 
+        this.refDotGrid = createRef<DotGrid>()
         this.state = {
             isButtonDisabled: true,
             isModalOpen: false,
@@ -87,8 +88,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             heightError: false,
             widthError: false
         }
-
-        this.refDotGrid = createRef<DotGrid>()
     }
 
     render() {
@@ -488,12 +487,21 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                     height: this.state.dimHeight,
                     width: this.state.dimWidth
                 })
-            const desks = this.refDotGrid.current?.getDesks().map((desk) => { return { x: desk.pos.x, y: desk.pos.y } })
-            const data = {
+
+            const removedDesks = this.refDotGrid.current?.getRemovedDesks();
+            const dataRemove = {
                 roomName: this.state.roomNameValue,
-                desks: desks ?? new Array()
+                desksId: removedDesks?.map((d) => d.serverId) ?? new Array<string>()
             }
-            //this.props.dispatch.createDesks(data);
+            this.props.dispatch.deleteDesk(dataRemove)
+
+            const newDesks = this.refDotGrid.current?.getNewDesks().map((desk) => { return { x: desk.pos.x + 1, y: desk.pos.y + 1 } })
+            const dataAdd = {
+                roomName: this.state.roomNameValue,
+                desks: newDesks ?? new Array()
+            }
+            this.props.dispatch.createDesks(dataAdd)
+
             this.handleCloseButton()
         }
     }
@@ -523,6 +531,12 @@ const mapDispatchToProps = (dispatch) => {
         dispatch: {
             modifyRoom: (roomName: string, data: RoomInformation) => {
                 dispatch(roomActionResolver.modifyRoom(roomName, data))
+            },
+            createDesks: (data: { roomName: string, desks: [{ x: number, y: number }] }) => {
+                dispatch(roomActionResolver.createDesks(data))
+            },
+            deleteDesk: (data: { roomName: string, desksId: Array<string> }) => {
+                dispatch(roomActionResolver.deleteDesk(data))
             }
         }
     }
