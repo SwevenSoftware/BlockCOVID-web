@@ -42,7 +42,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
         return (
             <div className="marginAccounts"> {/* TODO: change className */}
                 <ThemeProvider theme={theme}>
-                    <div className="addAccountButton"> {/* TODO: change className */}
+                    <div className="addRoomsButton"> {/* TODO: change className */}
                         <NewRoom />
                     </div>
                     <div>
