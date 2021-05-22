@@ -15,6 +15,6 @@ module.exports = {
         "src/**/*.ts"
     ],
     moduleNameMapper: {
-        "^.+\\.(css|less)$" : "<rootDir>/CSSStub.js"
+        "^.+\\.(css|less)$": "<rootDir>/CSSStub.js"
     }
 };
