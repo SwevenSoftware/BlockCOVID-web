@@ -6,6 +6,7 @@ import roomActionResolver from '../actions/roomsActions'
 import { RoomInformation } from "../Api/roomAPI"
 /* types */
 import {
+    ERROR_GRID_RESET_DESK_IS_IN_USE,
     ERROR_INSERTION_NUMBER,
     ERROR_ROOM_NAME_NOT_AVAILABLE,
     ERROR_TIME_NOT_AVAILABLE,
@@ -52,6 +53,7 @@ interface ModifyRoomState {
     weekDays: any,
     weekDaysError: boolean,
     timeError: boolean,
+    gridError: string
 }
 
 class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
@@ -86,7 +88,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             dimHeight: this.props.data.room.height,
             dimWidth: this.props.data.room.width,
             heightError: false,
-            widthError: false
+            widthError: false,
+            gridError: ""
         }
     }
 
@@ -129,19 +132,26 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                 />
                             </div>
                             <div className="centralModal">
+                                <FormHelperText>
+                                    {this.state.gridError}
+                                </FormHelperText>
                                 <Button
                                     id="cleanGrid"
                                     variant="outlined"
                                     size="medium"
                                     onClick={() => {
-                                        this.refDotGrid.current?.resetView()
+                                        if (this.refDotGrid.current?.resetView()) {
+                                            this.setState({gridError: ""})
+                                        }
+                                        else {
+                                            this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                        }
                                     }}>
                                     Svuota stanza
                                 </Button>
                             </div>
                         </DialogContent>
                         <DialogContent>
-                            {/* e.g. uso ref: this.refDotGrid.current?.<metodo DotGrid>()*/}
                             <div className="addField">
                                 <TextField
                                     required
@@ -226,8 +236,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     value={this.state.dimHeight}
                                     onChange={(e) => {
                                         if (this.handleChangeSize(e.target.value, "dimHeight")) {
-                                            this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))
-                                            this.refDotGrid.current?.resetView()
+                                            if(this.refDotGrid.current?.setSize(this.state.dimWidth, parseInt(e.target.value))) {
+                                                this.setState({gridError: ""})
+                                            }
+                                            else {
+                                                this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                            }
                                         }
                                     }}
                                 />
@@ -243,8 +257,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
                                     value={this.state.dimWidth}
                                     onChange={(e) => {
                                         if (this.handleChangeSize(e.target.value, "dimWidth")) {
-                                            this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)
-                                            this.refDotGrid.current?.resetView()
+                                            if(this.refDotGrid.current?.setSize(parseInt(e.target.value), this.state.dimHeight)) {
+                                                this.setState({gridError: ""})
+                                            }
+                                            else {
+                                                this.setState({gridError: ERROR_GRID_RESET_DESK_IS_IN_USE})
+                                            }
                                         }
                                     }}
                                 />
@@ -441,6 +459,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
             timeError: false,
             openingTimeStringValue: this.props.data.room.openingTime,
             closingTimeStringValue: this.props.data.room.closingTime,
+            gridError: ""
         })
         this.setDays()
     }
