@@ -73,7 +73,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 			roomNameValue: "",
 			openingTimeDateValue: new Date("2021-01-01T08:00"),
 			openingTimeStringValue: "08:00",
-			closingTimeDateValue: new Date("2031-01-01T18:00"),
+			closingTimeDateValue: new Date("2021-01-01T18:00"),
 			closingTimeStringValue: "18:00",
 			weekDays: {
 				monday: false,
@@ -241,8 +241,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 															closingTime.timeString,
 													})
 													this.timeInputControl(
-														this.state
-															.openingTimeDateValue,
+														this.state.openingTimeDateValue,
 														closingTime.time
 													)
 												} else {
@@ -488,7 +487,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 	}
 
 	private timeInputControl(timeOpen: Date, timeClose: Date): boolean {
-		if (timeOpen >= timeClose) {
+		if (timeOpen > timeClose) {
 			this.setState({ timeError: true })
 			return true
 		} else {
@@ -576,9 +575,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 				sunday: false,
 			},
 			openingTimeDateValue: new Date("2021-01-01T08:00"),
-			closingTimeDateValue: new Date("2031-01-01T18:00"),
+			closingTimeDateValue: new Date("2021-01-01T18:00"),
 			weekDaysError: false,
 			roomNameValue: "",
+			roomNameError: false,
 			timeError: false,
 			openingTimeStringValue: "08:00",
 			closingTimeStringValue: "18:00",
@@ -614,6 +614,7 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 		flagErr = this.widthInputControl(width) && width != NaN ? true : flagErr
 		flagErr = !openT ? true : flagErr
 		flagErr = !closeT ? true : flagErr
+		flagErr = this.timeInputControl(this.state.openingTimeDateValue, this.state.closingTimeDateValue) ? true : flagErr
 
 		if (!flagErr) {
 			const days = new Array()
