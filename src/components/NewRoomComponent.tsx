@@ -241,7 +241,8 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 															closingTime.timeString,
 													})
 													this.timeInputControl(
-														this.state.openingTimeDateValue,
+														this.state
+															.openingTimeDateValue,
 														closingTime.time
 													)
 												} else {
@@ -614,7 +615,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 		flagErr = this.widthInputControl(width) && width != NaN ? true : flagErr
 		flagErr = !openT ? true : flagErr
 		flagErr = !closeT ? true : flagErr
-		flagErr = this.timeInputControl(this.state.openingTimeDateValue, this.state.closingTimeDateValue) ? true : flagErr
+		flagErr = this.timeInputControl(
+			this.state.openingTimeDateValue,
+			this.state.closingTimeDateValue
+		)
+			? true
+			: flagErr
 
 		if (!flagErr) {
 			const days = new Array()

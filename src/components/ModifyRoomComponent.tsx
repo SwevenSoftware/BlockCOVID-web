@@ -221,13 +221,17 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 												)
 												this.setState({
 													openingTimeDateValue:
-													openingTime.time,
+														openingTime.time,
 												})
 												this.setState({
 													openingTimeStringValue:
 														openingTime.timeString,
 												})
-												this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
+												this.timeInputControl(
+													openingTime.time,
+													this.state
+														.closingTimeDateValue
+												)
 											} else {
 												this.setState({
 													timeError: true,
@@ -276,7 +280,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 													closingTimeStringValue:
 														closingTime.timeString,
 												})
-												this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
+												this.timeInputControl(
+													this.state
+														.openingTimeDateValue,
+													closingTime.time
+												)
 											} else {
 												this.setState({
 													timeError: true,
@@ -692,7 +700,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		flagErr = this.widthInputControl(width) ? true : flagErr
 		flagErr = !openT ? true : flagErr
 		flagErr = !closeT ? true : flagErr
-		flagErr = this.timeInputControl(this.state.openingTimeDateValue, this.state.closingTimeDateValue) ? true : flagErr
+		flagErr = this.timeInputControl(
+			this.state.openingTimeDateValue,
+			this.state.closingTimeDateValue
+		)
+			? true
+			: flagErr
 
 		if (!flagErr) {
 			const days = new Array()
