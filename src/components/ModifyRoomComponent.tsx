@@ -77,7 +77,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			),
 			openingTimeStringValue: this.props.data.room.openingTime,
 			closingTimeDateValue: new Date(
-				"2031-01-01T" + this.props.data.room.closingTime
+				"2021-01-01T" + this.props.data.room.closingTime
 			),
 			closingTimeStringValue: this.props.data.room.closingTime,
 			weekDays: {
@@ -102,6 +102,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 	componentDidMount() {
 		this.setButton()
 		this.setDays()
+		//this.timeInputControl()
 	}
 
 	render() {
@@ -220,13 +221,13 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 												)
 												this.setState({
 													openingTimeDateValue:
-														openingTime.time,
+													openingTime.time,
 												})
 												this.setState({
 													openingTimeStringValue:
 														openingTime.timeString,
 												})
-												this.timeInputControl()
+												this.timeInputControl(openingTime.time, this.state.closingTimeDateValue)
 											} else {
 												this.setState({
 													timeError: true,
@@ -275,7 +276,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 													closingTimeStringValue:
 														closingTime.timeString,
 												})
-												this.timeInputControl()
+												this.timeInputControl(this.state.openingTimeDateValue, closingTime.time)
 											} else {
 												this.setState({
 													timeError: true,
@@ -559,8 +560,8 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		return notChecked
 	}
 
-	private timeInputControl(): boolean {
-		if (this.state.openingTimeDateValue < this.state.closingTimeDateValue) {
+	private timeInputControl(timeOpen: Date, timeClose: Date): boolean {
+		if (timeOpen > timeClose) {
 			this.setState({ timeError: true })
 			return true
 		} else {
@@ -651,7 +652,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 				"2021-01-01T" + this.props.data.room.openingTime
 			),
 			closingTimeDateValue: new Date(
-				"2031-01-01T" + this.props.data.room.closingTime
+				"2021-01-01T" + this.props.data.room.closingTime
 			),
 			weekDaysError: false,
 			roomNameValue: this.props.data.room.name,
@@ -691,6 +692,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		flagErr = this.widthInputControl(width) ? true : flagErr
 		flagErr = !openT ? true : flagErr
 		flagErr = !closeT ? true : flagErr
+		flagErr = this.timeInputControl(this.state.openingTimeDateValue, this.state.closingTimeDateValue) ? true : flagErr
 
 		if (!flagErr) {
 			const days = new Array()
