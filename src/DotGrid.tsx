@@ -62,7 +62,7 @@ class DotGrid extends Component<DotGridProps> {
 
         if (props.data?.desks)
             for (const desk of props.data.desks) {
-                const pos: Pos2d = { x: desk.x, y: desk.y }
+                const pos: Pos2d = { x: desk.x - 1, y: desk.y - 1 }
                 this.grid.addDesk(pos, !desk.available, desk.deskId);
             }
 
