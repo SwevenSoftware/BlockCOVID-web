@@ -1,5 +1,7 @@
 ![Build status](https://github.com/SwevenSoftware/BlockCOVID-web/actions/workflows/build-bundle.yml/badge.svg)
 [![codecov](https://codecov.io/gh/SwevenSoftware/BlockCOVID-web/branch/develop/graph/badge.svg)](https://codecov.io/gh/SwevenSoftware/BlockCOVID-web)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 # BlockCOVID-web
 ## Description
 Web module for the project BlockCOVID.
