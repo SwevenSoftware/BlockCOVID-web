@@ -66,7 +66,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
 		this.handleCloseButton = this.handleCloseButton.bind(this)
 		this.handleConfirm = this.handleConfirm.bind(this)
-
 		this.refDotGrid = createRef<DotGrid>()
 		this.state = {
 			isButtonDisabled: true,
@@ -98,6 +97,11 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			widthError: false,
 			gridError: "",
 		}
+	}
+
+	componentDidMount() {
+		this.setButton()
+		this.setDays()
 	}
 
 	render() {
@@ -509,11 +513,6 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 				</div>
 			</ThemeProvider>
 		)
-	}
-
-	componentDidMount() {
-		this.setButton()
-		this.setDays()
 	}
 
 	private setButton(
