@@ -1,47 +1,52 @@
+import accountApi, { accountAPI } from "../Api/accountAPI"
 import { loginTypes } from "../types"
-import { login as loginAPI, logout as logoutAPI } from '../api'
 
-export const login = ({ username, password }) => {
-    return (dispatch, getState) => {
-        loginAPI({ username, password })
-            .then(res => {
-                dispatch(success(res.data))
-            })
-            .catch(err => {
-                dispatch(failure(err.response.status))
-            })
-    }
+export class loginActions {
+	accountApi: accountAPI
+
+	constructor(accountApi: accountAPI) {
+		this.accountApi = accountApi
+	}
+
+	login(data: { username: string; password: string }) {
+		return (dispatch) => {
+			this.accountApi
+				.login(data)
+				.then((res) => {
+					dispatch(this.successLogin(res.data))
+				})
+				.catch((err) => {
+					dispatch(this.failureLogin(err.response.status))
+				})
+		}
+	}
+
+	logout() {
+		return (dispatch, getState) => {
+			let tokenID = getState().login.token?.id
+			this.accountApi
+				.logout(tokenID)
+				.finally(dispatch(this.successLogout()))
+		}
+	}
+
+	successLogin = (data) => ({
+		type: loginTypes.LOGIN_SUCCESS,
+		payload: {
+			...data,
+		},
+	})
+
+	successLogout = () => ({
+		type: loginTypes.LOGOUT,
+	})
+
+	failureLogin = (error) => ({
+		type: loginTypes.LOGIN_FAILURE,
+		payload: {
+			error,
+		},
+	})
 }
 
-export const logout = (tokenID: string) => {
-    return (dispatch, gestState) => {
-        logoutAPI(tokenID)
-            .then(res => {
-                dispatch(successLogout(res.data))
-            })
-            .catch(err => {
-                dispatch(failure(err.response.status))
-            })
-    }
-}
-
-const success = (data) => ({
-    type: loginTypes.LOGIN_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const successLogout = (data) => ({
-    type: loginTypes.LOGIN_LOGOUT_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const failure = (error) => ({
-    type: loginTypes.LOGIN_FAILURE,
-    payload: {
-        error
-    }
-})
+export default new loginActions(accountApi)

@@ -1,114 +1,133 @@
 import { accountTypes } from "../types"
-import {
-    getAccounts as getAccountsAPI,
-    createAccount as createAccountAPI,
-    modifyAccount as modifyAccountAPI,
-    deleteAccount as deleteAccountAPI
-} from '../api'
+import accountApi, { accountAPI } from "../Api/accountAPI"
 
-export const getAccounts = (tokenID: string) => {
-    return (dispatch, getState) => {
-        getAccountsAPI(tokenID)
-            .then(res => {
-                dispatch(successGetAccounts(res.data))
-            })
-            .catch(err => {
-                dispatch(failureGetAccounts(err.response.status))
-            })
-    }
+export interface accountInformation {
+	username: string
+	password: string
+	authorities: string[]
 }
 
-export const createAccount = ({ tokenID, username, password, auth }) => {
-    return (dispatch, getState) => {
-        createAccountAPI(tokenID, username, password, auth)
-            .then((res) => {
-                dispatch(successCreateAccount(res.data))
-                dispatch(getAccounts(tokenID))
-            })
-            .catch(err => {
-                dispatch(failureCreateAccount(err))
-            })
-    }
+export class accountsActions {
+	accountApi: accountAPI
+
+	constructor(accountApi: accountAPI) {
+		this.accountApi = accountApi
+	}
+
+	createAccount(data: accountInformation) {
+		return (dispatch, getState) => {
+			let tokenID = getState().login.token?.id
+			this.accountApi
+				.createAccount(tokenID, data)
+				.then((res) => {
+					dispatch(this.successCreateAccount(res.data))
+					dispatch(this.getAccounts())
+				})
+				.catch((err) => {
+					dispatch(this.failureCreateAccount(err.response.status))
+				})
+		}
+	}
+
+	modifyAccount(url: string, data: accountInformation) {
+		return (dispatch, getState) => {
+			let tokenID = getState().login.token?.id
+			this.accountApi
+				.modifyAccount(tokenID, url, data)
+				.then((res) => {
+					dispatch(this.successModifyAccount(res.data))
+					dispatch(this.getAccounts())
+				})
+				.catch((err) => {
+					dispatch(this.failureModifyAccount(err.response.status))
+				})
+		}
+	}
+
+	deleteAccount(url: string, data: { username: string }) {
+		return (dispatch, getState) => {
+			let tokenID = getState().login.token?.id
+			this.accountApi
+				.deleteAccount(tokenID, url, data)
+				.then((res) => {
+					dispatch(this.successDeleteAccount(res.data))
+					dispatch(this.getAccounts())
+				})
+				.catch((err) => {
+					dispatch(this.failureDeleteAccount(err.response.status))
+				})
+		}
+	}
+
+	getAccounts() {
+		return (dispatch, getState) => {
+			let tokenID = getState().login.token?.id
+			this.accountApi
+				.getAccounts(tokenID)
+				.then((res) => {
+					dispatch(this.successGetAccounts(res.data))
+				})
+				.catch((err) => {
+					dispatch(this.failureGetAccounts(err.response.status))
+				})
+		}
+	}
+
+	successCreateAccount = (data) => ({
+		type: accountTypes.CREATE_SUCCESS,
+		payload: {
+			...data,
+		},
+	})
+
+	successModifyAccount = (data) => ({
+		type: accountTypes.MODIFY_SUCCESS,
+		payload: {
+			...data,
+		},
+	})
+
+	successDeleteAccount = (data) => ({
+		type: accountTypes.DELETE_SUCCESS,
+		payload: {
+			...data,
+		},
+	})
+
+	successGetAccounts = (data) => ({
+		type: accountTypes.FETCH_SUCCESS,
+		payload: {
+			...data,
+		},
+	})
+
+	failureCreateAccount = (error) => ({
+		type: accountTypes.CREATE_FAILURE,
+		payload: {
+			error,
+		},
+	})
+
+	failureModifyAccount = (error) => ({
+		type: accountTypes.MODIFY_FAILURE,
+		payload: {
+			error,
+		},
+	})
+
+	failureDeleteAccount = (error) => ({
+		type: accountTypes.DELETE_FAILURE,
+		payload: {
+			error,
+		},
+	})
+
+	failureGetAccounts = (error) => ({
+		type: accountTypes.FETCH_FAILURE,
+		payload: {
+			error,
+		},
+	})
 }
 
-export const modifyAccount = ({ tokenID, link, username, password, auth }) => {
-    return (dispatch, getState) => {
-        modifyAccountAPI(tokenID, link, username, password, auth)
-            .then((res) => {
-                dispatch(successModifyAccount(res.data))
-                dispatch(getAccounts(tokenID))
-            })
-            .catch(err => {
-                dispatch(failureModifyAccount(err))
-            })
-    }
-}
-
-export const deleteAccount = (username: string, link: string, tokenID: string) => {
-    return (dispatch, getState) => {
-        deleteAccountAPI(username, link, tokenID)
-            .then((res) => {
-                dispatch(successDeleteAccount(res.data))
-                dispatch(getAccounts(tokenID))
-            })
-            .catch(err => {
-                dispatch(failureDeleteAccount(err))
-            })
-    }
-}
-
-const successGetAccounts = (data) => ({
-    type: accountTypes.FETCH_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const successCreateAccount = (data) => ({
-    type: accountTypes.CREATE_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const successModifyAccount = (data) => ({
-    type: accountTypes.MODIFY_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const successDeleteAccount = (data) => ({
-    type: accountTypes.DELETE_SUCCESS,
-    payload: {
-        ...data
-    }
-})
-
-const failureGetAccounts = (error) => ({
-    type: accountTypes.FETCH_FAILURE,
-    payload: {
-        error
-    }
-})
-
-const failureCreateAccount = (error) => ({
-    type: accountTypes.CREATE_FAILURE,
-    payload: {
-        error
-    }
-})
-
-const failureModifyAccount = (error) => ({
-    type: accountTypes.MODIFY_FAILURE,
-    payload: {
-        error
-    }
-})
-
-const failureDeleteAccount = (error) => ({
-    type: accountTypes.DELETE_FAILURE,
-    payload: {
-        error
-    }
-})
+export default new accountsActions(accountApi)

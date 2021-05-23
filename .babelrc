@@ -1,0 +1,12 @@
+{
+   "env": {
+     "test": {
+       "presets": [
+         "react",
+         ["@babel/preset-env"],
+         ["@babel/preset-react"],
+         ["@babel/preset-typescript"]
+       ]
+     }
+   }
+ }

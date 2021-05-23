@@ -1,347 +1,364 @@
 /* (((((((((((((((((((((((((((((( INTERPAGES )))))))))))))))))))))))))))) */
 
 #decline {
-    width: 100%;
+	width: 100%;
 }
 
 #confirm {
-    width: 100%;
+	width: 100%;
 }
 
 #decline:hover {
-    color: white;
-    background-color:rgb(201, 33, 33);
+	color: white;
+	background-color: rgb(201, 33, 33);
 }
 
 #confirm:hover {
-    color: white;
-    background-color: #689f38;
+	color: white;
+	background-color: #689f38;
 }
 
 #primaryColor {
-    color: #689f38;
+	color: #689f38;
 }
 
 #colorError {
-    color: red;
+	color: red;
+}
+
+.modalTitle {
+	text-align: center;
+}
+
+.centralModal {
+	margin-left: 15px;
+	margin: auto;
+	width: 50%;
+	text-align: center;
 }
 
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
 .marginAccounts {
-    margin-top: 5em;
-    margin-left: 4em;
+	margin-top: 5em;
+	margin-left: 4em;
 }
 
 .titleAccounts {
-    margin-left: -1.5em;
+	margin-left: -1.5em;
 }
 
 .counter {
-    margin-bottom: 1%;
-    max-width: 75%;
+	margin-bottom: 1%;
+	max-width: 75%;
 }
 
 .spacing {
-    padding-left: 10em;
+	padding-left: 10em;
 }
 
-.usernameLayout{
-  overflow: hidden;
-  text-overflow: ellipsis;
+.usernameLayout {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.grid{
-    width: 23%;
-    margin: 0 2% 2% 0;
+.grid {
+	width: 23%;
+	margin: 0 2% 2% 0;
 }
 
 .paper {
-    height: 5em;
-    /* max-width: 30em; */
+	height: 5em;
+	/* max-width: 30em; */
 }
 
 .listItem {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .pencil:hover {
-    color: #689f38;
+	color: #689f38;
 }
 
 .trash:hover {
-    color: rgb(201, 33, 33);
+	color: rgb(201, 33, 33);
 }
 
 .addAccountButton {
-    position: absolute;
-    right: 2em;
+	position: absolute;
+	right: 2em;
 }
 
 .number {
-    padding-left: 15%;
+	padding-left: 15%;
 }
 
 .people {
-    color: #121212
+	color: #121212;
 }
 
 .shield {
-    color: #d68f00;
+	color: #d68f00;
 }
 
 .bag {
-    color: rgb(134, 42, 42);
+	color: rgb(134, 42, 42);
 }
 
 .cleaner {
-    color: rgb(5, 162, 235);
+	color: rgb(5, 162, 235);
 }
-
 
 /* (((((((((((((((((((((((((((((( CARDGRID )))))))))))))))))))))))))))) */
 
 .gridInline {
-    display: inline-block;
-    min-width: 50%;
-    margin-top: -6em;
-    margin-left: -7.5em;
+	display: inline-block;
+	min-width: 50%;
+	margin-top: -6em;
+	margin-left: -7.5em;
 }
 
 .buttonInline {
-    display: inline-block;
-    min-width: 35%;
-    position: absolute;
-    margin-left: 4em;
-    margin-right: 4em;
-    text-align: center;
+	display: inline-block;
+	min-width: 35%;
+	position: absolute;
+	margin-left: 4em;
+	margin-right: 4em;
+	text-align: center;
 }
 
 .buttonGrid {
-    margin-bottom: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 .dispGrid {
-    margin-right: 1em;
+	margin-right: 1em;
 }
 
 .headerCard {
-    background-color: #689f38;
-    color: white;
-    text-align: center;
-    font-size: medium;
+	background-color: #689f38;
+	color: white;
+	text-align: center;
+	font-size: medium;
 }
 
-.iconColor:hover{
-    color: #673ab7;
+.iconColor:hover {
+	color: #673ab7;
 }
 
 /* (((((((((((((((((((((((((((((( GENERALLAYOUT )))))))))))))))))))))))))))) */
 
 .root {
-    display: 'flex';
+	display: "flex";
 }
 
 .menuButton {
-    margin-right: 36em;
+	margin-right: 36em;
 }
 
 .hide {
-    display: none;
+	display: none;
 }
 
 .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-left: 1em;
-    padding-right: 1em;
-    /* necessary for content to be below app bar */
-    min-height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-left: 1em;
+	padding-right: 1em;
+	/* necessary for content to be below app bar */
+	min-height: 60px;
 }
 
 .content {
-    flex-grow: 1;
-    padding: 3em;
-    /* necessary for content to be right app bar */
-    margin-left: 50px;
+	flex-grow: 1;
+	padding: 3em;
+	/* necessary for content to be right app bar */
+	margin-left: 50px;
 }
-
 
 /* (((((((((((((((((((((((((((((( NEWUSER )))))))))))))))))))))))))))) */
 
 .addColor:hover {
-    color: #F0B030;
+	color: #f0b030;
 }
+
 /* (((((((((((((((((((((((((((((( LOGIN )))))))))))))))))))))))))))) */
 
 .container {
-    display: 'flex';
-    flex-wrap: wrap;
-    width: 30em;
-    margin: auto;
+	display: "flex";
+	flex-wrap: wrap;
+	width: 30em;
+	margin: auto;
 }
 
 .loginBtn {
-    flex-grow: 1;
-    background-color: "#689f38";
+	flex-grow: 1;
+	background-color: "#689f38";
 }
 
 .loginBtn:hover {
-    background-color: "#3c611b";
+	background-color: "#3c611b";
 }
 
 .cardLogin {
-    margin-top: 25%;
-}
-
-
-
-/* (((((((((((((((((((((((((((((( PENCIL )))))))))))))))))))))))))))) */
-
-.pencilTitle {
-    text-align: center;
-}
-
-.centralPencil {
-    margin: auto;
-    width: 50%;
-}
-
-.alignCentralPencil {
-    margin: auto;
-    width: 50%;
-    text-align: center;
+	margin-top: 25%;
 }
 
 /* (((((((((((((((((((((((((((((( REPORT )))))))))))))))))))))))))))) */
 
 .marginButton {
-    margin-top: 1em;
+	margin-top: 1em;
 }
 
 /* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
 
 .tableTitles {
-    color: white;
-    font-weight: 500;
+	color: white;
+	font-weight: 500;
 }
 
 /* (((((((((((((((((((((((((((((( ROOMS )))))))))))))))))))))))))))) */
 
 .paddingAppBar {
-    padding: 0;
+	padding: 0;
 }
 
+.addRoomsButton {
+	width: 100%;
+	text-align: right;
+	margin-bottom: 1%;
+}
+
+/* (((((((((((((((((((((((((((((( ROOMS MODIFY )))))))))))))))))))))))))))) */
+
+#cleanGrid {
+	margin-bottom: 2em;
+}
+
+#cleanGrid:hover {
+	color: white;
+	background-color: rgb(201, 33, 33);
+}
 
 /* (((((((((((((((((((((((((((((( TRASH )))))))))))))))))))))))))))) */
 
 .addField {
-    margin-bottom: 7%;
-    border-color: rgb(201, 33, 33);
+	margin-bottom: 7%;
+	border-color: rgb(201, 33, 33);
 }
 
 #trashMessage {
-    text-align: center;
-    color: rgb(201, 33, 33);
+	text-align: center;
+	color: rgb(201, 33, 33);
 }
 
 .tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px black;
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px black;
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
+	visibility: hidden;
+	width: 120px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 
 .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 .adminIcon:hover {
-    color: #d68f00;
+	color: #d68f00;
 }
 
 .userIcon:hover {
-    color: rgb(134, 42, 42);
+	color: rgb(134, 42, 42);
 }
 
 .cleanerIcon:hover {
-    color: rgb(5, 162, 235);
+	color: rgb(5, 162, 235);
 }
-
-
 
 /* ====================== MEDIA QUERY ====================== */
 
 @media only screen and (max-width: 1264px) {
-    .buttonInline {
-        width: 33%;
-    }   
-    .grid {
-        min-width: 31%;
-    }
-    .spacing {
-        padding-left: 8em;
-    }
+	.buttonInline {
+		width: 33%;
+	}
+	.grid {
+		min-width: 31%;
+	}
+	.spacing {
+		padding-left: 8em;
+	}
 }
 
 @media only screen and (max-width: 976px) {
-    .buttonInline {
-        width: 33%;
-    }   
-    .grid {
-        min-width: 48%;
-    }
-    .spacing {
-        padding-left: 4em;
-    }
+	.buttonInline {
+		width: 33%;
+	}
+	.grid {
+		min-width: 48%;
+	}
+	.spacing {
+		padding-left: 4em;
+	}
 }
 
 @media only screen and (max-width: 660px) {
-    .buttonInline {
-        width: 33%;
-    }  
-    .grid {
-        min-width: 100%;
-        margin-right: 0%;
-    }
-    .addAccountButton {
-        right:0.5em;
-        top: 5.5em;
-    }
-    .spacing {
-        padding-left: 1em;
-    }
+	.buttonInline {
+		width: 33%;
+	}
+	.grid {
+		min-width: 100%;
+		margin-right: 0%;
+	}
+	.addAccountButton {
+		right: 0.5em;
+		top: 5.5em;
+	}
+	.spacing {
+		padding-left: 1em;
+	}
+}
+
+.centralGrid {
+	/* margin-left: 25%; */
+	padding-left: 14px;
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
+
+.marginUnderGrid {
+	margin-top: 5%;
 }
