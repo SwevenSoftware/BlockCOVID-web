@@ -689,11 +689,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			this.state.weekDays.sunday,
 		]
 
+		let roomName = this.state.roomNameValue
 		let openT = this.state.openingTimeStringValue
 		let closeT = this.state.closingTimeStringValue
 		let height = this.state.dimHeight
 		let width = this.state.dimWidth
-		let roomName = this.state.roomNameValue
+
 		flagErr = this.roomNameValidate(roomName) ? true : flagErr
 		flagErr = this.weekDaysInputControl(weekDays) ? true : flagErr
 		flagErr = this.heightInputControl(height) ? true : flagErr
@@ -717,12 +718,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			if (weekDays[5]) days.push("SATURDAY")
 			if (weekDays[6]) days.push("SUNDAY")
 			this.props.dispatch.modifyRoom(this.props.data.room.name, {
-				name: this.state.roomNameValue,
-				openingAt: this.state.openingTimeStringValue,
-				closingAt: this.state.closingTimeStringValue,
+				name: roomName,
+				openingAt: openT,
+				closingAt: closeT,
 				openingDays: days,
-				height: this.state.dimHeight,
-				width: this.state.dimWidth,
+				height: height,
+				width: width,
 			})
 
 			const removedDesks = this.refDotGrid.current?.getRemovedDesks()
