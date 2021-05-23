@@ -131,6 +131,16 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
 										<ModifyRoom
+											key={
+												roomList.room.name +
+												roomList.room.closed +
+												roomList.room.openingTime +
+												roomList.room.closingTime +
+												roomList.room.openingDays +
+												roomList.room.height +
+												roomList.room.width +
+												JSON.stringify(roomList.desks)
+											}
 											data={{
 												room: {
 													name: roomList.room.name,
@@ -162,6 +172,16 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 										/>
 									</ListItemText>
 									<DeleteRoom
+										key={
+											roomList.room.name +
+											roomList.room.closed +
+											roomList.room.openingTime +
+											roomList.room.closingTime +
+											roomList.room.openingDays +
+											roomList.room.height +
+											roomList.room.width +
+											JSON.stringify(roomList.desks)
+										}
 										data={{
 											room: {
 												name: roomList.room.name,
