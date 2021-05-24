@@ -7,6 +7,49 @@ export class reportAPI {
 		this.axios = axios
 	}
 
+	getUsage(
+		tokenID: string,
+		data: { fromTimestamp: string; toTimestamp: string }
+	): Promise<AxiosResponse> {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: tokenID,
+			},
+			params: {
+				from: data.fromTimestamp,
+				to: data.toTimestamp,
+			},
+		}
+		return this.axios.get("/api/reports/usage", config)
+	}
+
+	getReport(
+		tokenID: string,
+		data: { reportName: string }
+	): Promise<AxiosResponse> {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: tokenID,
+			},
+			params: {
+				reportName: data.reportName,
+			},
+		}
+		return this.axios.get("/api/reports/report/" + data.reportName, config)
+	}
+
+	getCleaner(tokenID: string): Promise<AxiosResponse> {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: tokenID,
+			},
+		}
+		return this.axios.get("/api/reports/cleaner", config)
+	}
+
 	getReports(tokenID: string): Promise<AxiosResponse> {
 		const config = {
 			headers: {
