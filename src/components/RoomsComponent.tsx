@@ -18,8 +18,10 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import NewRoom from "./NewRoomComponent"
+import StatusRoom from "./StatusRoomComponent"
 import ModifyRoom from "./ModifyRoomComponent"
 import DeleteRoom from "./DeleteRoomComponent"
+
 
 interface RoomsProps {
 	state: any
@@ -130,7 +132,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 										/>
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
-										<ModifyRoom
+										<StatusRoom
 											key={
 												roomList.room.name +
 												roomList.room.closed +
@@ -144,8 +146,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 											data={{
 												room: {
 													name: roomList.room.name,
-													closed: roomList.room
-														.closed,
 													openingTime:
 														roomList.room.openingTime.split(
 															":"
@@ -163,14 +163,53 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 															":"
 														)[1],
 													openingDays: openingDays,
-													height: roomList.room
-														.height,
+													height: roomList.room.height,
 													width: roomList.room.width,
 													desks: roomList.desks,
 												},
 											}}
 										/>
 									</ListItemText>
+									<ModifyRoom
+										key={
+											roomList.room.name +
+											roomList.room.closed +
+											roomList.room.openingTime +
+											roomList.room.closingTime +
+											roomList.room.openingDays +
+											roomList.room.height +
+											roomList.room.width +
+											JSON.stringify(roomList.desks)
+										}
+										data={{
+											room: {
+												name: roomList.room.name,
+												closed: roomList.room
+													.closed,
+												openingTime:
+													roomList.room.openingTime.split(
+														":"
+													)[0] +
+													":" +
+													roomList.room.openingTime.split(
+														":"
+														)[1],
+												closingTime:
+													roomList.room.closingTime.split(
+														":"
+													)[0] +
+													":" +
+													roomList.room.closingTime.split(
+														":"
+													)[1],
+												openingDays: openingDays,
+												height: roomList.room
+													.height,
+												width: roomList.room.width,
+												desks: roomList.desks,
+											},
+										}}
+									/>
 									<DeleteRoom
 										key={
 											roomList.room.name +
