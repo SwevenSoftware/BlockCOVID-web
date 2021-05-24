@@ -1,4 +1,4 @@
-import reportsReducer, { initialState } from "../../src/reducers/reportsReducer"
+import reportsReducer, { initialState } from "../../src/reducers/reportReducer"
 import { reportTypes } from "../../src/types"
 
 describe("reports reducer test", function () {

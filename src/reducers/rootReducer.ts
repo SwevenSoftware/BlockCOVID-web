@@ -2,7 +2,7 @@ import { combineReducers } from "redux"
 import loginReducer from "./loginReducer"
 import accountsReducer from "./accountsReducer"
 import roomsReducer from "./roomsReducer"
-import reportsReducer from "./reportsReducer"
+import reportsReducer from "./reportReducer"
 
 const rootReducer = combineReducers({
 	login: loginReducer,
