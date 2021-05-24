@@ -7,17 +7,13 @@ const mockedAxios = axios as jest.Mocked<typeof axios>
 describe("reportApi", () => {
 	it("correctly gets all reports", () => {
 		const axiosResponse: AxiosResponse = {
-			data: {
-				_embedded: {
-					reportInformationList: [
-						{
-							name: "Registered_Report_usage_20210523_000000.pdf",
-							creationDate: "2021-05-23T00:00:00.028264417",
-							registrationDate: "2021-05-23T00:00:00.028264417",
-						},
-					],
+			data: [
+				{
+					name: "Registered_Report_usage_20210523_000000.pdf",
+					creationDate: "2021-05-23T00:00:00.028264417",
+					registrationDate: "2021-05-23T00:00:00.028264417",
 				},
-			},
+			],
 			status: 200,
 			statusText: "OK",
 			config: {},
