@@ -24,7 +24,7 @@ describe("reportApi", () => {
 		jest.clearAllMocks()
 	})
 
-	it("correctly get report listing reservations' usage status", () => {
+	it("correctly gets report listing reservations' usage status", () => {
 		const data = {
 			fromTimestamp: "2021-01-01T08:00",
 			toTimestamp: "2021-01-01T20:00",
@@ -67,7 +67,7 @@ describe("reportApi", () => {
 		)
 	})
 
-	it("correctly get report listing rooms' cleaning status", () => {
+	it("correctly gets report listing rooms' cleaning status", () => {
 		mockedAxios.get.mockImplementationOnce(() =>
 			Promise.resolve(axiosResponse)
 		)
