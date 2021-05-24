@@ -37,7 +37,7 @@ describe("Room actions", () => {
 	}
 
 	it("should correctly handle all reports fetch", function () {
-		reportApi.getReport = jest.fn(async () => {
+		reportApi.getReports = jest.fn(async () => {
 			return axiosResponse
 		})
 		const expectedAction = [
@@ -50,7 +50,7 @@ describe("Room actions", () => {
 	})
 
 	it("should correctly handle all reports fetch error", function () {
-		reportApi.getReport = jest.fn(async () => {
+		reportApi.getReports = jest.fn(async () => {
 			throw new Error()
 		})
 		const expectedAction = [
