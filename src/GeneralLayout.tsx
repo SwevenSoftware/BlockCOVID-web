@@ -182,7 +182,12 @@ export default function GeneralLayout() {
 						<ListItemText primary="Desks" />
 					</ListItem>
 
-					<ListItem button key="Reports" component={Link} to="/reports">
+					<ListItem
+						button
+						key="Reports"
+						component={Link}
+						to="/reports"
+					>
 						<ListItemIcon className="iconColor">
 							<InsertDriveFileIcon />
 						</ListItemIcon>

@@ -1,8 +1,8 @@
 import axios, { AxiosResponse, AxiosStatic } from "axios"
 
 export interface ReportInformation {
-	name: string,
-	creationDate: Date,
+	name: string
+	creationDate: Date
 	registrationDate: Date
 }
 
