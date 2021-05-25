@@ -8,19 +8,7 @@ import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
-import IconButton from "@material-ui/core/IconButton"
-import CreateIcon from "@material-ui/icons/Create"
-import DeleteIcon from "@material-ui/icons/Delete"
-import PersonIcon from "@material-ui/icons/Person"
-import SecurityIcon from "@material-ui/icons/Security"
-import WorkIcon from "@material-ui/icons/Work"
-import BathtubIcon from "@material-ui/icons/Bathtub"
-import { FormLabel, FormHelperText } from "@material-ui/core"
-/* styles */
-// import { ThemeProvider } from '@material-ui/core/styles'
-// import { theme } from '../theme'
 /* others */
 import DotGrid from "../DotGrid"
 
@@ -44,7 +32,6 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 		this.refDotGrid = createRef<DotGrid>()
 		this.handleClickOpen = this.handleClickOpen.bind(this)
 		this.handleClose = this.handleClose.bind(this)
-		this.handleConfirm = this.handleConfirm.bind(this)
 	}
 
 	render() {
@@ -65,7 +52,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 					<DialogTitle id="form-dialog-title">
 						'{this.props.data.room.name}'
 					</DialogTitle>
-					<DialogContent className="centralGrid">
+					<DialogContent>
 						<div className="centralGrid">
 							<DotGrid
 								mode="deleteGrid"
@@ -108,16 +95,6 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 		this.setState({ isModalOpen: false })
 	}
 
-	/**
-	 * @params
-	 * @returns
-	 */
-	private handleConfirm(): void {
-		this.props.dispatch.deleteRoom("api/rooms/", {
-			roomName: this.props.data.room.name,
-		})
-		this.handleClose()
-	}
 }
 
 const mapStateToProps = (state: any) => {
