@@ -31,6 +31,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import PeopleIcon from "@material-ui/icons/People"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import DnsIcon from "@material-ui/icons/Dns"
+import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile"
 /* others */
 import clsx from "clsx"
 
@@ -179,6 +180,13 @@ export default function GeneralLayout() {
 							<EventSeatIcon />
 						</ListItemIcon>
 						<ListItemText primary="Desks" />
+					</ListItem>
+
+					<ListItem button key="Reports" component={Link} to="/reports">
+						<ListItemIcon className="iconColor">
+							<InsertDriveFileIcon />
+						</ListItemIcon>
+						<ListItemText primary="Reports" />
 					</ListItem>
 				</List>
 				<Divider />
