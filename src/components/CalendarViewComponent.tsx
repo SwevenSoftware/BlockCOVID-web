@@ -49,27 +49,30 @@ class CalendarViewComponent extends Component<CalendarViewProps, CalendarViewSta
       const { data, currentDate } = this.state;
       return (
          <div>
-            <Button>
-
+            <Button
+               className = "calendar"
+               onClick = {() => this.handleClickOpen()}
+            >
+               {this.props.data.user.username}
             </Button>
             <Paper>
-            <Scheduler
-               data={data}
-               height={660}
-            >
-               <ViewState
-                  currentDate={currentDate}
-                  onCurrentDateChange={this.currentDateChange}
-               />
-               <WeekView
-                  startDayHour={9}
-                  endDayHour={19}
-               />
-               <Toolbar />
-               <DateNavigator />
-               <TodayButton />
-               <Appointments />
-            </Scheduler>
+               <Scheduler
+                  data={data}
+                  height={660}
+               >
+                  <ViewState
+                     currentDate={currentDate}
+                     onCurrentDateChange={this.currentDateChange}
+                  />
+                  <WeekView
+                     startDayHour={9}
+                     endDayHour={19}
+                  />
+                  <Toolbar />
+                  <DateNavigator />
+                  <TodayButton />
+                  <Appointments />
+               </Scheduler>
             </Paper>
          </div>
       );
