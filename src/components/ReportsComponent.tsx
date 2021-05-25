@@ -91,23 +91,24 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 	}
 
 	sort(a: ReportInformation, b: ReportInformation) {
+		let property: string
 		switch (this.state.orderBy) {
 			case "nome":
 			default:
-				return a.name < b.name ? 1 : b.name < a.name ? -1 : 0
+				property = "name"
+				break
 			case "creazione":
-				return a.creationDate < b.creationDate
-					? 1
-					: b.creationDate < a.creationDate
-					? -1
-					: 0
+				property = "creationDate"
+				break
 			case "registrazione":
-				return a.registrationDate < b.registrationDate
-					? 1
-					: b.registrationDate < a.registrationDate
-					? -1
-					: 0
+				property = "registrationDate"
+				break
 		}
+		return a[property] < b[property]
+			? 1
+			: b[property] < a[property]
+			? -1
+			: 0
 	}
 
 	private popolate(): Array<JSX.Element> {
