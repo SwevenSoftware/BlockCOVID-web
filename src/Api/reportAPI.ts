@@ -1,5 +1,11 @@
 import axios, { AxiosResponse, AxiosStatic } from "axios"
 
+export interface ReportInformation {
+	name: string,
+	creationDate: Date,
+	registrationDate: Date
+}
+
 export class reportAPI {
 	private axios: AxiosStatic
 
