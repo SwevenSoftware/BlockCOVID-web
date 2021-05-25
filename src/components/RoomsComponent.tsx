@@ -22,7 +22,6 @@ import StatusRoom from "./StatusRoomComponent"
 import ModifyRoom from "./ModifyRoomComponent"
 import DeleteRoom from "./DeleteRoomComponent"
 
-
 interface RoomsProps {
 	state: any
 	dispatch: any
@@ -163,7 +162,8 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 															":"
 														)[1],
 													openingDays: openingDays,
-													height: roomList.room.height,
+													height: roomList.room
+														.height,
 													width: roomList.room.width,
 													desks: roomList.desks,
 												},
@@ -184,8 +184,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 										data={{
 											room: {
 												name: roomList.room.name,
-												closed: roomList.room
-													.closed,
+												closed: roomList.room.closed,
 												openingTime:
 													roomList.room.openingTime.split(
 														":"
@@ -193,7 +192,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 													":" +
 													roomList.room.openingTime.split(
 														":"
-														)[1],
+													)[1],
 												closingTime:
 													roomList.room.closingTime.split(
 														":"
@@ -203,8 +202,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 														":"
 													)[1],
 												openingDays: openingDays,
-												height: roomList.room
-													.height,
+												height: roomList.room.height,
 												width: roomList.room.width,
 												desks: roomList.desks,
 											},

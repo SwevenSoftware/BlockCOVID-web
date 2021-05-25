@@ -21,6 +21,7 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import DialogContentText from "@material-ui/core/DialogContentText"
+import IconButton from "@material-ui/core/IconButton"
 import CreateIcon from "@material-ui/icons/Create"
 import { FormLabel, FormHelperText } from "@material-ui/core"
 import {
@@ -110,12 +111,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		return (
 			<ThemeProvider theme={theme}>
 				<div>
-					<Button
+					<IconButton
 						className="pencil"
 						onClick={() => this.handleClickOpenButton()}
 					>
 						<CreateIcon />
-					</Button>
+					</IconButton>
 					<Dialog
 						open={this.state.isModalOpen}
 						onClose={() => this.handleCloseButton()}

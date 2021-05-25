@@ -50,12 +50,12 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 	render() {
 		return (
 			<div>
-				<IconButton
+				<Button
 					className="pencil"
 					onClick={() => this.handleClickOpen()}
 				>
 					{this.props.data.room.name}
-				</IconButton>
+				</Button>
 				<Dialog
 					open={this.state.isModalOpen}
 					onClose={this.handleClose}
@@ -77,28 +77,6 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 								}}
 							/>
 						</div>
-					</DialogContent>
-					<DialogContent>
-						<DialogContentText color="primary">
-							Dimensioni stanza:
-						</DialogContentText>
-						<FormLabel>
-							{this.props.data.room.height}x
-							{this.props.data.room.width}
-						</FormLabel>
-						<DialogContentText color="primary">
-							Orario di apertura:
-						</DialogContentText>
-						<FormLabel>
-							{this.props.data.room.openingTime} -{" "}
-							{this.props.data.room.closingTime}
-						</FormLabel>
-						<DialogContentText color="primary">
-							Giorni di apertura:
-						</DialogContentText>
-						<FormLabel>
-							{this.props.data.room.openingDays.join(", ")}
-						</FormLabel>
 					</DialogContent>
 					<DialogActions>
 						<Button
