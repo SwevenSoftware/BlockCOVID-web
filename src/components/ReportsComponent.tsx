@@ -15,7 +15,6 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import FormHelperText from "@material-ui/core/FormHelperText"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
@@ -124,7 +123,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 							<Paper className="paper">
 								<ListItem className="listItem">
 									<ListItemIcon>
-										<InsertDriveFileIcon />
+										<InsertDriveFileIcon className={report.name.toLowerCase().split("_").includes("usage") ? "bag" : report.name.toLowerCase().split("_").includes("cleaner") ? "cleaner" : ""}/>
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
 										<Button className="pencil">
