@@ -94,7 +94,6 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 	private handleClose(): void {
 		this.setState({ isModalOpen: false })
 	}
-
 }
 
 const mapStateToProps = (state: any) => {
