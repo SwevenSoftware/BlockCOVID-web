@@ -15,6 +15,7 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
+import NoteAddIcon from "@material-ui/icons/NoteAdd"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
@@ -34,7 +35,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 	constructor(props) {
 		super(props)
 		this.state = {
-			orderBy: "",
+			orderBy: "creazione",
 		}
 	}
 
@@ -43,34 +44,55 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 	}
 
 	render() {
-		console.log(this.props.state)
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>
 					<div className="addRoomsButton">
-						<FormControl>
-							<InputLabel shrink id="order-by-label">
-								Ordina per
-							</InputLabel>
-							<Select
-								labelId="ordina-per"
-								id="order-by-select"
-								value={this.state.orderBy}
-								onChange={(e) => {
-									this.handleChangeSelectedOrderBy(
-										e.target.value as string
-									)
-								}}
-							>
-								<MenuItem value="nome">Nome report</MenuItem>
-								<MenuItem value="creazione">
-									Data creazione
-								</MenuItem>
-								<MenuItem value="registrazione">
-									Data registrazione
-								</MenuItem>
-							</Select>
-						</FormControl>
+						<ListItem>
+							<ListItemIcon>
+								<Button
+									onClick={() => {
+										this.props.dispatch.getUsage()
+									}}
+								>
+									<NoteAddIcon className="bag" />
+								</Button>
+							</ListItemIcon>
+							<ListItemIcon>
+								<Button
+									onClick={() => {
+										this.props.dispatch.getCleaner()
+									}}
+								>
+									<NoteAddIcon className="cleaner" />
+								</Button>
+							</ListItemIcon>
+							<FormControl>
+								<InputLabel shrink id="order-by-label">
+									Ordina per
+								</InputLabel>
+								<Select
+									labelId="ordina-per"
+									id="order-by-select"
+									value={this.state.orderBy}
+									onChange={(e) => {
+										this.handleChangeSelectedOrderBy(
+											e.target.value as string
+										)
+									}}
+								>
+									<MenuItem value="creazione">
+										Data creazione
+									</MenuItem>
+									<MenuItem value="registrazione">
+										Data registrazione
+									</MenuItem>
+									<MenuItem value="nome">
+										Nominativo report
+									</MenuItem>
+								</Select>
+							</FormControl>
+						</ListItem>
 					</div>
 					<div>
 						{this.props.state.reports.error
@@ -123,10 +145,31 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 							<Paper className="paper">
 								<ListItem className="listItem">
 									<ListItemIcon>
-										<InsertDriveFileIcon className={report.name.toLowerCase().split("_").includes("usage") ? "bag" : report.name.toLowerCase().split("_").includes("cleaner") ? "cleaner" : ""}/>
+										<InsertDriveFileIcon
+											className={
+												report.name
+													.toLowerCase()
+													.split("_")
+													.includes("usage")
+													? "bag"
+													: report.name
+															.toLowerCase()
+															.split("_")
+															.includes("cleaner")
+													? "cleaner"
+													: ""
+											}
+										/>
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
-										<Button className="pencil">
+										<Button
+											className="pencil"
+											onClick={() => {
+												this.props.dispatch.getReport({
+													reportName: report.name,
+												})
+											}}
+										>
 											{report.name}
 										</Button>
 									</ListItemText>
@@ -153,6 +196,18 @@ const mapDispatchToProps = (dispatch: Function) => {
 		dispatch: {
 			getReports: () => {
 				dispatch(reportActionsResolve.getReports())
+			},
+			getReport: (data: { reportName: string }) => {
+				dispatch(reportActionsResolve.getReport(data))
+			},
+			getUsage: (data: {
+				fromTimestamp: string
+				toTimestamp: string
+			}) => {
+				dispatch(reportActionsResolve.getUsage(data))
+			},
+			getCleaner: () => {
+				dispatch(reportActionsResolve.getCleaner())
 			},
 		},
 	}
