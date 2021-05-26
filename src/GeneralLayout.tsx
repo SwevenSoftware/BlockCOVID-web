@@ -31,7 +31,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import PeopleIcon from "@material-ui/icons/People"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import DnsIcon from "@material-ui/icons/Dns"
-import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile"
+import AssignmentIcon from "@material-ui/icons/Assignment"
 /* others */
 import clsx from "clsx"
 
@@ -189,7 +189,7 @@ export default function GeneralLayout() {
 						to="/reports"
 					>
 						<ListItemIcon className="iconColor">
-							<InsertDriveFileIcon />
+							<AssignmentIcon />
 						</ListItemIcon>
 						<ListItemText primary="Reports" />
 					</ListItem>
