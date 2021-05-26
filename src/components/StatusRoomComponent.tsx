@@ -38,7 +38,6 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 		return (
 			<div>
 				<Button
-					className="pencil"
 					onClick={() => this.handleClickOpen()}
 				>
 					{this.props.data.room.name}
