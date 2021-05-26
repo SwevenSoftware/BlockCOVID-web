@@ -31,6 +31,11 @@ describe("reportApi", () => {
 		}
 		const config = {
 			...requestConfig,
+			headers: {
+				...requestConfig.headers,
+				"Content-Type": "application/pdf",
+			},
+			responseType: "blob",
 			params: {
 				from: data.fromTimestamp,
 				to: data.toTimestamp,
@@ -51,9 +56,11 @@ describe("reportApi", () => {
 		}
 		const config = {
 			...requestConfig,
-			params: {
-				reportName: data.reportName,
+			headers: {
+				...requestConfig.headers,
+				"Content-Type": "application/pdf",
 			},
+			responseType: "blob",
 		}
 		mockedAxios.get.mockImplementationOnce(() =>
 			Promise.resolve(axiosResponse)
@@ -68,14 +75,19 @@ describe("reportApi", () => {
 	})
 
 	it("correctly gets report listing rooms' cleaning status", () => {
+		const config = {
+			...requestConfig,
+			headers: {
+				...requestConfig.headers,
+				"Content-Type": "application/pdf",
+			},
+			responseType: "blob",
+		}
 		mockedAxios.get.mockImplementationOnce(() =>
 			Promise.resolve(axiosResponse)
 		)
 		expect(reportAPI.getCleaner(adminToken)).resolves.toEqual(axiosResponse)
-		expect(mockedAxios.get).lastCalledWith(
-			"/api/reports/cleaner",
-			requestConfig
-		)
+		expect(mockedAxios.get).lastCalledWith("/api/reports/cleaner", config)
 	})
 
 	it("correctly gets all reports", () => {
