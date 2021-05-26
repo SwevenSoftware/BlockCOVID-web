@@ -37,9 +37,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 	render() {
 		return (
 			<div>
-				<Button
-					onClick={() => this.handleClickOpen()}
-				>
+				<Button onClick={() => this.handleClickOpen()}>
 					{this.props.data.room.name}
 				</Button>
 				<Dialog
