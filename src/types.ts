@@ -79,6 +79,9 @@ export const ERROR_DESK_DOES_NOT_EXIST = "La postazione non esiste"
 export const ERROR_GRID_RESET_DESK_IS_IN_USE =
 	"Attenzione. Una delle postazioni risulta in uso. Procedere con cautela"
 
+/* reports */
+export const ERROR_REPORT_NOT_FOUND = "Il report selezionato non è disponibile"
+
 /* others */
 export const ERROR_UNKNOWN =
 	"Errore sconosciuto. Si prega di contattare l'amministratore"
