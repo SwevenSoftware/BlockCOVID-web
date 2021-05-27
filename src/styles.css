@@ -37,6 +37,11 @@
 	text-align: center;
 }
 
+.scrollbar {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
 .marginAccounts {
@@ -361,4 +366,9 @@
 
 .marginUnderGrid {
 	margin-top: 5%;
+}
+
+.addReportsButton {
+	float: right;
+	margin-bottom: 1%;
 }

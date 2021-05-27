@@ -21,6 +21,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import { ReportInformation } from "../Api/reportAPI"
+import { TextField } from "@material-ui/core"
 
 interface ReportsProps {
 	state: any
@@ -47,7 +48,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>
-					<div className="addRoomsButton">
+					<div className="addReportsButton">
 						<ListItem>
 							<ListItemIcon>
 								<Button
@@ -95,6 +96,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 						</ListItem>
 					</div>
 					<div>
+						<p>prova</p>
 						{this.props.state.reports.error
 							? this.props.state.reports.error
 							: ""}
