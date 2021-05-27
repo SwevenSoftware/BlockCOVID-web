@@ -141,6 +141,10 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 					this.sort(a, b)
 				)
 				.map((report: ReportInformation) => {
+					let creationDate: Date = new Date(report.creationDate)
+					let registrationDate: Date = new Date(
+						report.registrationDate
+					)
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">
@@ -177,15 +181,29 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 								</ListItem>
 								<div className="infoReports">
 									<Typography style={{ fontSize: "13px" }}>
-										Registrazione: 01/01/2021 08:00
+										{"Creazione: " +
+											creationDate.toLocaleDateString() +
+											" - " +
+											creationDate.toLocaleTimeString(
+												[],
+												{
+													hour: "2-digit",
+													minute: "2-digit",
+												}
+											)}
 									</Typography>
 									<Typography style={{ fontSize: "13px" }}>
-										Creazione: 01/01/2021 10:00
+										{"Registrazione: " +
+											registrationDate.toLocaleDateString() +
+											" - " +
+											registrationDate.toLocaleTimeString(
+												[],
+												{
+													hour: "2-digit",
+													minute: "2-digit",
+												}
+											)}
 									</Typography>
-									{/* <Typography style={{ fontSize: '14px' }}>
-										Registrazione: 01/01/2021 08:00
-										Creazione: 01/01/2021 10:00
-									</Typography> */}
 								</div>
 							</Paper>
 						</Grid>
