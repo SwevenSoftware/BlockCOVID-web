@@ -50,7 +50,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 		return (
 			<div>
 				<IconButton
-					className="trash"
+					className="redButton"
 					onClick={(e) => this.handleClickOpen()}
 				>
 					<DeleteIcon />
