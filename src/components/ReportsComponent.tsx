@@ -21,7 +21,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import { ReportInformation } from "../Api/reportAPI"
-import { TextField } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 
 interface ReportsProps {
 	state: any
@@ -96,7 +96,6 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 						</ListItem>
 					</div>
 					<div>
-						<p>prova</p>
 						{this.props.state.reports.error
 							? this.props.state.reports.error
 							: ""}
@@ -143,8 +142,8 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 				)
 				.map((report: ReportInformation) => {
 					rows.push(
-						<Grid key={report.name} className="grid">
-							<Paper className="paper">
+						<Grid key={report.name} className="gridReports">
+							<Paper className="paperReports">
 								<ListItem className="listItem">
 									<ListItemIcon>
 										<InsertDriveFileIcon
@@ -165,7 +164,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
 										<Button
-											className="pencil"
+											className="greenButton"
 											onClick={() => {
 												this.props.dispatch.getReport({
 													reportName: report.name,
@@ -174,8 +173,21 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										>
 											{report.name}
 										</Button>
+										
 									</ListItemText>
 								</ListItem>
+								<div className="infoReports">
+									<Typography style={{ fontSize: '13px' }}>
+										Registrazione: 01/01/2021 08:00
+									</Typography>
+									<Typography style={{ fontSize: '13px' }}>
+										Creazione: 01/01/2021 10:00
+									</Typography>
+									{/* <Typography style={{ fontSize: '14px' }}>
+										Registrazione: 01/01/2021 08:00
+										Creazione: 01/01/2021 10:00
+									</Typography> */}
+								</div>
 							</Paper>
 						</Grid>
 					)

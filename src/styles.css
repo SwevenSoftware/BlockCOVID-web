@@ -18,12 +18,16 @@
 	background-color: #689f38;
 }
 
-#primaryColor {
+#colorError {
+	color: red;
+}
+
+.greenButton:hover {
 	color: #689f38;
 }
 
-#colorError {
-	color: red;
+.redButton:hover {
+	color: rgb(201, 33, 33);
 }
 
 .modalTitle {
@@ -40,6 +44,14 @@
 .scrollbar {
 	overflow-x: hidden;
 	overflow-y: hidden;
+}
+
+.centralGrid {
+	/* margin-left: 25%; */
+	padding-left: 14px;
+	margin: auto;
+	width: 100%;
+	text-align: center;
 }
 
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
@@ -65,6 +77,7 @@
 .usernameLayout {
 	overflow: hidden;
 	text-overflow: ellipsis;
+	margin-left: -8%;
 }
 
 .grid {
@@ -85,13 +98,7 @@
 	transform: translate(-50%, -50%);
 }
 
-.pencil:hover {
-	color: #689f38;
-}
 
-.trash:hover {
-	color: rgb(201, 33, 33);
-}
 
 .addAccountButton {
 	position: absolute;
@@ -214,10 +221,23 @@
 	margin-top: 25%;
 }
 
-/* (((((((((((((((((((((((((((((( REPORT )))))))))))))))))))))))))))) */
+/* (((((((((((((((((((((((((((((( REPORTS )))))))))))))))))))))))))))) */
 
-.marginButton {
-	margin-top: 1em;
+.addReportsButton {
+	float: right;
+}
+
+.gridReports {
+	width: 32%;
+	margin: 0 1% 2% 0;
+}
+
+.paperReports {
+	height: 8em;
+}
+
+.infoReports {
+	margin: 2.5% 0 0 25%;
 }
 
 /* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
@@ -237,6 +257,10 @@
 	width: 100%;
 	text-align: right;
 	margin-bottom: 1%;
+}
+
+.marginUnderGrid {
+	margin-top: 5%;
 }
 
 /* (((((((((((((((((((((((((((((( ROOMS MODIFY )))))))))))))))))))))))))))) */
@@ -354,21 +378,4 @@
 	.spacing {
 		padding-left: 1em;
 	}
-}
-
-.centralGrid {
-	/* margin-left: 25%; */
-	padding-left: 14px;
-	margin: auto;
-	width: 100%;
-	text-align: center;
-}
-
-.marginUnderGrid {
-	margin-top: 5%;
-}
-
-.addReportsButton {
-	float: right;
-	margin-bottom: 1%;
 }
