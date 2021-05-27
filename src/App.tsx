@@ -16,23 +16,27 @@ const App: React.FC = () => {
 
 	return (
 		<BrowserRouter>
-		<div className="scrollbar">
-			{GeneralLayout()}
-			<div className="marginAccounts">
-				{token ? (
-					<Switch>
-						<Route path="/accounts" exact component={Accounts} />
-						<Route path="/rooms" exact component={Rooms} />
-						<Route path="/reports" exact component={Reports} />
-						<Redirect path="*" to="/accounts" />
-					</Switch>
-				) : (
-					<Switch>
-						<Route path="/login" exact component={Login} />
-						<Redirect path="*" to="/login" />
-					</Switch>
-				)}
-			</div>
+			<div className="scrollbar">
+				{GeneralLayout()}
+				<div className="marginAccounts">
+					{token ? (
+						<Switch>
+							<Route
+								path="/accounts"
+								exact
+								component={Accounts}
+							/>
+							<Route path="/rooms" exact component={Rooms} />
+							<Route path="/reports" exact component={Reports} />
+							<Redirect path="*" to="/accounts" />
+						</Switch>
+					) : (
+						<Switch>
+							<Route path="/login" exact component={Login} />
+							<Redirect path="*" to="/login" />
+						</Switch>
+					)}
+				</div>
 			</div>
 		</BrowserRouter>
 	)

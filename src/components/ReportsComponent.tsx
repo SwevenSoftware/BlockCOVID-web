@@ -173,14 +173,13 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										>
 											{report.name}
 										</Button>
-										
 									</ListItemText>
 								</ListItem>
 								<div className="infoReports">
-									<Typography style={{ fontSize: '13px' }}>
+									<Typography style={{ fontSize: "13px" }}>
 										Registrazione: 01/01/2021 08:00
 									</Typography>
-									<Typography style={{ fontSize: '13px' }}>
+									<Typography style={{ fontSize: "13px" }}>
 										Creazione: 01/01/2021 10:00
 									</Typography>
 									{/* <Typography style={{ fontSize: '14px' }}>
