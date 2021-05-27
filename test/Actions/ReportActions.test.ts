@@ -36,6 +36,51 @@ describe("Room actions", () => {
 		headers: {},
 	}
 
+	it("should correctly handle usage report creation", function () {
+		reportApi.getUsage = jest.fn(async () => {
+			return axiosResponse
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.CREATE_USAGE_SUCCESS,
+			},
+			{
+				type: reportTypes.FETCH_ALL_SUCCESS,
+			},
+		]
+		store.dispatch(reportActionsResolver.getUsage())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
+	it("should correctly handle cleaner report creation", function () {
+		reportApi.getCleaner = jest.fn(async () => {
+			return axiosResponse
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.CREATE_CLEANER_SUCCESS,
+			},
+			{
+				type: reportTypes.FETCH_ALL_SUCCESS,
+			},
+		]
+		store.dispatch(reportActionsResolver.getCleaner())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
+	it("should correctly handle single report fetch", function () {
+		reportApi.getReport = jest.fn(async () => {
+			return axiosResponse
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.FETCH_SINGLE_SUCCESS,
+			},
+		]
+		store.dispatch(reportActionsResolver.getReport())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
 	it("should correctly handle all reports fetch", function () {
 		reportApi.getReports = jest.fn(async () => {
 			return axiosResponse
@@ -46,6 +91,45 @@ describe("Room actions", () => {
 			},
 		]
 		store.dispatch(reportActionsResolver.getReports())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
+	it("should correctly handle usage report creation error", function () {
+		reportApi.getUsage = jest.fn(async () => {
+			throw new Error()
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.CREATE_USAGE_FAILURE,
+			},
+		]
+		store.dispatch(reportActionsResolver.getReport())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
+	it("should correctly handle cleaner report creation error", function () {
+		reportApi.getCleaner = jest.fn(async () => {
+			throw new Error()
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.CREATE_CLEANER_FAILURE,
+			},
+		]
+		store.dispatch(reportActionsResolver.getCleaner())
+		// expect(store.getActions()).toContain(expectedAction)
+	})
+
+	it("should correctly handle single report fetch error", function () {
+		reportApi.getReport = jest.fn(async () => {
+			throw new Error()
+		})
+		const expectedAction = [
+			{
+				type: reportTypes.FETCH_SINGLE_FAILURE,
+			},
+		]
+		store.dispatch(reportActionsResolver.getReport())
 		// expect(store.getActions()).toContain(expectedAction)
 	})
 
