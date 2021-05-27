@@ -12,6 +12,23 @@ describe("Room actions", () => {
 		fetchMock.restore()
 	})
 
+	const fakeReports = {
+		_embedded: {
+			reportInformationList: [
+				{
+					name: "Registered_Report_usage_20210523_000000.pdf",
+					creationDate: "2021-05-23T00:00:00.028264417",
+					registrationDate: "2021-05-23T00:00:00.028264417",
+				},
+				{
+					name: "Registered_Report_usage_20210524_000000.pdf",
+					creationDate: "2021-05-24T00:00:00.028264417",
+					registrationDate: "2021-05-24T00:00:00.028264417",
+				},
+			],
+		},
+	}
+
 	let store
 	let reportActionsResolver
 	let reportApi
@@ -22,6 +39,11 @@ describe("Room actions", () => {
 				token: {
 					id: "adminToken",
 				},
+				error: "",
+			},
+			reports: {
+				reports: fakeReports,
+				error: "",
 			},
 		})
 		reportApi = jest.fn as jest.Mock<typeof reportApi>
@@ -46,6 +68,7 @@ describe("Room actions", () => {
 			},
 			{
 				type: reportTypes.FETCH_ALL_SUCCESS,
+				payload: fakeReports,
 			},
 		]
 		store.dispatch(reportActionsResolver.getUsage())
@@ -62,6 +85,7 @@ describe("Room actions", () => {
 			},
 			{
 				type: reportTypes.FETCH_ALL_SUCCESS,
+				payload: fakeReports,
 			},
 		]
 		store.dispatch(reportActionsResolver.getCleaner())
@@ -88,6 +112,7 @@ describe("Room actions", () => {
 		const expectedAction = [
 			{
 				type: reportTypes.FETCH_ALL_SUCCESS,
+				payload: fakeReports,
 			},
 		]
 		store.dispatch(reportActionsResolver.getReports())
