@@ -16,6 +16,7 @@ const App: React.FC = () => {
 
 	return (
 		<BrowserRouter>
+		<div className="scrollbar">
 			{GeneralLayout()}
 			<div className="marginAccounts">
 				{token ? (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
 						<Redirect path="*" to="/login" />
 					</Switch>
 				)}
+			</div>
 			</div>
 		</BrowserRouter>
 	)
