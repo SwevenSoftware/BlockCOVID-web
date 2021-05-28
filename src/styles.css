@@ -77,17 +77,17 @@
 .usernameLayout {
 	overflow: hidden;
 	text-overflow: ellipsis;
-	margin-left: -8%;
 }
 
 .grid {
+	float: left;
 	width: 23%;
-	margin: 0 2% 2% 0;
+	margin-right: 2%;
+	margin-bottom: 2%;
 }
 
 .paper {
 	height: 5em;
-	/* max-width: 30em; */
 }
 
 .listItem {
@@ -234,6 +234,12 @@
 	height: 8em;
 }
 
+.nameReports {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: -8%;
+}
+
 .infoReports {
 	margin: 2.5% 0 0 25%;
 }
@@ -342,10 +348,14 @@
 		width: 33%;
 	}
 	.grid {
-		min-width: 31%;
+		width: 31%;
 	}
 	.spacing {
 		padding-left: 8em;
+	}
+	.gridReports {
+		min-width: 48%;
+		margin: 0 1% 2% 0;
 	}
 }
 
@@ -353,22 +363,26 @@
 	.buttonInline {
 		width: 33%;
 	}
-	.grid {
-		min-width: 48%;
-	}
+	/* .grid {
+		width: 48%;
+	} */
 	.spacing {
-		padding-left: 4em;
+		padding-left: 40em;
 	}
+	/* .gridReports {
+		min-width: 48%;
+		margin: 0 1% 2% 0;
+	} */
 }
 
 @media only screen and (max-width: 660px) {
 	.buttonInline {
 		width: 33%;
 	}
-	.grid {
-		min-width: 100%;
+	/* .grid {
+		width: 100%;
 		margin-right: 0%;
-	}
+	} */
 	.addAccountButton {
 		right: 0.5em;
 		top: 5.5em;
@@ -376,4 +390,8 @@
 	.spacing {
 		padding-left: 1em;
 	}
+	/* .gridReports {
+		width: 100%;
+		margin: 0 0% 2% 0;
+	} */
 }

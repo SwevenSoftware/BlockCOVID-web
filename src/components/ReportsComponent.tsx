@@ -166,7 +166,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 											}
 										/>
 									</ListItemIcon>
-									<ListItemText className="usernameLayout">
+									<ListItemText className="nameReports">
 										<Button
 											className="greenButton"
 											onClick={() => {
