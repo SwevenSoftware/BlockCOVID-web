@@ -59,7 +59,7 @@ class DeleteAccountComponent extends Component<
 		return (
 			<div>
 				<IconButton
-					className="trash"
+					className="redButton"
 					onClick={(e) => this.handleClickOpen()}
 				>
 					<DeleteIcon />
