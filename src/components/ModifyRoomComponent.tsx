@@ -112,7 +112,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			<ThemeProvider theme={theme}>
 				<div>
 					<IconButton
-						className="pencil"
+						className="greenButton"
 						onClick={() => this.handleClickOpenButton()}
 					>
 						<CreateIcon />

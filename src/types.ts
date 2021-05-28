@@ -32,6 +32,17 @@ export const roomTypes = {
 	DELETE_DESK_FAILURE: "ROOM_DELETE_DESK_FAILURE",
 }
 
+export const reportTypes = {
+	FETCH_ALL_SUCCESS: "REPORT_FETCH_ALL_SUCCESS",
+	FETCH_ALL_FAILURE: "REPORT_FETCH_ALL_FAILURE",
+	FETCH_SINGLE_SUCCESS: "REPORT_FETCH_SINGLE_SUCCESS",
+	FETCH_SINGLE_FAILURE: "REPORT_FETCH_SINGLE_FAILURE",
+	CREATE_USAGE_SUCCESS: "REPORT_CREATE_USAGE_SUCCESS",
+	CREATE_USAGE_FAILURE: "REPORT_CREATE_USAGE_FAILURE",
+	CREATE_CLEANER_SUCCESS: "REPORT_CREATE_CLEANER_SUCCESS",
+	CREATE_CLEANER_FAILURE: "REPORT_CREATE_CLEANER_FAILURE",
+}
+
 /* login */
 export const ERROR_USER_NO_AUTH =
 	"Accesso non autorizzato. Si prega di contattare l'amministratore"
@@ -67,6 +78,9 @@ export const ERROR_DESK_ALREADY_EXISTS = "La postazione risulta già presente"
 export const ERROR_DESK_DOES_NOT_EXIST = "La postazione non esiste"
 export const ERROR_GRID_RESET_DESK_IS_IN_USE =
 	"Attenzione. Una delle postazioni risulta in uso. Procedere con cautela"
+
+/* reports */
+export const ERROR_REPORT_NOT_FOUND = "Il report selezionato non è disponibile"
 
 /* others */
 export const ERROR_UNKNOWN =
