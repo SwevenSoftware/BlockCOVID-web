@@ -153,18 +153,6 @@ export default function GeneralLayout() {
 				<List>
 					<ListItem
 						button
-						key="Reservations"
-						component={Link}
-						to="/reservations"
-					>
-						<ListItemIcon className="iconColor">
-							<DnsIcon />
-						</ListItemIcon>
-						<ListItemText primary="Reservations" />
-					</ListItem>
-
-					<ListItem
-						button
 						key="Accounts"
 						component={Link}
 						to="/accounts"
