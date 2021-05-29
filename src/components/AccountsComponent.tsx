@@ -22,6 +22,7 @@ import { theme } from "../theme"
 import ModifyAccount from "./ModifyAccountComponent"
 import NewAccount from "./NewAccountComponent"
 import DeleteAccount from "./DeleteAccountComponent"
+import CalendarViewComponent from "./CalendarViewComponent"
 
 interface AccountProps {
 	state: any
@@ -172,3 +173,18 @@ const mapDispatchToProps = (dispatch: Function) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountComponent)
+
+//da posizionare al posto del nome dell'utente per renderlo cliccabile
+{/* <ListItemText
+										//primary={user.username}
+										className="usernameLayout"
+									>
+										<CalendarViewComponent
+											data={{
+												user: {
+													username: user.usernmame
+												}
+											}}
+										/>
+										
+									</ListItemText> */}
