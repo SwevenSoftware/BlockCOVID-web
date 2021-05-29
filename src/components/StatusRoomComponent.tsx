@@ -9,6 +9,12 @@ import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import Typography from "@material-ui/core/Typography"
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+import CropFreeIcon from '@material-ui/icons/CropFree';
 /* others */
 import DotGrid from "../DotGrid"
 
@@ -49,6 +55,26 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 					<DialogTitle id="form-dialog-title">
 						'{this.props.data.room.name}'
 					</DialogTitle>
+					<ListItem>
+							<ListItemIcon className="spacingColorDesk">
+								<FiberManualRecordIcon className="deskBooked" />
+								<Typography>
+									Prenotato
+								</Typography>
+							</ListItemIcon>
+							<ListItemIcon className="spacingColorDesk">
+								<FiberManualRecordIcon className="deskUsed" />
+								<Typography>
+									Occupato
+								</Typography>
+							</ListItemIcon>
+							<ListItemIcon className="spacingColorDesk">
+								<CropFreeIcon/>
+								<Typography>
+									Libero
+								</Typography>
+							</ListItemIcon>
+					</ListItem>
 					<DialogContent>
 						<div className="centralGrid">
 							<DotGrid

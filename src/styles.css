@@ -54,6 +54,19 @@
 	text-align: center;
 }
 
+.deskBooked {
+	color: #008000;
+}
+
+.deskUsed {
+	color: #d68f00;
+}
+
+.spacingColorDesk {
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
 
 .marginAccounts {
