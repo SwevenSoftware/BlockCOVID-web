@@ -129,7 +129,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 							id="form-dialog-title"
 							className="modalTitle"
 						>
-							Modifica la stanza '{this.props.data.room.name}'
+							Modifica {this.props.data.room.name}
 						</DialogTitle>
 						<DialogContent className="centralGrid">
 							<DialogContentText>

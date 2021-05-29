@@ -53,7 +53,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 					aria-labelledby="form-dialog-title"
 				>
 					<DialogTitle id="form-dialog-title">
-						'{this.props.data.room.name}'
+						{this.props.data.room.name}
 					</DialogTitle>
 					<ListItem>
 						<ListItemIcon className="spacingColorDesk">
