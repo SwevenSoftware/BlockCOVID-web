@@ -57,8 +57,8 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 					</DialogTitle>
 					<ListItem>
 						<ListItemIcon className="spacingColorDesk">
-							<FiberManualRecordIcon className="deskBooked" />
-							<Typography>Prenotato</Typography>
+							<FiberManualRecordIcon className="deskFree" />
+							<Typography>Libero</Typography>
 						</ListItemIcon>
 						<ListItemIcon className="spacingColorDesk">
 							<FiberManualRecordIcon className="deskUsed" />
@@ -66,7 +66,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 						</ListItemIcon>
 						<ListItemIcon className="spacingColorDesk">
 							<CropFreeIcon />
-							<Typography>Libero</Typography>
+							<Typography>Vuoto</Typography>
 						</ListItemIcon>
 					</ListItem>
 					<DialogContent>
