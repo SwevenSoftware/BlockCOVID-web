@@ -18,6 +18,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import NewRoom from "./NewRoomComponent"
+import StatusRoom from "./StatusRoomComponent"
 import ModifyRoom from "./ModifyRoomComponent"
 import DeleteRoom from "./DeleteRoomComponent"
 
@@ -40,12 +41,8 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 	render() {
 		return (
 			<div className="marginAccounts">
-				{" "}
-				{/* TODO: change className */}
 				<ThemeProvider theme={theme}>
 					<div className="addRoomsButton">
-						{" "}
-						{/* TODO: change className */}
 						<NewRoom />
 					</div>
 					<div>
@@ -63,8 +60,6 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 
 	/**
 	 * Provides the HTML code to display the rooms
-	 * @params
-	 * @returns An array of HTML code to display each room
 	 */
 	private popolate(): Array<JSX.Element> {
 		let rows: Array<JSX.Element> = []
@@ -114,10 +109,20 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 								: 0
 						)
 					rows.push(
-						<Grid key={roomList.room.name} className="grid">
+						<Grid
+							className="grid"
+							key={
+								roomList.room.name +
+								roomList.room.closed +
+								roomList.room.openingTime +
+								roomList.room.closingTime +
+								roomList.room.openingDays +
+								roomList.room.height +
+								roomList.room.width +
+								JSON.stringify(roomList.desks)
+							}
+						>
 							<Paper className="paper">
-								{" "}
-								{/* TODO: change style, might change className as well */}
 								<ListItem className="listItem">
 									<ListItemIcon>
 										<MeetingRoomIcon
@@ -130,22 +135,10 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 										/>
 									</ListItemIcon>
 									<ListItemText className="usernameLayout">
-										<ModifyRoom
-											key={
-												roomList.room.name +
-												roomList.room.closed +
-												roomList.room.openingTime +
-												roomList.room.closingTime +
-												roomList.room.openingDays +
-												roomList.room.height +
-												roomList.room.width +
-												JSON.stringify(roomList.desks)
-											}
+										<StatusRoom
 											data={{
 												room: {
 													name: roomList.room.name,
-													closed: roomList.room
-														.closed,
 													openingTime:
 														roomList.room.openingTime.split(
 															":"
@@ -171,17 +164,35 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 											}}
 										/>
 									</ListItemText>
+									<ModifyRoom
+										data={{
+											room: {
+												name: roomList.room.name,
+												closed: roomList.room.closed,
+												openingTime:
+													roomList.room.openingTime.split(
+														":"
+													)[0] +
+													":" +
+													roomList.room.openingTime.split(
+														":"
+													)[1],
+												closingTime:
+													roomList.room.closingTime.split(
+														":"
+													)[0] +
+													":" +
+													roomList.room.closingTime.split(
+														":"
+													)[1],
+												openingDays: openingDays,
+												height: roomList.room.height,
+												width: roomList.room.width,
+												desks: roomList.desks,
+											},
+										}}
+									/>
 									<DeleteRoom
-										key={
-											roomList.room.name +
-											roomList.room.closed +
-											roomList.room.openingTime +
-											roomList.room.closingTime +
-											roomList.room.openingDays +
-											roomList.room.height +
-											roomList.room.width +
-											JSON.stringify(roomList.desks)
-										}
 										data={{
 											room: {
 												name: roomList.room.name,

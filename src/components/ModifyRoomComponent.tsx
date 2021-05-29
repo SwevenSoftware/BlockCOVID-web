@@ -21,6 +21,8 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import DialogContentText from "@material-ui/core/DialogContentText"
+import IconButton from "@material-ui/core/IconButton"
+import CreateIcon from "@material-ui/icons/Create"
 import { FormLabel, FormHelperText } from "@material-ui/core"
 import {
 	KeyboardTimePicker,
@@ -109,12 +111,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		return (
 			<ThemeProvider theme={theme}>
 				<div>
-					<Button
+					<IconButton
 						className="greenButton"
 						onClick={() => this.handleClickOpenButton()}
 					>
-						{this.props.data.room.name}
-					</Button>
+						<CreateIcon />
+					</IconButton>
 					<Dialog
 						open={this.state.isModalOpen}
 						onClose={() => this.handleCloseButton()}
@@ -127,7 +129,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 							id="form-dialog-title"
 							className="modalTitle"
 						>
-							Modifica la stanza '{this.props.data.room.name}'
+							Modifica {this.props.data.room.name}
 						</DialogTitle>
 						<DialogContent className="centralGrid">
 							<DialogContentText>
