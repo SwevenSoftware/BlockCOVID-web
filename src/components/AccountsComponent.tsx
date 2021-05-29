@@ -175,7 +175,8 @@ const mapDispatchToProps = (dispatch: Function) => {
 export default connect(mapStateToProps, mapDispatchToProps)(AccountComponent)
 
 //da posizionare al posto del nome dell'utente per renderlo cliccabile
-{/* <ListItemText
+{
+	/* <ListItemText
 										//primary={user.username}
 										className="usernameLayout"
 									>
@@ -187,4 +188,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountComponent)
 											}}
 										/>
 										
-									</ListItemText> */}
+									</ListItemText> */
+}
