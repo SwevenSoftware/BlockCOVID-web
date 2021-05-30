@@ -16,13 +16,18 @@ import Typography from "@material-ui/core/Typography"
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
 import CropFreeIcon from "@material-ui/icons/CropFree"
 
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import {
+	withStyles,
+	Theme,
+	createStyles,
+	makeStyles,
+} from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
 /* others */
 import DotGrid from "../DotGrid"
 
@@ -37,26 +42,26 @@ interface StatusRoomStates {
 }
 
 const StyledTableCell = withStyles((theme: Theme) =>
-  createStyles({
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }),
-)(TableCell);
+	createStyles({
+		head: {
+			backgroundColor: theme.palette.common.black,
+			color: theme.palette.common.white,
+		},
+		body: {
+			fontSize: 14,
+		},
+	})
+)(TableCell)
 
 const StyledTableRow = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }),
-)(TableRow);
+	createStyles({
+		root: {
+			"&:nth-of-type(odd)": {
+				backgroundColor: theme.palette.action.hover,
+			},
+		},
+	})
+)(TableRow)
 
 class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 	refDotGrid: RefObject<DotGrid>
@@ -124,22 +129,38 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 								<Table aria-label="customized table">
 									<TableHead>
 										<TableRow>
-											<StyledTableCell>ID</StyledTableCell>
-											<StyledTableCell align="right">X</StyledTableCell>
-											<StyledTableCell align="right">Y</StyledTableCell>
+											<StyledTableCell>
+												ID
+											</StyledTableCell>
+											<StyledTableCell align="right">
+												X
+											</StyledTableCell>
+											<StyledTableCell align="right">
+												Y
+											</StyledTableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>
-									{this.props.data.room.desks.map((desk) => (
-										<StyledTableRow key={desk.deskId}>
-											{/* <StyledTableCell component="th" scope="row">
+										{this.props.data.room.desks.map(
+											(desk) => (
+												<StyledTableRow
+													key={desk.deskId}
+												>
+													{/* <StyledTableCell component="th" scope="row">
 												{desk.deskId}
 											</StyledTableCell> */}
-											<StyledTableCell>{desk.deskId}</StyledTableCell>
-											<StyledTableCell align="right">{desk.x}</StyledTableCell>
-											<StyledTableCell align="right">{desk.y}</StyledTableCell>
-										</StyledTableRow>
-									))}
+													<StyledTableCell>
+														{desk.deskId}
+													</StyledTableCell>
+													<StyledTableCell align="right">
+														{desk.x}
+													</StyledTableCell>
+													<StyledTableCell align="right">
+														{desk.y}
+													</StyledTableCell>
+												</StyledTableRow>
+											)
+										)}
 									</TableBody>
 								</Table>
 							</TableContainer>
