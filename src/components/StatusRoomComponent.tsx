@@ -80,6 +80,16 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 									desks: this.props.data.room.desks,
 								}}
 							/>
+							{this.props.data.room.desks.map((desk) => (
+								<Typography key={desk.deskId}>
+									{"ID: " +
+										desk.deskId +
+										", X: " +
+										desk.x +
+										", Y: " +
+										desk.y}
+								</Typography>
+							))}
 						</div>
 					</DialogContent>
 					<DialogActions>
