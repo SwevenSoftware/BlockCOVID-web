@@ -84,6 +84,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 				<Dialog
 					open={this.state.isModalOpen}
 					onClose={this.handleClose}
+					fullWidth
 					maxWidth="sm"
 					aria-labelledby="form-dialog-title"
 				>
