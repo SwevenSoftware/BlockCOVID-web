@@ -44,7 +44,7 @@ interface StatusRoomStates {
 const StyledTableCell = withStyles((theme: Theme) =>
 	createStyles({
 		head: {
-			backgroundColor: theme.palette.common.black,
+			backgroundColor: "#689f38",
 			color: theme.palette.common.white,
 		},
 		body: {
