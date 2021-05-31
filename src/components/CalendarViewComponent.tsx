@@ -4,7 +4,9 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 /* material-ui */
 import Paper from "@material-ui/core/Paper"
-import { Button } from "@material-ui/core"
+import { Button, DialogTitle } from "@material-ui/core"
+import Dialog from "@material-ui/core/Dialog"
+import DialogContent from "@material-ui/core/DialogContent"
 /* devexpress */
 import { ViewState } from "@devexpress/dx-react-scheduler"
 import {
@@ -19,6 +21,7 @@ import {
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 import { CalendarProps } from "@material-ui/pickers/views/Calendar/Calendar"
+import { appointments } from "../appointments"
 
 interface CalendarViewProps {
 	state: any
@@ -39,8 +42,8 @@ class CalendarViewComponent extends Component<
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: Appointments,
-			currentDate: new Date("2021-01-01T08:00"),
+			data: appointments,
+			currentDate: new Date(),
 			isModalOpen: false,
 		}
 		this.handleClickOpen = this.handleClickOpen.bind(this)
@@ -49,6 +52,7 @@ class CalendarViewComponent extends Component<
 
 	render() {
 		const { data, currentDate } = this.state
+		console.log(this.state.currentDate)
 		return (
 			<div>
 				<Button
@@ -57,19 +61,38 @@ class CalendarViewComponent extends Component<
 				>
 					{this.props.data.user.username}
 				</Button>
-				<Paper>
-					<Scheduler data={data} height={660}>
-						<ViewState
-							currentDate={currentDate}
-							onCurrentDateChange={this.currentDateChange}
-						/>
-						<WeekView startDayHour={9} endDayHour={19} />
-						<Toolbar />
-						<DateNavigator />
-						<TodayButton />
-						<Appointments />
-					</Scheduler>
-				</Paper>
+				<Dialog
+					open={this.state.isModalOpen}
+					onClose={() => this.handleClose()}
+					aria-labelledby="form-dialog-title"
+					fullWidth
+					maxWidth="md"
+				>
+					<DialogTitle
+						id="form-dialog-title"
+						className="modalTitle"
+					>
+						Calendario prenotazioni di {this.props.data.user.username}
+					</DialogTitle>
+					<DialogContent>
+						<Paper>
+							<Scheduler 
+								data={data}
+								height={660}
+							>
+								<ViewState
+									currentDate={currentDate}
+									onCurrentDateChange={this.currentDateChange}
+								/>
+								<WeekView startDayHour={9} endDayHour={19} />
+								<Toolbar />
+								<DateNavigator />
+								<TodayButton />
+								<Appointments />
+							</Scheduler>
+						</Paper>
+					</DialogContent>
+				</Dialog>
 			</div>
 		)
 	}
