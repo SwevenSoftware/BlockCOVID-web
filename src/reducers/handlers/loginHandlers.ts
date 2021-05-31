@@ -11,7 +11,6 @@ loginHandlers[loginTypes.LOGIN_SUCCESS] = function (state, action) {
 	let isAdmin = action.payload.authorities.includes("ADMIN")
 	if (isAdmin) {
 		/** user has admin authorities, authorized login attempt */
-		location.href = "/accounts"
 		return {
 			token: action.payload.token,
 			error: "",
@@ -46,8 +45,6 @@ loginHandlers[loginTypes.LOGIN_FAILURE] = function (state, action) {
 }
 
 loginHandlers[loginTypes.LOGOUT] = function (state, action) {
-	console.log(loginTypes.LOGOUT) // WARNING: testing purposes
-	location.href = "/login"
 	return {
 		token: null,
 		error: "",

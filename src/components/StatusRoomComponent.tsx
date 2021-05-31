@@ -15,6 +15,19 @@ import ListItemText from "@material-ui/core/ListItemText"
 import Typography from "@material-ui/core/Typography"
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
 import CropFreeIcon from "@material-ui/icons/CropFree"
+
+import {
+	withStyles,
+	Theme,
+	createStyles,
+	makeStyles,
+} from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
 /* others */
 import DotGrid from "../DotGrid"
 
@@ -27,6 +40,28 @@ interface StatusRoomProps {
 interface StatusRoomStates {
 	isModalOpen: boolean
 }
+
+const StyledTableCell = withStyles((theme: Theme) =>
+	createStyles({
+		head: {
+			backgroundColor: "#689f38",
+			color: theme.palette.common.white,
+		},
+		body: {
+			fontSize: 14,
+		},
+	})
+)(TableCell)
+
+const StyledTableRow = withStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			"&:nth-of-type(odd)": {
+				backgroundColor: theme.palette.action.hover,
+			},
+		},
+	})
+)(TableRow)
 
 class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 	refDotGrid: RefObject<DotGrid>
@@ -49,6 +84,7 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 				<Dialog
 					open={this.state.isModalOpen}
 					onClose={this.handleClose}
+					fullWidth
 					maxWidth="sm"
 					aria-labelledby="form-dialog-title"
 				>
@@ -80,6 +116,51 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 									desks: this.props.data.room.desks,
 								}}
 							/>
+							{/* {this.props.data.room.desks.map((desk) => (
+								<Typography key={desk.deskId}>
+									{"ID: " +
+										desk.deskId +
+										", X: " +
+										desk.x +
+										", Y: " +
+										desk.y}
+								</Typography>
+							))} */}
+							<TableContainer>
+								<Table aria-label="customized table">
+									<TableHead>
+										<TableRow>
+											<StyledTableCell>
+												ID
+											</StyledTableCell>
+											<StyledTableCell>X</StyledTableCell>
+											<StyledTableCell>Y</StyledTableCell>
+										</TableRow>
+									</TableHead>
+									<TableBody>
+										{this.props.data.room.desks.map(
+											(desk) => (
+												<StyledTableRow
+													key={desk.deskId}
+												>
+													{/* <StyledTableCell component="th" scope="row">
+												{desk.deskId}
+											</StyledTableCell> */}
+													<StyledTableCell>
+														{desk.deskId}
+													</StyledTableCell>
+													<StyledTableCell>
+														{desk.x}
+													</StyledTableCell>
+													<StyledTableCell>
+														{desk.y}
+													</StyledTableCell>
+												</StyledTableRow>
+											)
+										)}
+									</TableBody>
+								</Table>
+							</TableContainer>
 						</div>
 					</DialogContent>
 					<DialogActions>
