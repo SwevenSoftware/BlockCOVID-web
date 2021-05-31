@@ -133,12 +133,8 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 											<StyledTableCell>
 												ID
 											</StyledTableCell>
-											<StyledTableCell align="right">
-												X
-											</StyledTableCell>
-											<StyledTableCell align="right">
-												Y
-											</StyledTableCell>
+											<StyledTableCell>X</StyledTableCell>
+											<StyledTableCell>Y</StyledTableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>
@@ -153,10 +149,10 @@ class StatusRoomComponent extends Component<StatusRoomProps, StatusRoomStates> {
 													<StyledTableCell>
 														{desk.deskId}
 													</StyledTableCell>
-													<StyledTableCell align="right">
+													<StyledTableCell>
 														{desk.x}
 													</StyledTableCell>
-													<StyledTableCell align="right">
+													<StyledTableCell>
 														{desk.y}
 													</StyledTableCell>
 												</StyledTableRow>
