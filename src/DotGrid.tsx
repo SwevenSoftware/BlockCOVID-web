@@ -113,8 +113,8 @@ class DotGrid extends Component<DotGridProps> {
 		}
 
 		if (
-			pointPos.x > this.gridSettings.width - this.gridSettings.dim ||
-			pointPos.y > this.gridSettings.height - this.gridSettings.dim
+			pointPos.x > this.gridSettings.width / this.gridSettings.dim - 2 ||
+			pointPos.y > this.gridSettings.height / this.gridSettings.dim - 2
 		)
 			return
 
