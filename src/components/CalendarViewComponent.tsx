@@ -68,18 +68,13 @@ class CalendarViewComponent extends Component<
 					fullWidth
 					maxWidth="md"
 				>
-					<DialogTitle
-						id="form-dialog-title"
-						className="modalTitle"
-					>
-						Calendario prenotazioni di {this.props.data.user.username}
+					<DialogTitle id="form-dialog-title" className="modalTitle">
+						Calendario prenotazioni di{" "}
+						{this.props.data.user.username}
 					</DialogTitle>
 					<DialogContent>
 						<Paper>
-							<Scheduler 
-								data={data}
-								height={660}
-							>
+							<Scheduler data={data} height={660}>
 								<ViewState
 									currentDate={currentDate}
 									onCurrentDateChange={this.currentDateChange}

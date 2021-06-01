@@ -122,8 +122,8 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 									<CalendarViewComponent
 										data={{
 											user: {
-												username: user.usernmame
-											}
+												username: user.usernmame,
+											},
 										}}
 										/* primary={user.username}
 										className="usernameLayout" */
