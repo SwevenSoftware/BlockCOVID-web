@@ -141,10 +141,11 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 					this.sort(a, b)
 				)
 				.map((report: ReportInformation) => {
-					let creationDate: Date = new Date(report.creationDate)
+					let creationDate: Date = new Date(report.creationDate+"Z")
 					let registrationDate: Date = new Date(
-						report.registrationDate
+						report.registrationDate+"Z"
 					)
+
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">

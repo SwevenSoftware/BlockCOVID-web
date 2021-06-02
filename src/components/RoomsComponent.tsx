@@ -35,7 +35,7 @@ class RoomsComponent extends Component<RoomsProps, RoomsStates> {
 	}
 
 	componentDidMount() {
-		this.props.dispatch.getRooms({ fromTimestamp: "", toTimestamp: "" })
+		this.props.dispatch.getRooms()
 	}
 
 	render() {
