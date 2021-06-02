@@ -75,9 +75,13 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 			roomNameError: false,
 			roomNameValue: "",
 			openingTimeDateValue: fakeOpeningDate,
-			openingTimeStringValue: this.handleTimeChange(fakeOpeningDate.getTime()).timeString,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
 			closingTimeDateValue: fakeClosingDate,
-			closingTimeStringValue: this.handleTimeChange(fakeClosingDate.getTime()).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDays: {
 				monday: false,
 				tuesday: false,
@@ -584,8 +588,12 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 			},
 			openingTimeDateValue: fakeOpeningDate,
 			closingTimeDateValue: fakeClosingDate,
-			openingTimeStringValue: this.handleTimeChange(fakeOpeningDate.getTime()).timeString,
-			closingTimeStringValue: this.handleTimeChange(fakeClosingDate.getTime()).timeString,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDaysError: false,
 			roomNameValue: "",
 			roomNameError: false,

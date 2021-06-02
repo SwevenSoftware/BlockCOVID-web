@@ -71,17 +71,29 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		this.refDotGrid = createRef<DotGrid>()
 		let fakeOpeningDate: Date = new Date()
 		let fakeClosingDate: Date = new Date()
-		fakeOpeningDate.setUTCHours(parseInt(this.props.data.room.openingTime.split(":")[0]), parseInt(this.props.data.room.openingTime.split(":")[1]), 0)
-		fakeClosingDate.setUTCHours(parseInt(this.props.data.room.closingTime.split(":")[0]), parseInt(this.props.data.room.closingTime.split(":")[1]), 0)
+		fakeOpeningDate.setUTCHours(
+			parseInt(this.props.data.room.openingTime.split(":")[0]),
+			parseInt(this.props.data.room.openingTime.split(":")[1]),
+			0
+		)
+		fakeClosingDate.setUTCHours(
+			parseInt(this.props.data.room.closingTime.split(":")[0]),
+			parseInt(this.props.data.room.closingTime.split(":")[1]),
+			0
+		)
 		this.state = {
 			isButtonDisabled: true,
 			isModalOpen: false,
 			roomNameError: false,
 			roomNameValue: this.props.data.room.name,
 			openingTimeDateValue: fakeOpeningDate,
-			openingTimeStringValue: this.handleTimeChange(fakeOpeningDate.getTime()).timeString,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
 			closingTimeDateValue: fakeClosingDate,
-			closingTimeStringValue: this.handleTimeChange(fakeClosingDate.getTime()).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDays: {
 				monday: false,
 				tuesday: false,
@@ -652,8 +664,16 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 	private handleCloseButton() {
 		let fakeOpeningDate: Date = new Date()
 		let fakeClosingDate: Date = new Date()
-		fakeOpeningDate.setUTCHours(parseInt(this.props.data.room.openingTime.split(":")[0]), parseInt(this.props.data.room.openingTime.split(":")[1]), 0)
-		fakeClosingDate.setUTCHours(parseInt(this.props.data.room.closingTime.split(":")[0]), parseInt(this.props.data.room.closingTime.split(":")[1]), 0)
+		fakeOpeningDate.setUTCHours(
+			parseInt(this.props.data.room.openingTime.split(":")[0]),
+			parseInt(this.props.data.room.openingTime.split(":")[1]),
+			0
+		)
+		fakeClosingDate.setUTCHours(
+			parseInt(this.props.data.room.closingTime.split(":")[0]),
+			parseInt(this.props.data.room.closingTime.split(":")[1]),
+			0
+		)
 		this.setState({
 			isButtonDisabled: true,
 			isModalOpen: false,
@@ -667,8 +687,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			weekDaysError: false,
 			roomNameValue: this.props.data.room.name,
 			timeError: false,
-			openingTimeStringValue: this.handleTimeChange(fakeOpeningDate.getTime()).timeString,
-			closingTimeStringValue: this.handleTimeChange(fakeClosingDate.getTime()).timeString,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			gridError: "",
 		})
 		this.setDays()

@@ -141,9 +141,9 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 					this.sort(a, b)
 				)
 				.map((report: ReportInformation) => {
-					let creationDate: Date = new Date(report.creationDate+"Z")
+					let creationDate: Date = new Date(report.creationDate + "Z")
 					let registrationDate: Date = new Date(
-						report.registrationDate+"Z"
+						report.registrationDate + "Z"
 					)
 
 					rows.push(
