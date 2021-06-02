@@ -16,23 +16,23 @@ export class reportActions {
 			if (!(data?.fromTimestamp && data?.toTimestamp)) {
 				let today: Date = new Date()
 				let todayDate: string =
-					today.getFullYear() +
+					today.getUTCFullYear() +
 					"-" +
-					(today.getMonth() < 10
-						? "0" + today.getMonth()
-						: today.getMonth()) +
+					(today.getUTCMonth() < 10
+						? "0" + today.getUTCMonth()
+						: today.getUTCMonth()) +
 					"-" +
-					(today.getDate() < 10
-						? "0" + today.getDate()
-						: today.getDate())
+					(today.getUTCDate() < 10
+						? "0" + today.getUTCDate()
+						: today.getUTCDate())
 				let todayTime: string =
-					(today.getHours() < 10
-						? "0" + today.getHours().toString()
-						: today.getHours().toString()) +
+					(today.getUTCHours() < 10
+						? "0" + today.getUTCHours().toString()
+						: today.getUTCHours().toString()) +
 					":" +
-					(today.getMinutes() < 10
-						? "0" + today.getMinutes().toString()
-						: today.getMinutes().toString())
+					(today.getUTCMinutes() < 10
+						? "0" + today.getUTCMinutes().toString()
+						: today.getUTCMinutes().toString())
 				let todayString: string = todayDate + "T" + todayTime
 				dataToDispatch = {
 					fromTimestamp: todayString,
