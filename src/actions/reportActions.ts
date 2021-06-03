@@ -15,16 +15,28 @@ export class reportActions {
 			let dataToDispatch = data
 			if (!(data?.fromTimestamp && data?.toTimestamp)) {
 				let today: Date = new Date()
+				let yesterday: Date = new Date()
+				yesterday.setDate(today.getDate() - 1)
 				let todayDate: string =
 					today.getUTCFullYear() +
 					"-" +
-					(today.getUTCMonth() < 10
-						? "0" + today.getUTCMonth()
-						: today.getUTCMonth()) +
+					(today.getUTCMonth() + 1 < 10
+						? "0" + (today.getUTCMonth() + 1)
+						: today.getUTCMonth() + 1) +
 					"-" +
 					(today.getUTCDate() < 10
 						? "0" + today.getUTCDate()
 						: today.getUTCDate())
+				let yesterdayDate: string =
+					yesterday.getUTCFullYear() +
+					"-" +
+					(yesterday.getUTCMonth() + 1 < 10
+						? "0" + (yesterday.getUTCMonth() + 1)
+						: yesterday.getUTCMonth() + 1) +
+					"-" +
+					(yesterday.getUTCDate() < 10
+						? "0" + yesterday.getUTCDate()
+						: yesterday.getUTCDate())
 				let todayTime: string =
 					(today.getUTCHours() < 10
 						? "0" + today.getUTCHours().toString()
@@ -34,8 +46,9 @@ export class reportActions {
 						? "0" + today.getUTCMinutes().toString()
 						: today.getUTCMinutes().toString())
 				let todayString: string = todayDate + "T" + todayTime
+				let yesterdayString: string = yesterdayDate + "T" + todayTime
 				dataToDispatch = {
-					fromTimestamp: todayString,
+					fromTimestamp: yesterdayString,
 					toTimestamp: todayString,
 				}
 			}
