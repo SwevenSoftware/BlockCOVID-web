@@ -55,17 +55,20 @@ class CalendarViewComponent extends Component<
 	}
 
 	componentDidMount() {
+		//console.log(this.props.data.user.username, "mount")
 		let reser = {
 			username: this.props.data.user.username,
 			startTime: "2021-01-01T08:00",
 			endTime: "2021-07-01T08:00"	
 		}
 		this.props.dispatch.getReservationsByUser(reser)
+		this.reservationList = this.popolate()
 	}
 
 	render() {
 		const { data, currentDate } = this.state
-		console.log(this.props)
+		//console.log(this.props.state)
+		//console.log(this.props.data.user.username, this.reservationList)
 		return (
 			<div>
 				<Button
@@ -87,7 +90,7 @@ class CalendarViewComponent extends Component<
 					</DialogTitle>
 					<DialogContent>
 						<Paper>
-							<Scheduler data={data} height={660}>
+							<Scheduler data={this.reservationList} height={660}>
 								<ViewState
 									currentDate={currentDate}
 									onCurrentDateChange={this.currentDateChange}
@@ -95,8 +98,9 @@ class CalendarViewComponent extends Component<
 								<WeekView startDayHour={9} endDayHour={19} />
 								{/* <Toolbar />
 								<DateNavigator />
-								<TodayButton /> */}
-								<Appointments />
+								<TodayButton />
+								<Appointments /> */}
+								<>{...this.reservationList}</>
 							</Scheduler>
 						</Paper>
 					</DialogContent>
@@ -118,18 +122,28 @@ class CalendarViewComponent extends Component<
 		this.setState({ isModalOpen: false })
 	}
 
-	private popolate(): Array<string> {
-		let rows: Array<string> = new Array()
-		if (this.props.state.reservations) {
-			this.props.state.reservations.map((reservation) => {
-				let appointment = [
-					
-				]
-
+	private popolate(): Array<any> {
+		let rows: Array<any> = new Array()
+		if (this.props.state.reservations?.reservations) {
+			console.log("primo")
+			if(this.props.state.reservations?.reservations[this.props.data.user.username]){
+				console.log("secondo")
+				console.log(this.props.state.reservations.reservations[this.props.data.user.username])
+				/* this.props.state.reservations.reservations[this.props.data.user.username].map((reservation) => {
+					console.log(...reservation)
+					let appointment = {
+						title: reservation.room,
+						startDate: reservation.start,
+						endDate: reservation.end,
+						id: rows.length,
+						location: reservation.room,
+					}
+					console.log("terzo")
+					rows.push(appointment) 
+				}) */
 			}
-
-			)
 		}
+		return rows
 	}
 }
 
