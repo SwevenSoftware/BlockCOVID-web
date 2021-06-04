@@ -14,7 +14,7 @@ export class reservationsActions {
 			this.reservationApi
 				.getReservationsByUser(tokenID, data)
 				.then((res) => {
-					dispatch(this.successGetReservationsByUser(res.data))
+					dispatch(this.successGetReservationsByUser(res.data, data.username))
 				})
 				.catch((err) => {
 					dispatch(this.failureGetReservationsByUser(err?.response?.status))
@@ -22,10 +22,11 @@ export class reservationsActions {
 		}
 	}
 
-   successGetReservationsByUser = (data) => ({
+   successGetReservationsByUser = (data, username) => ({
 		type: reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS,
 		payload: {
 			...data,
+			username: username
 		},
 	})
 
