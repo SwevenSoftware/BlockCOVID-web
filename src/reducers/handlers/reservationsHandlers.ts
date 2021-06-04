@@ -7,7 +7,10 @@ export const reservationsHandlers = {}
 
 reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS] = function (state, action) {
 	return {
-		reservations: action.payload._embedded.reservationWithRoomList,
+		reservations:{
+			...state.reservations,
+			[action.payload.username]: action.payload._embedded.reservationWithRoomList
+		},
 		error: ""
 	}
 }
@@ -16,7 +19,7 @@ reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_FAILURE] = func
 	switch (action.payload.error) {
 		default:
 			return {
-				...state,
+				reservations: null,
 				error: ERROR_UNKNOWN,
 			}
 	}
