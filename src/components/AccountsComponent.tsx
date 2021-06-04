@@ -41,6 +41,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 	}
 
 	render() {
+		console.log(this.props.state)
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>
@@ -122,7 +123,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 									<CalendarViewComponent
 										data={{
 											user: {
-												username: user.usernmame,
+												username: user.username,
 											},
 										}}
 										/* primary={user.username}
@@ -163,6 +164,7 @@ const mapStateToProps = (state: any) => {
 	return {
 		state: {
 			accounts: state.accounts,
+			login:state.login
 		},
 	}
 }
