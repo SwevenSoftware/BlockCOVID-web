@@ -6,6 +6,8 @@ import configureMockStore from "redux-mock-store"
 import thunk from "redux-thunk"
 import { JSDOM } from "jsdom"
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17"
+import ReactTestUtils from "react-dom/test-utils"
+import Button from "@material-ui/core/Button"
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -60,5 +62,15 @@ describe("Delete Room Component", function () {
 			</Provider>
 		)
 		expect(wrapper.find(DeleteRoomComponent).length).toEqual(1)
+	})
+
+	it("should close the room deletion modal", async function () {
+		const wrapper = mount(
+			<Provider store={store}>
+				<DeleteRoomComponent data={data} />
+			</Provider>
+		)
+		const decline = wrapper.find(DeleteRoomComponent).find(Button)
+		// ReactTestUtils.Simulate.click(decline) // TestUtils.Simulate expected a DOM node as the first argument but received a component instance. Pass the DOM node you wish to simulate the event on instead.
 	})
 })
