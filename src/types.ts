@@ -32,6 +32,11 @@ export const roomTypes = {
 	DELETE_DESK_FAILURE: "ROOM_DELETE_DESK_FAILURE",
 }
 
+export const reservationTypes = {
+	FETCH_RESERVATIONS_BY_USER_SUCCESS: "FETCH_RESERVATIONS_BY_USER_SUCCESS",
+	FETCH_RESERVATIONS_BY_USER_FAILURE: "FETCH_RESERVATIONS_BY_USER_FAILURE"
+}
+
 /* login */
 export const ERROR_USER_NO_AUTH =
 	"Accesso non autorizzato. Si prega di contattare l'amministratore"
