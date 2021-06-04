@@ -164,7 +164,7 @@ const mapStateToProps = (state: any) => {
 	return {
 		state: {
 			accounts: state.accounts,
-			login:state.login
+			login: state.login,
 		},
 	}
 }

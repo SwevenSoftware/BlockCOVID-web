@@ -59,7 +59,7 @@ class CalendarViewComponent extends Component<
 		let reser = {
 			username: this.props.data.user.username,
 			startTime: "2021-01-01T08:00",
-			endTime: "2021-07-01T08:00"	
+			endTime: "2021-07-01T08:00",
 		}
 		this.props.dispatch.getReservationsByUser(reser)
 		this.reservationList = this.popolate()
@@ -126,9 +126,17 @@ class CalendarViewComponent extends Component<
 		let rows: Array<any> = new Array()
 		if (this.props.state.reservations?.reservations) {
 			console.log("primo")
-			if(this.props.state.reservations?.reservations[this.props.data.user.username]){
+			if (
+				this.props.state.reservations?.reservations[
+					this.props.data.user.username
+				]
+			) {
 				console.log("secondo")
-				console.log(this.props.state.reservations.reservations[this.props.data.user.username])
+				console.log(
+					this.props.state.reservations.reservations[
+						this.props.data.user.username
+					]
+				)
 				/* this.props.state.reservations.reservations[this.props.data.user.username].map((reservation) => {
 					console.log(...reservation)
 					let appointment = {
@@ -150,7 +158,7 @@ class CalendarViewComponent extends Component<
 const mapStateToProps = (state: any) => {
 	return {
 		state: {
-			reservations: state.reservations
+			reservations: state.reservations,
 		},
 	}
 }
@@ -158,9 +166,13 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
 	return {
 		dispatch: {
-			getReservationsByUser: (data: {username: string, startTime: string, endTime: string}) => {
+			getReservationsByUser: (data: {
+				username: string
+				startTime: string
+				endTime: string
+			}) => {
 				dispatch(reservationActionsResolver.getReservationsByUser(data))
-			}
+			},
 		},
 	}
 }

@@ -8,29 +8,40 @@ export class reservationsActions {
 		this.reservationApi = reservationApi
 	}
 
-   getReservationsByUser(data: {username: string, startTime: string, endTime: string}) {
+	getReservationsByUser(data: {
+		username: string
+		startTime: string
+		endTime: string
+	}) {
 		return (dispatch, getState) => {
 			let tokenID = getState().login.token?.id
 			this.reservationApi
 				.getReservationsByUser(tokenID, data)
 				.then((res) => {
-					dispatch(this.successGetReservationsByUser(res.data, data.username))
+					dispatch(
+						this.successGetReservationsByUser(
+							res.data,
+							data.username
+						)
+					)
 				})
 				.catch((err) => {
-					dispatch(this.failureGetReservationsByUser(err?.response?.status))
+					dispatch(
+						this.failureGetReservationsByUser(err?.response?.status)
+					)
 				})
 		}
 	}
 
-   successGetReservationsByUser = (data, username) => ({
+	successGetReservationsByUser = (data, username) => ({
 		type: reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS,
 		payload: {
 			...data,
-			username: username
+			username: username,
 		},
 	})
 
-   failureGetReservationsByUser = (error) => ({
+	failureGetReservationsByUser = (error) => ({
 		type: reservationTypes.FETCH_RESERVATIONS_BY_USER_FAILURE,
 		payload: {
 			error,

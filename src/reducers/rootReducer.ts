@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
 	login: loginReducer,
 	accounts: accountsReducer,
 	rooms: roomsReducer,
-	reservations: reservationsReducers
+	reservations: reservationsReducers,
 })
 
 export default rootReducer

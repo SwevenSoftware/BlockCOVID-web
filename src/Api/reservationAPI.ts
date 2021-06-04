@@ -22,8 +22,8 @@ export class reservationAPI {
 			},
 			params: {
 				from: data.startTime,
-				to: data.endTime
-			}
+				to: data.endTime,
+			},
 		}
 		return this.axios.get(
 			"/api/reservations/view/user/" + data.username,
