@@ -2,6 +2,7 @@
 import React, { Component } from "react"
 /* redux */
 import { connect } from "react-redux"
+import reservationActionsResolver from "../actions/reservationsActions"
 /* material-ui */
 import Paper from "@material-ui/core/Paper"
 import { Button, DialogTitle } from "@material-ui/core"
@@ -39,8 +40,10 @@ class CalendarViewComponent extends Component<
 	CalendarViewProps,
 	CalendarViewStates
 > {
+	reservationList: any
 	constructor(props) {
 		super(props)
+		this.reservationList = new Array()
 		this.state = {
 			data: appointments,
 			currentDate: new Date(),
@@ -48,11 +51,21 @@ class CalendarViewComponent extends Component<
 		}
 		this.handleClickOpen = this.handleClickOpen.bind(this)
 		this.handleClose = this.handleClose.bind(this)
+		this.currentDateChange = this.currentDateChange.bind(this)
+	}
+
+	componentDidMount() {
+		let reser = {
+			username: this.props.data.user.username,
+			startTime: "2021-01-01T08:00",
+			endTime: "2021-07-01T08:00"	
+		}
+		this.props.dispatch.getReservationsByUser(reser)
 	}
 
 	render() {
 		const { data, currentDate } = this.state
-		console.log(this.state.currentDate)
+		console.log(this.props)
 		return (
 			<div>
 				<Button
@@ -80,9 +93,9 @@ class CalendarViewComponent extends Component<
 									onCurrentDateChange={this.currentDateChange}
 								/>
 								<WeekView startDayHour={9} endDayHour={19} />
-								<Toolbar />
+								{/* <Toolbar />
 								<DateNavigator />
-								<TodayButton />
+								<TodayButton /> */}
 								<Appointments />
 							</Scheduler>
 						</Paper>
@@ -98,25 +111,43 @@ class CalendarViewComponent extends Component<
 
 	private handleClickOpen(): void {
 		this.setState({ isModalOpen: true })
+		this.setState({ currentDate: new Date() })
 	}
 
 	private handleClose(): void {
 		this.setState({ isModalOpen: false })
+	}
+
+	private popolate(): Array<string> {
+		let rows: Array<string> = new Array()
+		if (this.props.state.reservations) {
+			this.props.state.reservations.map((reservation) => {
+				let appointment = [
+					
+				]
+
+			}
+
+			)
+		}
 	}
 }
 
 const mapStateToProps = (state: any) => {
 	return {
 		state: {
-			//ToCheck
-			//error: state.calendar.error
+			reservations: state.reservations
 		},
 	}
 }
 
 const mapDispatchToProps = (dispatch: Function) => {
 	return {
-		dispatch: {},
+		dispatch: {
+			getReservationsByUser: (data: {username: string, startTime: string, endTime: string}) => {
+				dispatch(reservationActionsResolver.getReservationsByUser(data))
+			}
+		},
 	}
 }
 
