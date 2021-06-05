@@ -167,8 +167,32 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 											}
 										/>
 									</ListItemIcon>
-									<ListItemText className="nameReports">
-										<Button
+									<ListItemText>
+										<Typography>
+											{"Creazione: " +
+												creationDate.toLocaleDateString() +
+												" - " +
+												creationDate.toLocaleTimeString(
+													[],
+													{
+														hour: "2-digit",
+														minute: "2-digit",
+													}
+												)}
+										</Typography>
+										<Typography>
+											{"Registrazione: " +
+												registrationDate.toLocaleDateString() +
+												" - " +
+												registrationDate.toLocaleTimeString(
+													[],
+													{
+														hour: "2-digit",
+														minute: "2-digit",
+													}
+												)}
+										</Typography>
+										{/* <Button
 											className="greenButton"
 											onClick={() => {
 												this.props.dispatch.getReport({
@@ -177,10 +201,23 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 											}}
 										>
 											{report.name}
-										</Button>
+										</Button> */}
 									</ListItemText>
 								</ListItem>
 								<div className="infoReports">
+									<Button
+										style={{ fontSize: "13px" }}
+										className="greenButton"
+										onClick={() => {
+											this.props.dispatch.getReport({
+													reportName: report.name,
+											})
+										}}
+									>
+										{report.name}
+									</Button>
+								</div>
+								{/* <div className="infoReports">
 									<Typography style={{ fontSize: "13px" }}>
 										{"Creazione: " +
 											creationDate.toLocaleDateString() +
@@ -205,7 +242,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 												}
 											)}
 									</Typography>
-								</div>
+								</div> */}
 							</Paper>
 						</Grid>
 					)
