@@ -210,7 +210,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										className="greenButton"
 										onClick={() => {
 											this.props.dispatch.getReport({
-													reportName: report.name,
+												reportName: report.name,
 											})
 										}}
 									>
