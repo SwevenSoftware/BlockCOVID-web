@@ -122,8 +122,8 @@ class CalendarViewComponent extends Component<
 		this.setState({ isModalOpen: false })
 	}
 
-	private populate() {
-		let rows: Appointment[] = []
+	private populate(): Appointment[] {
+		let appointments: Appointment[] = []
 		if (
 			this.props.state.reservations?.reservations[
 				this.props.data.user.username
@@ -145,17 +145,17 @@ class CalendarViewComponent extends Component<
 					ended: boolean
 					_links: any
 				}) => {
-					rows.push({
+					appointments.push({
 						title: reservation.room,
 						startDate: reservation.start,
 						endDate: reservation.end,
-						id: rows.length,
+						id: appointments.length,
 						location: reservation.room,
 					})
 				}
 			)
 		}
-		return rows
+		return appointments
 	}
 }
 
