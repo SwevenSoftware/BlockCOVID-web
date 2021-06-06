@@ -22,7 +22,14 @@ import {
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 import { CalendarProps } from "@material-ui/pickers/views/Calendar/Calendar"
-import { appointments } from "../appointments"
+
+interface Appointment {
+	title: string
+	startDate: Date
+	endDate: Date
+	id: number
+	location: string
+}
 
 interface CalendarViewProps {
 	state: any
@@ -31,7 +38,7 @@ interface CalendarViewProps {
 }
 
 interface CalendarViewStates {
-	data: any
+	data: Appointment[]
 	currentDate: Date
 	isModalOpen: boolean
 }
@@ -40,12 +47,10 @@ class CalendarViewComponent extends Component<
 	CalendarViewProps,
 	CalendarViewStates
 > {
-	reservationList: any
 	constructor(props) {
 		super(props)
-		this.reservationList = new Array()
 		this.state = {
-			data: appointments,
+			data: [],
 			currentDate: new Date(),
 			isModalOpen: false,
 		}
@@ -55,20 +60,16 @@ class CalendarViewComponent extends Component<
 	}
 
 	componentDidMount() {
-		//console.log(this.props.data.user.username, "mount")
-		let reser = {
+		// TODO: change start time and end time properly
+		this.props.dispatch.getReservationsByUser({
 			username: this.props.data.user.username,
 			startTime: "2021-01-01T08:00",
 			endTime: "2021-07-01T08:00",
-		}
-		this.props.dispatch.getReservationsByUser(reser)
-		this.reservationList = this.popolate()
+		})
+		this.setState({ data: this.populate() })
 	}
 
 	render() {
-		const { data, currentDate } = this.state
-		//console.log(this.props.state)
-		//console.log(this.props.data.user.username, this.reservationList)
 		return (
 			<div>
 				<Button
@@ -85,22 +86,21 @@ class CalendarViewComponent extends Component<
 					maxWidth="md"
 				>
 					<DialogTitle id="form-dialog-title" className="modalTitle">
-						Calendario prenotazioni di{" "}
-						{this.props.data.user.username}
+						{"Calendario prenotazioni di " +
+							this.props.data.user.username}
 					</DialogTitle>
 					<DialogContent>
 						<Paper>
-							<Scheduler data={this.reservationList} height={660}>
+							<Scheduler data={this.state.data} height={660}>
 								<ViewState
-									currentDate={currentDate}
+									currentDate={this.state.currentDate}
 									onCurrentDateChange={this.currentDateChange}
 								/>
-								<WeekView startDayHour={9} endDayHour={19} />
+								<WeekView startDayHour={8} endDayHour={20} />
 								{/* <Toolbar />
 								<DateNavigator />
-								<TodayButton />
-								<Appointments /> */}
-								<>{...this.reservationList}</>
+								<TodayButton /> */}
+								<Appointments />
 							</Scheduler>
 						</Paper>
 					</DialogContent>
@@ -122,34 +122,38 @@ class CalendarViewComponent extends Component<
 		this.setState({ isModalOpen: false })
 	}
 
-	private popolate(): Array<any> {
-		let rows: Array<any> = new Array()
-		if (this.props.state.reservations?.reservations) {
-			console.log("primo")
-			if (
-				this.props.state.reservations?.reservations[
-					this.props.data.user.username
-				]
-			) {
-				console.log("secondo")
-				console.log(
-					this.props.state.reservations.reservations[
-						this.props.data.user.username
-					]
-				)
-				/* this.props.state.reservations.reservations[this.props.data.user.username].map((reservation) => {
-					console.log(...reservation)
-					let appointment = {
+	private populate() {
+		let rows: Appointment[] = []
+		if (
+			this.props.state.reservations?.reservations[
+				this.props.data.user.username
+			]
+		) {
+			this.props.state.reservations.reservations[
+				this.props.data.user.username
+			].map(
+				(reservation: {
+					id: string
+					deskId: string
+					room: string
+					username: string
+					start: Date
+					end: Date
+					usageStart: Date | null
+					usageEnd: Date | null
+					deskCleaned: boolean
+					ended: boolean
+					_links: any
+				}) => {
+					rows.push({
 						title: reservation.room,
 						startDate: reservation.start,
 						endDate: reservation.end,
 						id: rows.length,
 						location: reservation.room,
-					}
-					console.log("terzo")
-					rows.push(appointment) 
-				}) */
-			}
+					})
+				}
+			)
 		}
 		return rows
 	}
