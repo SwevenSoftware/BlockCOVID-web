@@ -67,6 +67,10 @@ describe("Account Component", function () {
 				cleaners: 0,
 			},
 		},
+		reservations: {
+			reservations: null,
+			error: "",
+		},
 		login: {
 			token: "adminToken",
 			error: "",
