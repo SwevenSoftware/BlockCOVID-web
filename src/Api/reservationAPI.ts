@@ -21,7 +21,7 @@ export class reservationAPI {
 				"Content-Type": "application/json",
 			},
 			params: {
-				from: data.startTime,
+				from: data.startTime, // far date, just for debugging: "2021-01-13T22:00"
 				to: data.endTime,
 			},
 		}

@@ -41,7 +41,6 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 	}
 
 	render() {
-		console.log(this.props.state)
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>

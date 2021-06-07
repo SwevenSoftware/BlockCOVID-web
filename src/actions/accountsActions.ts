@@ -68,7 +68,7 @@ export class accountsActions {
 					dispatch(this.successGetAccounts(res.data))
 				})
 				.catch((err) => {
-					dispatch(this.failureGetAccounts(err.response.status))
+					dispatch(this.failureGetAccounts(err?.response?.status))
 				})
 		}
 	}

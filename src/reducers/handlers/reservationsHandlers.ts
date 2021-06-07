@@ -4,19 +4,27 @@ export const reservationsHandlers = {}
 
 reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS] =
 	function (state, action) {
-		return {
-			reservations: {
-				...state.reservations,
-				[action.payload.username]:
-					action.payload._embedded.reservationWithRoomList,
-			},
-			error: "",
+		if (action.payload?._embedded) {
+			return {
+				reservations: {
+					...state.reservations,
+					[action.payload.username]:
+						action.payload._embedded.reservationWithRoomList,
+				},
+				error: "",
+			}
+		} else {
+			return {
+				reservations: null,
+				error: "",
+			}
 		}
 	}
 
 reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_FAILURE] =
 	function (state, action) {
-		switch (action.payload.error) {
+		console.log(action.payload)
+		switch (action.payload) {
 			default:
 				return {
 					reservations: null,
