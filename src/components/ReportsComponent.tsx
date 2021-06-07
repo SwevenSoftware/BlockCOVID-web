@@ -168,6 +168,22 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										/>
 									</ListItemIcon>
 									<ListItemText>
+										<div className="usernameLayout">
+											<Button
+												style={{ fontSize: "13px" }}
+												className="greenButton"
+												onClick={() => {
+													this.props.dispatch.getReport(
+														{
+															reportName:
+																report.name,
+														}
+													)
+												}}
+											>
+												{report.name}
+											</Button>
+										</div>
 										<Typography>
 											{"Creazione: " +
 												creationDate.toLocaleDateString() +
@@ -192,57 +208,11 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													}
 												)}
 										</Typography>
-										{/* <Button
-											className="greenButton"
-											onClick={() => {
-												this.props.dispatch.getReport({
-													reportName: report.name,
-												})
-											}}
-										>
-											{report.name}
-										</Button> */}
+										<Typography>
+											{"Hashcode: " + report.hashcode}
+										</Typography>
 									</ListItemText>
 								</ListItem>
-								<div className="infoReports">
-									<Button
-										style={{ fontSize: "13px" }}
-										className="greenButton"
-										onClick={() => {
-											this.props.dispatch.getReport({
-												reportName: report.name,
-											})
-										}}
-									>
-										{report.name}
-									</Button>
-								</div>
-								{/* <div className="infoReports">
-									<Typography style={{ fontSize: "13px" }}>
-										{"Creazione: " +
-											creationDate.toLocaleDateString() +
-											" - " +
-											creationDate.toLocaleTimeString(
-												[],
-												{
-													hour: "2-digit",
-													minute: "2-digit",
-												}
-											)}
-									</Typography>
-									<Typography style={{ fontSize: "13px" }}>
-										{"Registrazione: " +
-											registrationDate.toLocaleDateString() +
-											" - " +
-											registrationDate.toLocaleTimeString(
-												[],
-												{
-													hour: "2-digit",
-													minute: "2-digit",
-												}
-											)}
-									</Typography>
-								</div> */}
 							</Paper>
 						</Grid>
 					)
