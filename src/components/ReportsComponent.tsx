@@ -16,6 +16,8 @@ import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import NoteAddIcon from "@material-ui/icons/NoteAdd"
+import SecurityIcon from "@material-ui/icons/Security"
+import InfoIcon from "@material-ui/icons/Info"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
@@ -216,11 +218,38 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													: "null")}
 										</Typography>
 										<Typography>
-											{"Hashcode: " + report.hash}
+											<div className="tooltipReportsHashcode">
+												<Typography>
+													Hashcode:
+													<InfoIcon
+														className="greenButton"
+														fontSize="small"
+													/>
+													<span
+														className="tooltiptextReportsHashcode"
+														id="reportHash"
+													>
+														{report.hash}
+													</span>
+												</Typography>
+											</div>
 										</Typography>
+										{/* <Button onClick={this.myFunction}>
+											Copia il testo
+										</Button> */}
 										<Typography>
-											{"Transaction hashcode: " +
-												report.transactionHash}
+											<div className="tooltipReportsTransationHashcode">
+												<Typography>
+													Transaction hashcode:
+													<InfoIcon
+														className="greenButton"
+														fontSize="small"
+													/>
+													<span className="tooltiptextReportsTransationHashcode">
+														{report.transactionHash}
+													</span>
+												</Typography>
+											</div>
 										</Typography>
 									</ListItemText>
 								</ListItem>
@@ -231,6 +260,20 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 		}
 		return rows
 	}
+
+	// private myFunction(): void {
+	// 	/* Get the text field */
+	// 	const copyText = window.document.getElementById("reportHash")!;
+
+	//    /* Select the text field */
+	// 	copyText.select();
+
+	//    /* Copy the text inside the text field */
+	// 	document.execCommand("copy");
+
+	// 	/* Alert the copied text */
+	// 	// alert("Copied the text: " + copyText.reportHash);
+	// }
 }
 
 const mapStateToProps = (state: any) => {
