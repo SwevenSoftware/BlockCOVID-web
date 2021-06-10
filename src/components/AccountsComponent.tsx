@@ -163,7 +163,6 @@ const mapStateToProps = (state: any) => {
 	return {
 		state: {
 			accounts: state.accounts,
-			login: state.login,
 		},
 	}
 }
@@ -179,20 +178,3 @@ const mapDispatchToProps = (dispatch: Function) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountComponent)
-
-//da posizionare al posto del nome dell'utente per renderlo cliccabile
-{
-	/* <ListItemText
-										//primary={user.username}
-										className="usernameLayout"
-									>
-										<CalendarViewComponent
-											data={{
-												user: {
-													username: user.usernmame
-												}
-											}}
-										/>
-										
-									</ListItemText> */
-}
