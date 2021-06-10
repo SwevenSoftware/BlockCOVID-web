@@ -45,7 +45,6 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 	}
 
 	render() {
-		{console.log(this.props.state.reports)}
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>
@@ -146,7 +145,6 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 					let registrationDate: Date = new Date(
 						report.registrationDate + "Z"
 					)
-
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">
@@ -210,7 +208,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 												)}
 										</Typography>
 										<Typography>
-											{"Hashcode: " + report.hashcode}
+											{"Hashcode: " + report.hash}
 										</Typography>
 									</ListItemText>
 								</ListItem>
