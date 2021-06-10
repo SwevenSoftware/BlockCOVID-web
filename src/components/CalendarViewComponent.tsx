@@ -103,7 +103,7 @@ class CalendarViewComponent extends Component<
 									defaultCurrentDate={this.state.currentDate}
 									onCurrentDateChange={this.handleDateChange}
 								/>
-								<WeekView startDayHour={8} endDayHour={20} />
+								<WeekView startDayHour={0} endDayHour={24} />
 								<Toolbar />
 								<DateNavigator />
 								<TodayButton />
