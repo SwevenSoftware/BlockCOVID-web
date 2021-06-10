@@ -18,7 +18,7 @@ import {
 	DateNavigator,
 	Appointments,
 	TodayButton,
-	AppointmentTooltip
+	AppointmentTooltip,
 } from "@devexpress/dx-react-scheduler-material-ui"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
@@ -109,9 +109,7 @@ class CalendarViewComponent extends Component<
 								<DateNavigator />
 								<TodayButton />
 								<Appointments />
-								<AppointmentTooltip
-									showCloseButton
-								/>
+								<AppointmentTooltip showCloseButton />
 							</Scheduler>
 						</Paper>
 					</DialogContent>
