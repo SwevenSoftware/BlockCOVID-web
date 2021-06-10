@@ -23,14 +23,6 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 import { CalendarProps } from "@material-ui/pickers/views/Calendar/Calendar"
 
-interface Appointment {
-	title: string
-	startDate: Date
-	endDate: Date
-	id: number
-	location: string
-}
-
 interface CalendarViewProps {
 	state: any
 	dispatch: any
@@ -38,7 +30,6 @@ interface CalendarViewProps {
 }
 
 interface CalendarViewStates {
-	data: Appointment[]
 	currentDate: Date
 	isModalOpen: boolean
 }
@@ -50,7 +41,6 @@ class CalendarViewComponent extends Component<
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: [],
 			currentDate: new Date(),
 			isModalOpen: false,
 		}
@@ -61,7 +51,7 @@ class CalendarViewComponent extends Component<
 	}
 
 	componentDidMount() {
-		// this.handleDateChange(new Date())
+		this.handleDateChange(this.state.currentDate)
 	}
 
 	render() {
@@ -88,8 +78,20 @@ class CalendarViewComponent extends Component<
 								: ""}
 							<Scheduler
 								height={660}
-								data={this.state.data}
-								key={JSON.stringify(this.state.data)}
+								data={
+									this.props.state.reservations.reservations
+										? this.props.state.reservations
+												.reservations[
+												this.props.data.user.username
+										  ]
+											? this.props.state.reservations
+													.reservations[
+													this.props.data.user
+														.username
+											  ]
+											: []
+										: []
+								}
 							>
 								<ViewState
 									defaultCurrentDate={this.state.currentDate}
@@ -110,8 +112,8 @@ class CalendarViewComponent extends Component<
 
 	private handleClickOpen(): void {
 		this.setState({
-			isModalOpen: true,
 			currentDate: new Date(),
+			isModalOpen: true,
 		})
 	}
 
@@ -122,7 +124,7 @@ class CalendarViewComponent extends Component<
 	private handleDateChange(date: Date): void {
 		let firstWeekDate = new Date(date)
 		firstWeekDate.setDate(firstWeekDate.getDate() - firstWeekDate.getDay())
-		let lastWeekDate: Date = new Date(date)
+		let lastWeekDate: Date = new Date(firstWeekDate)
 		lastWeekDate.setDate(firstWeekDate.getDate() + 6)
 		firstWeekDate.setHours(0, 0, 0)
 		lastWeekDate.setHours(23, 59, 59)
@@ -161,45 +163,6 @@ class CalendarViewComponent extends Component<
 			startTime: stringify(startTime),
 			endTime: stringify(endTime),
 		})
-		this.setState({ data: this.populate() })
-	}
-
-	private populate(): Appointment[] {
-		let appointments: Appointment[] = []
-		if (this.props.state.reservations?.reservations) {
-			if (
-				this.props.state.reservations.reservations[
-					this.props.data.user.username
-				]
-			) {
-				this.props.state.reservations.reservations[
-					this.props.data.user.username
-				].map(
-					(reservation: {
-						id: string
-						deskId: string
-						room: string
-						username: string
-						start: Date
-						end: Date
-						usageStart: Date | null
-						usageEnd: Date | null
-						deskCleaned: boolean
-						ended: boolean
-						_links: any
-					}) => {
-						appointments.push({
-							title: reservation.room,
-							startDate: reservation.start,
-							endDate: reservation.end,
-							id: appointments.length,
-							location: reservation.room,
-						})
-					}
-				)
-			}
-		}
-		return appointments
 	}
 }
 
