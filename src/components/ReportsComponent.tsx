@@ -142,9 +142,13 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 				)
 				.map((report: ReportInformation) => {
 					let creationDate: Date = new Date(report.creationDate + "Z")
-					let registrationDate: Date = new Date(
-						report.registrationDate + "Z"
-					)
+					let registrationDate: Date | null = null
+					if (report.registrationDate) {
+						registrationDate = new Date(
+							report.registrationDate + "Z"
+						)
+					}
+
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">
@@ -192,23 +196,31 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													{
 														hour: "2-digit",
 														minute: "2-digit",
+														second: "2-digit",
 													}
 												)}
 										</Typography>
 										<Typography>
 											{"Registrazione: " +
-												registrationDate.toLocaleDateString() +
-												" - " +
-												registrationDate.toLocaleTimeString(
-													[],
-													{
-														hour: "2-digit",
-														minute: "2-digit",
-													}
-												)}
+												(registrationDate
+													? registrationDate.toLocaleDateString() +
+													  " - " +
+													  registrationDate.toLocaleTimeString(
+															[],
+															{
+																hour: "2-digit",
+																minute: "2-digit",
+																second: "2-digit",
+															}
+													  )
+													: "null")}
 										</Typography>
 										<Typography>
 											{"Hashcode: " + report.hash}
+										</Typography>
+										<Typography>
+											{"Transaction hashcode: " +
+												report.transactionHash}
 										</Typography>
 									</ListItemText>
 								</ListItem>
