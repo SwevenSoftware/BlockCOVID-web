@@ -45,6 +45,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 	}
 
 	render() {
+		{console.log(this.props.state.reports)}
 		return (
 			<div className="marginAccounts">
 				<ThemeProvider theme={theme}>
@@ -100,7 +101,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 							? this.props.state.reports.error
 							: ""}
 						<Grid container spacing={3}>
-							{this.popolate()}
+							{this.populate()}
 						</Grid>
 					</div>
 				</ThemeProvider>
@@ -133,7 +134,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 			: 0
 	}
 
-	private popolate(): Array<JSX.Element> {
+	private populate(): Array<JSX.Element> {
 		let rows: Array<JSX.Element> = []
 		if (this.props.state.reports.reports) {
 			this.props.state.reports.reports
