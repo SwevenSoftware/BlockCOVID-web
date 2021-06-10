@@ -1,9 +1,9 @@
 import { reducerFactory } from "./reducerFactory"
 import { reservationsHandlers } from "./handlers/reservationsHandlers"
 
-const initialState = {
+export const initialState = {
 	reservations: null,
-	error: null,
+	error: "",
 	loading: false,
 }
 
