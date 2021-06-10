@@ -50,7 +50,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 		return (
 			<div>
 				<IconButton
-					className="trash"
+					className="redButton"
 					onClick={(e) => this.handleClickOpen()}
 				>
 					<DeleteIcon />
@@ -61,7 +61,7 @@ class TrashComponent extends Component<DeleteRoomProps, DeleteRoomStates> {
 					aria-labelledby="form-dialog-title"
 				>
 					<DialogTitle id="form-dialog-title">
-						Sei sicuro di eliminare '{this.props.data.room.name}'?
+						Sei sicuro di eliminare {this.props.data.room.name}?
 					</DialogTitle>
 					<DialogContent className="centralGrid">
 						<div className="centralGrid">

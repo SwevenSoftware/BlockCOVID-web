@@ -21,6 +21,8 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import DialogContentText from "@material-ui/core/DialogContentText"
+import IconButton from "@material-ui/core/IconButton"
+import CreateIcon from "@material-ui/icons/Create"
 import { FormLabel, FormHelperText } from "@material-ui/core"
 import {
 	KeyboardTimePicker,
@@ -67,19 +69,31 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		this.handleCloseButton = this.handleCloseButton.bind(this)
 		this.handleConfirm = this.handleConfirm.bind(this)
 		this.refDotGrid = createRef<DotGrid>()
+		let fakeOpeningDate: Date = new Date()
+		let fakeClosingDate: Date = new Date()
+		fakeOpeningDate.setUTCHours(
+			parseInt(this.props.data.room.openingTime.split(":")[0]),
+			parseInt(this.props.data.room.openingTime.split(":")[1]),
+			0
+		)
+		fakeClosingDate.setUTCHours(
+			parseInt(this.props.data.room.closingTime.split(":")[0]),
+			parseInt(this.props.data.room.closingTime.split(":")[1]),
+			0
+		)
 		this.state = {
 			isButtonDisabled: true,
 			isModalOpen: false,
 			roomNameError: false,
 			roomNameValue: this.props.data.room.name,
-			openingTimeDateValue: new Date(
-				"2021-01-01T" + this.props.data.room.openingTime
-			),
-			openingTimeStringValue: this.props.data.room.openingTime,
-			closingTimeDateValue: new Date(
-				"2021-01-01T" + this.props.data.room.closingTime
-			),
-			closingTimeStringValue: this.props.data.room.closingTime,
+			openingTimeDateValue: fakeOpeningDate,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeDateValue: fakeClosingDate,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDays: {
 				monday: false,
 				tuesday: false,
@@ -109,12 +123,12 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		return (
 			<ThemeProvider theme={theme}>
 				<div>
-					<Button
-						className="pencil"
+					<IconButton
+						className="greenButton"
 						onClick={() => this.handleClickOpenButton()}
 					>
-						{this.props.data.room.name}
-					</Button>
+						<CreateIcon />
+					</IconButton>
 					<Dialog
 						open={this.state.isModalOpen}
 						onClose={() => this.handleCloseButton()}
@@ -127,7 +141,7 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 							id="form-dialog-title"
 							className="modalTitle"
 						>
-							Modifica la stanza '{this.props.data.room.name}'
+							Modifica {this.props.data.room.name}
 						</DialogTitle>
 						<DialogContent className="centralGrid">
 							<DialogContentText>
@@ -630,15 +644,15 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 		/** converting MaterialUI object to Date object */
 		let time: Date = new Date(milliseconds)
 		let timeString: string
-		if (time.getHours() < 10) {
-			timeString = "0" + time.getHours().toString()
+		if (time.getUTCHours() < 10) {
+			timeString = "0" + time.getUTCHours().toString()
 		} else {
-			timeString = time.getHours().toString()
+			timeString = time.getUTCHours().toString()
 		}
-		if (time.getMinutes() < 10) {
-			timeString += ":0" + time.getMinutes().toString()
+		if (time.getUTCMinutes() < 10) {
+			timeString += ":0" + time.getUTCMinutes().toString()
 		} else {
-			timeString += ":" + time.getMinutes().toString()
+			timeString += ":" + time.getUTCMinutes().toString()
 		}
 		return { time, timeString }
 	}
@@ -648,6 +662,18 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 	}
 
 	private handleCloseButton() {
+		let fakeOpeningDate: Date = new Date()
+		let fakeClosingDate: Date = new Date()
+		fakeOpeningDate.setUTCHours(
+			parseInt(this.props.data.room.openingTime.split(":")[0]),
+			parseInt(this.props.data.room.openingTime.split(":")[1]),
+			0
+		)
+		fakeClosingDate.setUTCHours(
+			parseInt(this.props.data.room.closingTime.split(":")[0]),
+			parseInt(this.props.data.room.closingTime.split(":")[1]),
+			0
+		)
 		this.setState({
 			isButtonDisabled: true,
 			isModalOpen: false,
@@ -656,17 +682,17 @@ class ModifyRoomComponent extends Component<ModifyRoomProps, ModifyRoomState> {
 			dimWidth: this.props.data.room.width,
 			widthError: false,
 			roomNameError: false,
-			openingTimeDateValue: new Date(
-				"2021-01-01T" + this.props.data.room.openingTime
-			),
-			closingTimeDateValue: new Date(
-				"2021-01-01T" + this.props.data.room.closingTime
-			),
+			openingTimeDateValue: fakeOpeningDate,
+			closingTimeDateValue: fakeClosingDate,
 			weekDaysError: false,
 			roomNameValue: this.props.data.room.name,
 			timeError: false,
-			openingTimeStringValue: this.props.data.room.openingTime,
-			closingTimeStringValue: this.props.data.room.closingTime,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			gridError: "",
 		})
 		this.setDays()

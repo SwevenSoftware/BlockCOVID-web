@@ -18,12 +18,16 @@
 	background-color: #689f38;
 }
 
-#primaryColor {
+#colorError {
+	color: red;
+}
+
+.greenButton:hover {
 	color: #689f38;
 }
 
-#colorError {
-	color: red;
+.redButton:hover {
+	color: rgb(201, 33, 33);
 }
 
 .modalTitle {
@@ -35,6 +39,32 @@
 	margin: auto;
 	width: 50%;
 	text-align: center;
+}
+
+.scrollbar {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.centralGrid {
+	/* margin-left: 25%; */
+	padding-left: 14px;
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
+
+.deskFree {
+	color: #008000;
+}
+
+.deskUsed {
+	color: #ffa500;
+}
+
+.spacingColorDesk {
+	margin-right: 1em;
+	margin-bottom: 1em;
 }
 
 /* (((((((((((((((((((((((((((((( ACCOUNTS )))))))))))))))))))))))))))) */
@@ -63,13 +93,14 @@
 }
 
 .grid {
+	float: left;
 	width: 23%;
-	margin: 0 2% 2% 0;
+	margin-right: 2%;
+	margin-bottom: 2%;
 }
 
 .paper {
 	height: 5em;
-	/* max-width: 30em; */
 }
 
 .listItem {
@@ -78,14 +109,6 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-
-.pencil:hover {
-	color: #689f38;
-}
-
-.trash:hover {
-	color: rgb(201, 33, 33);
 }
 
 .addAccountButton {
@@ -213,10 +236,31 @@
 	margin-top: 25%;
 }
 
-/* (((((((((((((((((((((((((((((( REPORT )))))))))))))))))))))))))))) */
+/* (((((((((((((((((((((((((((((( REPORTS )))))))))))))))))))))))))))) */
 
-.marginButton {
-	margin-top: 1em;
+.addReportsButton {
+	float: right;
+}
+
+.gridReports {
+	width: 32%;
+	margin: 0 1% 2% 0;
+}
+
+.paperReports {
+	height: 8.5em;
+}
+
+.nameReports {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: -8%;
+}
+
+.infoReports {
+	margin: 1.5% 0 0 14%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
@@ -236,6 +280,10 @@
 	width: 100%;
 	text-align: right;
 	margin-bottom: 1%;
+}
+
+.marginUnderGrid {
+	margin-top: 5%;
 }
 
 /* (((((((((((((((((((((((((((((( ROOMS MODIFY )))))))))))))))))))))))))))) */
@@ -319,10 +367,14 @@
 		width: 33%;
 	}
 	.grid {
-		min-width: 31%;
+		width: 31%;
 	}
 	.spacing {
 		padding-left: 8em;
+	}
+	.gridReports {
+		min-width: 48%;
+		margin: 0 1% 2% 0;
 	}
 }
 
@@ -330,22 +382,26 @@
 	.buttonInline {
 		width: 33%;
 	}
-	.grid {
-		min-width: 48%;
-	}
+	/* .grid {
+		width: 48%;
+	} */
 	.spacing {
-		padding-left: 4em;
+		padding-left: 40em;
 	}
+	/* .gridReports {
+		min-width: 48%;
+		margin: 0 1% 2% 0;
+	} */
 }
 
 @media only screen and (max-width: 660px) {
 	.buttonInline {
 		width: 33%;
 	}
-	.grid {
-		min-width: 100%;
+	/* .grid {
+		width: 100%;
 		margin-right: 0%;
-	}
+	} */
 	.addAccountButton {
 		right: 0.5em;
 		top: 5.5em;
@@ -353,16 +409,8 @@
 	.spacing {
 		padding-left: 1em;
 	}
-}
-
-.centralGrid {
-	/* margin-left: 25%; */
-	padding-left: 14px;
-	margin: auto;
-	width: 100%;
-	text-align: center;
-}
-
-.marginUnderGrid {
-	margin-top: 5%;
+	/* .gridReports {
+		width: 100%;
+		margin: 0 0% 2% 0;
+	} */
 }

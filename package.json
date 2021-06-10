@@ -19,6 +19,7 @@
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "date-fns": "^2.19.0",
+    "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
     "node-fetch": "^2.6.1",
     "notistack": "^1.0.5",

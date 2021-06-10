@@ -31,6 +31,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import PeopleIcon from "@material-ui/icons/People"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import DnsIcon from "@material-ui/icons/Dns"
+import AssignmentIcon from "@material-ui/icons/Assignment"
 /* others */
 import clsx from "clsx"
 
@@ -152,18 +153,6 @@ export default function GeneralLayout() {
 				<List>
 					<ListItem
 						button
-						key="Reservations"
-						component={Link}
-						to="/reservations"
-					>
-						<ListItemIcon className="iconColor">
-							<DnsIcon />
-						</ListItemIcon>
-						<ListItemText primary="Reservations" />
-					</ListItem>
-
-					<ListItem
-						button
 						key="Accounts"
 						component={Link}
 						to="/accounts"
@@ -179,6 +168,18 @@ export default function GeneralLayout() {
 							<EventSeatIcon />
 						</ListItemIcon>
 						<ListItemText primary="Desks" />
+					</ListItem>
+
+					<ListItem
+						button
+						key="Reports"
+						component={Link}
+						to="/reports"
+					>
+						<ListItemIcon className="iconColor">
+							<AssignmentIcon />
+						</ListItemIcon>
+						<ListItemText primary="Reports" />
 					</ListItem>
 				</List>
 				<Divider />

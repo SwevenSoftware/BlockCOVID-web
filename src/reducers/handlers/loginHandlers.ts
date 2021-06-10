@@ -45,7 +45,6 @@ loginHandlers[loginTypes.LOGIN_FAILURE] = function (state, action) {
 }
 
 loginHandlers[loginTypes.LOGOUT] = function (state, action) {
-	console.log(loginTypes.LOGOUT) // WARNING: testing purposes
 	return {
 		token: null,
 		error: "",

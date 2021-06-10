@@ -65,16 +65,23 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 		this.handleCloseButton = this.handleCloseButton.bind(this)
 		this.handleConfirm = this.handleConfirm.bind(this)
 		this.handleChangeSize = this.handleChangeSize.bind(this)
-
+		let fakeOpeningDate: Date = new Date()
+		let fakeClosingDate: Date = new Date()
+		fakeOpeningDate.setHours(8, 0, 0)
+		fakeClosingDate.setHours(18, 0, 0)
 		this.state = {
 			isButtonDisabled: true,
 			isModalOpen: false,
 			roomNameError: false,
 			roomNameValue: "",
-			openingTimeDateValue: new Date("2021-01-01T08:00"),
-			openingTimeStringValue: "08:00",
-			closingTimeDateValue: new Date("2021-01-01T18:00"),
-			closingTimeStringValue: "18:00",
+			openingTimeDateValue: fakeOpeningDate,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeDateValue: fakeClosingDate,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDays: {
 				monday: false,
 				tuesday: false,
@@ -541,15 +548,15 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 		/** converting MaterialUI object to Date object */
 		let time: Date = new Date(milliseconds)
 		let timeString: string
-		if (time.getHours() < 10) {
-			timeString = "0" + time.getHours().toString()
+		if (time.getUTCHours() < 10) {
+			timeString = "0" + time.getUTCHours().toString()
 		} else {
-			timeString = time.getHours().toString()
+			timeString = time.getUTCHours().toString()
 		}
-		if (time.getMinutes() < 10) {
-			timeString += ":0" + time.getMinutes().toString()
+		if (time.getUTCMinutes() < 10) {
+			timeString += ":0" + time.getUTCMinutes().toString()
 		} else {
-			timeString += ":" + time.getMinutes().toString()
+			timeString += ":" + time.getUTCMinutes().toString()
 		}
 		return { time, timeString }
 	}
@@ -559,6 +566,10 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 	}
 
 	private handleCloseButton() {
+		let fakeOpeningDate: Date = new Date()
+		let fakeClosingDate: Date = new Date()
+		fakeOpeningDate.setHours(8, 0, 0)
+		fakeClosingDate.setHours(18, 0, 0)
 		this.setState({
 			isButtonDisabled: true,
 			isModalOpen: false,
@@ -575,14 +586,18 @@ class NewRoomComponent extends Component<NewRoomProps, NewRoomStates> {
 				saturday: false,
 				sunday: false,
 			},
-			openingTimeDateValue: new Date("2021-01-01T08:00"),
-			closingTimeDateValue: new Date("2021-01-01T18:00"),
+			openingTimeDateValue: fakeOpeningDate,
+			closingTimeDateValue: fakeClosingDate,
+			openingTimeStringValue: this.handleTimeChange(
+				fakeOpeningDate.getTime()
+			).timeString,
+			closingTimeStringValue: this.handleTimeChange(
+				fakeClosingDate.getTime()
+			).timeString,
 			weekDaysError: false,
 			roomNameValue: "",
 			roomNameError: false,
 			timeError: false,
-			openingTimeStringValue: "08:00",
-			closingTimeStringValue: "18:00",
 		})
 	}
 
