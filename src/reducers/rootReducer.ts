@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 	login: loginReducer,
 	accounts: accountsReducer,
 	rooms: roomsReducer,
-  reports: reportsReducer,
+	reports: reportsReducer,
 	reservations: reservationsReducers,
 })
 
