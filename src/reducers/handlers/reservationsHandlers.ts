@@ -43,6 +43,7 @@ reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS] =
 					[action.payload.username]: appointments,
 				},
 				error: "",
+				loading: false,
 			}
 		} else {
 			if (state.reservations) {
@@ -52,6 +53,7 @@ reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS] =
 						return {
 							reservations: null,
 							error: "",
+							loading: false,
 						}
 					}
 				}
@@ -60,6 +62,7 @@ reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_SUCCESS] =
 			return {
 				...state,
 				error: "",
+				loading: false,
 			}
 		}
 	}
@@ -71,6 +74,16 @@ reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_FAILURE] =
 				return {
 					reservations: null,
 					error: ERROR_UNKNOWN,
+					loading: false,
 				}
+		}
+	}
+
+reservationsHandlers[reservationTypes.FETCH_RESERVATIONS_BY_USER_LOADING] =
+	function (state, action) {
+		return {
+			...state,
+			error: "",
+			loading: true,
 		}
 	}

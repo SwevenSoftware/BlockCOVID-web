@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper"
 import { Button, DialogTitle } from "@material-ui/core"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
+import LinearProgress from "@material-ui/core/LinearProgress"
 /* devexpress */
 import { ViewState } from "@devexpress/dx-react-scheduler"
 import {
@@ -77,7 +78,7 @@ class CalendarViewComponent extends Component<
 								? this.props.state.reservations.error
 								: ""}
 							<Scheduler
-								height={660}
+								height={600}
 								data={
 									this.props.state.reservations.reservations
 										? this.props.state.reservations
@@ -93,6 +94,11 @@ class CalendarViewComponent extends Component<
 										: []
 								}
 							>
+								{this.props.state.reservations.loading ? (
+									<LinearProgress />
+								) : (
+									""
+								)}
 								<ViewState
 									defaultCurrentDate={this.state.currentDate}
 									onCurrentDateChange={this.handleDateChange}

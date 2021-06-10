@@ -15,6 +15,7 @@ export class reservationsActions {
 	}) {
 		return (dispatch, getState) => {
 			let tokenID = getState().login.token?.id
+			dispatch(this.loadingGetReservationsByUser())
 			this.reservationApi
 				.getReservationsByUser(tokenID, data)
 				.then((res) => {
@@ -46,6 +47,10 @@ export class reservationsActions {
 		payload: {
 			error,
 		},
+	})
+
+	loadingGetReservationsByUser = () => ({
+		type: reservationTypes.FETCH_RESERVATIONS_BY_USER_LOADING,
 	})
 }
 
