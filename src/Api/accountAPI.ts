@@ -43,13 +43,24 @@ export class accountAPI {
 	modifyAccount(
 		tokenID: string,
 		url: string,
-		data: { username: string; password: string; authorities: string[] }
+		data: {
+			username: string
+			password: string | null
+			authorities: string[]
+		}
 	): Promise<AxiosResponse> {
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: tokenID,
 			},
+		}
+		if (!data.password) {
+			const dataNoPassword = {
+				username: data.username,
+				authorities: data.authorities,
+			}
+			return this.axios.put(url, dataNoPassword, config)
 		}
 		return this.axios.put(url, data, config)
 	}
