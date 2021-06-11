@@ -126,8 +126,6 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 													username: user.username,
 												},
 											}}
-											/* primary={user.username}
-											className="usernameLayout" */
 										/>
 									</ListItemText>
 									<ModifyAccount
