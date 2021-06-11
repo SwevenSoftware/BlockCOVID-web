@@ -119,15 +119,17 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 									<ListItemIcon>
 										<PersonIcon fontSize="large" />
 									</ListItemIcon>
-									<CalendarViewComponent
-										data={{
-											user: {
-												username: user.username,
-											},
-										}}
-										/* primary={user.username}
-										className="usernameLayout" */
-									/>
+									<ListItemText>
+										<CalendarViewComponent
+											data={{
+												user: {
+													username: user.username,
+												},
+											}}
+											/* primary={user.username}
+											className="usernameLayout" */
+										/>
+									</ListItemText>
 									<ModifyAccount
 										data={{
 											user: {
