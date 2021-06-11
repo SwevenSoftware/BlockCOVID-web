@@ -70,6 +70,7 @@ describe("Account Component", function () {
 		reservations: {
 			reservations: null,
 			error: "",
+			loading: false,
 		},
 		login: {
 			token: "adminToken",
