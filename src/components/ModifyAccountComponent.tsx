@@ -72,30 +72,28 @@ class ModifyAccountComponent extends Component<
 > {
 	constructor(props) {
 		super(props)
-		;(this.handleChangeAuthorities =
-			this.handleChangeAuthorities.bind(this)),
-			(this.handleChangePassword = this.handleChangePassword.bind(this)),
-			(this.handleChangeConfirmPassword =
-				this.handleChangeConfirmPassword.bind(this)),
-			(this.handleClickOpenButton =
-				this.handleClickOpenButton.bind(this)),
-			(this.handleCloseButton = this.handleCloseButton.bind(this)),
-			(this.handleConfirm = this.handleConfirm.bind(this)),
-			(this.state = {
-				passwordValue: "",
-				confirmPasswordValue: "",
-				isButtonDisabled: true,
-				isPencilOpen: false,
-				authorities: {
-					checkedAdmin: false,
-					checkedUser: false,
-					checkedCleaner: false,
-				},
-				passwordError: false,
-				confirmPasswordError: false,
-				authoritiesError: false,
-				lengthPasswordError: false,
-			})
+		this.handleChangeAuthorities = this.handleChangeAuthorities.bind(this)
+		this.handleChangePassword = this.handleChangePassword.bind(this)
+		this.handleChangeConfirmPassword =
+			this.handleChangeConfirmPassword.bind(this)
+		this.handleClickOpenButton = this.handleClickOpenButton.bind(this)
+		this.handleCloseButton = this.handleCloseButton.bind(this)
+		this.handleConfirm = this.handleConfirm.bind(this)
+		this.state = {
+			passwordValue: "",
+			confirmPasswordValue: "",
+			isButtonDisabled: true,
+			isPencilOpen: false,
+			authorities: {
+				checkedAdmin: false,
+				checkedUser: false,
+				checkedCleaner: false,
+			},
+			passwordError: false,
+			confirmPasswordError: false,
+			authoritiesError: false,
+			lengthPasswordError: false,
+		}
 	}
 
 	render() {
@@ -129,7 +127,6 @@ class ModifyAccountComponent extends Component<
 								</DialogContentText>
 								<div className="addField">
 									<TextField
-										required
 										id="outlined-password-input1"
 										label="Password"
 										type="password"
@@ -164,7 +161,6 @@ class ModifyAccountComponent extends Component<
 								</div>
 								<div className="addField">
 									<TextField
-										required
 										id="outlined-password-input2"
 										label="Ripeti Password"
 										type="password"
@@ -190,9 +186,6 @@ class ModifyAccountComponent extends Component<
 								</div>
 							</div>
 							<div className="centralModal">
-								<DialogContentText color="primary">
-									* indica i campi obbligatori
-								</DialogContentText>
 								<FormControl>
 									<FormLabel>Ruolo:</FormLabel>
 									<FormGroup>
@@ -377,16 +370,13 @@ class ModifyAccountComponent extends Component<
 		passwordValue: string = this.state.passwordValue
 	): boolean {
 		let reg = new RegExp("^[a-zA-Z0-9]{8,16}$")
-		if (passwordValue.match(reg)) {
-			if (passwordValue === "") {
-				this.setState({ passwordError: true })
-				this.setState({ lengthPasswordError: false })
-				return true
-			} else {
-				this.setState({ passwordError: false })
-				this.setState({ lengthPasswordError: false })
-				return false
+		if (passwordValue.match(reg) || !passwordValue) {
+			if (!passwordValue && !this.state.confirmPasswordValue) {
+				this.setState({ confirmPasswordError: false })
 			}
+			this.setState({ passwordError: false })
+			this.setState({ lengthPasswordError: false })
+			return false
 		} else {
 			this.setState({ passwordError: true })
 			this.setState({ lengthPasswordError: true })
@@ -398,16 +388,14 @@ class ModifyAccountComponent extends Component<
 		passwordValue: string,
 		confirmPasswordValue: string
 	): boolean {
-		if (
-			confirmPasswordValue !== passwordValue ||
-			confirmPasswordValue === ""
-		) {
+		if (passwordValue && confirmPasswordValue !== passwordValue) {
 			this.setState({ confirmPasswordError: true })
-			this.setState({ passwordError: true })
+			return true
+		} else if (!passwordValue && confirmPasswordValue) {
+			this.setState({ confirmPasswordError: true })
 			return true
 		} else {
 			this.setState({ confirmPasswordError: false })
-			this.setState({ passwordError: false })
 			return false
 		}
 	}
