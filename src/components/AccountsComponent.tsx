@@ -119,7 +119,7 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 									<ListItemIcon>
 										<PersonIcon fontSize="large" />
 									</ListItemIcon>
-									<ListItemText>
+									<ListItemText className="usernameLayout">
 										<CalendarViewComponent
 											data={{
 												user: {
