@@ -58,7 +58,7 @@ So in order to contribute to the application the steps are:
 - open a pull request describing your changes and addressing issues if necessary
 eventually an administrator will review your work and merge it in the develop branch.
 ### pre-commit hook
-Builds will fail if the code is not compliant with the [typescript-formatter](https://www.npmjs.com/package/typescript-formatter) formatting.
+Builds will fail if the code is not compliant with the [prettier](https://www.npmjs.com/package/prettier) formatting.
 Therefore add this hook to git that prevents you from committing anything that is not correctly formatted
 ```shell
 cp pre-commit.sh .git/hooks/pre-commit
