@@ -10,7 +10,7 @@ module.exports = merge(common, {
         index: 'index.html',
         port: 8000,
         proxy: {
-            '/api/**': 'http://192.168.210.30:8091'
+            '/api/**': 'http://localhost:8091'
         },
         historyApiFallback: {
             index: 'index.html'
