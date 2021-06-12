@@ -22,6 +22,7 @@ import { theme } from "../theme"
 import ModifyAccount from "./ModifyAccountComponent"
 import NewAccount from "./NewAccountComponent"
 import DeleteAccount from "./DeleteAccountComponent"
+import CalendarViewComponent from "./CalendarViewComponent"
 
 interface AccountProps {
 	state: any
@@ -118,10 +119,15 @@ class AccountComponent extends Component<AccountProps, AccountStates> {
 									<ListItemIcon>
 										<PersonIcon fontSize="large" />
 									</ListItemIcon>
-									<ListItemText
-										primary={user.username}
-										className="usernameLayout"
-									/>
+									<ListItemText className="usernameLayout">
+										<CalendarViewComponent
+											data={{
+												user: {
+													username: user.username,
+												},
+											}}
+										/>
+									</ListItemText>
 									<ModifyAccount
 										data={{
 											user: {
