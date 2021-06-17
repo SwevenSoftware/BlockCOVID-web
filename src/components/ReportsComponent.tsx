@@ -16,7 +16,6 @@ import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import NoteAddIcon from "@material-ui/icons/NoteAdd"
-import SecurityIcon from "@material-ui/icons/Security"
 import InfoIcon from "@material-ui/icons/Info"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
@@ -225,18 +224,12 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 														className="greenButton"
 														fontSize="small"
 													/>
-													<span
-														className="tooltiptextReportsHashcode"
-														id="reportHash"
-													>
+													<span className="tooltiptextReportsHashcode">
 														{report.hash}
 													</span>
 												</Typography>
 											</div>
 										</Typography>
-										{/* <Button onClick={this.myFunction}>
-											Copia il testo
-										</Button> */}
 										<Typography>
 											<div className="tooltipReportsTransationHashcode">
 												<Typography>
@@ -260,20 +253,6 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 		}
 		return rows
 	}
-
-	// private myFunction(): void {
-	// 	/* Get the text field */
-	// 	const copyText = window.document.getElementById("reportHash")!;
-
-	//    /* Select the text field */
-	// 	copyText.select();
-
-	//    /* Copy the text inside the text field */
-	// 	document.execCommand("copy");
-
-	// 	/* Alert the copied text */
-	// 	// alert("Copied the text: " + copyText.reportHash);
-	// }
 }
 
 const mapStateToProps = (state: any) => {
