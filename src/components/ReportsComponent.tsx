@@ -22,7 +22,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import { ReportInformation } from "../Api/reportAPI"
-import { TextField, Tooltip, Typography } from "@material-ui/core"
+import { Link, TextField, Tooltip, Typography } from "@material-ui/core"
 
 interface ReportsProps {
 	state: any
@@ -263,6 +263,21 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 															)}
 														</Button>
 													</Tooltip>
+												</Typography>
+											</div>
+										</Typography>
+										<Typography>
+											<div className="listItem">
+												<Typography>
+													<Link
+														href={
+															"https://etherscan.io/tx/" +
+															report.transactionHash
+														}
+													>
+														Vedi la transazione su
+														etherscan
+													</Link>
 												</Typography>
 											</div>
 										</Typography>
