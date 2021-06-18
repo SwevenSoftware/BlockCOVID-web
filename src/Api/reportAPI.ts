@@ -4,6 +4,8 @@ export interface ReportInformation {
 	name: string
 	creationDate: Date
 	registrationDate: Date
+	hash: string
+	transactionHash: string
 }
 
 export class reportAPI {

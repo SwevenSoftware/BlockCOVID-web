@@ -16,12 +16,13 @@ import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import NoteAddIcon from "@material-ui/icons/NoteAdd"
+import InfoIcon from "@material-ui/icons/Info"
 /* styles */
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import { ReportInformation } from "../Api/reportAPI"
-import { TextField, Typography } from "@material-ui/core"
+import { Link, TextField, Tooltip, Typography } from "@material-ui/core"
 
 interface ReportsProps {
 	state: any
@@ -100,7 +101,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 							? this.props.state.reports.error
 							: ""}
 						<Grid container spacing={3}>
-							{this.popolate()}
+							{this.populate()}
 						</Grid>
 					</div>
 				</ThemeProvider>
@@ -133,7 +134,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 			: 0
 	}
 
-	private popolate(): Array<JSX.Element> {
+	private populate(): Array<JSX.Element> {
 		let rows: Array<JSX.Element> = []
 		if (this.props.state.reports.reports) {
 			this.props.state.reports.reports
@@ -142,14 +143,17 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 				)
 				.map((report: ReportInformation) => {
 					let creationDate: Date = new Date(report.creationDate + "Z")
-					let registrationDate: Date = new Date(
-						report.registrationDate + "Z"
-					)
+					let registrationDate: Date | null = null
+					if (report.registrationDate) {
+						registrationDate = new Date(
+							report.registrationDate + "Z"
+						)
+					}
 
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">
-								<ListItem className="listItem">
+								<ListItem className="listItemIcon">
 									<ListItemIcon>
 										<InsertDriveFileIcon
 											className={
@@ -168,8 +172,26 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										/>
 									</ListItemIcon>
 									<ListItemText>
+										<div className="listItem">
+											<Button
+												style={{ fontSize: "13px" }}
+												className="greenButton"
+												onClick={() => {
+													this.props.dispatch.getReport(
+														{
+															reportName:
+																report.name,
+														}
+													)
+												}}
+											>
+												{report.name
+													.split("_")
+													.join(" ")}
+											</Button>
+										</div>
 										<Typography>
-											{"Creazione: " +
+											{"Data di creazione: " +
 												creationDate.toLocaleDateString() +
 												" - " +
 												creationDate.toLocaleTimeString(
@@ -177,78 +199,109 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													{
 														hour: "2-digit",
 														minute: "2-digit",
+														second: "2-digit",
 													}
 												)}
 										</Typography>
 										<Typography>
-											{"Registrazione: " +
-												registrationDate.toLocaleDateString() +
-												" - " +
-												registrationDate.toLocaleTimeString(
-													[],
-													{
-														hour: "2-digit",
-														minute: "2-digit",
-													}
-												)}
+											{"Data di registrazione: " +
+												(registrationDate
+													? registrationDate.toLocaleDateString() +
+													  " - " +
+													  registrationDate.toLocaleTimeString(
+															[],
+															{
+																hour: "2-digit",
+																minute: "2-digit",
+																second: "2-digit",
+															}
+													  )
+													: "null")}
 										</Typography>
-										{/* <Button
-											className="greenButton"
-											onClick={() => {
-												this.props.dispatch.getReport({
-													reportName: report.name,
-												})
-											}}
-										>
-											{report.name}
-										</Button> */}
+										<Typography>
+											<div className="listItem">
+												<Typography>
+													{"Hash del documento: "}
+													<Tooltip
+														title="clicca per copiare"
+														placement="right"
+													>
+														<Button
+															color="primary"
+															onClick={() =>
+																navigator.clipboard.writeText(
+																	report.hash
+																)
+															}
+														>
+															{this.short(
+																report.hash
+															)}
+														</Button>
+													</Tooltip>
+												</Typography>
+											</div>
+										</Typography>
+										<Typography>
+											<div className="listItem">
+												<Typography>
+													{"Hash transazione: "}
+													<Tooltip
+														title="clicca per copiare"
+														placement="right"
+													>
+														<Button
+															color="primary"
+															onClick={() =>
+																navigator.clipboard.writeText(
+																	report.transactionHash
+																)
+															}
+														>
+															{this.short(
+																report.transactionHash
+															)}
+														</Button>
+													</Tooltip>
+												</Typography>
+											</div>
+										</Typography>
+										<Typography>
+											<div className="listItem">
+												{report.transactionHash ? (
+													<Link
+														href={
+															"https://etherscan.io/tx/" +
+															report.transactionHash
+														}
+													>
+														Vedi la transazione su
+														etherscan
+													</Link>
+												) : (
+													"Registrazione non ancora avvenuta"
+												)}
+											</div>
+										</Typography>
 									</ListItemText>
 								</ListItem>
-								<div className="infoReports">
-									<Button
-										style={{ fontSize: "13px" }}
-										className="greenButton"
-										onClick={() => {
-											this.props.dispatch.getReport({
-												reportName: report.name,
-											})
-										}}
-									>
-										{report.name}
-									</Button>
-								</div>
-								{/* <div className="infoReports">
-									<Typography style={{ fontSize: "13px" }}>
-										{"Creazione: " +
-											creationDate.toLocaleDateString() +
-											" - " +
-											creationDate.toLocaleTimeString(
-												[],
-												{
-													hour: "2-digit",
-													minute: "2-digit",
-												}
-											)}
-									</Typography>
-									<Typography style={{ fontSize: "13px" }}>
-										{"Registrazione: " +
-											registrationDate.toLocaleDateString() +
-											" - " +
-											registrationDate.toLocaleTimeString(
-												[],
-												{
-													hour: "2-digit",
-													minute: "2-digit",
-												}
-											)}
-									</Typography>
-								</div> */}
 							</Paper>
 						</Grid>
 					)
 				})
 		}
 		return rows
+	}
+
+	private short(hash: string): string {
+		if (hash) {
+			return (
+				hash.substr(0, 3) +
+				"..." +
+				hash.substring(hash.length - 3, hash.length)
+			)
+		}
+		return ""
 	}
 }
 
