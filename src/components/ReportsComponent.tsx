@@ -268,16 +268,19 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										</Typography>
 										<Typography>
 											<div className="listItem">
-												{
-													report.transactionHash ?
-														<Link
-															href={"https://etherscan.io/tx/" + report.transactionHash}
-														>
-															Vedi la transazione su etherscan
-														</Link>
-														:
-														"Registrazione non ancora avvenuta"
-												}
+												{report.transactionHash ? (
+													<Link
+														href={
+															"https://etherscan.io/tx/" +
+															report.transactionHash
+														}
+													>
+														Vedi la transazione su
+														etherscan
+													</Link>
+												) : (
+													"Registrazione non ancora avvenuta"
+												)}
 											</div>
 										</Typography>
 									</ListItemText>
