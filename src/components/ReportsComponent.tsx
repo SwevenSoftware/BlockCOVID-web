@@ -22,7 +22,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../theme"
 /* others */
 import { ReportInformation } from "../Api/reportAPI"
-import { TextField, Typography } from "@material-ui/core"
+import { TextField, Tooltip, Typography } from "@material-ui/core"
 
 interface ReportsProps {
 	state: any
@@ -153,7 +153,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 					rows.push(
 						<Grid key={report.name} className="gridReports">
 							<Paper className="paperReports">
-								<ListItem className="listItem">
+								<ListItem className="listItemIcon">
 									<ListItemIcon>
 										<InsertDriveFileIcon
 											className={
@@ -172,7 +172,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										/>
 									</ListItemIcon>
 									<ListItemText>
-										<div className="usernameLayout">
+										<div className="listItem">
 											<Button
 												style={{ fontSize: "13px" }}
 												className="greenButton"
@@ -185,11 +185,13 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													)
 												}}
 											>
-												{report.name}
+												{report.name
+													.split("_")
+													.join(" ")}
 											</Button>
 										</div>
 										<Typography>
-											{"Creazione: " +
+											{"Data di creazione: " +
 												creationDate.toLocaleDateString() +
 												" - " +
 												creationDate.toLocaleTimeString(
@@ -202,7 +204,7 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 												)}
 										</Typography>
 										<Typography>
-											{"Registrazione: " +
+											{"Data di registrazione: " +
 												(registrationDate
 													? registrationDate.toLocaleDateString() +
 													  " - " +
@@ -217,30 +219,50 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 													: "null")}
 										</Typography>
 										<Typography>
-											<div className="tooltipReportsHashcode">
+											<div className="listItem">
 												<Typography>
-													Hashcode:
-													<InfoIcon
-														className="greenButton"
-														fontSize="small"
-													/>
-													<span className="tooltiptextReportsHashcode">
-														{report.hash}
-													</span>
+													{"Hash del documento: "}
+													<Tooltip
+														title="clicca per copiare"
+														placement="right"
+													>
+														<Button
+															color="primary"
+															onClick={() =>
+																navigator.clipboard.writeText(
+																	report.hash
+																)
+															}
+														>
+															{this.short(
+																report.hash
+															)}
+														</Button>
+													</Tooltip>
 												</Typography>
 											</div>
 										</Typography>
 										<Typography>
-											<div className="tooltipReportsTransationHashcode">
+											<div className="listItem">
 												<Typography>
-													Transaction hashcode:
-													<InfoIcon
-														className="greenButton"
-														fontSize="small"
-													/>
-													<span className="tooltiptextReportsTransationHashcode">
-														{report.transactionHash}
-													</span>
+													{"Hash transazione: "}
+													<Tooltip
+														title="clicca per copiare"
+														placement="right"
+													>
+														<Button
+															color="primary"
+															onClick={() =>
+																navigator.clipboard.writeText(
+																	report.transactionHash
+																)
+															}
+														>
+															{this.short(
+																report.transactionHash
+															)}
+														</Button>
+													</Tooltip>
 												</Typography>
 											</div>
 										</Typography>
@@ -252,6 +274,14 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 				})
 		}
 		return rows
+	}
+
+	private short(hash: string) {
+		return (
+			hash.substr(0, 3) +
+			"..." +
+			hash.substring(hash.length - 3, hash.length)
+		)
 	}
 }
 

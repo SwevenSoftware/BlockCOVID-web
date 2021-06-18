@@ -103,12 +103,18 @@
 	height: 5em;
 }
 
-.listItem {
+.listItemIcon {
 	margin: 0;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.listItem {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: auto;
 }
 
 .addAccountButton {
@@ -244,7 +250,7 @@
 }
 
 .paperReports {
-	height: 10.5em;
+	height: 15em;
 }
 
 .tooltipReportsHashcode {
@@ -286,13 +292,13 @@
 	opacity: 1;
 }
 
-.tooltipReportsTransationHashcode {
+.tooltipReportsTransactionHashcode {
 	position: relative;
 	display: inline-block;
 	border-bottom: 1px black;
 }
 
-.tooltipReportsTransationHashcode .tooltiptextReportsTransationHashcode {
+.tooltipReportsTransactionHashcode .tooltiptextReportsTransactionHashcode {
 	visibility: hidden;
 	width: 500px;
 	background-color: #555;
@@ -310,7 +316,8 @@
 	transition: opacity 0.3s;
 }
 
-.tooltipReportsTransationHashcode .tooltiptextReportsTransationHashcode::after {
+.tooltipReportsTransactionHashcode
+	.tooltiptextReportsTransactionHashcode::after {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -321,7 +328,8 @@
 	border-color: #555 transparent transparent transparent;
 }
 
-.tooltipReportsTransationHashcode:hover .tooltiptextReportsTransationHashcode {
+.tooltipReportsTransactionHashcode:hover
+	.tooltiptextReportsTransactionHashcode {
 	visibility: visible;
 	opacity: 1;
 }
