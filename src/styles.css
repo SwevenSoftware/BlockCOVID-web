@@ -103,12 +103,18 @@
 	height: 5em;
 }
 
-.listItem {
+.listItemIcon {
 	margin: 0;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.listItem {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: auto;
 }
 
 .addAccountButton {
@@ -134,6 +140,10 @@
 
 .cleaner {
 	color: rgb(5, 162, 235);
+}
+
+.calendar:hover {
+	color: #673ab7;
 }
 
 /* (((((((((((((((((((((((((((((( CARDGRID )))))))))))))))))))))))))))) */
@@ -244,17 +254,88 @@
 }
 
 .paperReports {
-	height: 8em;
+	height: 15em;
 }
 
-.nameReports {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	margin-left: -8%;
+.tooltipReportsHashcode {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px black;
 }
 
-.infoReports {
-	margin: 2.5% 0 0 25%;
+.tooltipReportsHashcode .tooltiptextReportsHashcode {
+	visibility: hidden;
+	width: 300px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 0%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tooltipReportsHashcode .tooltiptextReportsHashcode::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+.tooltipReportsHashcode:hover .tooltiptextReportsHashcode {
+	visibility: visible;
+	opacity: 1;
+}
+
+.tooltipReportsTransactionHashcode {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px black;
+}
+
+.tooltipReportsTransactionHashcode .tooltiptextReportsTransactionHashcode {
+	visibility: hidden;
+	width: 500px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	font-size: small;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: -20%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tooltipReportsTransactionHashcode
+	.tooltiptextReportsTransactionHashcode::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 54%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+.tooltipReportsTransactionHashcode:hover
+	.tooltiptextReportsTransactionHashcode {
+	visibility: visible;
+	opacity: 1;
 }
 
 /* (((((((((((((((((((((((((((((( RESERVATION )))))))))))))))))))))))))))) */
