@@ -268,17 +268,16 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 										</Typography>
 										<Typography>
 											<div className="listItem">
-												<Typography>
-													<Link
-														href={
-															"https://etherscan.io/tx/" +
-															report.transactionHash
-														}
-													>
-														Vedi la transazione su
-														etherscan
-													</Link>
-												</Typography>
+												{
+													report.transactionHash ?
+														<Link
+															href={"https://etherscan.io/tx/" + report.transactionHash}
+														>
+															Vedi la transazione su etherscan
+														</Link>
+														:
+														"Registrazione non ancora avvenuta"
+												}
 											</div>
 										</Typography>
 									</ListItemText>
@@ -291,12 +290,15 @@ class ReportsComponent extends Component<ReportsProps, ReportsState> {
 		return rows
 	}
 
-	private short(hash: string) {
-		return (
-			hash.substr(0, 3) +
-			"..." +
-			hash.substring(hash.length - 3, hash.length)
-		)
+	private short(hash: string): string {
+		if (hash) {
+			return (
+				hash.substr(0, 3) +
+				"..." +
+				hash.substring(hash.length - 3, hash.length)
+			)
+		}
+		return ""
 	}
 }
 
