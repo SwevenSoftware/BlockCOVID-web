@@ -12,7 +12,17 @@ module.exports = {
     ],
     collectCoverageFrom: [
         "src/**/*.tsx",
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "!src/App.tsx",
+        "!src/configureStore.ts",
+        "!src/DotGrid.tsx",
+        "!src/GeneralLayout.tsx",
+        "!src/index.tsx",
+        "!src/Grid.ts",
+        "!src/components/ModifyAccountComponent.tsx",
+        "!src/components/ModifyRoomComponent.tsx",
+        "!src/components/NewAccountComponent.tsx",
+        "!src/components/NewRoomComponent.tsx",
     ],
     moduleNameMapper: {
         "^.+\\.(css|less)$": "<rootDir>/CSSStub.js"

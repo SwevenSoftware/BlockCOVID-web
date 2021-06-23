@@ -43,21 +43,3 @@ const App: React.FC = () => {
 }
 
 export default App
-
-/* <div className="App">
-        <BrowserRouter>
-          <GeneralLayout/>
-          <Switch>
-            <Route path='/accounts' exact component={Accounts}/>
-            <Route path='/login' exact component={Login}/>
-            <Redirect from='/' to='/reservations'/>
-          </Switch>
-        </BrowserRouter>
-        </div>
-*/
-/*
-  <Route path='/reservations' exact component={Reservations}/>
-  <Route path='/desk' exact component={CardGrid}/>
-  <Route path='/accounts' exact component={Accounts}/>
-  <Route path='/login' exact component={Login}/>
-*/

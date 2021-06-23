@@ -30,16 +30,6 @@ class CardGridApp extends Component<{}, StateApp, any> {
 		this.resetGrid = this.resetGrid.bind(this)
 	}
 
-	/*updateStateGrid(d: HTMLDivElement | null) {
-      if (d !== null) {
-        console.log(d.clientWidth, d.clientHeight);
-        this.setState({
-          width: d.clientWidth,
-          height: d.clientHeight
-        });
-      }
-    }*/
-
 	componentDidMount() {
 		if (this.dispGrid.current && this.dotGrid.current) {
 			this.dotGrid.current.setSize(
@@ -59,22 +49,11 @@ class CardGridApp extends Component<{}, StateApp, any> {
 				<div className="gridInline">
 					<ThemeProvider theme={theme}>
 						<Card>
-							{/* <CardHeader className="headerCard" title="New room"/> */}
 							<CardContent
 								ref={this.dispGrid}
 								className="dispGrid"
-							>
-								{/*                                 <DotGrid ref={this.dotGrid} mode="" width={this.setGrid.width || 0} height={this.setGrid.width || 0} />
-								 */}{" "}
+							>{" "}
 							</CardContent>
-							{/* <CardActions>
-                <Button size="medium" color="primary">
-                  Save room
-                </Button>
-                <Button size="medium" color="secondary" onClick={this.resetGrid}>
-                  Reset
-                </Button>
-              </CardActions> */}
 						</Card>
 					</ThemeProvider>
 				</div>
