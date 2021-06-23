@@ -52,7 +52,8 @@ class CardGridApp extends Component<{}, StateApp, any> {
 							<CardContent
 								ref={this.dispGrid}
 								className="dispGrid"
-							>{" "}
+							>
+								{" "}
 							</CardContent>
 						</Card>
 					</ThemeProvider>
